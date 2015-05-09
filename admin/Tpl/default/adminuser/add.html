@@ -1,0 +1,68 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('lists')}">管理员列表</a> |
+        <a class="on" href="{:U('add')}">添加管理员</a>
+    </ul>
+</div>
+<form name="myform" id="myform" action="{:U('add')}" method="post">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="10%"><span class="red">*</span>用户名：</th>
+            <td>
+                <input type="text" class="input-text" name="login_name" id="login_name" datatype="*" nullmsg="请输入管理员名字" errmsg="管理员名字不能为空" />
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>登录密码：</th>
+            <td><input name="pwd" type="password" class="input-text" id="pwd" datatype="*" nullmsg="请输入登录密码" errmsg="密码不能为空" />
+
+                <div id="msg_pwd" class="div_msg"></div>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>重复登录密码：</th>
+            <td><input name="pwd2" type="password" class="input-text" id="pwd2" datatype="*" nullmsg="再次输入登录密码" errmsg="两次密码不一致" />
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>姓名：</th>
+            <td><input name="true_name" type="text" class="input-text" id="true_name" datatype="*" nullmsg="请输入真实姓名" errmsg="姓名不能为空" />
+            </td>
+        </tr>
+        <tr>
+            <th>地址：</th>
+            <td>
+                <input name="adre" type="text" class="input-text" size="55" id="adre"/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>联系电话：</th>
+            <td><input name="tel" type="text" class="input-text" id="tel" datatype="*" nullmsg="请输入联系电话" errmsg="联系电话不能为空" />
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>用户组别：</th>
+            <td>
+                <label>
+                    <select id="group" name="group">
+                        <volist name="Roles_list" id="vo">
+                            <option value="{$vo.id}">{$vo.name}</option>
+                        </volist>
+                    </select>
+                </label>
+            </td>
+        </tr>
+
+        <tr>
+            <th><span class="red">*</span>状态：</th>
+            <td>
+                <input type="radio" id="status1" name="status" value="1" checked>&nbsp;<label for="status1">正常</label>&nbsp;&nbsp;
+                <input type="radio" id="status0" name="status" value="0">&nbsp;<label for="status0">锁定</label>
+            </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" value=" 保 存 " class="button" name="submit">
+        <input TYPE="reset" value=" 重 置 " class="button">
+    </div>
+</form>

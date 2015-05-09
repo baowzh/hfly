@@ -1,0 +1,101 @@
+<style type="text/css">
+.ulbc td {text-align: center;}
+.ulbc td .area_name {width: 200px;text-align: center;}
+.block {margin-bottom: 12px;}
+.list_table {border:thin #D6E0E9 solid;}
+.list_table th {font-weight: bold !important;font-size: 14px;}
+</style>
+
+<div id="nav" class="mainnav_title">
+  <ul>
+    <a href="{:U('show_list')}/t/HOTEL">所属城市</a> | <a class="on" href="{:U('list_areas',array('city'=>$id))}">城市区域列表</a> | <a href="javascript:;" onclick="art.dialog.open('{:U('citybelong/add_areas',array('id'=>$city[city_id]))}', {title:'添加城市区域', width:500, height:300, window:'top', lock:'true'});">添加城市区域</a>
+  </ul>
+</div>
+<table class="search_table" width="100%">
+  <tr>
+    <td class="search"><h2>城市：{$city["names"]}</h2></td>
+  </tr>
+</table>
+<form name="myform" id="myform" action="" method="post">
+  <volist name="block" id="list">
+    <neq name="list" value="">
+      <div class="block">
+        <div class="table-list">
+          <table cellspacing="0" cellpadding="0" width="100%" class="list_table">
+            <thead>
+              <tr>
+                 <th width="62"><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
+                <th width="140">划分区域</th>
+                <th>名称</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <volist name="list" id="vo">
+                <tr class="ulbc" id="tr_{$vo.id}">
+                  <td><input type="checkbox" class="sel" id="sel_{$vo.id}" value="{$vo.id}" name="items_{$vo.id}" /></td>
+                  <td>{$vo.area_type|get_area_type}</td>
+                  <td><input type="text" name="area_name" value="{$vo.area_name}" class="area_name" id="area_name_{$vo.id}" /></td>
+                  <td><a href="javascript:void(0);" onclick="ajax_save('{$vo.id}')">保存</a>&nbsp;| <a href="#" onclick="javascript:if (confirm('确定要删除这条记录吗？如果该区域内有酒店，删除后将会影响前台对这些酒店的搜索。 '))ajax_del({$vo.id});">删除</a></td>
+                </tr>
+              </volist>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </neq>
+  </volist>
+  <div class="btn">
+    <input type="submit" class="button" name="dosubmit" value="删除" onclick="myform.action = '{:U('areas_deleteall')}';"/>
+    <input onclick="sel_all();" value="全选"  type="button" class="button">
+  </div>
+</form>
+<script language="javascript">
+function ajax_del(id) {
+    var url = "{:U(ajax_del_areas)}?id=" + id;
+    $.ajax({
+        "url": url,
+        "type": "POST",
+        "complete": function() {},
+        "dataType": "json",
+        "error": function() {
+            alert("Ajax request error");
+        },
+        "success": function(result) {
+            result == 1 && art.dialog({
+                "title": "删除提示",
+                "content": "删除成功",
+                "ok": function() {
+                    location.reload();
+                }
+            });
+        }
+    });
+}
+
+function ajax_save(id){
+        var url = "{:U(ajax_save_areas)}?id="+id;
+        var names = $('#area_name_'+id).val();
+        $.ajax({
+            url: url,
+            type: "POST",
+            complete :function(){
+            }, 
+            dataType: 'json', 
+            data: "area_name="+names,
+            error: function() { alert('Ajax request error');},
+            success: function(result){
+                if(result==1){
+                    art.dialog.alert("保存成功");
+                }
+            }
+        }); 
+    }
+
+function sel_all() {
+    $("input.sel").each(function(index) {
+        $(this).attr("checked") ? $(this).removeAttr("checked") : $(this).attr("checked", "checked");
+    });
+}
+</script>
+<div class="page">{$page}</div>

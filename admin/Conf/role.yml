@@ -1,0 +1,16 @@
+---
+role_0:
+  names: 超级管理员
+  status: 1
+  lists:
+  action:
+role_1:
+  names: 运营经理
+  status: 1
+  lists:
+  action:
+role_4:
+  names: 信息管理员
+  status: 1
+  lists:
+  action:

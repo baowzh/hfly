@@ -1,0 +1,179 @@
+<include file="Public:header" />
+<load href="../Public/css/jquery.validate.css"/>
+<load href="../Public/css/ui-lightness/jquery-ui-1.9.0.custom.min.css"/>
+<load href="../Public/css/datepicker.css"/>
+<load href="../Public/js/swf2ckeditor.js" />
+<load href="../Public/js/Validform_v5.1_min.js"/>
+<load href="../Public/js/jquery.validate.check.js"/>
+<load href="../Public/js/jquery-1.8.2.min.js"/>
+<load href="../Public/js/jquery.ui.core.min.js"/>
+<load href="../Public/js/jquery_tp.js"/>
+<load href="../Public/js/jquery.ui.datepicker.min.js"/>
+<load href="__ROOT__/admin/Vendor/editor/kindeditor.js" />
+<table cellspacing="0" cellpadding="0" class="t1">
+    <tbody>
+        <tr>
+            <th height="20" colspan="2" id="title">您当前位置：<a target="_top" href="__ADMIN_URL__">首页</a> >
+                <a href="__URL__/show_list">会员管理</a> > 修改会员({$list['login_name']})</th>
+        </tr>
+    </tbody></table>
+<form action="__URL__/ajax_edit" class="validate"  validateinfo="parent:td" enctype="multipart/form-data" method="post" onSubmit="return formcheck();">
+    <table border="0" cellspacing="0" cellpadding="0" class="t3" style="margin-top: 20px;">
+        <tr>
+            <td align="right" style="width: 150px;"><span class="msg">*</span>用户名称：</td>
+            <td>
+                <input type="hidden" id="id" name="id" value="{$list['id']}"/>
+                <input type="hidden" id="info_id" name="info_id" value="{$list['info_id']}"/>
+                <span>{$list['login_name']}</span> 
+            </td>
+        </tr>
+        <tr>
+            <td align="right">密码：</td>
+            <td>
+                <input name="pwd" class="text3" type="Password" id="pwd" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">确认密码：</td>
+            <td>
+                <input name="pwd1" class="text3" type="Password" id="pwd1" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">头像上传：</td>
+            <td>
+                <input name="avatar_path" class="text3" type="file" id="avatar_path" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">身份证：</td>
+            <td>
+                <input name="identity_no" class="text isIDCard" type="text" id="identity_no" value="{$list['identity_no']}" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">真实姓名：</td>
+            <td>
+                <input name="true_name" class="text3" type="text IsRealName" id="true_name" value="{$list['true_name']}" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><span class="msg">*</span>性别：</td>
+            <td> <span id="L_OfferedProperties">
+                    <input id="deal_type" type="radio" name="sex" value="1" <if condition="$list['sex'] eq 1"> checked="checked"</if> />
+                    <label>男</label>　
+                    <input id="deal_type" type="radio" name="sex" value="2" <if condition="$list['sex'] eq 2"> checked="checked"</if>/>
+                    <label>女</label>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">电话：</td>
+            <td>
+                <input name="tel" class="text3" type="text isTel" id="tel" value="{$list['tel']}" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">手机：</td>
+            <td>
+                <input name="phone" class="text3 isPhone" type="text" id="phone" value="{$list['phone']}" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">E-mail：</td>
+            <td>
+                <input name="email" class="text email" type="text email" id="email" value="{$list['email']}" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">地址：</td>
+            <td>
+                <input name="address" class="text" type="text" id="address" value="{$list['address']}" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">邮编：</td>
+            <td>
+                <input name="post_code" class="text3 isZipCode" type="text" id="post_code" value="{$list['post_code']}" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">所属行业：</td>
+            <td>
+                <select id="industry" class="" name="industry">
+                    <option value="">---请选择---</option>
+                    <option value="信息与电子类" <if condition="$list['industry'] eq '信息与电子类'">selected="selected"</if>>信息与电子类</option>
+                    <option value="计算机与应用类" <if condition="$list['industry'] eq '计算机与应用类'">selected="selected"</if>>计算机与应用类</option>
+                    <option value="工程技术类" <if condition="$list['industry'] eq '工程技术类'">selected="selected"</if>>工程技术类</option>
+                    <option value="经济类" <if condition="$list['industry'] eq '经济类'">selected="selected"</if>>经济类</option>
+                    <option value="财会类" <if condition="$list['industry'] eq '财会类'">selected="selected"</if>>财会类</option>
+                    <option value="管理类" <if condition="$list['industry'] eq '管理类'">selected="selected"</if>>管理类</option>
+                    <option value="金融/保险类" <if condition="$list['industry'] eq '金融/保险类'">selected="selected"</if>>金融/保险类</option>
+                    <option value="科学研究类" <if condition="$list['industry'] eq '科学研究类'">selected="selected"</if>>科学研究类</option>
+                    <option value="社会中介服务类" <if condition="$list['industry'] eq '社会中介服务类'">selected="selected"</if>>社会中介服务类</option>
+                    <option value="医药卫生类" <if condition="$list['industry'] eq '医药卫生类'">selected="selected"</if>>医药卫生类</option>
+                    <option value="教学类" <if condition="$list['industry'] eq '教学类'">selected="selected"</if>>教学类</option>
+                    <option value="法律类" <if condition="$list['industry'] eq '法律类'">selected="selected"</if>>法律类</option>
+                    <option value="环境保护类" <if condition="$list['industry'] eq '环境保护类'">selected="selected"</if>>环境保护类</option>
+                    <option value="新闻出版文化类" <if condition="$list['industry'] eq '新闻出版文化类'">selected="selected"</if>>新闻出版文化类</option>
+                    <option value="农业技术类" <if condition="$list['industry'] eq '农业技术类'">selected="selected"</if>>农业技术类</option>
+                    <option value="文艺体育类" <if condition="$list['industry'] eq '文艺体育类'">selected="selected"</if>>文艺体育类</option>
+                    <option value="外语类" <if condition="$list['industry'] eq '外语类'">selected="selected"</if>>外语类</option>
+                    <option value="其他类" <if condition="$list['industry'] eq '其他类'">selected="selected"</if>>其他类</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">教育程度：</td>
+            <td>
+                <select id="U_EDU" name="education">
+                    <option value="">---请选择---</option>
+                    <option value="初中及以下" <if condition="$list['education'] eq '初中及以下'">selected="selected"</if>>初中及以下</option>
+                    <option value="技校" <if condition="$list['education'] eq '技校'">selected="selected"</if>>技校</option>
+                    <option value="中专" <if condition="$list['education'] eq '中专'">selected="selected"</if>>中专</option>
+                    <option value="高中" <if condition="$list['education'] eq '高中'">selected="selected"</if>>高中</option>
+                    <option value="大专" <if condition="$list['education'] eq '大专'">selected="selected"</if>>大专</option>
+                    <option value="本科" <if condition="$list['education'] eq '本科'">selected="selected"</if>>本科</option>
+                    <option value="研究生及以上" <if condition="$list['education'] eq '研究生及以上'">selected="selected"</if>>研究生及以上</option>
+                    <option value="其他" <if condition="$list['education'] eq '其他'">selected="selected"</if>>其他</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">每月收入：</td>
+            <td>
+                <span>
+                    <input id="income" type="radio" <if condition="$list['income'] eq 1">checked="checked"</if> value="1" name="income">
+                    <label for="U_ShouRu_0">2000元以下</label>
+                    <input id="income" type="radio" <if condition="$list['income'] eq 2">checked="checked"</if> value="2" name="income">
+                    <label for="U_ShouRu_1">2000-5000元</label>
+                    <input id="income" type="radio" <if condition="$list['income'] eq 3">checked="checked"</if> value="3" name="income">
+                    <label for="U_ShouRu_2">5000-10000元</label>
+                    <input id="income" type="radio" <if condition="$list['income'] eq 4">checked="checked"</if> value="4" name="income">
+                    <label for="U_ShouRu_3">10000元以上</label>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">婚姻状况：</td>
+            <td>
+        <input id="marital_status" type="radio" <if condition="$list['marital_status'] eq 1"> checked="checked"</if> value="1" name="marital_status">
+                <label for="U_Marry_0">未婚</label>
+                <input id="marital_status" type="radio" <if condition="$list['marital_status'] eq 2"> checked="checked"</if> value="2" name="marital_status">
+                <label for="U_Marry_1">已婚</label>
+                <input id="marital_status" type="radio" <if condition="$list['marital_status'] eq 3"> checked="checked"</if> value="3" name="marital_status">
+                <label for="U_Marry_2">离异</label>
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><span class="msg">*</span>审核：</td>
+            <td><input name="status" id="status" type="checkbox" value="1" <if condition="$list['status'] eq 1">checked="checked"</if> /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="添加" name="submit" id="submit" class="formInput01">
+                <br><br>
+            </td>
+        </tr>
+    </table>
+</form>

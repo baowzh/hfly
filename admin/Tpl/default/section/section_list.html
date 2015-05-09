@@ -1,0 +1,55 @@
+<include file="Public:header" />
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">栏目列表</th>
+  </tr>
+  <tr>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+  <td class="buttom"><a class="bule" href="add">添加栏目</a></td>
+  </tr>
+  </table>
+<table border="0" cellspacing="0" cellpadding="0"  class="t3" style="border-bottom: 1px solid #eee; " >
+  <tr >
+    <th>栏目名称</th>
+	<th>操作</th>
+  </tr>
+  
+  <volist name="add_pid_zero" id="v">
+    <tr align="left">
+    <td style="border-bottom: 1px solid #cccccc;" align="left">&nbsp;├{$v.names}</td>
+    <td style="border-bottom: 1px solid #cccccc; ">
+	 <a href="section_add?{$v.id}">添加子栏目</a>
+    <if condition="$vo.isdel eq 0">
+    &nbsp;|&nbsp;
+    <a href="section_edit?{$v.id}">编辑</a>
+    <if condition="$v.isdel eq 0">
+    &nbsp;|&nbsp;
+    <a href="#" onclick=confirms("section_del?{$vo.id}","您确认要删除么")>删除</a>
+    </if>
+    </td>
+  </tr>
+  <volist name="add_pid" id="vo">
+    <if condition="$v.id == $vo.pid ">
+    <tr align="left">
+		<td style="border-bottom: 1px solid #cccccc;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├{$vo.names}</td>
+		<td style="border-bottom: 1px solid #cccccc; ">
+		 <a href="section_add?{$vo.id}">添加子栏目</a>
+		<if condition="$vo.isdel eq 0">
+		&nbsp;|&nbsp;
+		<a href="section_edit?{$vo.id}">编辑</a>
+		<if condition="$vo.isdel eq 0">
+		&nbsp;|&nbsp;
+		<a href="#" onclick=confirms("section_del?{$vo.id}","您确认要删除么")>删除</a>
+		</if>
+		</td>
+  	</tr>
+          </if>
+   </volist>
+  </volist>
+</table>
+<table>
+<tr>
+	<td><div class="page"> {$departstr} </div></td>
+  </tr>
+</table>
+<include file="Public:footer" />

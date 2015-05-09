@@ -1,0 +1,44 @@
+<if condition="$mess neq ''">
+    
+    <else/>
+    <form action="__URL__/send_sms" class="validate"  validateinfo="parent:td" enctype="multipart/form-data" method="post" onSubmit="return formcheck();">
+        <table border="0" cellspacing="0" cellpadding="0" class="t3" style="margin-top: 20px;">
+            <tr>
+                <td align="right" style="width: 150px;"><span class="msg">*</span>会员：</td>
+                <td>
+            <if condition="$objUser eq ''">
+                <input type="hidden" id="user_id" name="user_id" value="0">
+                <span>全部会员</span>
+                <else/>
+                <input type="hidden" id="user_id" name="user_id" value="{$objUser['id']}">
+                <span>{$objUser['login_name']}</span>
+            </if>
+
+            </td>
+            </tr>
+            <tr>
+                <td align="right">标题：</td>
+                <td>
+                    <input name="title" type="text" class="text3" width="200px;" id="title" value='' />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">内容：</td>
+                <td><textarea id="content" name="content" cols="30" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <td align="right"><span class="msg">*</span>排序：</td>
+                <td>
+                    <input name="sort" type="text" class="text2 required digits" id="sort" value='50' />
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" value="添加" name="submit" id="submit" class="formInput01">
+                    <br><br>
+                </td>
+            </tr>
+        </table>
+    </form>
+</if>

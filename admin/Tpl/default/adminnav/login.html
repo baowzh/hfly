@@ -1,0 +1,50 @@
+<include file="Public:header" />
+<script language="javascript">
+function formcheck()
+{
+
+	if($.trim($("#pwd2").val())=='')
+	{
+		$("#msg_pwd2").text("请输入二次密码");
+		$("#pwd2").focus();
+		return false;
+	}
+	
+
+}
+</script>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FF0000;
+	float: left;
+}
+-->
+</style>
+<form action="{:U('Adminnav/index')}" method="post" onSubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th>开发人员密码确认</th>
+  
+  </tr>
+ <tr>
+ <td align="right"><div class="div_msg">{$message}</div></td>
+ </tr>
+  </table>
+
+  <table cellpadding="0" cellspacing="0" class="t2">
+ <input type="hidden" name="url" value="{$url}" />
+  <tr height="25px">
+	<td width="150" align="right"><span class="STYLE1">*&nbsp;</span>开发人员密码：</td>
+     <td> <input name="admin_nav_pwd" type="password" class="float_left" id="pwd2" value=""/> 
+     <div id="msg_pwd2"  class="div_msg"></div></td>
+  </tr>
+     <tr>
+  	<td class="buttom" colspan="5">
+     <input type="submit" name="submit" id="submit" value="确认" />
+  </td>
+  </tr>
+ </table>
+
+</form>
+<include file="Public:footer"/>

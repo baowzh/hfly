@@ -1,0 +1,308 @@
+/* CSS Document */
+
+.travel_content{ width:775px; margin-left:10px; float:left; margin-top:5px;}
+/****--------------------banner begin----------------------***********/
+.banner{ background:url(../img/travel/banner_bg.gif) no-repeat; width:775px; height:215px; position:relative; padding-top:40px;}
+.banner .toward_left_btn{ background:url(../img/travel/banner_left.gif) no-repeat; width:37px; height:36px; float:left; display:block; cursor:pointer; margin-right: 10px;margin-top: 60px;}
+.banner .toward_right_btn{ background:url(../img/travel/banner_right.gif) no-repeat; width:37px; height:36px; float:left; display:block; cursor:pointer; margin-left: 10px;margin-top: 60px;}
+.banner .banner_items{ float:left; width:680px; overflow:hidden; height:182px; position:relative;}
+.banner .banner_items ul{
+	position:absolute;
+}
+.banner .banner_items ul li{ width:150px; padding:0px 2px; display:inline; float:left; overflow:hidden; margin:0 8px; height:182px;}
+.banner .banner_arr{ background:url(../img/travel/banner_arr.gif) no-repeat; width:84px; height:84px; position:absolute; top:-4px; left:-4px;display:block; float:none;}
+.banner .banner_items ul li .product-photo{ width:146px; height:110px; overflow:hidden; border:1px solid #e1e1e1; padding:1px;}
+.banner .banner_items ul li .product-name { width:154px; overflow:hidden; margin-top:5px;  height:36px; overflow:hidden;} 
+.banner .banner_items ul li .product-name a{ width:154px; color:#333333; line-height:18px; height:36px; overflow:hidden;}
+.banner .banner_items ul li .product-price{ width:154px; overflow:hidden; color:#fd6600; margin-top:5px;}
+.banner .banner_items ul li .product-price label{ float:left; font-size:16px; line-height:20px; font-weight:bold;}
+.banner .banner_items ul li .product-price a { background:url(../img/travel/btn_looktrip.gif) no-repeat; width:68px; height:22px; overflow:hidden; float:right;}
+/****--------------------banner end----------------------***********/
+/****--------------------special_line begin----------------------***********/
+.special_line{ border:1px solid #dddddd; border-top:2px solid #4eabca; width:772px; margin-top:10px;}
+.special_line dl{ margin-top:10px; width:771px;}
+.special_line dl dt{ margin-bottom:10px; line-height:20px; color:#4eabca; font-weight:bold; margin-left:15px; font-size:14px;}
+.special_line dl dt label{ color:#ff9934;}
+.special_line dl dd{ float:left; margin:0px 9px; *margin:0px 7px; width:365px; margin-bottom:20px; overflow:hidden;}
+.special_line dl dd span{ width:107px; height:80px; overflow:hidden; float:left; border:1px solid #e1e1e1; padding:1px; }
+.special_line dl dd .line_detail{ float:left; margin-left:7px; width:247px; overflow:hidden;}
+.special_line dl dd .line_detail p{ color:#7d7d7d; line-height:18px;}
+.special_line dl dd .line_detail p.line_title{ color:#2f8ba4; font-weight:bold; margin-bottom:5px; height:18px; overflow:hidden;}
+.special_line dl dd .line_detail p.line_title a{color:#2f8ba4;}
+.special_line dl dd .line_detail p.line_title a:hover{ color:#ff9a32;}
+.special_line dl dd .line_detail span{ color:#ff6600; font-size:14px; display:block; padding-top:5px; width:245px; height:auto; border:none; font-weight:bold;}
+.special_line dl dd .line_detail span label{ text-decoration:line-through; font-size:12px; color:#999; margin-left:15px; font-weight:normal;}
+/****--------------------special_line end----------------------***********/
+
+
+/****--------------------main_lines begin----------------------***********/
+.main_lines{ width:775px; overflow:hidden; margin-top:10px;}
+.main_lines .main_line_title{ background:url(../img/travel/main_line_bg.gif) no-repeat; width:760px; height:36px; overflow:hidden; line-height:36px; color:#FFFFFF; display:block; padding-left:15px;}
+.main_lines .main_line_title label{ display:inline-block; font-size:14px; font-weight:bold; float:left;}
+.main_lines .main_line_title label.line_a{ float:right; font-size:12px; font-weight:normal;}
+.main_lines .main_line_title a{ margin:0 10px;color:#FFFFFF; }
+.main_lines .main_line_list{ border:1px solid #4eabca; border-top:none; width:773px;}
+.main_lines .main_line_list .line_list_title{ background:url(../img/travel/line_list_bg.gif) repeat-x; height:35px; width:773px; display:block;}
+.main_lines .main_line_list .line_list_title label{ background:#FFFFFF; display:inline-block;margin-left: 5px; border: 1px solid rgb(161, 195, 205); margin-top: 5px; padding: 5px 10px; line-height: 19px; border-bottom:none; font-size:14px; color:#308ba6; font-weight:bold; float:left;}
+.main_lines .main_line_list .line_list_title a{margin-right: 15px; color: rgb(124, 125, 127); line-height: 30px; width:610px; text-align:right; margin-bottom:5px;}
+.main_lines .main_line_list .line_list_title a.too_more{ float:right; width:auto;}
+.table_info{ width:100%; border-bottom: 1px solid #a2c2cd;}
+.table_info tr.title_tr_bg{ background:url(../img/travel/tr_bg.gif) repeat-x; height:30px;}
+.table_info tr.tr_current{ background-color:#fffbf8;}
+.table_info tr.title_tr_bg td{ text-align:center; color:#959595; line-height:14px;}
+.table_info tr td{ text-align:center; color:#7b7d7c; line-height:40px;}
+.table_info tr td.td_price{ color:#ff6501;font-weight: bold;}
+.table_info tr td.td_travelName{ line-height:20px; text-align:left; padding-top:5px; padding-bottom:10px; padding-left:10px; color:#333; }
+.table_info tr td.td_travelName a{ display:block; color:#308aa5;  font-size: 14px;font-weight: bold;}
+.table_info tr td.td_travelName a:hover{ color:#ff9a32;  }
+.table_info tr td.td_sale label{ background:url(../img/travel/hot_sale.gif) no-repeat; width:45px; height:15px; display:block; font-size:0; line-height:0; color:#FFFFFF; margin-left:5px;}
+.table_info tr td.td_sale label.sale{ background:url(../img/travel/sale_arr.gif) no-repeat;}
+.table_info tr td.td_sale label.recommend{ background:url(../img/travel/recommend_arr.gif) no-repeat;}
+.table_info tr td.group_stage label{ background:url(../img/travel/travel_arr.gif) right no-repeat; padding-right:12px; cursor:pointer; color:#36322F;}
+.table_info tr td.td_satisfaction{ color:#36322f;}
+/****--------------------main_lines end----------------------***********/
+
+/****--------------------date box begin----------------------***********/
+.date_box{ border:1px solid #4eabca; width:496px; display:none; z-index:200}
+.date_box .date_del{ font-size:0; line-height:0; color:#FFFFFF; background:url(../img/travel/calendar_del.gif) no-repeat; width:10px; height:10px; cursor:pointer; position:absolute;right: 0;
+    top: -12px;}
+.date_box .date_title{  height:29px; width:496px;}
+.date_box .date_title .title_left{ background:url(../img/travel/calendar_left.gif) no-repeat; height:29px; width:24px; cursor:pointer; float:left;}
+.date_box .date_title .title_right{ background:url(../img/travel/calendar_right.gif) no-repeat; height:29px; width:24px; cursor:pointer; float:left;}
+.date_box .date_title span{ width:448px; float:left; color:#FFFFFF; text-align:center; font-weight:bold; font-size:14px; height:29px;background:url(../img/travel/calendar_bg.gif) repeat-x; line-height:28px;}
+
+.table_date{ width:100%; background-color:#FFFFFF;}
+.table_date tr td{ border:1px solid #e8e8e8; border-left:0; text-align:right; height:45px;}
+.table_date tr.week td{border:none;line-height:30px; color:#acacac; height:30px; padding-right:8px;}
+.table_date tr.week td.td_holiday{color:#ff9868;}
+.table_date tr td.td_holiday{color:#ff9868;}
+.table_date tr td span{ display:block; padding-right:6px; height:43px; cursor:pointer;}
+.table_date tr td span .td_price{ display:block; color:#ff6602;}
+.table_date tr td span .td_space{ display:block; color:#50ad21;} 
+.table_date tr td span.td_group_stage{ background-color:#f4f8c3;}
+
+/****--------------------date box end----------------------***********/
+
+/****--------------------线路检索 begin----------------------***********/
+.retrieval{ width:775px;}
+.retrieval .retrieval_tab{ width:775px; height:28px; overflow:hidden;}
+.retrieval .retrieval_tab ul li{ float:left; background:url(../img/travel/tab_bg.gif) no-repeat; width:114px; height:28px; cursor:pointer; text-align:center; line-height:28px; color:#590200; margin-left:5px; font-weight:bold;}
+.retrieval .retrieval_tab ul li.li_current{ background:url(../img/travel/tab_current.gif) no-repeat; width:114px; height:28px; color:#FFFFFF; cursor:default;}
+.retrieval .retrieval_content{ background:url(../img/travel/tab_content_bg.gif) repeat-x; border:1px solid #dddddd; border-top:2px solid #4eabca; padding:0 8px; padding-bottom:5px;}
+.retrieval .retrieval_content span{ color:#ff9933; line-height:20px; padding-top:10px; display:block; margin-bottom:5px;padding-left:8px;}
+.retrieval .retrieval_content .sub_content{ border-bottom:1px dashed #d7e2e4; padding:10px 0px; padding-left:10px;}
+.retrieval .retrieval_content .sub_content dl dt{ float:left; color:#707070; font-weight:bold; line-height:18px;}
+.retrieval .retrieval_content .sub_content dl dd{ float:left; margin-left:5px;}
+.retrieval .retrieval_content .sub_content dl dd a{ color:#308aa4; padding:1px 5px; line-height:18px; margin-left:5px; margin-right:15px;}
+.retrieval .retrieval_content .sub_content dl dd a:hover{ text-decoration:none; color:#fefffd; background-color:#4dabc7;}
+.main_lines .main_line_top{border-top:1px solid #4EABCA;}
+.main_lines .main_line_list .line_list_title .count_line{ color:#333; margin-left:5px; display:inline-block; width:300px;margin-bottom:5px;}
+.main_lines .main_line_list .line_list_title .count_line label{ border:none; background:none; margin:0; padding:0; font-size:12px; color:#fe9834; float:none;}
+.main_lines .main_line_list .line_list_title .screening{ margin-right:5px; color:#333; display:inline-block; width:310px; text-align:right; margin-bottom:5px;}
+.main_lines .main_line_list .line_list_title .screening a{ float:none; color:#ff9a32; }
+.main_lines .main_line_list .line_list_title .screening a.scree_up{ background:url(../img/travel/up_arr.gif) right no-repeat; padding-right:8px; *background-position:right 1px;}
+
+.no_result{ color: #CDCDCD; font-size: 22px; font-weight: bold; height: 500px; padding-top: 100px; text-align: center; width: 753px; display:none;}
+
+/****--------------------线路检索 end----------------------***********/
+
+/****--------------------线路detail begin----------------------***********/
+.lineProduct{ margin:0 auto; width:912px; border:1px solid #a3c3cd; position:relative; padding:0 18px; padding-top:10px; background-color:#FFFFFF;}
+.lineProduct .free_arr{ position:absolute; right:-3px; top:-3px; background:url(../img/travel/free_line.gif) no-repeat; width:80px; height:66px;1}
+.lineProduct .line_name{ color:#aaaaaa; width:910px; line-height:18px; border-bottom:1px solid #dddddd; padding-bottom:8px;}
+.lineProduct .line_name span{ font-size:18px; font-weight:bold; color:#318aa6; display:block;}
+.lineProduct .line_name span label{ display:inline-block; vertical-align:top; margin-top:8px;}
+.lineProduct .line_name span .pay_now{ background:url(../img/travel/btn_pay.gif) no-repeat;width:100px; height:24px; overflow:hidden; display:inline-block; margin-top:5px; margin-left:5px;}
+.lineProduct .lineProduct_detail{ margin-top:10px;}
+.lineProduct .lineProduct_detail .detail_left{ float:left; width:558px; padding-bottom:20px; overflow:hidden;}
+.lineProduct .lineProduct_detail .detail_left .product_pic{ padding-bottom:10px; border-bottom:1px dashed #d7e2e8; width:558px; overflow:hidden;}
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_bigpic{ width:400px; height:300px; float:left; overflow:hidden;}
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_list{ margin-left:18px; border:1px solid #e8e8e8; background-color:#f7f7f7; padding:1px; float:left; width:136px; height:301px;}
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_list .product_up{ background:url(../img/travel/banner_up_arr.gif) center no-repeat; display:inline-block; width:136px; margin-top:3px; height:18px; cursor:pointer;}
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_list .product_down{ background:url(../img/travel/banner_down_arr.gif) center no-repeat; display:inline-block; width:136px; margin-bottom:3px; height:18px; cursor:pointer;}
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_list .banner_scoorll div span{ display:inline-block; width:136px; text-align:center; overflow:hidden; height:79px;  position:relative; cursor:pointer;margin:4px 0px; *margin:2px 0px;}
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_list .banner_scoorll{height:261px; width:136px; overflow:hidden; position:relative;}
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_list .banner_scoorll div span img{ padding:2px; width:100px; height:75px; overflow:hidden; }
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_list .banner_scoorll div span.procut_current{ position:relative;}
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_list .banner_scoorll div span.procut_current img{ border:2px solid #4eabc8; padding:0;}
+.lineProduct .lineProduct_detail .detail_left .product_pic .product_list .banner_scoorll div span.procut_current label{background:url(../img/travel/line_left_arr.gif) no-repeat; padding-left:6px; display:block; position:absolute; width:4px; height:7px;top: 35px; left: 12px;}
+
+.lineProduct .lineProduct_detail .detail_right{ float:left; margin-left:20px; width:333px; position:relative;}
+.lineProduct .lineProduct_detail .detail_right .price_info_box{ position:absolute; border:2px solid #4eabc8; width:184px; background-color:#FFFFFF; padding:10px; padding-top:5px; right: -20px;top: 30px;display:none;}
+.lineProduct .lineProduct_detail .detail_right .price_info_box label{ background:url(../img/travel/price_up_arr.gif) no-repeat; width:11px; height:6px; display:block; position:absolute; left:35px; top:-7px;}
+.lineProduct .lineProduct_detail .detail_right .price_info_box span{ color:#333; font-weight:bold; border-bottom:1px solid #c5e3ed; width:175px; display:block; line-height:22px;}
+.lineProduct .lineProduct_detail .detail_right .price_info_box p{ line-height:18px; margin-top:5px; }
+
+.lineProduct .lineProduct_detail .detail_right p.price_detail{ color:#707070; line-height:20px; margin-bottom:5px;}
+.lineProduct .lineProduct_detail .detail_right p.price_detail span{color:#ff6600;}
+.lineProduct .lineProduct_detail .detail_right p.price_detail label{color:#ff6600; font-weight:bold;}
+.lineProduct .lineProduct_detail .detail_right p.price_detail span label.size_price{ font-size:28px; font-weight:bold; margin-right:3px; }
+.lineProduct .lineProduct_detail .detail_right p.price_detail a.price_explain{ background:url(../img/travel/price_explain.gif) right no-repeat; padding-right:20px; margin-left:20px; color:#4eabc8;}
+.btn_qq{ background:url(../img/travel/qq_consulting.gif) no-repeat; width:98px; height:23px; display:inline-block; vertical-align:bottom;}
+.lineProduct .lineProduct_detail .detail_right p.price_detail span.product_num{ color:#707070; display:inline-block; width:170px;}
+.lineProduct .lineProduct_detail .detail_right .travel_date{ border:1px solid #febe90; width:290px; padding:20px; margin-top:10px; background-color:#fffbe0;}
+.lineProduct .lineProduct_detail .detail_right .travel_date p input.txtcon{ background:url(../img/travel/date-arr.gif) 165px center no-repeat #FFFFFF; height:18px;}
+.lineProduct .lineProduct_detail .detail_right .travel_date .pay_date_info{ padding-left:60px; color:#b4b4b4; margin-top:3px;}
+.lineProduct .lineProduct_detail .detail_right .travel_date p.pay_count{ padding-left:60px; color:#333; margin-top:3px;}
+.lineProduct .lineProduct_detail .detail_right .travel_date p.pay_count label{color:#ff6600; padding:3px; display:inline-block; padding-right:20px;}
+.lineProduct .lineProduct_detail .detail_right .travel_date p.pay_count input{ border:0;cursor:pointer; }
+.lineProduct .lineProduct_detail .detail_right .travel_date p.pay_count input.count_minus{ background:url(../img/travel/count-.gif) no-repeat; width:24px; height:15px;}
+.lineProduct .lineProduct_detail .detail_right .travel_date p.pay_count input.count_add{ background:url(../img/travel/count_add.gif) no-repeat; width:24px; height:15px;}
+.lineProduct .lineProduct_detail .detail_right .travel_date p.pay_count input.count{ border:1px solid #ff9933; cursor:default; width:22px; height:13px; text-align:center;}
+.lineProduct .lineProduct_detail .detail_right .travel_date p.pay_count .scheduled_now{ background:url(../img/travel/btn_scheduled_now.gif) no-repeat; width:136px; height:43px; cursor:pointer;}
+.lineProduct .lineProduct_detail .detail_right .travel_date p.pay_tip{ margin-top:20px;}
+.lineProduct .lineProduct_detail .detail_right .travel_date p.pay_tip label{ margin:0 3px;color:#ff6600;}
+
+.lineProduct .lineProduct_detail .detail_right .recommend_reasons{ border-top:1px solid #dddddd; width:328px; margin-top:15px; padding-left:5px;}
+.lineProduct .lineProduct_detail .detail_right .recommend_reasons dl{ margin-top:15px;}
+.lineProduct .lineProduct_detail .detail_right .recommend_reasons dl dt{ font-weight:bold; color:#707070; font-size:14px; margin-bottom:5px;}
+.lineProduct .lineProduct_detail .detail_right .recommend_reasons dl dd{ color:#aaaaaa; background:url(../img/travel/reason_arr.gif) left no-repeat; padding-left:16px; line-height:24px;}
+.recommend_reasons .price_detail a{ text-decoration:none;}
+.recommend_reasons .price_detail a.share_sina{ background:url(../img/common/sina_arr.gif) no-repeat; width:16px; height:16px; font-size:0; line-height:0; color:#FFFFFF;display: inline-block; margin-right:5px;vertical-align: top;}
+.recommend_reasons .price_detail a.share_weibo{ background:url(../img/travel/share_wb.gif) no-repeat; width:16px; height:16px; font-size:0; line-height:0; color:#FFFFFF;display: inline-block; margin-right:5px;vertical-align: top;}
+.recommend_reasons .price_detail a.share_twitter{ background:url(../img/travel/share_twitter.gif) no-repeat; width:16px; height:16px; font-size:0; line-height:0; color:#FFFFFF;display: inline-block; margin-right:5px;vertical-align: top;}
+.recommend_reasons .price_detail a.share_renren{ background:url(../img/travel/share_renren.gif) no-repeat; width:16px; height:16px; font-size:0; line-height:0; color:#FFFFFF;display: inline-block; margin-right:5px;vertical-align: top;}
+.recommend_reasons .price_detail a.share_favorite{ background:url(../img/travel/share_xing.gif) no-repeat; width:16px; height:16px; font-size:0; line-height:0; color:#FFFFFF;display: inline-block; margin-right:5px;vertical-align: top;}
+.recommend_reasons .price_detail a.share_douban{ background:url(../img/travel/share_douban.gif) no-repeat; width:16px; height:16px; font-size:0; line-height:0; color:#FFFFFF;display: inline-block; margin-right:5px;vertical-align: top;}
+
+
+
+.lineProduct .date_select{ margin-top:10px;}
+.lineProduct .date_select .date_select_title{ display:block; color:#707070;margin-bottom: 5px; line-height: 20px;}
+.lineProduct .date_select .date_select_title label{ color:#318aa6; font-size:14px; font-weight:bold;}
+.lineProduct .date_select .date_box{ width:555px;}
+.lineProduct .date_select .date_title{ width:555px;}
+.lineProduct .date_select .date_title span{ width:507px;}
+
+.line_detail{ margin:0 auto; margin-top:10px; width:950px; overflow:hidden;}
+.line_detail .main_line_list{ width:948px; border-color:#A1C3CD;}
+.line_detail .main_line_list .line_list_title{ width:947px;}
+.line_detail .main_line_list .line_list_title label{ padding:5px 35px;}
+.line_detail .main_line_list .trip_command{ border-top:1px solid #e8e8e8; margin:25px 30px;}
+.line_detail .main_line_list .trip_command p{ line-height:18px; color:#333333; margin-top:10px;}
+.line_detail .main_line_list .trip_command p label{ color: #ff9933; font-size: 20px; margin:0 5px; font-weight:bold;}
+.line_detail .main_line_list .trip_command p.travel_de{ color:#707070; margin-bottom:20px;}
+.line_detail .main_line_list .trip_command p.travel_de label{ font-size:12px; color:#707070; margin:0px 20px;}
+.line_detail .main_line_list .trip_command .line_day_pice{ float:left; padding:1px; width:128px; height:98px; border:1px solid #e3e3e3;}
+.line_detail .main_line_list .trip_command .line_day_detail{ float:left; width:720px; padding-left:5px; line-height:22px; color:#333333;}
+.line_retrieval{ margin:0 auto; width:950px; margin-top:10px; color:#333333;}
+.line_retrieval .retrieval_tab ul li{ font-size:14px;line-height: 32px; font-weight:bold;}
+.line_retrieval .retrieval_content{ background:none;  padding-bottom:25px; border-color:#A1C3CD; width:932px; border-top-color:#4eabca;}
+.line_retrieval .retrieval_content .papy_list{ margin-left:25px;color:#333333; margin-top:20px; width:880px;}
+.line_retrieval .retrieval_content .papy_list span{color:#333333; border-bottom:1px solid #e8e8e8; line-height:26px; padding:0;font-weight:bold; margin-bottom:15px;}
+.line_retrieval .retrieval_content .papy_list ul li{ line-height:24px; color:#333;}
+
+/*-------------------客户回访记录 begin-------------------------*/
+.line_detail .main_line_list .satisfaction{ border-bottom:1px solid #E8E8E8;margin: 25px 30px; padding-bottom:25px; }
+.line_detail .main_line_list .satisfaction .total_satisfaction{ float:left; border-right:1px solid #E8E8E8; height:110px; padding:0 25px; width:165px; text-align:right; padding-top:30px;}
+.line_detail .main_line_list .satisfaction .total_satisfaction .user_satisfaction{ color:#707070; font-weight:bold; font-size:14px; line-height:16px}
+.line_detail .main_line_list .satisfaction .total_satisfaction .satis_total{ color:#ff6600; font-weight:bold; font-size:34px; line-height:34px; margin:5px 0px;padding-right:5px;}
+.line_detail .main_line_list .satisfaction .total_satisfaction .satis_person{color:#707070; padding-right:5px;}
+.line_detail .main_line_list .satisfaction .total_satisfaction .satis_person label{ color:#ff6600; padding:0 5px;}
+
+.line_detail .main_line_list .satisfaction .progress_bar{ float:left; padding-left:25px; width:350px; overflow:hidden;}
+.line_detail .main_line_list .satisfaction .progress_bar ul li{ line-height:28px; color:#333; height:28px;}
+.line_detail .main_line_list .satisfaction .progress_bar ul li span.bar_pro{ width:200px; border:1px solid #4dabc7; display:inline-block; background:url(../img/travel/bar_bg.gif) repeat-x; height:10px; overflow:hidden;}
+.line_detail .main_line_list .satisfaction .progress_bar ul li span.bar_pro label{ display:inline-block; background:url(../img/travel/bar_current_bg.gif) repeat-x; height:10px; width:200px;}
+.line_detail .main_line_list .satisfaction .progress_bar ul li label.font_label{ color:#ff6600; margin-left:5px; font-weight:bold;}
+.line_detail .main_line_list .satisfaction .progress_bar ul li label.font_label font{ color:#707070; margin-left:5px; font-weight:normal;}
+
+.line_detail .main_line_list .satisfaction .comment_on{ float:left; padding-top:30px; width:215px; margin-left:40px; text-align:center; overflow:hidden;}
+.line_detail .main_line_list .satisfaction .comment_on p{ width:215px; text-align:center; color:#707070; line-height:20px; margin-bottom:5px;}
+.line_detail .main_line_list .satisfaction .comment_on p.btn_p{ padding-left:45px; *padding-left:0px; }
+.line_detail .main_line_list .satisfaction .comment_on p.btn_p .btn_comment{ background:url(../img/travel/btn_comment.gif) no-repeat; width:112px; height:32px; overflow:hidden; display:block; }
+.line_detail .main_line_list .satisfaction .comment_on p label{ color:#ff6600; font-weight:bold;}
+
+
+.line_detail .main_line_list .satisfaction_list{ margin:0 30px; width:888px; overflow:hidden;}
+.line_detail .main_line_list .satisfaction_list .list_single{ margin-top:10px; margin-bottom:30px;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_satis{ float:left; width:65px; margin-right:5px; background:url(../img/travel/satisfaction_tip.gif) no-repeat; height:49px; color:#FFFFFF; padding-right:15px; padding-top:5px; text-align:right; line-height:22px;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_satis span{ padding-right:5px;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_satis span.font_size{font-size: 24px;font-style: italic; padding-right:0;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_info{ float:left; background-color:#f7f7f7; width:770px; overflow:hidden; padding:15px;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_info .info_name{ color:3707070; font-weight:bold;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_info .info_name span{display: inline-block; width: 690px; line-height:18px;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_info .info_name span label{ font-weight:normal;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_info .info_name a{color:#ff9933;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_info .info_name a:hover{ text-decoration:none;}
+.custemer_phone{ background:url(../img/travel/phone_arr.gif) left no-repeat; padding-left:20px; }
+.custemer_common{ background:url(../img/travel/connon_arr.gif) left no-repeat; padding-left:20px;}
+
+.line_detail .main_line_list .satisfaction_list .list_single .single_info .trvel_evaluation{color:#ff9933; line-height:18px; border-bottom:1px dashed #d7e2e6; padding-bottom:10px;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_info .trvel_evaluation label{ padding-right:15px;}
+.line_detail .main_line_list .satisfaction_list .list_single .single_info .eva_infomation{ color:#707070; line-height:22px; margin-top:10px;}
+
+.input_box{ width:230px; overflow:hidden; margin-left: 60px; position:absolute;}
+.input_box .table_date tr td{ height:28px; border-bottom:none; text-align:center;}
+.input_box .table_date tr td span{ height:28px; line-height:28px;}
+.input_box .date_title .title_left{ background:url(../img/travel/small_date_left.gif) no-repeat; width:19px; height:24px;}
+.input_box .date_title .title_right{ background:url(../img/travel/small_date_right.gif) no-repeat; width:19px; height:24px;}
+.input_box .date_title span{ background:url(../img/travel/small_date_bg.gif) repeat-x; height:24px; width:192px;}
+.input_box .date_title{ width:230px;  height:24px;}
+
+/*-------------------客户回访记录 end-------------------------*/
+
+/****--------------------线路detail end----------------------***********/
+
+/*-------------------login box begin-------------------------*/
+.login_box{  width:540px; font-size:14px; z-index:100; }
+.login_box .login_box_title{ background:url(../img/common/login_box_bg.gif) repeat-x; height:31px; width:530px; color:#FFFFFF; padding-left:10px; display:block; line-height:30px; font-weight:bold;}
+.login_box .login_box_title label{ background:url(../img/travel/box_del.gif) no-repeat; width:12px; height:13px; margin-top:8px; cursor:pointer; margin-left:405px; display:inline-block;}
+.login_box .login_content{border:2px solid #4eabca; border-top:none;padding:15px; width:506px; padding-bottom:10px; background-color:#FFFFFF;}
+.login_box .login_content .content_login{ padding-right:20px; border-right:1px dashed #d5e2e8; width:205px; padding-top:5px; float:left;}
+.login_box .login_content  .login_title{ border-bottom:1px solid #dddddd; line-height:24px; width:205px; display:block; color:#ff9933; font-weight:bold; margin-bottom:25px; font-size:14px;}
+.login_box .login_content  .login_title label{ color:#318aa6}
+.login_box .login_content  p{ margin:15px 0px; line-height:20px; color:#333; width:205px;}
+.fast_subsice{ background:url(../img/travel/fast_subscribe.gif) no-repeat; width:82px; height:32px; cursor:pointer; border:0; margin-left:50px;}
+.login_box .login_content  p.login_tip{width:190px; text-align:left; color:#707070; margin-bottom:10px;}
+
+.login_box .login_content .content_register{ float:left; padding-left:20px; width:250px;}
+.logibox_login{ background:url(../img/travel/btn_login_box.gif) no-repeat; width:112px; height:32px;cursor:pointer; border:0; margin-left:38px;}
+.loginbox_register{ background:url(../img/travel/btn_register_box.gif) no-repeat; width:112px; height:32px;cursor:pointer; border:0; margin-left:38px;}
+.login_box .login_content .content_register p{ width:250px;}
+.login_box .login_content .content_register p a{ margin-left:5px;}
+.login_box .login_content .content_register p.login_tip{ margin-top:20px;}
+.login_box .login_content .content_register .login_title{ width:240px;}
+.login_box .login_content .txtcon{ height:22px; width:130px;}
+/*-------------------login box end-------------------------*/
+
+/*-------------------select date box begin-------------------------*/
+.select_date{border:2px solid #4eabca; width:398px; background-color:#FFFFFF;  padding-left:15px; z-index:100;}
+.select_date .box_date_del{ width:395px; text-align:right; margin-top:5px;}
+.select_date .box_date_del label{ cursor:pointer; background:url(../img/travel/box_del.gif) no-repeat; width:12px; height:13px; display:block; margin-left:380px;}
+.select_date .date_all{ color:#707070; font-size:14px;}
+.select_date .date_all label{ color:#ff6600;}
+.select_date .choice_count{ margin-top:20px; padding-bottom:20px; color:#333; border-bottom:1px dashed #d5e2e8; margin-right:20px;}
+.select_date .choice_count p.pay_count{color: #333333; line-height:18px;padding-left: 80px;}
+.select_date .choice_count .count_titile{ color:#333; margin-bottom:15px;}
+.select_date .choice_count p.pay_count label{ color: #FF6600;display: inline-block;padding: 3px; padding-right:20px;}
+.select_date .choice_count p.pay_count input.count_minus{background: url(../img/travel/count-.gif) no-repeat scroll 0 0 transparent;height: 15px;width: 24px; border:0; cursor:pointer}
+.select_date .choice_count p.pay_count input.count{ border: 1px solid #FF9933; height: 13px;text-align: center; width: 22px;}
+.select_date .choice_count p.pay_count input.count_add{ background: url(../img/travel/count_add.gif) no-repeat scroll 0 0 transparent;height: 15px;width: 24px; border:0; cursor:pointer}
+.select_date .children_tip{ width:378px; color:#707070; margin-top:5px; line-height:18px;}
+.btn_next{ background:url(../img/travel/btn_next.gif) no-repeat; width:82px; height:32px; cursor:pointer; border:0;}
+.select_date .pay_next{ margin-top:20px; margin-bottom:30px; width:378px; text-align:center;}
+/*-------------------select date box end-------------------------*/
+
+
+/*-------------------点评页面 begin-------------------------*/
+.line_detail .main_line_list .comment_on_title{ background:#eff7fa; color:#353e40; height:40px; display:block; line-height:40px; padding-left:17px; font-weight:bold; font-size:14px;}
+.line_detail .main_line_list .comment_on_title label{ color:#348da9;}
+.main_lines .common_on_top{border-top: 1px solid #4EABCA; margin-bottom:10px; background-color:#FFFFFF;}
+.line_detail .common_on_top .satisfaction{ margin: 43px 30px; border-bottom:none; padding-bottom:0px;}
+.line_detail .common_on_top .satisfaction .progress_bar ul li{ padding-bottom:2px;}
+.line_detail .main_line_list div.page{ width:938px;}
+.line_detail .main_line_list span.page{ width:590px;*width:580px; display:inline-block; font-weight:normal; font-size:12px;}
+
+/*点评 box*/
+.common_on_box .login_box_title{ width:342px;}
+.common_on_box .login_box_title label{ margin-left: 260px;}
+.common_on_box .login_content{ width:348px; padding:0; padding-top:15px; text-align:center; background-color:#FFFFFF; color:#333333; padding-bottom:10px;}
+.common_on_box .login_content p{ width:330px; margin:10px 0;}
+.common_on_box .login_content p input{ vertical-align:middle; margin-right:5px; margin-left:15px;}
+.common_on_box .login_content .message{ width:330px;}
+.common_on_box .login_content .message .maessage_title{ float:left; width:90px; text-align:right; color:#333333;}
+.common_on_box .login_content .message .message_textarea{ float:left; margin-left:10px;}
+.common_on_box .login_content .message .message_textarea textarea{ width:180px; height:85px; border:1px solid #7e9db9;; } 
+.btn_common_submit{ background:url(../img/travel/common_submit.gif) no-repeat; width:82px; height:32px; cursor:pointer; border:0;}
+/*-------------------点评页面 begin-------------------------*/

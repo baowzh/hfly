@@ -1,0 +1,38 @@
+<div class="col-19 user_nav" style="width:935px;">
+  <div style="margin-top:12px;"></div>
+    <div class=" alpha add">
+        <div class="center_right">
+            <div class="center_pht span-3">
+                <div class="center_pht_s span-12">
+                    <img src="../Public/images/user_photo.jpg" class="span-12">
+                    <div class="img-text"><span></span>
+                      <h4><a href="#">个人资料</a></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="center_font span-12">
+                <div class="center_list">
+                    <span class="rev_font"><b>{$user_name}</b></span> 您好！
+                </div>
+                <div class="center_list">
+                    <b>账户余额：</b>{$account_balance}元
+                    <span class="order_main_red"><a href="{:U('userinfo/finance_list')}">[查看账户明细]</a></span>
+                </div>
+                <div class="center_list">
+                    <span class="rev_font"></span> 当您的奖金总额满200元，即可申请提现
+                    <span class="order_main_red"><a href="{:U('withdraw/withdraw_apply.html')}">[我要提现]</a></span>
+                </div>
+                <div class="center_list">
+                    <b>站内信:</b>
+	  <span class="order_main_red">
+	    <a href="{:U('userinfo/message_list')}">未读({$unread_sms})</a></span>
+                </div>
+                <div class="center_list"><b>订单提醒：</b>
+                    <a href="{:U('userline/route_mag')}">线路订单({$line_list.order_num})</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="clear:both"></div>

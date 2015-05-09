@@ -1,0 +1,41 @@
+<include file="Public:header" />
+<load href="../Public/Js/swf2ckeditor.js" />
+<script language="javascript">
+    function formcheck()
+    {
+
+        if($.trim($("#names").val())=='')
+        {
+            $("#msg_names").html("请填写名称");
+            $("#names").focus();
+            return false;
+        }
+    }
+</script>
+
+<form action="__URL__/pic_edit" enctype="multipart/form-data" method="post" onsubmit="return formcheck();">
+    <input type="hidden" id="id" name="id" value="{$id}">
+    <input type="hidden" id="line_id" name="line_id" value="{$objLinePic.line_id}">
+    <table border="0" cellspacing="0" cellpadding="0" class="t3">
+        <tr>
+            <td align="right"><span class="msg">*</span>名称</td>
+            <td><label>
+                    <input type="text" name="names" id="names" value="{$objLinePic.names}" />
+                </label><span id="msg_names" class="msg"></span></td>
+        </tr>
+        <tr>
+            <td align="right"><span class="msg">*</span>排序</td>
+            <td><label>
+                    <input type="text" name="sort" id="sort" class="float_left" />
+                </label><span id="msg_picpath" class="msg"></span>
+          </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="保存" name="submit" id="submit" class="formInput01">
+            </td>
+        </tr>
+    </table>
+</form>
+<include file="Public:footer" />

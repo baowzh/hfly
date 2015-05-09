@@ -1,0 +1,49 @@
+<include file="Public:header" />
+<table cellspacing="0" cellpadding="0" class="t1">
+    <tbody>
+        <tr>
+            <th height="20" colspan="2" id="title">您当前位置：<a target="_top" href="__ADMIN_URL__">首页</a> >
+                <a href="__URL__/show_list">会员管理</a> > <a href="__URL__/sms_lists">短信列表</a> > 编辑短信</th>
+        </tr>
+    </tbody></table>
+<form action="__URL__/edit_sms" class="validate"  validateinfo="parent:td" enctype="multipart/form-data" method="post" onSubmit="return formcheck();">
+    <table border="0" cellspacing="0" cellpadding="0" class="t3" style="margin-top: 20px;">
+        <tr>
+            <td align="right" style="width: 150px;"><span class="msg">*</span>会员：</td>
+            <td>
+        <if condition="$list['user_id'] eq 0">
+            <input type="hidden" id="id" name="id" value="{$list['id']}">
+            <span>全部会员</span>
+            <else/>
+            <input type="hidden" id="id" name="id" value="{$list['id']}">
+            <span>{$login_name}</span>
+        </if>
+
+        </td>
+        </tr>
+        <tr>
+            <td align="right">标题：</td>
+            <td>
+                <input name="title" type="text" class="text3" width="200px;" id="title" value="{$list['title']}" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">内容：</td>
+            <td><textarea id="content" name="content" cols="30" rows="5">{$list['content']}</textarea></td>
+        </tr>
+        <tr>
+            <td align="right"><span class="msg">*</span>排序：</td>
+            <td>
+                <input name="sort" type="text" class="text2 required digits" id="sort" value="{$list['sort']}" />
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="添加" name="submit" id="submit" class="formInput01">
+                <br><br>
+            </td>
+        </tr>
+    </table>
+</form>
+<include file="Public:footer" />

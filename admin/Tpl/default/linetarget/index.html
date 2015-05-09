@@ -1,0 +1,89 @@
+<script type="text/javascript">
+    $(function () {
+        $.fn.allselect({
+            allselectclass: "allselect",
+            cselectname: "c_selected"
+        });
+    });
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('index')}">目的地管理</a> |
+        <a href="javascript:;" onclick="art.dialog.open('{:U('add_target',array('t'=>$types))}',{title:'添加所属城市',width:560,height:300,window:'top',lock:'true'});">添加目的地</a>
+    </ul>
+</div>
+
+<form action="">
+    <table class="search_table" width="100%">
+        <tr>
+            <td class="search">
+                关键词: <input id="title" type="text" class="input-text" name="title" value="{$title}"/>
+                &nbsp;
+                搜索类型：<select name="s_type">
+                <if condition="$s_type eq 1">
+                    <option value="1" selected>线路类型和目的地</option>
+                    <option value="2">出发城市</option>
+                    <else/>
+                    <option value="1" >线路类型和目的地</option>
+                    <option value="2" selected>出发城市</option>
+                </if>
+            </select>
+                <input type="submit" value="查询" class="button"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<form name="myform" id="myform" action="{:U('LineTarget/order_target')}" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+
+            <thead>
+            <tr>
+                <th><input type="checkbox" value="" class="allselect" id="check_box">
+                    <label for="check_box" class="for_box">全选/全不选</label></th>
+                <th>出发城市</th>
+                <th>线路类型</th>
+                <th>目的地</th>
+                <th>排序</th>
+                <th>是否热门</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="content">
+            <volist name="target_list" id="vo">
+                <tr>
+                    <td>
+                        <input type="checkbox" class="sel c_selected" id="sel_{$vo.id}" value="{$vo.id}" name="items[{$vo.id}]"/>
+                    </td>
+                    <td>{$start_city[$vo['start_id']]}</td>
+                    <td>{$vo.tnames}</td>
+                    <td>{$vo.cnames}</td>
+                    <td>
+                        <input type="text" name="sort[{$vo.id}]" class="input-text" id="sort_{$vo.id}" value="{$vo.sort}"/>
+                    </td>
+                    <td>
+                        <if condition="$vo.classify eq 1">
+                            是
+                            <else/>
+                            否
+                        </if>
+                    </td>
+                    <td>
+                        <a href="javascript:;" onclick="art.dialog.open('{:U('edit_target',array('id'=>$vo['id']))}',{title:'编辑所属城市',width:560,height:300,window:'top',lock:'true'});">编辑</a>&nbsp|&nbsp
+                        <a href="{:U('linetarget/del_target',array('id'=>$vo['id']))}"
+                           onclick="return atr_confirm(this.href, '确认要删除吗');">删除</a></td>
+                </tr>
+            </volist>
+            </tbody>
+
+        </table>
+        <input type="hidden" name="base_pos" value="{~echo MODULE_NAME}">
+    </div>
+    <div class="btn">
+        <input type="button" class="button" name="dosubmit" value="删除"
+               onclick="myform.action='{:U('deleteall')}';if(confirm( '确认要删除吗')){myform.submit();}"/>
+        <input type="button" class="button" name="dosubmit" value="排序"
+               onclick="myform.action = '{:U('line/reset_sort',array('jumpurl'=>base64_encode('linetarget/index')))}'; $('#myform').trigger('submit');"/>
+    </div>
+</form>
+<div class="page">{$page}</div>

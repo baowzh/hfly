@@ -1,0 +1,74 @@
+<include file="Public:header" />
+<script language="javascript">
+function formcheck()
+{	
+	if($.trim($("#config_key").val())=='')
+	{
+		$("#msg_config_key").html("请填写名称");
+		$("#config_key").focus();
+		return false;
+	}
+	if($.trim($("#config_value").val())=='')
+	{
+		$("#msg_config_value").html("请填写值");
+		$("#config_value").focus();
+		return false;
+	}
+	if($.trim($("#memo").val())=='')
+	{
+		$("#msg_memo").html("请填写描述");
+		$("#memo").focus();
+		return false;
+	}
+	if($.trim($("#sort").val())=='')
+	{
+		$("#msg_sort").html("请填写排序");
+		$("#sort").focus();
+		return false;
+	}
+}
+</script>
+<form action="__URL__/base_config_add" enctype="multipart/form-data" method="post" onsubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">添加设置</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="base_config">基本设置列表</a></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="保存" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+<table border="0" cellspacing="0" cellpadding="0" class="t3">
+  <tr>
+    <td align="right"><span class="msg">*</span>名称</td>
+    <td><label>
+      <input type="text" name="config_key" id="config_key" />
+    </label><span id="msg_config_key" class="msg"></span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>值</td>
+    <td><label>
+      <input type="text" name="config_value" id="config_value" />
+    </label><span id="msg_config_value" class="msg"></span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>描述</td>
+    <td><label>
+      <textarea name="memo" cols="50" rows="5" id="memo"></textarea>
+    </label><span id="msg_memo" class="msg"></span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>排序</td>
+    <td>
+    <label>
+      <input name="sort" type="text" id="sort" value="50" size="10" />
+    </label>
+    <span id="msg_sort" class="msg"></span>
+    </td>
+  </tr>
+  </table>
+</form>
+<include file="Public:footer" />

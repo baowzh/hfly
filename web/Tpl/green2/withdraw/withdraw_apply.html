@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="../Public/css/withdraw.css"/>
+<script type="text/javascript" src="../Public/js/withdraw.js"></script>
+<div class="">
+        <div class="col-19 omega page_content">
+        <div style="margin-top:12px;"></div>
+        	<ul class="side1">
+            <li><a href="./withdraw_list.html" class="col-2 alpha title col-full">提现记录</a></li>
+            <li class="col-2 title on"><a href="">提现申请</a></li>
+            </ul>
+            <div class="col-18 alpha body">
+              <form method="post" name="myform" id="myform" action="{:U('withdraw_apply')}">
+                <table class="table_form"  border="1">
+                  <tr class="form1">
+                    <th>账户可提余额：</th>
+                    <td height="50">
+                      <span id="lineheight50">{$userinfo["amount"]} 元
+                      		&nbsp;&nbsp;&nbsp;
+                      </span>
+                      <span><font color="#FF0000">正在“审核中”的提现金额会被冻结；<br/>目前被冻结的金额为：{$userinfo.checking_money} 元</font></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><span class="important">*</span>提现金额：</th>
+                    <td><span><input name="money" class="txt" type="text" datatype="value_check" minval="200" times="50" id="money" errormsg="输入错误"  sucmsg=" " nullmsg="请输入提现金额">&nbsp;</span>
+                    <span>提现的金额为50的整倍数，并且大于等于200</span>
+                    <span class="Validform_checktip" for="money"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><span class="important">*</span>银行账户名：</th>
+                    <td><input name="band_name" id="band_name" class="txt" type="text" datatype="s" errormsg="请正确输入" sucmsg=" " nullmsg="请输入银行账户名"></td>
+                  </tr>
+                  <tr>
+                    <th><span class="important">*</span>银行账号：</th>
+                    <td><input name="band_code" id="band_code" class="txt" type="text" size="36" datatype="/^[0-9]{19,24}$/" errormsg="请正确输入" sucmsg=" " nullmsg="请输入银行账号"></td>
+                  </tr>
+                  <tr>
+                    <th>身份证号：</th>
+                    <td><input name="person_code" id="person_code" class="txt" type="text" size="36" datatype="n18-23" errormsg="请正确输入" sucmsg=" " nullmsg="请输入身份证号码（可不填）" ignore="ignore"></td>
+                  </tr>
+                  <tr>
+                    <th>手机号码：</th>
+                    <td><input name="phone_num" id="phone_num" class="txt" type="text" datatype="n11-15" errormsg="请正确输入" sucmsg=" " nullmsg="请输入手机号码（可不填）" ignore="ignore">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><span class="important">*</span>备注：</th>
+                    <td height="144"><span><textarea name="remarks" id="remarks" cols="50" rows="6" datatype="*" errormsg="请正确输入" sucmsg=" " nullmsg="请填写备注"></textarea></span>
+                    <span class="Validform_checktip" for="remarks"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td><input name="submit" type="submit" class="btn2 gray" id="submit" value="提交" /></td>
+                  </tr>
+                </table>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

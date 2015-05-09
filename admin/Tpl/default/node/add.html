@@ -1,0 +1,139 @@
+<include file="Public:header" />
+<script type="text/javascript">
+   window.onload = f;
+	function f(){getYiJi();}
+	function getYiJi(){
+		$.ajax({
+			url: "__URL__/first",
+			dataType : "json",
+			type: "get",
+			cache : false,
+			success: function(json){
+				var select_root = document.getElementById('first');
+				select_root.length = 0;
+				select_root.add(new Option("项目",''));
+				for(var i=0;i<json.status.length;i++){
+					var xValue=json.status[i].id;
+					var xText=json.status[i].name;
+					var option=new Option(xText,xValue);
+					select_root.add(option);
+				}
+			}
+		});				
+	}
+	function getErJi(value){
+		$.ajax({
+			url: "__URL__/secend",//更变处erji?id=1
+			data: "id=" + value,
+			dataType : "json",
+			type: "post",
+			cache : false,
+			success: function(json){
+				var select_root = document.getElementById('secend');
+				select_root.length = 0;
+				select_root.add(new Option("模块",''));
+				for(var i=0;i<json.status.length;i++){
+					var xValue=json.status[i].id;
+					var xText=json.status[i].name;
+					var option=new Option(xText,xValue);
+					select_root.add(option);
+				}
+			}
+		});
+	}
+	function getSanJi(value){
+		$.ajax({
+			url: "__URL__/secend",//更变处
+			data: "id=" + value,
+			dataType : "json",
+			type: "post",
+			cache : false,
+			success: function(json){
+				var select_root = document.getElementById('third');
+				select_root.length = 0;
+				select_root.add(new Option("方法",''));
+				for(var i=0;i<json.status.length;i++){
+					var xValue=json.status[i].id;
+					var xText=json.status[i].name;
+					var option=new Option(xText,xValue);
+					select_root.add(option);
+				}
+			}
+		});
+	}
+function formcheck()
+{	
+	var  sel=document.getElementById( "first"); 
+	if(sel.value== ""){
+         $("#msg_first").text("节点位置不可以为空");
+		 $("#first").focus();
+		 return   false;
+     }
+	if($.trim($("#title").val())=='')
+	{
+		$("#msg_title").text("请输入用户名");
+		$("#title").focus();
+		return false;
+	}
+	if($.trim($("#remark").val())=='')
+	{
+		$("#msg_remark").text("描 述不可以为空");
+		$("#remark").focus();
+		return false;
+	}
+}
+</script>
+<table border="0" cellspacing="0" cellpadding="0" class="t1" >
+  <tr>
+  	<th colspan="2">增加节点</th>
+  </tr>
+  <tr>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+  <td class="buttom"><a class="bule" href="lists">节点列表</a></td>
+  </tr>
+  </table>
+<form method='post'  id="form1"  action="add" onSubmit="return formcheck();">
+<table cellpadding=0 cellspacing=0 class="t3">
+<tr>
+	<td class="tRight" >节点位置：</td>
+
+	<td class="tLeft" >
+	<select name="first" style="width:100px;" onchange="getErJi(this.value)" id="first" ><option value="">项目</option></select>
+	<select name="secend" style="width:100px;" onchange="getSanJi(this.value)" id="secend"><option value="">模块</option></select>
+	<select name="third" style="width:100px;"id="third"><option value="">方法</option></select>
+	</label><span id="msg_first" class="msg"></span>
+	</td>
+</tr>
+<tr>
+	<td class="tRight" >显示名：</td>
+	<td class="tLeft" ><input type="text"  name="title" id="title" />
+	  </label><span id="msg_title" class="msg"></span></td>
+</tr>
+<tr>
+	<td class="tRight">状态：</td>
+	<td class="tLeft">
+	<SELECT class="small bLeft"  name="status" id="status">
+	<option value="0">禁用</option>
+	<option value="1">启用</option>
+	</SELECT></td>
+</tr>
+<tr>
+	<td class="tRight" >排序：</td>
+	<td class="tLeft" ><input type="text" name="sort"></span><span style="color:#9933CC">可为空</span></td>
+</tr>
+<tr>
+	<td class="tRight tTop">描 述：</td>
+	<td class="tLeft"><TEXTAREA class="large bLeft" name="remark"  id="remark" rows="5" cols="57"></textarea>
+	</label><span id="msg_remark" class="msg"></span></td>
+</tr>
+<tr>
+	<td></td>
+<td>
+<input type="submit" value="保存" name="submit">&nbsp;&nbsp;
+<input type="reset" class="reset imgButton" value="清空" ></td>
+</tr>
+
+</table>
+</form>
+</div>
+<include file="Public:footer"/>

@@ -1,0 +1,90 @@
+<include file="Public:header" />
+<script language="javascript">
+function formcheck()
+{
+	if($.trim($("#value").val())=='')
+	{
+		$("#msg_value").text("请输入名称");
+		$("#value").focus();
+		return false;
+	}
+	if($.trim($("#name").val())=='')
+	{
+		$("#msg_name").text("请输入显示名");
+		$("#name").focus();
+		return false;
+	}
+	var  sel=document.getElementById( "level"); 
+	if(sel.value== ""){
+         $("#msg_level").text("请选择层位置");
+		 $("#level").focus();
+		 return   false;
+     }
+	if($.trim($("#info").val())=='')
+	{
+		$("#msg_info").text("请输入显示名");
+		$("#info").focus();
+		return false;
+	}
+}
+</script>
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">增加系统节点</th>
+  </tr>
+  <tr>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+  <td class="buttom"><a class="bule" href="__URL__/lists">系统节点列表</a></td>
+  </tr>
+  </table>
+<form method='post'  id="form1"  action="__URL__/add" onSubmit="return formcheck();">
+<table cellpadding=0 cellspacing=0 class="t3">
+<tr>
+	<td class="tRight" >名称：</td>
+	<td class="tLeft" ><input type="text" name="value" id="value">
+	 </label><span id="msg_value" class="msg"></span></td>
+</tr>
+<tr>
+	<td class="tRight" >显示名：</td>
+	<td class="tLeft" ><input type="text"  name="name" id="name">
+	 </label><span id="msg_name" class="msg"></span></td>
+</tr>
+<tr>
+	<td class="tRight">父层：</td>
+	<td class="tLeft">
+	<SELECT name="pid" id="pid">
+	<option value="">请选择</option>
+	<volist name="list" id="vo">
+		<option value="{$vo.id}">{$vo.name}</option>
+	</volist>
+	</SELECT>
+	</label><span id="msg_pid" class="msg"></span></td>
+	</td>
+</tr>
+<tr>
+	<td class="tRight">层位置：</td>
+	<td>
+	<SELECT  name="level" id="level">
+	<option value="">请选择</option>
+	<option value="1">项目</option>
+	<option value="2">模块</option>
+	<option value="3">方法</option>
+	</SELECT>
+	</label><span id="msg_level" class="msg"></span></td>
+</tr>
+<tr>
+	<td class="tRight tTop">描 述：</td>
+	<td class="tLeft"><TEXTAREA class="large bLeft" name="info"  id="info" rows="5" cols="57"></textarea>
+	</label><span id="msg_info" class="msg"></span></td>
+</tr>
+<tr>
+	<td></td>
+<td>
+<input type="submit" value="保存" name="submit">&nbsp;&nbsp;
+<input type="reset" class="reset imgButton" value="清空" >
+</td>
+</tr>
+</table>
+</form>
+</div>
+<include file="Public:footer"/>

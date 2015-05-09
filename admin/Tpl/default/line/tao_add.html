@@ -1,0 +1,86 @@
+<include file="Public:header" />
+<script language="javascript">
+    function formcheck()
+    {
+        if($.trim($("#names").val())=='')
+        {
+            $("#msg_names").html("请填写名称");
+            $("#names").focus();
+            return false;
+        }
+    }
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('tao_list')}/line_id/{$objLine.id}">线路套餐列表</a>
+        <a class="on" href="__URL__/tao_add/line_id/{$objLine.id}">添加套餐</a>
+    </ul>
+</div>
+
+<script type="text/javascript" src="/style/js/My97DatePicker/WdatePicker.js"></script>
+
+<form action="__URL__/tao_add" method="post" onsubmit="return formcheck();">
+<input type="hidden" id="line_id" name="line_id" value="{$objLine.id}">
+<table border="0" id="b_line_1" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+    <tr>
+        <th width="10%"><span class="red">*</span><em class="tit">团号</em>：</th>
+        <td><input type="text" datatype="*3-50" name="names" id="names" class="txt"/>
+        </td>
+    </tr>
+    <tr>
+        <th><span class="red">*</span><em>开始日期</em>：</th>
+        <td><input type="text" name="opentime" id="opentime" class="Wdate" datatype=""  onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'%y-%M-%d'});"/></td>
+    </tr>
+    <tr>
+        <th width="10%"><span class="red">*</span>结束日期：</th>
+        <td><input type="text" name="endtime"  id="endtime"  class="Wdate" datatype=""  onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'%y-%M-%d'});"/></td>
+    </tr>
+
+   <tr>
+        <td align="right"><em>成人单价</em>：</td>
+        <td><input name="man_price" type="text" class="txt"  id="man_price" value='' maxlength="10" datatype="*1-10"/>
+    </tr>
+    <tr>
+        <td align="right"><em>儿童单价</em>：</td>
+        <td><input name="er_price" type="text" class="txt"  id="er_price" value='' maxlength="10" datatype="*1-10"/>
+    </tr>
+
+   <tr>
+        <td align="right"><em>成人单价预付</em>：</td>
+        <td><input name="man_price_yufu" type="text" class="txt"  id="man_price_yufu" value='' maxlength="10" datatype="*1-10"/>
+    </tr>
+    <tr>
+        <td align="right"><em>儿童单价预付</em>：</td>
+        <td><input name="er_price_yufu" type="text" class="txt"  id="er_price_yufu" value='' maxlength="10" datatype="*1-10"/>
+    </tr>
+    <tr>
+        <td align="right"><em>最低要求人数</em>：</td>
+        <td><input name="count_ren" type="text" class="txt"  id="count_ren" value='' maxlength="10" datatype="*1-10"/>
+    </tr>
+    <tr>
+        <td align="right"><em>最低参团限制</em>：</td>
+        <td><input name="place" type="text" class="txt"  id="place" value='' maxlength="10" datatype="*1-10"/>
+    </tr>
+
+    <tr>
+        <td align="right">状态：</td>
+        <td><label><input id="status" type="radio" name="status" value="0" <eq name="line_list.status" value="0">checked="checked"</eq>/>显示</label>
+            <label><input id="status" type="radio" name="status" value="1" <eq name="line_list.status" value="1">checked="checked"</eq>/>隐藏</label>
+        </td>
+    </tr>
+    <tr>
+        <td align="right"><em>排序</em>：</td>
+        <td><input name="sort" type="text" class="input-text-c txt" id="sort" style="width:50px" value='50'
+                   maxlength="3"/></td>
+    </tr>
+    <tr>
+        <td height="50">&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<div id="btnbox" class="btn">
+    <INPUT TYPE="submit" value=" 保 存 " class="button" name="save">
+    <input TYPE="reset" value=" 重 置 " class="button">
+</div>
+</form>
+

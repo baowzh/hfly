@@ -1,0 +1,85 @@
+<include file="Public:header" />
+<script language="javascript">
+    function formcheck()
+    {
+        if($.trim($("#names").val())=='')
+        {
+            $("#msg_names").html("请填写名称");
+            $("#names").focus();
+            return false;
+        }
+    }
+</script>
+<script type="text/javascript" src="/style/js/My97DatePicker/WdatePicker.js"></script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('tao_list')}/line_id/{$objLineTao.id}">线路套餐列表</a>
+        <a class="on" href="__URL__/tao_add/line_id/{$objLineTao.id}">添加套餐</a>
+    </ul>
+</div>
+<form action="__URL__/tao_edit" enctype="multipart/form-data" method="post" onsubmit="return formcheck();">
+    <input type="hidden" id="id" name="id" value="{$id}">
+    <input type="hidden" id="line_id" name="line_id" value="{$objLineTao.line_id}">
+    <table border="0" id="b_line_1" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+    <tr>
+        <th width="10%"><span class="red">*</span><em class="tit">团号</em>：</th>
+        <td><input type="text" datatype="*3-50" name="names" id="names" class="txt" value="{$objLineTao.names}"/>
+        </td>
+    </tr>
+    <tr>
+        <th><span class="red">*</span><em>开始日期</em>：</th>
+        <td><input type="text" name="opentime" id="opentime" class="Wdate" datatype="" value="{$objLineTao.opentime}"  onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'%y-%M-%d'});"/></td>
+    </tr>
+    <tr>
+        <th width="10%"><span class="red">*</span>结束日期：</th>
+        <td><input type="text" name="endtime"  id="endtime"  class="Wdate" datatype="" value="{$objLineTao.endtime}"  onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'%y-%M-%d'});"/></td>
+    </tr>
+
+   <tr>
+        <td align="right"><em>成人单价</em>：</td>
+        <td><input name="man_price" type="text" class="txt"  id="man_price"  value="{$objLineTao.man_price}" maxlength="10" datatype="*1-10"/>
+    </tr>
+    <tr>
+        <td align="right"><em>儿童单价</em>：</td>
+        <td><input name="er_price" type="text" class="txt"  id="er_price"  value="{$objLineTao.er_price}" maxlength="10" datatype="*1-10"/>
+    </tr>
+
+   <tr>
+        <td align="right"><em>成人单价预付</em>：</td>
+        <td><input name="man_price_yufu" type="text" class="txt"  id="man_price_yufu"  value="{$objLineTao.man_price_yufu}" maxlength="10" datatype="*1-10"/>
+    </tr>
+    <tr>
+        <td align="right"><em>儿童单价预付</em>：</td>
+        <td><input name="er_price_yufu" type="text" class="txt"  id="er_price_yufu"  value="{$objLineTao.er_price_yufu}" maxlength="10" datatype="*1-10"/>
+    </tr>
+    <tr>
+        <td align="right"><em>最低要求人数</em>：</td>
+        <td><input name="count_ren" type="text" class="txt"  id="count_ren"  value="{$objLineTao.count_ren}" maxlength="10" datatype="*1-10"/>
+    </tr>
+    <tr>
+        <td align="right"><em>最低参团限制</em>：</td>
+        <td><input name="place" type="text" class="txt"  id="place"  value="{$objLineTao.place}" maxlength="10" datatype="*1-10"/>
+    </tr>
+
+    <tr>
+        <td align="right">状态：</td>
+        <td><label><input id="status" type="radio" name="status" value="0" <eq name="objLineTao.status" value="0">checked="checked"</eq>/>显示</label>
+            <label><input id="status" type="radio" name="status" value="1" <eq name="objLineTao.status" value="1">checked="checked"</eq>/>隐藏</label>
+        </td>
+    </tr>
+    <tr>
+        <td align="right"><em>排序</em>：</td>
+        <td><input name="sort" type="text" class="input-text-c txt" id="sort" style="width:50px" value='{$objLineTao.sort}'
+                   maxlength="3"/></td>
+    </tr>
+    <tr>
+        <td height="50">&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<div id="btnbox" class="btn">
+    <INPUT TYPE="submit" value=" 保 存 " class="button" name="save">
+    <input TYPE="reset" value=" 重 置 " class="button">
+</div>
+</form>
+<include file="Public:footer" />

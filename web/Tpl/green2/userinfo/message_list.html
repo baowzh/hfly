@@ -1,0 +1,20 @@
+
+		<div class="col-19 omega page_content">
+        	<div class="col-4 alpha title on">收件箱</div>
+            <div class="col-18 alpha body">
+            	<table width="100%" class="table_list">
+                	<tr>
+                      <th>日期</th>
+                      <th>内容</th>
+                      <th>操作</th>
+                    </tr>
+					<volist name="list" id="vo">
+                    <tr>
+                      <td>{$vo.create_time|f_date}</td>
+                      <td>{$vo.content}</td>
+                      <td><a href="{:U('message_del',array('id'=>$vo['id']))}" onclick="return atr_confirm(this.href,'确定撤销该订单吗?')">删除</a>&nbsp;&nbsp;<a href="{:U('short_message',array('id'=>$vo['id']))}">查看</a></td>
+                    </tr>
+					</volist>
+                </table>
+            </div>
+        </div>

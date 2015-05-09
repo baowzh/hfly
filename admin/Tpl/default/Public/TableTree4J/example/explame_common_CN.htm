@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+
+<head>
+	<title>TableTree4J V1.1RE 常用展示</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+	<script type="text/javascript" src="../TableTree4J.js"></script>
+	<link rel="StyleSheet" href="../css/tabletree4j.css" type="text/css" />
+	
+
+<style>
+	
+.body{
+font-size:12px;	
+}
+.btnDiv a{
+color:#0000FF;	
+text-decoration: none;	
+}
+.btnDiv a:hover{
+color:#CC3300;	
+text-decoration: underline;	
+}
+.items{
+color:#669999;
+font-size:14px;		
+}
+.title{
+font-size:16px;		
+font-weight:bold;
+}
+.copyrightdiv{
+font-size:12px;	
+font-family:"Arial";
+color:#C0C0C0;	
+}
+.centerClo {
+	text-align:center;
+}
+</style>
+
+
+<script language="JavaScript">
+	
+//GridTree
+	var gridTree;	
+	function showGridTree(){
+	//init
+		gridTree=new TableTree4J("gridTree","../");	
+		gridTree.tableDesc="<table border=\"1\" class=\"GridView\" width=\"100%\" id=\"table1\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse\"  bordercolordark=\"#C0C0C0\" bordercolorlight=\"#C0C0C0\" >";	
+		var headerDataList=new Array("模块名","创建时间","状态","操作");
+		var widthList=new Array("20%","40%","10%","30%");
+		//参数: arrayHeader,id,headerWidthList,booleanOpen,classStyle,hrefTip,hrefStatusText,icon,iconOpen
+		gridTree.setHeader(headerDataList,-1,widthList,true,"GridHead","This is a tipTitle of head href!","header status text","","");				
+		//设置列样式
+		gridTree.gridHeaderColStyleArray=new Array("","","","centerClo");
+		gridTree.gridDataCloStyleArray=new Array("","","","centerClo");	
+	//add data
+		var dataList=new Array("系统管理","2007-12-10","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		//参数: dataList,id,pid,booleanOpen,order,url,target,hrefTip,hrefStatusText,classStyle,icon,iconOpen
+		gridTree.addGirdNode(dataList,1,-1,null,3,"#",null,"hello!","状态栏文字",null,null,null);
+
+		dataList=new Array("权限管理","2007-11-8","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		gridTree.addGirdNode(dataList,2,-1,null,2);
+		
+		dataList=new Array("信息管理","2008-1-22","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		gridTree.addGirdNode(dataList,3,-1,null,5);
+		
+		dataList=new Array("文件管理","2007-3-18","停用","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		gridTree.addGirdNode(dataList,4,-1,null,4);
+		
+		dataList=new Array("日志管理","2007-4-20","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		gridTree.addGirdNode(dataList,5,-1,null,1);
+					
+		//-------------
+		dataList=new Array("权限管理2","2007-11-8","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		gridTree.addGirdNode(dataList,6,3,null,2);
+		
+		//dataList=new Array("信息管理2","2008-1-22","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		//gridTree.addGirdNode(dataList,7,3,null,1);
+		
+		dataList=new Array("文件管理2","2007-3-18","停用","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		gridTree.addGirdNode(dataList,8,5,null,3);
+		
+		dataList=new Array("日志管理2","2007-4-20","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		gridTree.addGirdNode(dataList,9,2,null,4);
+
+		//-------------
+		dataList=new Array("权限管理3","2007-11-8","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		gridTree.addGirdNode(dataList,10,6,null,"");
+		
+		//dataList=new Array("信息管理3","2008-1-22","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		//gridTree.addGirdNode(dataList,11,10,null,2);
+		
+		dataList=new Array("文件管理3","2007-3-18","停用","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		gridTree.addGirdNode(dataList,12,9,null,3);
+		
+		//dataList=new Array("日志管理3","2007-4-20","使用中","<a href=\"#\">删除</a> | <a href=\"#\">查看</a> ");
+		//gridTree.addGirdNode(dataList,13,7,null,1);
+	
+	//print	
+		gridTree.printTableTreeToElement("gridTreeDiv");		
+	
+	}
+	
+
+
+	
+	
+	
+//menuTree
+	var menuTree;	
+	function showMenuTree(){
+	//初始化
+		menuTree=new TableTree4J("menuTree","../");
+		menuTree.toMenuMode();
+		//参数: rootName,id,booleanOpen,classStyle,hrefTip,hrefStatusText,icon,iconOpen	
+		menuTree.setMenuRoot("模块名",-1,true,"MenuRoot","menu root href tip!","根状态栏文字","","");
+		//menuTree.config.booleanHighLightRow=true;
+	//添加数据
+		//参数: menuName,id,pid,booleanOpen,order,url,target,hrefTip,hrefStatusText,classStyle,icon,iconOpen
+		menuTree.addMenuNode("系统管理",1,-1,null,5,"#","_self","呵呵呵","",null,null,null);
+
+		menuTree.addMenuNode("权限管理",2,-1,null,2);
+
+		menuTree.addMenuNode("信息管理",3,-1,null,3);
+
+		menuTree.addMenuNode("文件管理",4,-1,null,4,"#","",null,null,null,"../img/trash.gif");
+
+		menuTree.addMenuNode("日志管理",5,-1,null,1,"","","哈哈哈","显示在状态栏的文字");					
+		//-------------
+		menuTree.addMenuNode("权限管理2",6,3,null,2);
+
+		menuTree.addMenuNode("信息管理2",7,3,null,1);
+
+		menuTree.addMenuNode("文件管理2",8,5,null,3);
+
+		menuTree.addMenuNode("日志管理2",9,2,null,4);
+		//-------------
+		menuTree.addMenuNode("权限管理3",10,6,null,"");
+
+		menuTree.addMenuNode("信息管理3",11,10,null,2);
+
+		menuTree.addMenuNode("文件管理3",12,9,null,3);
+	
+		menuTree.addMenuNode("日志管理3",13,7,null,1);		
+	//print	
+		menuTree.printTableTreeToElement("menuTreeDiv");				
+		
+	}	
+</script>	
+
+
+</head>
+	<body class="body">
+		<div style="font-size:25px;color:#993333;font-weight:bold">
+			TableTree4J Examples 
+
+		</div>
+		<div id="tips" class="title">
+			如何使用 TableTree4J 建立常用标准的表格树和菜单树两种模式的树。
+			
+			<hr/>
+		</div>
+		<div align="right">
+		<a href="exampleListCN.htm" style="color:#0000FF;font-size:12px">返回</a>	
+		</div>
+		<div id="gridTreeBtn" class="btnDiv" >
+			<span class="items">表格树</span><br/>
+			<input type="button" value="展示一个标准表格树" onclick="showGridTree()" />&nbsp;&nbsp;
+			<a  href="javascript:gridTree.openAllNodes()">展开所有</a> | 
+			<a  href="javascript:gridTree.closeAllNodes()">关闭所有</a>
+		</div>
+		<div id="gridTreeDiv">
+			
+		</div>
+		<p/>
+		<p/>
+		
+		<div id="gridTreeBtn" class="btnDiv" >
+			<span class="items">菜单树</span><br/>
+			<input type="button" value="展示一个标准菜单树" onclick="showMenuTree()" />&nbsp;&nbsp;
+			<a  href="javascript:menuTree.openAllNodes()">展开所有</a> | 
+			<a  href="javascript:menuTree.closeAllNodes()">关闭所有</a>
+		</div>
+		<div id="menuTreeDiv">
+			
+		</div>
+
+	
+	
+		
+<div class="copyrightdiv">				
+		<p/>
+		<p/>
+		<div align="center">E-mail:lannerk@qq.com</div>
+		<div align="center">Copyright (c) 2007-2008 xcode-studio</div>		
+		<div align="center">TableTree4J version:1.1RE updata:2008.5.17</div>		
+</div>
+
+
+	
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<include file="Public:header" />
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FF66FF;
+	float: left;
+}
+
+.STYLE2 {
+	color: #00FF33;
+	float: left;
+}
+-->
+</style>
+<form name="form1" action="__URL__/change_money" method="post" onSubmit="return check();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="3">详细留言信息</th>
+  </tr>
+  <tr>
+	  <td><a class="bule" href="messages">留言信息</a></td>
+	    <td class="buttom">
+		<label>
+		 <a href="__URL__/edit?{$content.id}">回复</a>
+		&nbsp;|&nbsp;
+		<a href="#" onclick=confirms("del?{$content.id}","您确认要删除么")>删除</a>
+	   </label>
+  </td>
+  </tr>
+</table>
+<table class="t1" border="0" cellspacing="0" cellpadding="0">
+ <tr height="25px">
+ 	 <td width="100" style="text-align: lift;"><span class="STYLE2">*&nbsp;留言时间:</span>&nbsp;&nbsp;{$content.user_time}</td>
+</tr>
+ <tr height="25px">
+	 <td width="100" style="text-align: lift;"><span class="STYLE1">*&nbsp;用户留言内容:</span></td>
+</tr>
+ <tr height="50px">
+    <td width="150" style="text-align: lift;">{$content.content}</td>
+</tr>
+ <tr height="25px">
+	<td width="100" style="text-align: lift;">
+	<span class="STYLE2">*&nbsp;回复时间:</span>&nbsp;&nbsp;{$content.admin_time}
+	</td>
+</tr>
+ <tr height="25px">
+	 <td width="100" style="text-align: lift;"><span class="STYLE1">*&nbsp;公司回复:</span></td>
+</tr>
+ <tr height="50px">
+	<if condition="$content.contents eq  null">
+	 <td width="150" style="text-align: lift;"> 暂时无回复</div></td>
+	<else/>
+	<td width="150" style="text-align: lift;"> {$content.contents}</td>
+ </if>
+</tr>
+</table>
+</form>
+<include file="Public:footer" />

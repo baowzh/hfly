@@ -1,0 +1,57 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('area_lists')}">广告区域管理</a> |
+        <a href="{:U('area_add')}">添加</a>
+    </ul>
+</div>
+
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
+                <th>区域名</th>
+                <th>英文标识</th>
+                <th>排序</th>
+                <th>状态</th>
+				<th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td><input type="checkbox" class="sel" id="sel_{$vo.id}" value="{$vo.id}" name="items_{$vo.id}" /></td>
+                    <td>{$vo.names}</td>
+					<td>{$vo.names_en}</td>
+                    <td>{$vo.sort}</td>
+					<td>{$vo.status}</td>
+                    <td>
+                        <a href="{:U('area_edit',array('id'=>$vo['id']))}">编辑</a>&nbsp;<a href="{:U('area_del',array('id'=>$vo['id']))}" onclick="return atr_confirm(this.href,'确认删除吗')">删除</a>
+                    </td>
+					
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+        <input type="button" class="button" name="dosubmit" value="删除"
+               onclick="myform.action='{:U('deleteall')}';return confirm_deleteall()"/>
+        <input type="button" class="button" name="dosubmit" value="排序"
+               onclick="myform.action='{:U('sort_list')}';$('#myform').submit();"/>
+			   {$page}
+    </div>
+</form>
+<script type="text/javascript">
+function sel_all(){
+    $('input.sel').each(function(index){
+        if($(this).attr('checked')){
+            $(this).removeAttr('checked');
+        }else{
+            $(this).attr('checked', 'checked');
+        }
+    });
+}
+</script>
+

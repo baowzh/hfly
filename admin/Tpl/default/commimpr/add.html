@@ -1,0 +1,49 @@
+
+<form action="{:U('add')}" enctype="multipart/form-data" method="post" onSubmit="return formcheck();" target="main">
+
+    <input type="hidden" name="types" value="{$types}"/>
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="400">
+        <tr>
+            <th width="99"><span class="red">*</span>名称</th>
+            <td>
+                <input type="text" name="names" id="names" class="txt" datatype="*" nullmsg="请填写名称" errmsg="请填写名称" sucmsg=" "/>
+            </td>
+        </tr>
+        <!--<tr>
+            <th><span class="red">*</span>印象颜色</th>
+            <td>
+                <input type="text" name="color" id="color" class="txt" datatype="*" nullmsg="请填写印象颜色" errmsg="请填写印象颜色" sucmsg=" "/>
+                可选颜色：blue，green，orange，red，brown，pink，purple;
+            </td>
+        </tr>-->
+        <tr>
+            <th><span class="red">*</span>排序</th>
+            <td>
+                <input name="sort" type="text" id="sort" value='' class="txt" datatype="n" nullmsg="请填写排序" errmsg="请填写数字" sucmsg=" " />
+            </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" class="button" name="save" value=" 保 存 ">
+        <input TYPE="reset" value=" 重 置 " class="button">
+  </div>
+</form>
+<script type="text/javascript">
+
+	function formcheck()
+	{
+		if($.trim($("#names").val())=='')
+        {
+            $("#msg_names").html("请填写名称");
+            $("#names").focus();
+            return false;
+        }
+        if($.trim($("#sort").val())=='')
+        {
+            $("#msg_sort").html("请填写排序");
+            $("#sort").focus();
+            return false;
+        }
+	}
+</script>
+<include file="Public:footer"/>

@@ -1,0 +1,42 @@
+
+<form action="" method="post" onSubmit="return formcheck();" target="main">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="640">
+        <tr>
+            <th width="99" height="18">线路：</th>
+            <td>{$list.line_name}</td>
+        </tr>
+        <tr>
+            <th height="18">用户提问：</th>
+            <td>{$list.question1}</td>
+        </tr>
+        <neq name="$list.question2" value="">
+        <tr>
+            <th height="18">问题补充：</th>
+            <td>{$list.question2}</td>
+        </tr>
+        </neq>
+        <tr>
+            <th>问题回答：</th>
+            <td><textarea name="answer" cols="70" rows="10" id="content">{$list.answer}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <th>排序：</th>
+            <td><input name="sort" type="text" value="{$list.sort}" size="8" maxlength="7" />
+            </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" class="button" name="save" value=" 提 交 ">
+        <input TYPE="reset" value=" 重 置 " class="button">
+  </div>
+</form>
+<script type="text/javascript">
+
+	function formcheck()
+	{
+		$("#add_form").submit();
+		return;
+	} 
+</script>
+<include file="Public:footer"/>

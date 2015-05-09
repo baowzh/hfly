@@ -1,0 +1,24 @@
+<include file="Public:header" />
+<div class="popContent">
+<div class="mess1">
+<p class="title">{$mess}</p><br/>
+<input id="state" name="state" type="hidden" value="{$state}"/>
+<p style="text-align:center; font-weight:bold;">操作成功</p><br/>
+<p id="showTime"></p>
+<script type=text/javascript>
+        var i = 2;
+        var intervalid;
+        var j = document.getElementById("state").value;
+        intervalid = setInterval("fun()", 1000);
+        function fun() {
+            if (i == 1) {              	
+			   parent.
+               clearInterval(intervalid);
+            }
+            i--; 
+        }
+</script>
+<br />
+</div>
+</div>
+<include file="Public:footer" />

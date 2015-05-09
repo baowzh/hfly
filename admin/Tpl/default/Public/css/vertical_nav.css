@@ -1,0 +1,101 @@
+
+*{margin:0;padding:0;border:0;}
+body {
+ font-family: arial, 宋体, serif;
+ font-size:12px;
+}
+#nav {
+ width:160px;
+ line-height: 24px; 
+ list-style-type: none;
+ text-align:left;
+ margin-left:12px;
+    /*定义整个ul菜单的行高和背景色*/
+}
+/*==================一级目录===================*/
+#nav a {
+	width: 160px;
+	display: block;
+	padding-left:10px;
+	padding-top:2px;
+	padding-bottom:2px;
+	 /*height: 26px;Width(一定要)，否则下面的Li会变形*/
+}
+#nav li {
+	/*border-bottom:#FFF 1px solid; /*下面的一条白边*/
+	float:left;
+	/*background-color: #84a7cb;*/
+	background-image: url(../images/ub_03.jpg);
+	background-repeat:no-repeat;
+	/*float：left,本不应该设置，但由于在Firefox不能正常显示
+ 继承Nav的width,限制宽度，li自动向下延伸*/
+}
+#nav li a:hover{
+ /*background:#fe721e; /*一级目录onMouseOver显示的背景色*/
+ background-image: url(../images/ub_04.jpg);
+ background-repeat:no-repeat;
+}
+#nav a:link  {
+ color:#00406c; text-decoration:none;font-weight:bold;
+}
+#nav a:visited  {
+ color:#00406c; text-decoration:none;font-weight:bold;
+}
+#nav a:hover  {
+ color:#fff;text-decoration:none;font-weight:bold;
+}
+/*==================二级目录===================*/
+#nav li ul {
+ list-style:none;
+ text-align:left;
+}
+#nav li ul li{ 
+ background: #d8e9fd; /*二级目录的背景色*/
+}
+#nav li ul a.sub{
+         padding-left:10px;
+         width:135px;
+		 height: 22px;
+		 margin-left:2px;
+ /* padding-left二级目录中文字向右移动，但Width必须重新设置=(总宽度-padding-left)*/
+}
+#nav li ul a.qita{
+         padding-left:5px;
+         width:55px;
+		 height: 22px;
+		 float:left;
+ /* padding-left二级目录中文字向右移动，但Width必须重新设置=(总宽度-padding-left)*/
+}
+/*下面是二级目录的链接样式*/
+#nav li ul a:link  {
+ color:#666; text-decoration:none;font-weight:normal;height: 20px;
+}
+#nav li ul a:visited  {
+ color:#666;text-decoration:none;font-weight:normal;height: 20px;
+}
+#nav li ul a:hover {
+ color:#00406c;
+ text-decoration:none;
+ font-weight:normal;
+ background:#d8e9fd;
+ height: 20px;
+ /* 二级onmouseover的字体颜色、背景色*/
+}
+/*==============================*/
+#nav li:hover ul {
+ left: auto;
+}
+#nav li.sfhover ul {
+ left: auto;
+}
+#content {
+ clear: left; 
+}
+#nav ul.collapsed {
+ display: none;
+}
+
+#PARENT{
+ width:100%;
+ padding:0px;
+}

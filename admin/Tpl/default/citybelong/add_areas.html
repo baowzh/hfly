@@ -1,0 +1,35 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+      <a class="on" href="{:U('citybelong/add_areas',array('id'=>$id))}">添加</a>
+    </ul>
+</div>
+<form id="myform" action="{:U('citybelong/add_areas',array('id'=>$id))}" method="post" class="validate" target="main">
+    <input type="hidden" name="city_id" value="{$id}" />
+    <table border="0" cellspacing="0" cellpadding="0"  class="table_form" width="100%">
+    	<tr>
+            <td align="right" height="23">城市名称：</td>
+            <td colspan="2">{$city.names}</td>
+        </tr>
+        <tr>
+            <td align="right" width="90"><span class="red">*</span>区域类型</td>
+            <td>
+              <select name="area_type" id="area_type">
+                <option value="1" selected="selected">商圈</option>
+                <option value="2">行政区</option>
+                <option value="3">地铁线路</option>
+                <option value="4">车站/机场</option>
+                <option value="5">观光景点</option>
+                <option value="6">大学</option>
+              </select>
+             </td>
+        </tr>
+        <tr>
+            <td align="right"><span class="red">*</span>区域名称</td>
+            <td colspan="2"><input name="area_name" type="text" id="area_name" value='' class="txt" datatype="*" nullmsg="请填写区域名称" errmsg="请正确填写区域名称" sucmsg=" " /></td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" name="submit" value=" 保 存 " class="button" >
+        <input TYPE="reset"  value=" 重 置 " class="button">
+    </div>
+</form>

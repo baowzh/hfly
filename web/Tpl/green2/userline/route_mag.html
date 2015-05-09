@@ -1,0 +1,61 @@
+
+<link rel="stylesheet"  href="../Public/css/route_q.css"/>
+    <div class="col-19 omega page_content route_mag_nav">
+    <div style="margin-top:12px;"></div>
+		<ul class="side1 ">
+            
+           
+             <li <eq name="_GET['s']" value="">class="col-2 title alpha on col-full"<else /></eq>><a href="{:U('userline/route_mag')}" class="col-2 title">全部</a></li>
+             <li <eq name="_GET['s']" value="1">class="col-2 title alpha on col-full"<else /></eq>><a href="{:U('userline/route_mag',array('s'=>'1'))}" class="col-2 title">待处理</a></li>
+             <li <eq name="_GET['s']" value="2">class="col-2 title alpha on col-full"<else /></eq>><a href="{:U('userline/route_mag',array('s'=>'2'))}" class="col-2 title">待付款</a></li>
+             <li <eq name="_GET['s']" value="3">class="col-2 title alpha on col-full"<else /></eq>><a href="{:U('userline/route_mag',array('s'=>'3'))}" class="col-2 title">已付款</a></li>
+             <li <eq name="_GET['s']" value="4">class="col-2 title alpha on col-full"<else /></eq>><a href="{:U('userline/route_mag',array('s'=>'4'))}" class="col-2 title">已取票</a></li>
+             <li <eq name="_GET['s']" value="5">class="col-2 title alpha on col-full"<else /></eq>><a href="{:U('userline/route_mag',array('s'=>'5'))}" class="col-2 title">已点评</a></li>
+             <li <eq name="_GET['s']" value="6">class="col-2 title alpha on col-full"<else /></eq>><a href="{:U('userline/route_mag',array('s'=>'6'))}" class="col-2 title">已结束</a></li>
+             <li <eq name="_GET['s']" value="7">class="col-2 title alpha on col-full"<else /></eq>><a href="{:U('userline/route_mag',array('s'=>'7'))}" class="col-2 title">已取消</a></li>
+              
+        </ul>
+            <div class="col-18 alpha body">
+            	<table width="100%" class="table_list">
+                	<tr>
+                      <th>编号</th>
+                      <th>名称</th>
+                      <th>出发日期</th>
+                      <th>总金额</th>
+                      <th>点评金额</th>
+                      <th>下单时间</th>
+                      <th>状态</th>
+                      <th>操作</th>
+                    </tr>
+                    <volist name="list" id="vo">
+					<tr>
+                      <td>{$vo.code}</td>
+                      <td>
+                                        <li><a href="{:U('travel/detail',array(id=>$vo['line_id']))}" target="_blank">{$vo.names}</a></li>
+                      </td>
+                      <td>{$vo.go_time|f_date}</td>
+                      <td>{$vo.amount}元</td>
+                      <td>{$vo.review_award}</td>
+                      <td>{$vo.create_time|f_date}</td>
+                      <td><if condition="$vo.o_status eq '1'">待处理
+                          <elseif condition="$vo.o_status eq '2'"/>待付款
+                              <elseif condition="$vo.o_status eq '3'"/>已付款
+                                  <elseif condition="$vo.o_status eq '4'"/>已出团
+                                      <elseif condition="$vo.o_status eq '5'"/>已点评
+                                          <elseif condition="$vo.o_status eq '6'"/>已结束
+                                              <elseif condition="$vo.o_status eq '7'"/>已取消
+                      </if></td>
+                      <td><a href="{:U('userline/route_order',array('id'=>$vo['o_id']))}">查看</a> <if condition="$vo.o_status eq '1'"><a href="{:U('userline/del_order',array('id'=>$vo['o_id']))}" onclick="return confirm('确定撤销该订单吗?',this.href)">撤销</a>
+                          <elseif condition="$vo.o_status eq '2'"/><a href="{:U('userline/del_order',array('id'=>$vo['o_id']))}" onclick="return confirm('确定撤销该订单吗?',this.href)">撤销</a> <a href="{:U('travel/order_success',array(order_id=>$vo['o_id']))}">付款</a>
+                              <elseif condition="$vo.o_status eq '3'"/>
+                                  <elseif condition="$vo.o_status eq '4'"/><a href="{:U('userline/route_impr',array('id'=>$vo['o_id']))}">点评</a>
+                                      <elseif condition="$vo.o_status eq '5'"/>
+                                          <elseif condition="$vo.o_status eq '6'"/>
+                                              <elseif condition="$vo.o_status eq '7'"/>
+                      </if></td>
+                    </tr>
+					</volist>
+                </table>
+                    <div class="page">{$page}</div>
+            </div>
+        </div>

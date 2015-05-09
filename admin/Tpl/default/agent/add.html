@@ -1,0 +1,55 @@
+<include file="Public:header" />
+<script language="javascript">
+<!--
+ //javascript去空格函数
+ function LTrim(str){ //去掉字符串 的头空格
+  var i;
+  for(i=0;i<str.length; i++) {
+   if(str.charAt(i)!=" ") break;
+  }
+  str = str.substring(i,str.length);
+  return str;
+ }
+
+ function RTrim(str){
+  var i;
+  for(i=str.length-1;i>=0;i--){
+   if(str.charAt(i)!=" "&&str.charAt(i)!=" ") break;
+  }
+  str = str.substring(0,i+1);
+  return str;
+ }
+ function Trim(str){
+  return LTrim(RTrim(str));
+ }
+ function check() {
+	  if(Trim(document.form1.login_name.value) == "") {
+		   alert("请输入报单用户名!");
+		   document.form1.login_name.focus();
+		   return false;
+	  }
+  return true;
+ }
+-->
+</script>
+<form name="form1" action="__URL__/add" method="post"  onSubmit="return check();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="3">增加报单中心</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="list">报单中心列表</a></td>
+  <td><div class="div_msg">{$message}</div></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="增加" />
+  </label></td>
+  </tr>
+  </table>
+<table class="t3" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="100" align="right">报单用户名</td>
+    <td><input type="text" name="login_name" id="login_name" /></td>
+  </tr>
+</table>
+</form>
+<include file="Public:footer" />

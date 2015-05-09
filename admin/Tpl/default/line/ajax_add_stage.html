@@ -1,0 +1,26 @@
+<tbody id="body_tmp_{$len}">
+ <tr>
+    <td align="right" style="border-top:1px solid #333;">选择：</td>
+    <td style="border-top:1px solid #333;"><input name="st_tmp[{$len}]" type="checkbox" class="sel" value="tmp_{$len}"></td>
+  </tr>
+  <tr>
+    <td align="right" style="width: 100px;">日期：</td>
+    <td>
+    <input type="text" name="date_start_tmp[{$len}]" id="date_start_tmp_{$len}" class="calender fl Wdate" value=""  onclick="WdatePicker()"/>
+      -
+    <input type="text" name="date_end_tmp[{$len}]" id="date_end_tmp_{$len}" class="calender fl Wdate" value=""  onclick="WdatePicker()" />
+      <span for="date_start_tmp_{$len}"></span> <span for="date_end_tmp_{$len}}"></span></td>
+  </tr>
+  <tr>
+    <td align="right" style="width: 100px;">门市价：</td>
+    <td><input type="text" name="stage_RACKRATE_tmp[{$len}]" id="stage_RACKRATE_tmp_{$len}" class="number" value="" /></td>
+  </tr>
+  <tr>
+    <td align="right" style="width: 100px;"><span class="msg">*</span>成人价：</td>
+    <td><input type="text" name="stage_adult_tmp[{$len}]" id="stage_adult_tmp_{$len}" class="text number"  value="" /></td>
+  </tr>
+  <tr>
+    <td align="right" style="width: 100px;"><span class="msg">*</span>儿童价：</td>
+    <td><input type="text" name="stage_children_tmp[{$len}]" id="stage_children_tmp_{$len}" class="text number" value=""/></td>
+  </tr>
+  </tbody>

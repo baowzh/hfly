@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="../Public/css/register.css"/>
+<style type="text/css">
+.system-message{ padding: 0px 48px; }
+.system-message h1{ font-size: 100px; font-weight: normal; line-height: 120px; margin-bottom: 12px;}
+.system-message .jump{ padding-top: 10px;font-size: 14px;}
+.system-message .jump a{ color: #333;}
+.system-message .success,.system-message .error{ line-height: 1.8em; font-size:20px; color:#F90;}
+.system-message .detail{ font-size: 12px; line-height: 20px; margin-top: 12px; display:none}
+</style>
+<div class="wrapper w1200">
+  <div class="col-24 content alpha">
+    <div class="col-24 content_top alpha">
+      <h1 class="col-10 content_top_font">提示页面</h1>
+    </div>
+    <div class="clear"></div>
+    <div class="col-24" style="text-align:center">
+      <div class="system-message">
+        <present name="message">
+          <h1><img src="../Public/images/right.png" width="67" height="67" /></h1>
+          <p class="success"><?php echo($message); ?></p>
+          <else/>
+          <h1><img src="../Public/images/wrong.png" width="67" height="67" /></h1>
+          <p class="error">很抱歉！您的操作有误！<br/><?php echo($error); ?></p>
+        </present>
+        <p class="detail"></p>
+        <p class="jump"> 页面自动 <a id="href" href="<?php echo($jumpUrl); ?>"><u>跳转</u></a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b> </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time == 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>

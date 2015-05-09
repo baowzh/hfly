@@ -1,0 +1,19 @@
+<include file="Public:header" />
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">清空业务数据</th>
+  </tr>
+  <tr>
+  <td><div class="div_msg">{$message}</div></td>
+  <td>&nbsp;</td>
+  </tr>
+  </table>
+<table border="0" cellspacing="0" cellpadding="0" class="t3">
+  <tr>
+    <td align="left"><span class="msg">该操作将清空业务数据，文章、配置等信息不会清空，操作无法恢复，建议备份后再执行</span></td>
+  </tr>
+  <tr>
+    <td height="25"><a href='dbclear?do' onclick=confirms('dbclear?do','确定要开始清空数据么，该操作无法回滚')>开始执行数据清空</a></td>
+  </tr>
+  </table>
+<include file="Public:footer" />

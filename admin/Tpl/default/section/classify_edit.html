@@ -1,0 +1,106 @@
+<script type="text/javascript">
+    var root = "__ROOT__", index = "__Index__";
+</script>
+<link rel="stylesheet"
+	href="__ROOT__/Public/Plugins/uploadify/uploadify.css" />
+<script type="text/javascript"
+	src="__ROOT__/Public/Plugins/uploadify/jquery.uploadify-3.1.min.js"></script>
+<script type="text/javascript"
+	src="__ROOT__/Public/Plugins/uploadify/jquery.jUpload.js"></script>
+<script type="text/javascript">
+     $(function () {
+		 $('#show_msg').show();
+                $("#upload1").jUpload({
+                    trigger_id: "t_upload1",
+                    uploader: "{:U('uploadify/head_img')}",
+                    queueID: "upload1-queue",
+                    formData: {
+                        "<?php echo session_name(); ?>": "<?php echo session_id(); ?>",
+                        "savePath": "/Upload/images/section_pic/",
+                        "saveRule": "time",
+                        "divId": "img1"
+                    },
+                    success: function (data, info) {
+						$("#photo_1").val(data[0].path);
+						art.dialog.alert(info);
+                    }
+                });
+            })
+function formcheck()
+{
+	return true;
+}
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('classify_management')}">栏目列表</a> |
+        <a class="on" href="{:U('classify_edit')}?id={$id}">编辑栏目</a>
+    </ul>
+</div>
+<form action="{:U('classify_edit')}/id/{$id}" name="form1"enctype="multipart/form-data" method="post" onsubmit="return formcheck();">
+  <input type="hidden" value="2" name="cid">
+  <input type="hidden" value="{$id}" name="id">
+  <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+  <tr>
+      <th width="128"><span class="red">*</span>请选择模型：</th>
+      <td colspan="2">
+          <select id="model" name="model" class="txt">
+          <option value="0" <eq name="section.model" value="0"> selected="selected"</eq>>文章模型</option>
+          <option value="1" <eq name="section.model" value="1"> selected="selected"</eq>>单页模型</option>
+        </select>
+      </td>
+  </tr>
+  <tr>
+      <th>选择上级栏目：</th>
+      <td colspan="2">
+        <select id="parentid" name="pid" class="txt">
+          <option value="0">作为顶级栏目</option>
+          {$psection}
+        </select>
+      </td>
+  </tr>
+  <tr>
+      <th><span class="red">*</span>栏目名称：</th>
+      <td colspan="2"><input name="names" type="text" class="txt" id="names" value="{$section.names}" datatype="*" nullmsg="请填写栏目名称" errmsg="请填写栏目名称" sucmsg=" " /></td>
+  </tr>
+  <tr>
+      <th><span class="red">*</span>栏目英文名称：</th>
+      <td colspan="2"><input name="e_names" type="text" class="txt" id="e_names" value="{$section.e_names}" datatype="*" nullmsg="请填写栏目英文名称" errmsg="请填写栏目英文名称" sucmsg=" " /></td>
+  </tr>
+  <tr style="display:none;">
+      <th>栏目图片：</th>
+      <td colspan="2">
+      <div id="img1"></div>
+      <div id="upload1-queue" style="margin-top:6px;"></div>
+      <input class="isFile" type="hidden" id="photo_1" name="pic_front"/>
+          <input data-msg-isFile="请上传图片" class="isFile" id="upload1" name="file_upload1" type="file"/>
+          <div class="f_left" style="margin:12px 0 0 6px;">
+          <a class="upload_bt" href="javascript:void(0);" id="t_upload1" onclick="$('#show_msg').hide();">点击上传</a>
+          </div><span class="Validform_checktip f_left" id="show_msg" style="color:#F00">若不修改图片则此项无需更改</span></td>
+  </tr>
+  <tr>
+      <th><span class="red">*</span>描述：</th>
+      <td colspan="2">
+          <textarea name="memo" cols="50" rows="8" id="memo" datatype="*" nullmsg="请填写描述" errmsg="请填写描述" sucmsg=" " class="f_left">{$section.memo}</textarea>
+      </td>
+  </tr>
+  <tr>
+      <th height="30"><span class="red">*</span>是否在导航显示：</th>
+      <td colspan="2">
+          <input type="radio" id="n1" value="1" name="status" <eq name="section.status" value="1"> checked="checked"</eq>><label for="n1">是</label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="radio" value="0" id="n2" name="status" <eq name="section.status" value="0"> checked="checked"</eq>><label for="n2">否</label>
+      
+      </td>
+  </tr>
+  <tr style="display:none;">
+      <th><span class="red">*</span>排序：</th>
+      <td colspan="2">
+          <input name="sort" type="text" id="sort" class="txt" value='{$section.sort}' datatype="n" nullmsg="请填写排序" errmsg="请填写数字" sucmsg=" " />
+          <span id="red_sort" class="red"></span></td>
+  </tr>
+  </table>
+<div id="btnbox" class="btn">
+  <INPUT TYPE="submit" value=" 保 存 " name="save" class="button">
+  <input name="rset" TYPE="reset" class="button" id="rset" value=" 重 置 ">
+</div>
+</form>

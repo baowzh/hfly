@@ -1,0 +1,23 @@
+<link rel="stylesheet"  href="../Public/css/route_q.css"/>
+<div class="col-19 omega page_content ">
+<div style="margin-top:12px;"></div>
+    <div class="col-18 alpha alpha_nav "><div class=" title on">旅游路线收藏</div></div>
+    <div class="col-18 alpha body">
+        <table width="100%" class="table_list">
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>操作</th>
+
+            </tr>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.code}</td>
+                    <td><a href="{:U('travel/detail',array('id'=>$vo['id']))}">{$vo.names}</td>
+                    <td><a href="{:U('userline/route_coll_del',array('id'=>$vo['kid']))}" onclick="return confirm('确定删除该收藏吗?',this.href)">删除</a></td>
+                </tr>
+            </volist>
+        </table>
+    </div>
+    <div class="col-18 page page_nav">{$page}</div>
+</div>

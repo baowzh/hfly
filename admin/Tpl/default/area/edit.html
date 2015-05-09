@@ -1,0 +1,26 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('edit')}?id={$id}">编辑地区</a>
+    </ul>
+</div>
+<link href="../Public/css/tour.css" type='text/css' rel='stylesheet'/>
+<form id="myform" class="validate" action="" enctype="multipart/form-data" method="post">
+<ul class="lineNav">
+    <li style="border:none;height:28px; width:85px;"><input type="submit" value="保存" name="submit" id="submit" class="formInput01"></li>
+</ul>
+<table width="401" border="0" cellpadding="0" cellspacing="0" class="table_form" id="b_line_1">
+    <tr>
+        <th width="35%"><span class="red">*</span>中文名称：</th>
+        <td width="65%"><input type="text" name="names" id="names" class="text required" value="{$area.names}"/>
+        </td>
+    </tr>
+    <tr>
+        <th>英文名称：</th>
+        <td><input type="text" name="names_en" id="names_en" class="text required" value="{$area.names_en}"></td>
+    </tr>
+    <tr>
+        <th><span class="red">*</span>排序：</th>
+        <td><input name="sort" type="text" class="input-text-c required number" id="sort" maxlength="3" value="{$area.sort}"/>
+        </td>
+    </tr>
+</table>

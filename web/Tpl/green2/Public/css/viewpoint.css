@@ -1,0 +1,16 @@
+/*------------------------- ¾ÆµêµãÆÀÒ³Ãæ begin -------------------------*/
+.hide{ display:none;}
+.th{ width:100px;}
+.impr_li {  padding:5px 8px !important; margin:1px;border:2px white solid; cursor:pointer; list-style:none; float:left;}
+.txt{ width: 80px; height:25px;; border: 1px solid #cccccc; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset; padding:3px; line-height: 1.42857; vertical-align: middle; background-color: white; color: #555555; background-image: none; margin-right: 10px; line-height:20px;}
+.impr_li.red{ background-color:#CA032D;}
+.txt_id{width: 200px; height:25px;; border: 1px solid #cccccc; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset; padding:3px; line-height: 1.42857; vertical-align: middle; background-color: white; color: #555555; background-image: none; margin-right: 10px;}
+.impr_li.red{ background-color:#CA032D;}
+.impr_li.green{ background-color:#7CB30D;}
+.impr_li.gray{ background-color:#999;}
+.impr_li.brown{ background-color:#A95A34}
+.impr_li.pink{ background-color:#F957B4;}
+.impr_li.blue{ background-color:#0E63D6;}
+.impr_li.orange{ background-color:#F5A40C;}
+.impr_li.purple{ background-color:#8B05B1;}
+/*------------------------- ¾ÆµêµãÆÀÒ³Ãæ end -------------------------*/

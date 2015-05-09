@@ -1,0 +1,88 @@
+<script type="text/javascript">
+$(function(){
+	$.fn.allselect({
+			allselectclass:"allselect",//class
+			cselectname: "c_selected"//name
+	}); 
+});
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('show_list')}">线路列表</a> |
+        <a href="{:U('add')}">添加线路</a>
+    </ul>
+</div>
+<form action="{:U('show_list')}" method="get">
+    <table class="search_table" width="100%">
+        <tr>
+            <td class="search">
+                标题: <input id="title" type="text" class="input-text" name="names" value="{$get.names}"/>
+                &nbsp;
+                <input type="submit" value="查询" class="button"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0"  width="100%">
+            <thead>
+                <tr>
+                    <th width="80"><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
+                    <th>封面</th>
+                    <th>编号</th>
+                    <th style="text-align: left;">名称</th>
+                    <th>属性</th>
+                    <th>出发城市</th>
+                    <th>排序</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="ulbc" id="tr_{$vo.id}">
+                    <td id="td_sel"><input type="checkbox" name="deleteall[{$vo.id}]" class="sel c_selected" id="sel_{$vo.id}" value="{$vo.id}"/></td>
+                    <td><img src='{$vo.id|get_line_img}' style="width:100px;height:80px" /></td>
+                    <td><span>{$vo.code}</span></td>
+                    <td style="text-align: left;">
+                        <a href="__ROOT__/index.php/travel/detail/id/{$vo.id}" target="_blank">
+                            {$vo.names}
+                        </a>
+                    </td>
+                    <td><if condition="$vo.property eq 1">普通<elseif condition="$vo.property eq 2" />特价<elseif condition="$vo.property eq 3"/>新品<elseif condition="$vo.property eq 4"/>热门</if></td>
+                <td>{$vo.city_id|_get_city}</td>
+                <td><input type="text" name="sort[{$vo.id}]" id="sort_{$vo.id}" value="{$vo.sort}"/></td>
+
+                <td>
+                    <a href="__URL__/pic_list/line_id/{$vo.id}">图片</a>&nbsp;
+                    <a href="__URL__/price_list/line_id/{$vo.id}">报价</a>&nbsp;
+                    <a href="__URL__/tao_list/line_id/{$vo.id}">套餐价格</a>&nbsp;
+                    <a href="__URL__/edit/id/{$vo.id}">编辑</a>&nbsp;
+                    <a href="__URL__/del/id/{$vo.id}" onclick="return atr_confirm(this.href)">删除</a>
+                </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <input type="hidden" name="base_pos" value="{~echo MODULE_NAME}">
+        <div class="btn">
+            <input type="button" class="button" name="dosubmit" value="删除"
+                   onclick="myform.action = '{:U('deleteall')}';return confirm_deleteall(this.form)"/>
+            <input type="button" class="button" name="dosubmit" value="排序"
+                   onclick="myform.action = '{:U('line/reset_sort',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');"/>
+        </div>
+        <div class="page">{$page}</div>
+    </div>
+</form>
+<script type="text/javascript">
+	function sel_all(){
+	    $('input.sel').each(function(index){
+	        if($(this).attr('checked')){
+	            $(this).removeAttr('checked');
+	        }else{
+	            $(this).attr('checked', 'checked');
+	        }
+	    });
+	}
+
+</script>

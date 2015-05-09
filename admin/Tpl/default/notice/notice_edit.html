@@ -1,0 +1,55 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a  href="{:U('notice')}">公告列表</a> |
+        <a class="on" href="{:U('notice_edit',array('id'=>$notice_info['id']))}">编辑公告</a>
+    </ul>
+</div>
+    <form action="{:U('notice_edit',array('id'=>$notice_info['id']))}" id="myform" name="myform" enctype="multipart/form-data" method="post" >
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tbody>
+            <tr>
+                <th>公告标题：</th>
+                <td><input name="title" type="text" class="txt w300" id="title" value="{$notice_info.title}"></td>
+            </tr>
+            <tr>
+                <th>排序：</th>
+                <td><span><input name="sort" type="text" class="txt w80 digits" id="sort" value="{$notice_info.sort}"></span></td>
+            </tr>
+            <tr>
+                <th>点击数：</th>
+                <td><span><input name="hits" type="text" class="txt w80 digits" id="hits" value="{$notice_info.hits}"></span></td>
+            </tr>
+         <!-- <tr>
+                <th>起始时间：</th>
+                <td><input name="start_time" type="text"  class="txt calender required date"  id="start_time" value="{$notice_info.start_time|f_time=###,""}"></td>
+            </tr>
+            <tr>
+                <th>终止时间：</th>
+                <td><input name="end_time" type="text" class="txt calender required date"  id="end_time"  value="{$notice_info.end_time|f_time=###,""}"></td>
+            </tr>-->
+            <tr>
+                <th>seo标题（seo_title）：</th>
+                <td><input name="seo_title" type="text" class="txt w300" id="seo_title" value="{$seo_info.seo_title}"></td>
+            </tr>
+            <tr>
+                <th>seo关键字（seo_keywords）：</th>
+                <td><input name="seo_keywords" type="text" class="txt w300" id="seo_keywords" value="{$seo_info.seo_keywords}"></td>
+            </tr>
+            <tr>
+                <th>seo描述（seo_description）：</th>
+                <td><textarea name="seo_description" id="seo_description" cols="90" rows="3">{$seo_info.seo_description}</textarea></td>
+            </tr>
+            <tr>
+                <th class="vt">公告内容：</th>
+                <td>
+                    <textarea name="content" cols="90" rows="5" id="content" class="kind-text">{$notice_info.content}</textarea>
+                </td>
+            </tr>
+            </tr><tr><td height="50"></td></tr>
+        </tbody>
+    </table>
+        <div id="btnbox" class="btn">
+            <INPUT TYPE="submit" value=" 保 存 " name="save" class="button">
+            <input name="rset" TYPE="reset" class="button" id="rset" value=" 重 置 ">
+        </div>
+    </form>

@@ -1,0 +1,80 @@
+<div class="link_1">
+     <div class="link_title">
+        <h3>个人发起拼团 &nbsp;&nbsp;线路编号：{$line_base.code}</h3>
+        <span><a class="close" onclick="showclose()" style="cursor:pointer" >&nbsp;</a></span>
+     </div>
+     <form onsubmit="return ajaxPost(this,'{:U('order_ping_act')}')">
+       <input type="hidden" value="{$line_base.code}"   name="lcode">
+       <input type="hidden" value="{$line_base.id}"     name="lid">
+       <input type="hidden" value="{$line_base.cmoney}" name="cmoney">
+       <table>
+           <tr>
+               <td class="names" >团名</td>
+               <td class="ru"><input type="text" placeholder="如相约之旅" name="tuan_name" class="w150s"></td>
+               <td class="names">报名截止</td>
+               <td><input name="start" type="text" id="start" style="width:90px;" class="Wdate" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',minDate:'%y-%M-{%d+1}'});" readonly=""></td>
+               <td class="names">旅行开始</td>
+               <td><input name="ends"   type="text" id="ends" style="width:90px;"   class="Wdate" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',minDate:'%y-%M-{%d+1}'});" readonly=""></td>
+           </tr>
+           <tr>
+               <td class="names" >已有人数</td>
+               <td class="ru">
+                 <select name="people" style="margin-left:0px;"><option value="0">0位男士</option><option value="1">1位男士</option><option value="2">2位男士</option><option value="3">3位男士</option><option value="4">4位男士</option><option value="5">5位男士</option><option value="6">6位男士</option><option value="7">7位男士</option><option value="8">8位男士</option><option value="9">9位男士</option></select>
+	             <select name="woman"><option value="0">0位女士</option><option value="1">1位女士</option><option value="2">2位女士</option><option value="3">3位女士</option><option value="4">4位女士</option><option value="5">5位女士</option><option value="6">6位女士</option><option value="7">7位女士</option><option value="8">8位女士</option><option value="9">9位女士</option></select>
+		         <select name="chd"><option value="0">0位儿童</option><option value="1">1位儿童</option><option value="2">2位儿童</option><option value="3">3位儿童</option><option value="4">4位儿童</option><option value="5">5位儿童</option><option value="6">6位儿童</option><option value="7">7位儿童</option><option value="8">8位儿童</option><option value="9">9位儿童</option></select>
+               </td>
+               <td class="names">目标人数</td>
+               <td>
+                   <select name="mins"><option value="2">2人</option><option value="3">3人</option><option value="4">4人</option><option value="5">5人</option><option value="6">6人</option><option value="7">7人</option><option value="8">8人</option><option value="9">9人</option><option value="10">10人</option><option value="11">11人</option><option value="12">12人</option><option value="13">13人</option><option value="14">14人</option><option value="15">15人</option><option value="16">16人</option><option value="17">17人</option><option value="18">18人</option><option value="19">19人</option><option value="20">20人</option><option value="21">21人</option><option value="22">22人</option><option value="23">23人</option><option value="24">24人</option><option value="25">25人</option><option value="26">26人</option><option value="27">27人</option><option value="28">28人</option><option value="29">29人</option><option value="30">30人</option></select>
+               </td>
+               <td class="names">最多接受</td>
+               <td>
+                  <select name="maxs"><option value="2">2人</option><option value="3">3人</option><option value="4">4人</option><option value="5">5人</option><option value="6">6人</option><option value="7">7人</option><option value="8" selected="selected">8人</option><option value="9">9人</option><option value="10">10人</option><option value="11">11人</option><option value="12">12人</option><option value="13">13人</option><option value="14">14人</option><option value="15">15人</option><option value="16">16人</option><option value="17">17人</option><option value="18">18人</option><option value="19">19人</option><option value="20">20人</option><option value="21">21人</option><option value="22">22人</option><option value="23">23人</option><option value="24">24人</option><option value="25">25人</option><option value="26">26人</option><option value="27">27人</option><option value="28">28人</option><option value="29">29人</option><option value="30">30人</option></select>
+                </td>
+           </tr>
+           <tr>
+               <td class="names">人数不足</td>
+               <td>
+                  <select name="must" style=" width:150px;"><option value="1">只有我们一家也成行</option><option value="0">不成行，退还诚意金</option></select>
+               </td>
+               <td class="long_name" colspan="2">跟团者帮我承担的团费比例</td>
+                <td colspan="2">
+                  <select name="cheap"><option value="0">不需要</option><option value="1">团费总额的1%</option><option value="2">团费总额的2%</option><option value="3">团费总额的3%</option><option value="4">团费总额的4%</option><option value="5">团费总额的5%</option><option value="6">团费总额的6%</option><option value="7">团费总额的7%</option><option value="8">团费总额的8%</option><option value="9">团费总额的9%</option><option value="10">团费总额的10%</option></select>
+               </td>
+           </tr>
+           <tr>
+              <td class="names">联系人</td>
+              <td style="text-align:left"><input type="text" placeholder="如王小姐" name="name" style="margin-left:8px;width:140px;"></td>
+              <td class="names">手机号码</td>
+              <td colspan="3" style="text-align:left">
+                   <input type="text" name="phone" style="margin-left:8px; width:90px;">
+                   <span>号码不公开，公开请备注，<br/>接收报名通知</span>
+              </td>
+           </tr>
+           
+           <tr>
+              <td class="names">诚意金</td>
+              <td style="text-align:left"><b style="color:#f73900; font-size:22px">{$line_base.cmoney}</b>元/人，达到目标人数后需补交预定金</td>
+              <td class="names">Email</td>
+              <td colspan="3" style="text-align:left">
+                   <input type="text" name="email"  style="margin-left:8px; width:90px;">
+                   <span style=" margin-top:15px">（接收Email报名通知）</span>
+              </td>
+           </tr>
+           <tr>
+              <td class="names">备注说明</td>
+              <td colspan="5"><textarea name="desc" style=" width:705px; height:70px; margin-top:5px; border:1px solid #05adae; "></textarea>
+              <p>如：我们是一家三口，来自上海，是大学教授，年龄在35岁左右，希望拼到两个年龄差不多的家庭，地域工作不限，不接受单身或者小情侣；同时我们需要把住宿调整为ｘｘｘｘ，补差价ｘｘｘ元，我的微信号是ｘｘｘ，具体可沟通。</p> 
+              </td>
+           </tr>
+           <tr>
+              <td class="names">客服编号</td>
+              <td colspan="5">
+                 <select style=" width:150px;"><option>我没联系过客服</option></select>
+                 <span class="queren">下一步，支付诚意金</span>
+                 <input type="submit" value="发起拼团" class="sumbit warning active"  >
+              </td>
+           </tr>
+       </table>
+     </form>
+  </div>

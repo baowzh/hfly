@@ -1,0 +1,14 @@
+<link rel="stylesheet"  href="../Public/css/route_q.css"/>
+<div class="col-19 omega page_content route_questions_nav">
+<div style="margin-top:12px;"></div>
+    <div class="col-4 alpha title on">旅游线路问答</div>
+    <div class="col-18 alpha body">
+        <volist name="list" id="vo">
+            <div class="route_q_a">
+                <div class="route_questions">你在<a href="{:U('travel/detail',array('id'=>$vo['id']))}">{$vo.names}</a>线路中问：{$vo.question1}</div>
+                <if condition="$vo.status eq '1'"><div class='route_wait'>请等待回复...</div><else /><div class='route_answer'>{$vo.answer}</div></if>
+            </div>
+        </volist>
+    </div>
+  <div class="col-18 page page_nav">{$page}</div>
+</div>

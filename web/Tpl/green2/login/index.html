@@ -1,0 +1,72 @@
+<div class="logins">
+	<div class="w main">
+		<div id="entry" class="w">
+			<div class="mt">
+				<h2>用户登录</h2>
+				<b></b>
+			</div>
+			<div style="PADDING-TOP: 30px" class="mc">
+				<form action="{:U('login/login',$_GET)}" method="post"
+					class="check-form">
+					<div class="form">
+						<div class="item">
+							<span class="label">邮箱或手机：</span>
+							<div class="fl">
+								<input type="text" id="username" name="username" class="text"
+									tabindex="1" value="" sta="0" maxlength="50"> <label
+									id="loginname_succeed" class="blank invisible"></label> <span
+									class="clr"></span>
+							</div>
+						</div>
+						<div class="item">
+							<span class="label">密码：</span>
+							<div class="fl" style="width: 320px">
+								<input type="password" id="password" name="password"
+									class="text" tabindex="2" sta="0" maxlength="18"> <label
+									id="loginpwd_succeed" class="blank invisible"></label> <label
+									style="float: right; font-size: 12px;"><a
+									href="{:U('register/retrieve_password')}"
+									style="color: #000; text-decoration: underline;">忘记密码?</a></label> <span
+									class="clr"></span>
+							</div>
+						</div>
+						<div class="item" id="o-authcode" style="display: none">
+							<span class="label">验证码：</span>
+							<div class="fl" style="width: 320px;">
+								<input type="text" id="authcode" name="authcode"
+									class="text text-1" tabindex="3" sta="0" maxlength="6">
+								<label id="authcode_succeed" class="blank"></label> <label
+									class="img"> <img id="JD_Verification1"
+									style="WIDTH: 80px; HEIGHT: 30px; CURSOR: pointer"
+									onclick="this.src='VerifyCode.aspx?&amp;uid=982f9f99-eb33-4546-9909-34e6083e747f&amp;yys='+new Date().getTime()"
+									src="VerifyCode.aspx?&amp;uid=982f9f99-eb33-4546-9909-34e6083e747f"
+									alt="">
+								</label> <label class="ftx23" style="font-size: 12px;">&nbsp;看不清？<a
+									href="###"
+									style="font-size: 12px; text-decoration: underline; color: #000">换一张</a></label>
+								<span class="clr"></span>
+							</div>
+						</div>
+						<div id="autoentry" class="item">
+							<div class="fl" style="margin-left: 150px">
+								<label class="mar" style="font-size: 12px;"><input
+									id="chkRememberUsername" class="checkbox" checked=""
+									type="checkbox" name="login_state" value="1"> 记住用户名</label>
+							</div>
+						</div>
+						<div class="item">
+							<span class="label">&nbsp;</span><input id="loginsubmit"
+								class="btn-img btn-entry" tabindex="8" value="登录" type="submit">
+						</div>
+					</div>
+				</form>
+				<div id="guide">
+					<h5>还不是汇丰旅行社用户？</h5>
+					<div class="content">现在免费注册成为汇丰旅行社用户，便能立刻享受便宜又放心的环球之旅。</div>
+					<a class="btn-link btn-personal" href="{:U('register/register')}">注册新用户</a>
+				</div>
+				<span class="clr"></span>
+			</div>
+		</div>
+	</div>
+</div>

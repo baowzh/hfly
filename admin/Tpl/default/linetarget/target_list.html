@@ -1,0 +1,9 @@
+<volist name="target_list" id="vo">
+<tr class="ulbc" id="tr_{$vo.id}">
+        <td id="td_sel"><input type="checkbox" class="sel" id="sel_{$vo.id}" value="{$vo.id}" /></td>        
+        <td><input size="4" type="text" name="sort[{$vo.id}]" id="sort_{$vo.id}" value="{$vo.sort}" validate="required:true,number:true,min:0" /></td>
+        <td style="text-align: left;">{$vo.names}</td>
+        <td>{$vo.names_en}</td>        
+        <td><a href="#" onclick= "javascript:if(confirm( '确定要删除该条记录吗？ '))ajax_del({$vo.id});">删除</a></td>
+</tr>
+</volist>

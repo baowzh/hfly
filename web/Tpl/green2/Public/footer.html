@@ -1,0 +1,28 @@
+
+  <div class="footer">
+     <div class="foottop">&nbsp;</div>
+     <div class="footcont">
+        <volist name="helps" id="help">
+           <div class="footbox">
+               <h3>{$help.names}</h3>
+               <volist name="help.list" id="act">
+               <li><a href="{:U('article/detail',array('id'=>$act['id']))}" >{$act.title}</a></li>
+               </volist>
+            </div>
+        </volist>
+     </div>
+     <div class="footbottom">
+        <ul>
+        
+        <volist name="aboutlist" id="about">
+         <li><a href="{:U('article/detail',array('id'=>$about['id']))}" >{$about.title}</a></li>
+        </volist>
+       </ul>
+       <div class="clear"></div>
+       <div class="hotlines">内蒙古汇丰旅行社有限公司国内统一服务热线：400-000-0000</div>
+         <p>公司地址：名都中央广场 南路332号1-2层</p>
+         <p>内ICP备88888888号  Copyright 2000-2015 内蒙旅行社 ALL Rights Resevised</p>
+     </div>
+  </div>
+</body>
+</html>

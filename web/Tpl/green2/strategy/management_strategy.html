@@ -1,0 +1,32 @@
+	<div class="col-19 omega page_content">
+   <div style="margin-top:12px;"></div>
+		<ul class="side1">
+            
+           
+             <li class="col-2 alpha title on col-full">全部</li>
+             <li><a href="#" class="col-2 grid_2 title">待处理</a></li>
+             <li><a href="#" class="col-2 grid_2 title">待付款</a></li>
+             <li><a href="#" class="col-2 grid_2 title">已付款</a></li>
+             <li><a href="#" class="col-2 grid_2 title">已取票</a></li>
+             <li><a href="#" class="col-2 grid_2 title">已点评</a></li>
+             <li><a href="#" class="col-2 grid_2 title">已结束</a></li>
+             <li><a href="#" class="col-2 grid_2 title">已取消</a></li>
+              
+        </ul>
+            <div class="col-18 alpha body">
+            	<table width="100%" class="table_list">
+                	<tr>
+                      <th>标题</th>
+                      <th>状态</th>
+                      <th>操作</th>
+                    </tr>
+                    <volist name="list" id="vo">
+					<tr>
+                      <td>{$vo.title}</td>
+                      <td><if condition="$vo.status eq '1'">审核中<elseif condition="$vo.status eq '2'" />已发布<else />--</if></td>
+                      <td><if condition="$vo.status eq '1'"><a href="{:U('strategy/edit_strategy',array('id'=>$vo['id']))}">编辑</a><elseif condition="$vo.status eq '2'" /><a href="{:U('strategy/edit_strategy',array('id'=>$vo['id']))}">编辑</a>&nbsp|&nbsp查看<else />--</if></td>
+                    </tr>
+					</volist>
+                </table>
+            </div>
+        </div>

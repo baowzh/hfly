@@ -1,0 +1,134 @@
+<include file="Public:header" />
+<load href="../Public/Js/swf2ckeditor.js" />
+<load href="__ROOT__/Admin/Vendor/editor/kindeditor.js" />
+<script language="javascript">
+/*
+    function formcheck()
+    {
+
+        if($.trim($("#names").val())=='')
+        {
+            $("#msg_names").html("请填写名称");
+            $("#names").focus();
+            return false;
+        }
+        if($.trim($("#city_id").val())=='0')
+        {
+            $("#msg_city_id").html("请选择所属城市");
+            $("#city_id").focus();
+            return false;
+        }
+    }
+	*/
+    KE.show({id : 'traffic_info'});
+	KE.show({id : 'buy_info'});
+	KE.show({id : 'special_shopping'});
+</script>
+<table cellspacing="0" cellpadding="0" class="t1">
+    <tbody><tr>
+            <th height="27" colspan="2" id="title">其它内容</th>
+        </tr>
+        
+    </tbody>
+</table>
+<form action="__URL__/Line_info" enctype="multipart/form-data" method="post" onSubmit="return formcheck();">
+    <table border="0" cellspacing="0" cellpadding="0" class="t3">
+        <tr>
+            <td align="right"><span class="msg">*</span>特色介绍：</td>
+            <td><label>
+                    <textarea name="detail" cols="100" rows="22" id="detail"></textarea>
+                </label>
+                <span id="msg_detail" class="msg"></span><br>
+            </td>
+        </tr>
+         <tr>
+            <td align="right"><span class="msg">*</span>预定需知：</td>
+            <td><label>
+                    <textarea name="detail" cols="100" rows="22" id="detail"></textarea>
+                </label>
+                <span id="msg_detail" class="msg"></span><br>
+            </td>
+        </tr>
+         <tr>
+            <td align="right"><span class="msg">*</span>温馨提示：</td>
+            <td><label>
+                    <textarea name="detail" cols="100" rows="22" id="detail"></textarea>
+                </label>
+                <span id="msg_detail" class="msg"></span><br>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="下一步" name="submit" id="submit" class="formInput01">
+                <input type="submit" value="上一步" name="a" id="a" class="formInput01">
+            </td>
+        </tr>
+    </table>
+</form>
+<script language="javascript">
+
+    function chekcseo() {
+        if ($('#SEO').filter(':checked').length == 1) { $('tr[name="seo"]').show(); } else { $('tr[name="seo"]').hide(); }
+    }
+	
+    $(document).ready(function(){
+		$('#SEO').click(function () { chekcseo(); });
+		chekcseo();
+        $("#paycart_all").click(function(){
+            $('input.sel_paycart').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#special_service_all").click(function(){
+            $('input.sel_special_service').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#service_item_all").click(function(){
+            $('input.sel_service_item').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#service_dinner_all").click(function(){
+            $('input.sel_service_dinner').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#recreation_all").click(function(){
+            $('input.sel_recreation').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#room_facilitie_all").click(function(){
+            $('input.sel_room_facilitie').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+    });
+</script>
+<include file="Public:footer" />

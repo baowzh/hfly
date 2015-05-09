@@ -1,0 +1,42 @@
+
+<form action="" method="post" target="main">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="640">
+        <tr>
+            <th width="99" height="18">线路名：</th>
+            <td>{$list.names}</td>
+        </tr>
+        <tr>
+            <th height="18">行程分数：</th>
+            <td>{$list.travel|get_starts}</td>
+        </tr>
+		        <tr>
+            <th height="18">导游分数：</th>
+            <td>{$list.guide|get_starts}</td>
+        </tr>
+		        <tr>
+            <th height="18">交通分数：</th>
+            <td>{$list.traffic|get_starts}</td>
+        </tr>
+		        <tr>
+            <th height="18">住宿分数：</th>
+            <td>{$list.room|get_starts}</td>
+        </tr>
+		        <tr>
+            <th height="18">满意度：</th>
+            <td>{$list.point}</td>
+        </tr>
+				<tr>
+            <th height="18">点评印象：</th>
+            <td>{$list.impr_id}</td>
+        </tr>
+				<tr>
+            <th height="18">评论时间：</th>
+            <td>{$list.create_time|f_date}</td>
+        </tr>
+        <tr>
+            <th>用户评论：</th>
+            <td><textarea name="answer" cols="70" rows="10" id="content" disabled="disabled">{$list.content}</textarea>
+            </td>
+        </tr>
+    </table>
+</form>

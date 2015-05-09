@@ -1,0 +1,72 @@
+﻿<link rel="stylesheet" href="../Public/css/register.css"/>
+<div class="wrapper w1200">
+
+    <div class="col-24 content alpha">
+        <div class="col-24 content_top alpha">
+            <h1 class="col-10 content_top_font">会员注册</h1>
+        </div>
+        <div class="clear"></div>
+        <div class="col-24 content_main">
+            <div class="col-14 content_main_left">
+                <form action="{:U('register')}" method="post" class="check-form">
+                    <div class="col-14 content_main_left_number">
+                        <span class="col-2 content_main_left_number_title">会员账号 :</span>
+                        <div class="col-5 msg_wrap">
+                            <input name="username" type="text" datatype="s,/^[^0-9].{4,17}$/" errormsg="请输入5到18位字符，不能以数字开头" class="col-5" ajaxUrl="{:U('valid')}"/>
+                        </div>
+                        <div class="Validform_tipbox" for="username"></div>
+                        <div class="col-6 msg_wrap"></div>
+                    </div>
+                    <div class="col-14 content_main_left_number">
+                        <span class="col-2 content_main_left_number_title">邮箱地址 :</span>
+
+                        <div class="col-5 msg_wrap">
+                            <input name="email" type="text" class="col-5" datatype="e" ajaxUrl="{:U('valid')}"/>
+                        </div>
+                        <div class="Validform_tipbox" for="email"></div>
+                        <div class="col-6 msg_wrap"></div>
+                    </div>
+                    <div class="col-14 content_main_left_number">
+                        <span class="col-2 content_main_left_number_title tit_wrap">登录密码 :</span>
+
+                        <div class="col-5 msg_wrap">
+                            <input name="password" type="password" class="col-5" datatype="*5-20" autocomplete="off"/>
+                        </div>
+                        <div class="Validform_tipbox" for="password"></div>
+                        <div class="col-6 msg_wrap"></div>
+                    </div>
+                    <div class="col-14 content_main_left_number">
+                        <span class="col-2 content_main_left_number_title tit_wrap">确认密码 :</span>
+
+                        <div class="col-5 msg_wrap">
+                            <input name="password2"  type="password" errormsg="两次密码不一致" class="col-5" datatype="*5-20" recheck="password" autocomplete="off"/>
+                        </div>
+                        <div class="Validform_tipbox" for="password2"></div>
+                        <div class="col-6 msg_wrap"></div>
+                    </div>
+                    <div class="col-14 content_main_left_number">
+                        <label class="col-6 prefix_2 msg_wrap alpha " for="agree">
+                            <input type="checkbox" name="agree" id="agree" value="1" sucmsg=" " nullmsg=" " datatype="/1/" checked="checked"/>
+                           <div style="min-width: 15px;" class="Validform_tipbox" for="agree"></div> 我已阅读并接受《<a href="##">tripec服务协议</a>》          
+                           
+                        </label>
+                        <div class="col-6 msg_wrap alpha"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="col-7 prefix_2 suffix_5" style=" margin-left:100px;">
+                        <input type="submit" class="btn green" value="注 册"/>
+                    </div>
+                </form>
+            </div>
+            <div class="col-5 content_main_right">
+                <div class="font_login">
+                    <div class="font_login_title"><span>已有账号，立即登录</span></div>
+                    <div class="btn_login">
+                        <a href="{:U('login/index')}"><img src="../Public/images/btn_login.jpg" width="135" height="32"/></a>
+		    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

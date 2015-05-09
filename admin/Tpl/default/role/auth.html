@@ -1,0 +1,57 @@
+<style>
+    .table-list td.tl{
+        text-align: left;
+        text-indent: 15px;
+    }
+</style>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('lists')}">管理员角色</a> |
+        <a class="on" href="{:U('auth',array('id'=>$names))}">角色授权</a>
+    </ul>
+</div>
+<table width="100%" class="search_table">
+    <tbody>
+        <tr>
+            <td class="search">                
+                当前角色：<strong>{$role_info.names}</strong>&nbsp;
+                <a onclick="$(':checkbox').attr('checked','checked')" href="javascript:void(0);">全选</a>/
+                <a onclick="$(':checkbox').removeAttr('checked')" href="javascript:void(0);">全不选</a>/
+                <a href="javascript:void(0);" onclick="Anti();">反选</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<form action="{:U('role_set_auth',array('names'=>$names))}" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0"  width="100%">
+            <thead>
+                <tr>
+                    <th CLASS="w120">菜单ID</th>
+                    <th class="w80">授权</th>
+                    <th>菜单名</th>
+                    <th CLASS="w120">菜单状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                {$nav_str}
+            </tbody>
+        </table>
+    </div>
+    <div style='height:50px'></div>
+<div id="btnbox" class="btn">
+    <INPUT TYPE="submit" value=" 保 存 " class="button">
+    <input TYPE="reset" value=" 重 置 " class="button">
+</div>
+</form>
+<script type="text/javascript">
+    function Anti() {
+        $(':checkbox').each(function() {
+            if (typeof ($(this).attr("checked")) == "undefined") {
+                $(this).attr('checked', 'checked');
+            } else {
+                $(this).removeAttr('checked');
+            }
+        });
+    }
+</script>

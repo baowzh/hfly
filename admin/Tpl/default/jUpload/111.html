@@ -1,0 +1,73 @@
+<volist name="travel" id="travel_id">
+    <div id="day_{$travel_id.day}" class="line_day">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="t3">
+            <tr>
+                <td>行程安排</td>
+                <td>第day_{$travel_id.day}天</td>
+            </tr>
+            <tr>
+                <td>行程标题</td>
+                <td><input id="title_{$travel_id.day}" class="formTitle" type="text" size="50"
+                           value="{$travel_id.title}" name="title_{$travel_id.day}"></td>
+            </tr>
+            <tr>
+                <td>用餐</td>
+                <td><input type="checkbox" value="1" box="dining_{$travel_id.day}"
+                           name="dining_{$travel_id.day}[]"
+                    <in name="ding['0']" value="$travel_id.dining">checked="checked"</in>
+                    >
+                    早餐
+                    <input type="checkbox" value="2" box="dining_{$travel_id.day}"
+                           name="dining_{$travel_id.day}[]"
+                    <in name="ding['1']" value="$travel_id.dining">checked="checked"</in>
+                    >
+                    中餐
+                    <input type="checkbox" value="3" box="dining_{$travel_id.day}"
+                           name="dining_{$travel_id.day}[]"
+                    <in name="ding['2']" value="$travel_id.dining">checked="checked"</in>
+                    >
+                    晚餐
+                </td>
+            </tr>
+            <tr>
+                <td>住宿</td>
+                <td><input id="stay_{$travel_id.day}" class="formTitle valid" type="text" maxlength="50"
+                           value="{$travel_id.stay}" name="stay_{$travel_id.day}"></td>
+            </tr>
+        </table>
+        <div id="TravelText_{$travel_id.day}" class="lineRowText">
+            <ul id="ActivityTitle_{$travel_id.day}" class="lineRowSub">
+                <li onclick="addtool(this);"><img alt="增加1段" src="../Public/Images/toolsAdd.png"></li>
+                <li onclick="deltool(this);"><img alt="删除1段" src="../Public/Images/toolsDell.png"></li>
+                <volist name="section[$travel_id['id']]" id="sec_id">
+                    <li onclick="tabsTravel(this);"
+                    <eq name="sec_id.names" value="1">class="yes"</eq>
+                    >第<b>{$sec_id.names}</b>段
+                </volist>
+            </ul>
+            <div id="TravelText_{$travel_id.day}" class="lineRowText">
+                <volist name="section[$travel_id['id']]" id="seccon_id">
+
+                    <table id="container_{$travel_id.day}_{$seccon_id.names}"
+                           style=' <neq name="seccon_id.names" value="1">display:none;</neq> background:rgb(255, 243, 217);width: 90%;'>
+                        <tr>
+                            <td width="6%">标题：</td>
+                            <td><input type="text" class="formTitle"
+                                       id="activity_title_{$travel_id.day}_{$seccon_id.names}"
+                                       name="activity_title_{$travel_id.day}_{$seccon_id.names}"
+                                       value="{$seccon_id.title}"></td>
+                        </tr>
+
+                        <tr>
+                            <td>内容：</td>
+                            <td><textarea style="width:90%; height:200px" class="XH-text"
+                                          id="activity_text_{$travel_id.day}_{$seccon_id.names}"
+                                          name="activity_text_{$travel_id.day}_{$seccon_id.names}">{:stripslashes($seccon_id['content'])}</textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </volist>
+            </div>
+        </div>
+    </div>
+</volist>

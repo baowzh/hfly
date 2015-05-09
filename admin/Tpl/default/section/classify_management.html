@@ -1,0 +1,41 @@
+<div id="nav" class="mainnav_title" xmlns="http://www.w3.org/1999/html">
+    <ul>
+        <a class="on" href="{:U('classify_management')}">栏目列表</a> |
+        <a href="{:U('classify_add')}">添加栏目</a>
+    </ul>
+</div>
+<form method="post" action="lists" name="myform" id="myform">
+    <div class="table-list">
+        <table width="100%" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <th><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
+                <th style='text-align:left;'>栏目名称</th>
+                <th style="display:none;">栏目图片</th>
+                <th>文档数量（合计 {$acount} 篇）</th>
+                <th>所属模型</th>
+                <th>导航显示</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+              {$section_str}
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="删除" 
+        onclick="myform.action='{:U('classify_delall')}';return confirm_classify_delall()"/>
+    </div>
+</form>
+<script type="text/javascript">
+function sel_all(){
+	$('.item').each(function(index){
+		if($(this).attr('checked')){
+			$(this).removeAttr('checked');
+		}else{
+			$(this).attr('checked', 'checked');
+		}
+	});
+}
+</script>

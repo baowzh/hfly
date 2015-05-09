@@ -1,0 +1,44 @@
+<div id="day_{$day}" class="line_day">
+  <table width="100%"  border="0" cellpadding="0" cellspacing="0" class="t3">
+  	<tr>
+            <td>行程安排</td>
+            <td>第{$day}天</td>
+          </tr>
+    <tr>
+      <td>行程标题</td>
+      <td><input id="title_{$day}" class="formTitle" type="text" size="50" value="" name="title_{$day}"></td>
+    </tr>
+    <tr>
+      <td>用餐</td>
+      <td><input type="checkbox" value="1" box="dining_{$day}" name="dining_{$day}[]">
+        早餐
+        <input type="checkbox" value="2" box="dining_{$day}" name="dining_{$day}[]">
+        中餐
+        <input type="checkbox" value="3" box="dining_{$day}" name="dining_{$day}[]">
+        晚餐 </td>
+    </tr>
+    <tr>
+      <td>住宿</td>
+      <td><input id="stay_{$day}" class="formTitle valid" type="text" maxlength="50" value="" name="stay_{$day}"></td>
+    </tr>
+  </table>
+  <div id="TravelText_{$day}" class="lineRowText">
+    <ul id="ActivityTitle_{$day}" class="lineRowSub">
+      <li onclick="addtool(this);"><img alt="增加1段" src="../Public/Images/toolsAdd.png"></li>
+      <li onclick="deltool(this);"><img alt="删除1段" src="../Public/Images/toolsDell.png"></li>
+      <li onclick="tabsTravel(this);" class="yes">第<b>1</b>段</li>
+    </ul>
+    <div id="TravelText_{$day}" class="lineRowText">
+      <table style="width: 90%;" id="container_{$day}_1"  style="background:rgb(255, 243, 217);">
+      <tr>
+        <td width="6%">标题：</td>
+        <td><input type="text" class="formTitle" id="activity_title_{$day}_1" name="activity_title_{$day}_1"></td>
+      </tr>
+      <tr>
+        <td>内容：</td>
+        <td><textarea style="width: 90%; height:200px;" class="XH-text" id="activity_text_{$day}_1" name="activity_text_{$day}_1">第{$day}天第1段内容....</textarea></td>
+      </tr>
+      </table>
+    </div>
+  </div>
+</div>

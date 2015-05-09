@@ -1,0 +1,225 @@
+<script type="text/javascript">
+    var root = "__ROOT__", index = "__Index__";
+</script>
+<link rel="stylesheet"
+	href="__ROOT__/Public/Plugins/uploadify/uploadify.css" />
+<script type="text/javascript"
+	src="__ROOT__/Public/Plugins/uploadify/jquery.uploadify-3.1.min.js"></script>
+<script type="text/javascript"
+	src="__ROOT__/Public/Plugins/uploadify/jquery.jUpload.js"></script>
+<script type="text/javascript">
+     $(function () {
+		 $('#show_msg').show();
+                $("#upload1").jUpload({
+                    trigger_id: "t_upload1",
+                    uploader: "{:U('uploadify/head_img')}",
+                    queueID: "upload1-queue",
+                    formData: {
+                        "<?php echo session_name(); ?>": "<?php echo session_id(); ?>",
+                        "savePath": "/Upload/images/articles/",
+                        "saveRule": "time",
+                        "divId": "img1"
+                    },
+                    success: function (data, info) {
+						$("#photo_1").val(data[0].path);
+						art.dialog.alert(info);
+                    }
+                });
+            })
+function formcheck()
+{
+	return true;
+}
+</script>
+<table cellspacing="0" cellpadding="0" class="t1">
+    <tbody><tr>
+            <th height="27" colspan="2" id="title">编辑景点</th>
+        </tr>
+
+    </tbody>
+</table>
+<form action="__URL__/edit" enctype="multipart/form-data" method="post" onSubmit="return formcheck();">
+    <input type="hidden" id="id" name="id" value="{$id}">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="120"><span class="red">*</span>景点名称：</th>
+            <td colspan="2"><span class="f_left"><input name="names" type="text" class="txt" id="names" value="{$objViewpoint.names}" datatype="*" nullmsg="请填写酒店介绍" errmsg="请填写酒店介绍" sucmsg=" " />&nbsp;<span id="msg_names" class="msg_span">
+            <input id="SEO" type="checkbox" name="SEO" <if condition="0 neq $objViewpoint['seo_id']"> checked="checked"</if> value="yes"/><label for="SEO">SEO优化</label>    </span><span class="Validform_checktip f_left"></span>
+                <input id="seo_id" name="seo_id" type="hidden" value="{$objseo_info.id}">
+            </td>
+        </tr>
+        <tr name="seo">
+            <th>SEO标题：</th>
+            <td colspan="2"><textarea name="title" rows="2" cols="20" id="title" style="height:50px;width:600px;">{$objseo_info.title}</textarea> 
+          <span id="box_keyword" class="Dp">建议不超出30个字</span></td>
+        </tr>
+        <tr name="seo">
+            <th>SEO关键词：</th>
+            <td colspan="2"><textarea name="keyword" rows="2" cols="20" id="keyword" style="height:50px;width:600px;">{$objseo_info.keyword}</textarea>
+                <span id="box_keyword" class="Dp">将被搜索引擎用来搜索您网站的关键内容，每个关键字用英文逗号分隔</span></td>
+        </tr>
+        <tr name="seo">
+            <th>SEO描述：</th>
+            <td colspan="2"><textarea name="detail" rows="2" cols="20" id="detail" style="height:50px;width:600px;">{$objseo_info.detail}</textarea>
+              <span id="box_detail" class="Dp">描述中请不要带英文的逗号，建议不超出80个字</span></td>
+        </tr>
+        <tr>
+          <th>缩图：</th>
+          <td colspan="2"><div id="img1"></div>
+                    <div id="upload1-queue" style="margin-top:6px;"></div>
+                     <input class="isFile" type="hidden" id="photo_1" name="pic_front" value="{$objViewpoint.pic}"/>
+                    <input data-msg-isFile="请上传图片" class="isFile" id="upload1" name="file_upload1" type="file"/>
+                    <div class="f_left" style="margin:12px 0 0 6px;">
+                    <a class="upload_bt" href="javascript:void(0);" id="t_upload1" onclick="$('#show_msg').hide();">点击上传</a>
+                    </div><span class="Validform_checktip f_left" id="show_msg" style="color:#F00">若不修改图片则此项无需更改</span></td>
+        </tr>
+        <tr>
+          <th>现用图片：</th>
+          <td colspan="2">
+            <neq name="objViewpoint.pic" value="">
+              <img src="__ROOT__{$objViewpoint.pic}" style="max-width:580px;min-width:420px" />
+            </neq>
+          </td>
+        </tr>
+        
+        <tr>
+            <th><span class="red">*</span>所属地区：</th>
+            <td colspan="2"><select id="city_id" name="city_id" class="txt" datatype="/^[^0]\d*$/" nullmsg="请选择所属地区" errmsg="请选择所属地区" sucmsg=" ">
+                    <option value="0">请选择</option>
+                    <volist name="list_city_id" id="vo">
+                    <option  value="{$vo.cid}" <if condition="$vo.id eq $objViewpoint['city_id']"> selected="selected"</if>>{$vo.names}</option>
+                    </volist>
+                </select>
+                <span id="msg_city_belong" class="msg1"></span>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>景点级别：</th>
+            <td colspan="2">
+                <select id="rank" name="rank" class="txt" datatype="/^[^0]\d*$/" nullmsg="请选择景点级别" errmsg="请选择景点级别" sucmsg=" ">
+                    <option value="0">请选择</option>
+                    <option value="2" <if condition="2 eq $objViewpoint['rank']"> selected="selected"</if>>AA</option>
+                    <option value="3" <if condition="3 eq $objViewpoint['rank']"> selected="selected"</if>>AAA</option>
+                    <option value="4" <if condition="4 eq $objViewpoint['rank']"> selected="selected"</if>>AAAA</option>
+                    <option value="5" <if condition="5 eq $objViewpoint['rank']"> selected="selected"</if>>AAAAA</option>
+                </select>
+            </td>
+        </tr>
+      
+      
+        <tr>
+            <th>景区介绍：</th>
+            <td>
+              <textarea name="view_info" class="kind-text" cols="100" rows="12" style="width:100%" id="view_info">{$objViewpoint.view_info}</textarea>
+<span id="msg_view_info" class="msg1"></span>
+            </td>
+            <td width="150">&nbsp;</td>
+        </tr>
+       
+        <tr>
+            <th><span class="red">*</span>状态：</th>
+            <td colspan="2">
+                <select id="status" name="status">
+                    <option value="0" <if condition="$objViewpoint['status'] eq 0">selected="selected"</if>>正常</option>
+                    <option value="1" <if condition="$objViewpoint['status'] eq 1">selected="selected"</if>>推荐</option>
+                    <option value="2" <if condition="$objViewpoint['status'] eq 2">selected="selected"</if>>隐藏</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>排序：</th>
+            <td colspan="2">
+                <input name="sort" type="text" id="sort" value='{$objViewpoint.sort}' class="txt" datatype="n" nullmsg="请填写排序" errmsg="请填写数字" sucmsg=" "/>
+                <span id="msg_sort" class="msg1"></span>
+            </td>
+        </tr>
+        <tr><td height="50"></td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+    <INPUT TYPE="submit" name="submit"  value=" 保 存 " class="button" >
+        <input TYPE="reset"  value=" 重 置 " class="button">
+    </div>
+    
+    
+</form>
+<script language="javascript">
+
+    function chekcseo() {
+        if ($('#SEO').filter(':checked').length == 1) { $('tr[name="seo"]').show(); } else { $('tr[name="seo"]').hide(); }
+    }
+    $(document).ready(function(){
+		$('#SEO').click(function () { chekcseo(); });
+		chekcseo();
+        $("#paycart_all").click(function(){
+            $('input.sel_paycart').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#special_service_all").click(function(){
+            $('input.sel_special_service').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#service_item_all").click(function(){
+            $('input.sel_service_item').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#service_dinner_all").click(function(){
+            $('input.sel_service_dinner').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#recreation_all").click(function(){
+            $('input.sel_recreation').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+        $("#room_facilitie_all").click(function(){
+            $('input.sel_room_facilitie').each(function(){
+                if($(this).attr('checked')){
+                    $(this).removeAttr('checked');
+                }else{
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+    });
+    
+    $(function () {
+         $.fn.cityLink({
+            linkId: {
+                province: "province",
+                city: "city",
+                county: "area"
+            },
+            defaults: {
+                province: "{$province}",
+                city: "{$city}",
+                county: "{$area}"
+            }});
+            <if condition="$objViewpoint.location_x neq ''">baidu_map({ lat: {$objViewpoint.location_y},lng: {$objViewpoint.location_x},adr: ""});<else />baidu_map();</if>
+        });
+</script>
+<include file="Public:footer" />

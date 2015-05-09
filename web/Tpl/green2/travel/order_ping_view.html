@@ -1,0 +1,48 @@
+<div class="dogview">
+     <div class="link_title">
+        <h3>个人发起拼团 &nbsp;&nbsp;线路编号：{$line_base.code}</h3>
+        <span><a class="close" onclick="showclose()" style="cursor:pointer" >&nbsp;</a></span>
+     </div>
+     
+     <div style="padding:15px;border:1px solid #05adae;">
+         <span style="color:#ff0000">注：您必须支付诚意金，拼团才能被其他人看到且报名，拼团不成功诚意金全退，通过手机号查询到拼团，如有改动请联系客服操作！</span>
+         <form id="a" method="post" target="_blank" action="{:U('/order/index')}">
+            <input type="text" value="{$vo.phone}" name="topphone" style="border-bottom:#FFFFFF solid 1px; border-top:0px;border-left:0px;border-right:0px;background-color:#507596;color:#fff; width:90px"> 
+            <input type="submit" value="查看拼团" style=" border:1px #333333 solid">
+         </form>
+      </div>
+       <form method="post" target="_blank" action="{:U('order_pay')}">
+        <input type="hidden" name="orderid"  value="{$vo.orderid}"/>
+         <table>
+           <tr >
+             <td class="names">团名</td>
+             <td class="ru">{$vo.tuan_name}</td>
+             <td class="names">拼团编号</td>
+             <td style="color:#993300; font-weight:bold" class="ru">{$vo.lcode}</td>
+           </tr>
+           <tr  style="color:#993300; font-weight:bold">
+             <td class="names">支付金额</td>
+             <td class="ru"><span style="font-size:24px; color:#993300">{$vo.price}</span>元</td>
+             <td class="names">旅行开始</td>
+             <td class="ru">{$vo.ends}({$vo.start}截止报名)</td>
+           </tr>
+           <tr >
+             <td class="names">人数</td>
+             <td class="ru"><span>{$vo.people}男{$vo.woman}女{$vo.chd}儿童</span></td>
+             <td class="names">人数要求</td>
+             <td class="ru">{$vo.mins}-{$vo.maxs}人</td>
+           </tr>
+           <tr >
+              <td class="names">发起人</td>
+              <td class="ru">{$vo.name}</td>
+              <td class="names">手机</td>
+              <td class="ru">{$vo.phone}</td>
+           </tr>
+           <tr height="50px">
+               <td class="names">支付方式</td>
+         	   <td class="ru"><select name="payclass"><option value="0">支付宝(支持网银信用卡)</option></select></td>
+	           <td class="names" colspan="2" style="text-align:left; padding-left:10px;"><input class="sub_bg" style="width:190px;height:40px;line-height:40px;border:none; padding:0;font-size:14px; color:#fff; font-weight:bold; background:#F00; margin-top:5px;"  type="submit" value="开始支付"><br />支付成功会收到付款确认短信凭证</td>
+           </tr>
+        </table>
+     </form>
+</div>

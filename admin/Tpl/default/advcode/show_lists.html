@@ -1,0 +1,52 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('show_lists')}">代码广告</a> |
+        <a href="javascript:void(0);" onclick="art.dialog.open('{:U('add')}',{title:'添加代码广告',width:600,height:550,window:'top',lock:'true'});">添加</a>
+    </ul>
+</div>
+
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th width="150"><input type="checkbox" value="" id="check_box" onclick="selectall('ids[]');">
+                    &nbsp;<label for="check_box" class="for_box">全选/全不选 </label></th>
+                <th style="text-align: left;">名字</th>
+                <th style="text-align: left;">广告内容</th>
+                <th>描述</th>
+                <th>位置</th>
+                <th>排序</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="ulbc" id="tr_{$vo.id}">
+                    <td id="td_sel"><input type="checkbox" class="sel" id="sel_{$vo.id}" value="{$vo.id}"/></td>
+                    <td style="text-align: left;"><input type="text" name="names_{$vo.id}" id="names_{$vo.id}"
+                                                         value="{$vo.names}"/></td>
+                    <td style="text-align: left;"><textarea name="content_" id="content_" cols="40" rows="8">{$vo.content}</textarea></td>
+                    <td><input type="text" name="area_memo_{$vo.id}" id="area_memo_{$vo.id}" value="{$vo.area_memo}"/>
+                    </td>
+                    <th><input type="text" name="pos_{$vo.id}" id="area_memo_{$vo.id}" value="{$vo.pos}"/></th>
+                    <td>
+                      <input type="text" name="sort[{$vo.id}]" id="sort_{$vo.id}" value="{$vo.sort}"/>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0);" onclick="ajax_save('{$vo.id}')">保存</a>&nbsp;<a href="{:U('deleteadv',array('id'=>$vo['id']))}" onclick="return atr_confirm(this.href,'确认删除吗')">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+        <input type="button" class="button" name="dosubmit" value="删除"
+               onclick="myform.action='{:U('deleteall')}';return confirm_deleteall()"/>
+        <input type="button" class="button" name="dosubmit" value="排序"
+               onclick="myform.action='{:U('sort_list')}';$('#myform').submit();"/>
+    </div>
+</form>
+{$page}
+

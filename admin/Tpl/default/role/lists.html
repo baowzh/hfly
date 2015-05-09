@@ -1,0 +1,51 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('list')}">管理员角色</a> |
+        <a href="{:U('add')}">添加角色</a>
+    </ul>
+</div>
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th>角色名称</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            
+            <volist name="role" id="vo">
+                <tr>
+                    {~$keys = explode("_", $key);}
+                    <td>{$vo.names}</td>
+                    <td>
+                <if condition="$vo['status'] eq 0 "><span class="cRed">已禁用</span>
+                    <elseif condition="$vo['status'] eq 1 "/><span class="cGreen">已启用</span>
+                </if>
+                </td>
+                <td>
+                <if condition="$vo['status'] eq 0">
+                    <a  href= "{:U('activation',array('id'=>$key))} " onclick="return atr_confirm(this.href, '确定激活角色吗？');">激活</a>
+                    <elseif condition="$vo['status'] eq 1 " />
+                    <a  href= "{:U('activation',array('id'=>$key))}"  onclick="return atr_confirm(this.href, '确定禁用角色吗？');" class="cRed">禁用</a>
+                </if>
+                &nbsp;|&nbsp;
+                <a href="{:U('del',array('id'=>$key))}" onclick="return atr_confirm(this.href, '确定删除角色吗？');"> 删除</a>
+                &nbsp;|&nbsp;
+                <a href="#" onclick= "location.href = '__URL__/edit?id={$key}'">编辑</a>
+                &nbsp;|&nbsp;
+                <a href="{:U('auth',array('id'=>$key))}" class="cRed">授权</a>
+                </td>
+                </tr>
+            </volist>
+        </table>
+    </div>
+    <div class="btn">
+        <input type="button" class="button" name="dosubmit" value="删除"
+               onclick="myform.action = '{:U('deleteall')}'; return confirm_deleteall()"/>
+        <input type="button" class="button" name="dosubmit" value="排序"
+               onclick="myform.action = '{:U('sort_list')}'; $('#myform').submit();"/>
+    </div>
+</form>
+<div class="page"> {$page} </div>

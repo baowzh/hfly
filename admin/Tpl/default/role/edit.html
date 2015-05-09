@@ -1,0 +1,32 @@
+<include file="Public:header" />
+
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('edit',array('id'=>$id))}">修改角色信息</a> |
+        <a href="{:U('lists')}">组别列表</a>
+    </ul>
+</div>
+
+
+<form action="{:U('edit',array('id'=>$id))}" method="post" validate="parent:td">
+    <div class="table-list">
+        <table class="form_table">
+            <tbody>
+                <tr>
+                    <th><em>*</em>角色名：</th>
+                    <td><input id="names" name="names" class="input-text required" type="text" value="{$role_info.names}"> </td>
+                </tr>
+                <tr>
+                    <td><em>*</em>角色级别：</td>
+                    <td><input type="text" id="level" name="level" class="input-text required digits" value="{$role_info.level}"></td>
+                </tr>            
+            </tbody>
+        </table>
+    </div>
+    <div style='height:50px'></div>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" value=" 保 存 " class="button">
+        <input TYPE="reset" value=" 重 置 " class="button">
+    </div>
+</form>
+</div>

@@ -1,0 +1,93 @@
+    <div class="col-19 omega page_content">
+    <div style="margin-top:12px;"></div>
+          <ul class="side1">
+              <li class="col-2 alpha title on col-full">用户修改资料</li>
+              <li><a href="{:U('userinfo/revise_password')}" class="col-2 title">用户修改密码</a></li>
+              <li><a href="{:U('userinfo/revise_loginmethod')}" class="col-2 alpha title">登录方式修改</a></li>
+            </ul>
+            <div class="col-18 alpha body">
+               <form action="{:U('userinfo/revise_userdetail')}" method="post" enctype="multipart/form-data" name="myform" id="myform">
+               <table width="100%" class="table_form">
+                  <tr>
+                      <th width="13%">用户名：</th>
+                      <td width="87%">{$detail.username}</td>
+                    </tr>
+                    
+                   
+                    <tr>
+                      <th>真实姓名：</th>
+                      <td><input type="text" name="true_name" id="" class="txt" value='{$detail.true_name}' datatype="*" size="20" tip="请输入真实姓名" nullmsg="请输入真实姓名" /></td>
+                </tr>
+                    <tr>
+                      <th>身份证：</th>
+                      <td><input type="text" name="identity_no" id="" class="txt" value='{$detail.identity_no}' datatype="*" size="40" tip="请输入身份证号" nullmsg="请输入身份证号" /></td>
+                    </tr>
+                    <tr>
+                      <th>性别：</th>
+                      <td>
+                        <if condition="$detail.sex eq 1">
+                          <label><input name="sex" type="radio" id="_man" value="1" checked="checked" /></label>
+                          <label for="_man">男</label>  
+                          <label><input name="sex" type="radio" id="_woman" value="2" /></label>
+                          <label for="_woman">女</label>
+                        <else />
+                          <label><input name="sex" type="radio" id="_man" value="1"  /></label>
+                          <label for="_man">男</label>  
+                          <label><input name="sex" type="radio" id="_woman" value="2" checked="checked"/></label>
+                          <label for="_woman">女</label>
+                        </if>
+                     </td>
+                    </tr>
+                    <tr>
+                      <th>手机：</th>
+                      <td>
+                        <span>{$detail.phone}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="button" class="btn sm primary" onclick="location='{:U('userinfo/revise_loginmethod')}'" value="修改"/></span></td>
+                    </tr>
+                    <tr>
+                      <th>E-mail：</th>
+                      <td>
+                        <span>{$detail.email}&nbsp;&nbsp;&nbsp;
+                      <input type="button" class="btn sm primary" onclick="location='{:U('userinfo/revise_loginmethod')}'" value="修改"/></span></td>
+                    </tr>
+                   <tr>
+                      <th>地址：</th>
+                      <td><input type="text" name="address" id="" class="txt" value='{$detail.address}' datatype="*" size="50" tip="请输入地址" nullmsg="请输入地址" /></td>
+                    </tr>
+                    <tr>
+                      <th>所属行业：</th>
+                      <td>
+                        <select name="industry" id="" class="select">
+                          <volist name="industrys" id="vo">
+                            <if condition="$detail.industry eq $vo.industry ">
+                              <option value="{$vo.id}" selected="selected">{$vo.industry}</option>
+                            <else />
+                              <option value="{$vo.id}">{$vo.industry}</option>
+                            </if>
+                          </volist>
+                        </select>   
+                      </td>
+                    </tr>
+                    <tr>
+                      
+                      <th>教育程度：</th>
+                      <td>
+                        <select name="education" id="" class="select">
+                          <volist name="educations" id="vo">
+                            <if condition="$detail.education eq $vo.education ">
+                              <option value="{$vo.id}" selected="selected">{$vo.education}</option>
+                            <else />
+                              <option value="{$vo.id}">{$vo.education}</option>
+                            </if>
+                          </volist>
+                        </select> 
+                      </td>
+                    </tr> 
+                    <tr>
+                      <th></th>
+                      <td><input name="" id="" class="btn primary" type="submit" value="提交修改"  style="margin-left:120px;"/></td>
+                    </tr>                 
+                 </table>
+               </form>
+            </div>
+        </div>

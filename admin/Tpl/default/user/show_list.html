@@ -1,0 +1,79 @@
+<script type="text/javascript">
+$(function(){
+	$.fn.allselect({
+			allselectclass:"allselect",//class
+			cselectname: "c_selected"//name
+	}); 
+});
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('show_list')}">会员管理</a> |
+        <a href="{:U('add')}">添加会员</a>
+    </ul>
+</div>
+<form action="{:U('show_list')}" method="get">
+    <table class="search_table" width="100%">
+        <tr>
+            <td class="search">
+                关键词: <input id="key" type="text" class="input-text" name="key" value="{$key}"/>
+                <input type="hidden" id="menuid" name="menuid" value="26"/>
+                <input type="submit" name="submit" value="查询" class="button"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table width="100%" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <th><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
+                <th>会员帐号 / 邮箱 / 手机</th>
+                <th>注册时间</th>
+                <th>奖金</th>
+                <th>激活</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="ulbc" id="tr_{$vo.id}">
+                    <td id="td_sel"><input type="checkbox" class="sel c_selected" id="sel_{$vo.id}" value="{$vo.id}"  name="items_{$vo.id}"/></td>
+                    <td><strong>{$vo.username}</strong> / <span>邮箱：<strong>{$vo.email}</strong></span> /
+                        <span>手机：<strong>{$vo.phone}</strong></span>
+                    </td>
+                    <td><span>{$vo.create_time|date="Y-m-d H:i:s",###}</span></td>
+                    <td><span>{$vo.amount}</span></td>
+                    <td><input disabled type="checkbox" name="status_{$vo.id}" id="status_{$vo.id}"
+                        <if condition="$vo.status eq 1">checked="checked"</if>/>
+                    </td>
+                    <td>
+                        <a href="__APP__/user/edit?id={$vo.id}">编辑</a> /
+                        <a href="__APP__/user/del?id={$vo.id}" onclick="return atr_confirm(this.href);" class="ui-confirm" title="删除确认" content='确定要删除该用户么'>删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+    		
+   			<input type="submit" class="button" name="dosubmit" value="删除" onclick="myform.action='{:U('deleteall')}';"/>
+      		
+                    
+    </div>
+</form>
+<div class="page">{$page}</div>
+<script type="text/javascript">
+function sel_all(){
+    $('input.sel').each(function(index){
+        if($(this).attr('checked')){
+            $(this).removeAttr('checked');
+        }else{
+            $(this).attr('checked', 'checked');
+        }
+    });
+}
+
+</script>

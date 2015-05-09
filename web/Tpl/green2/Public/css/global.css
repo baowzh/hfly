@@ -1,0 +1,81 @@
+@charset "utf-8";
+/*定义全局重置样式*/
+
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,form,img,dl,dt,dd,table,th,td,blockquote,fieldset,div,strong,label,em{margin:0;padding:0;border:0;}
+ul,ol,li{list-style:none;}
+body, button, input, select, textarea {
+    font: 12px/1.5 tahoma,arial,宋体,微软雅黑;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+}
+address, cite, dfn, em, var {
+    font-style: normal;
+}
+code, kbd, pre, samp {
+    font-family: courier new,courier,monospace;
+}
+small {
+    font-size: 12px;
+}
+ul, ol {
+    list-style: none outside none;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+sup {
+    vertical-align: text-top;
+}
+sub {
+    vertical-align: text-bottom;
+}
+legend {
+    color: #000000;
+}
+fieldset, img {
+    border: 0 none;
+}
+button, input, select, textarea {
+    font-size: 100%;
+}
+.clear{clear:both;}
+.fm{ font-weight:normal;}
+.mt5{ margin-top:5px;}.mt10{ margin-top:10px;}
+.mb15{ margin-bottom:15px;}
+.ml30{ margin-left:30px;}
+.ml10{ margin-left:10px;}
+.l{ float:left;}
+.r{ float:right;}
+.c_green{ color:#329900;}
+.fs14{ font-size:14px;}
+.c_nor{ color:#333333;}
+.fb{ font-weight:bold;}
+.c_red{ color:#F00;}
+.c_red31{ color:#FF3100;}
+.w258{ width:258px;}
+.c_orange{ color:#ff6600;}
+.bdw1{ border:#FFF solid 1px;}
+.c_gray{ color:#666666;}
+.ml20{ margin-left:20px;}.ml5{ margin-left:5px;}
+.pl10{ padding-left:10px;}.pr10{ padding-right:10px;}.mr10{ margin-right:10px;}
+.lh22{ line-height:22px;}.lh25{ line-height:25px;}.lh23{ line-height:23px;}
+.pd10{ padding:10px;}
+.pd5{ padding:5px;}.c_hs{ color:#A12F00;}
+.b{ font-weight:bold;}
+.fb{ font-weight:bold;}.ffa{ font-family:Arial,Helvetica,sans-serif;}.fs16{ font-size:16px;}
+.fs18{ font-size:16px;}.fs20{ font-size:20px;}.pdr15{ padding-right:15px;}.fs12{ font-size:12px;}
+.mbm5{ margin-bottom:5px;}.pt10{ padding-top:10px;}
+.c_blue{ color:#0055EE;}.w550{ width:550px;}.c_white{ color:#FFF;}
+.c_tuan{ background:url(../images/time_more.gif) 0 0 no-repeat; padding-left:12px;}
+.mr20{ margin-right:20px;}.bd_gray{ background:#F9F9F9;}
+.wz a{ background: url(../images/de.gif) 0 5px no-repeat; padding-left:8px; margin-right:5px;}
+.page_list{ height:28px; line-height:28px; margin-left:20px;}
+.page_list a{ float:left; margin-right:8px;}
+
+
+.de{}
+.de a{ margin-left:5px;}

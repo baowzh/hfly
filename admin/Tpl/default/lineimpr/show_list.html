@@ -1,0 +1,81 @@
+<script type="text/javascript">
+$(function(){
+	$.fn.allselect({
+			allselectclass:"allselect",
+			cselectname: "c_selected"
+	}); 
+});
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('show_list')}">点评管理</a>
+    </ul>
+</div>
+
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
+                <th>印象编号</th>
+				<th>用户名</th>
+				<th>满意度</th>
+				<th>评价时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="ulbc">
+                    <td id="td_sel" align="center"><input type="checkbox"  class="sel c_selected" id="sel_{$vo.id}" value="{$vo.id}" name="items[{$vo.id}]" /></td>
+                    <td align="center">{$vo.id}</td>
+                    <td align="center">{$vo.order_id}</td>
+					<td align="center">{$vo.point}</td>
+                    <td align="center">{$vo.create_time|f_date}</td>
+                    <td align="center" id="control_{$vo.id}">
+                        <eq name="vo.status" value="5"><a href="javascript:void(0);" onclick="fa_award({$vo.id});">审核</a>&nbsp;|&nbsp</eq>
+                    <a href="javascript:void(0);" onclick="select_win({$vo.id});">查看</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="删除"
+                   onclick="myform.action = '{:U('deleteall')}';return confirm_deleteall(this.form)"/>
+        <!-- input type="button" class="button" name="dosubmit" value="删除" onclick="myform.action='{:U('deleteall')}';return confirm_deleteall() / -->
+    </div>
+</form>
+
+<script language="javascript">
+    
+    function select_win(id){
+        art.dialog.open('{:U('select_win')}?id='+id,{
+		title:'点评管理',
+		width:640,
+		height:480,
+		lock:'true'
+		});
+    }
+    
+    function fa_award(id){
+        art.dialog.open('{:U('award')}?id='+id,{
+		title:'点评审核',
+		width:500,
+		height:200,
+		lock:'true'
+		});
+    }
+    function sel_all(){
+        $('input.sel').each(function(index){
+            if($(this).attr('checked')){
+                $(this).removeAttr('checked');
+            }else{
+                $(this).attr('checked', 'checked');
+            }
+        });
+    }
+</script>
+<div class="page">{$page}</div>

@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="__ROOT__/Public/Plugins/uploadify/uploadify.css"/>
+<script type="text/javascript" src="__ROOT__/Public/Plugins/uploadify/jquery.uploadify-3.1.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Plugins/uploadify/jquery.jUpload.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#upload1").jUpload({
+            trigger_id: "t_upload1",
+            uploader: _index_ + "uploadify/head_img",
+            queueID: "upload1-queue",
+            formData: {
+                "<?php echo session_name(); ?>": "<?php echo session_id(); ?>",
+                "savePath": "/Upload/images/names/",
+                "saveRule": "time",
+               // "divId": "img1",
+                "thumb": 1,
+            },
+            success: function(data, info) {
+                $("#pic").val(data[0]["id"]);
+                $("#img1").attr("src",_root_ + data[0]["path"]);
+            }
+        });
+    });
+</script>
+<div class="col-19 omega page_content">
+<div style="margin-top:12px;"></div>
+    <ul>
+        <li class="col-4 alpha title on">游记攻略列表</li>
+        <li><a class="col-4 title">游记攻略添加/修改</a></li>
+    </ul>
+    <div class="col-18 alpha body">
+        <form action="" method="post" enctype="multipart/form-data" name="myform" id="myform">
+            <table width="100%" class="table_form">
+                <tr>
+                    <th>标题：</th>
+                    <td><input name="title" id="" type="text" class="txt" datatype="*" size="50" tip="请输入文本" nullmsg="请输入文本" value="{$list.title}" /></td>
+                </tr>
+                <tr>
+                    <th>缩略图：</th>
+                    <td><div id="upload1-queue"></div>
+                        <!--<input class="isFile" type="hidden" id="photo_1" name="pic_front"/>-->
+                        <input type="hidden" id="pic" name="pic" value="{$list.pic}"/>
+                        <input data-msg-isFile="请上传身份证照片" class="isFile" id="upload1" name="file_upload1" type="file"/>
+                        <a class="upload_bt" href="javascript:void(0);" id="t_upload1" onclick="$('#show_msg').hide();">点击上传</a><img id="img1" src="{$list.pic_path}" /></td>
+                </tr>
+                <tr>
+                    <th>出发时间：</th>
+                    <td><select name="go_year" class="select">
+                            <foreach name="year" item="yy">
+                            <option value="{$yy}" <if condition="$list.go_year eq $yy">selected="selected"</if> >{$yy}</option>
+                            </foreach>
+                        </select> 年
+                        <select name="go_month" class="select">
+                            <foreach name="month" item="mm">
+                            <option value="{$mm}" <if condition="$list.go_month eq $mm">selected="selected"</if> >{$mm}</option>
+                            </foreach>
+                        </select> 月
+                    </td>
+                </tr>
+                <tr>
+                    <th>出发城市：</th>
+                    <td><input type="text" name="go_city" id="" class="txt" value='{$list.go_city}' /></td>
+                </tr>
+                <tr>
+                    <th>行程天数：</th>
+                    <td><input type="text" name="days" id="" class="txt" value='{$list.days}' /></td>
+                </tr>
+                <tr>
+                    <th>人均消费：</th>
+                    <td><input type="text" name="consumption" id="" class="txt" value='{$list.consumption}' /></td>
+                </tr>
+                <tr>
+                    <th>目的地：</th>
+                    <td>
+                        <span><input type="text" name="target" id="" class="txt" value='{$list.target}' /></span>
+                        <span><input name="" id="" class="btn2 gray" type="button" value="添加目的地" /></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>简要描述：</th>
+                    <td height="122" valign="bottom"><textarea name="subtitle" id="" cols="47" rows="5" class="textarea">{$list.subtitle}</textarea></td>
+                </tr>
+                <tr>
+                    <th>内容：</th>
+                    <td height="316" valign="bottom"><textarea name="content" id="" class="kind-text textarea">{$list.content}</textarea></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><input name="" id="" class="btn2 gray" type="submit" value="   发布   " /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

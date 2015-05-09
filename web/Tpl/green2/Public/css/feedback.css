@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+
+form table th{
+	text-align:right;
+}
+form table th, form table td{	border-top: 0;}
+form table thead td{
+	background-color:#FFF;
+	text-align:center;
+	height:60px;
+	vertical-align:top;
+}
+form table thead td span{
+	width:700px;
+	display:inline-block;
+	line-height:22px;
+	text-align:left;
+	color:inherit;
+}
+form table td input:not([type="submit"]){
+	height:26px;
+	width:300px;
+}
+form table td textarea{
+	height:110px;
+	width:300px;
+}
+form table tbody span{ color:red;}
+form table td .msg{ width:120px;}

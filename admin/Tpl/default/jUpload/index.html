@@ -1,0 +1,16 @@
+<form action="">
+    <input type="hidden" id="photo_2" name="pic_back"/>
+    <a href="##" id="jtrigger">上传</a>
+    <input id="upload2" name="file_upload2" type="file"/>
+
+    <textarea name="content" id="kind_0"  class="kind-text"></textarea>
+    <input type="button" value="获取countent" onclick="alert(kinds['kind_0'].html())"/>
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        $("#upload2").jUpload({
+            trigger_id:"jtrigger"
+        });
+    })
+</script>

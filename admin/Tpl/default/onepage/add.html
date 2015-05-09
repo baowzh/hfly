@@ -1,0 +1,53 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+      <a href="{:U('lists')}">文章列表</a> |
+      <a class="on" href="{:U('add')}">添加页面</a>
+    </ul>
+</div>
+
+<form action="{:U('add')}" enctype="multipart/form-data" method="post" onSubmit="return formcheck();" id="add_form">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="126" style="width:120px;"><span class="red">*</span>栏目选择：</th>
+            <td colspan="2">
+               <select name="cid" class="txt">
+                 <volist name="a_sections" id="vo">
+                    <option value="{$vo.id}">{$vo.names}</option>
+                 </volist>
+               </select>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>标题：</th>
+            <td colspan="2"><input type="text" name="title" id="title" class="txt" size="60" datatype="*" nullmsg="请填写文章标题" errmsg="请填写文章标题" sucmsg=" "/></td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>内容：</th>
+            <td><textarea name="content" cols="100" rows="20" id="content" class="kind-text" datatype="*1-65535" nullmsg="请填写文章内容" errmsg="文章内容最多填写65535个字符" sucmsg=" "></textarea></td>
+            <td width="220">&nbsp;</td>
+        </tr>
+        <tr>
+          <th><span class="red">*</span>文章来源：</th>
+          <td colspan="2"><input type="text" name="source" id="source" class="txt" size="30" datatype="*" nullmsg="请填写文章来源" errmsg="请填写文章来源" sucmsg=" "/></td>
+        </tr>
+        <tr>
+          <th>文章来源地址：</th>
+          <td colspan="2"><input name="source_url" type="text" class="txt" id="source_url" size="60" datatype="url" ignore="ignore" errmsg="请正确填写文章来源地址" sucmsg=" " /></td>
+        </tr>
+        <tr>
+          <th><span class="red">*</span>状态：</th>
+          <td colspan="2" height="30"><input name="status" type="radio" id="status_1" value="1" checked="checked" /><label for="status_1">启用</label>&nbsp;
+           <input type="radio" name="status" id="status_2" value="0" /><label for="status_2">停用</label>
+          </td>
+        </tr>
+        <tr>
+          <th><span class="red">*</span>排序：</th>
+          <td colspan="2" height="30"><input name="sort" class="txt" type="text" id="sort" value="1" datatype="n" nullmsg="请填写排序" errmsg="请填写数字" sucmsg=" " />
+          </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" value=" 添 加 " name="save" class="button">
+        <input TYPE="reset" value=" 重 置 " class="button">
+  </div>
+</form>

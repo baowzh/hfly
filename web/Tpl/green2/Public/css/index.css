@@ -1,0 +1,272 @@
+/* CSS Document */
+#content_1, #content_2 {
+	clear: both;
+}
+
+#con_left_1, #con_middle_1, #con_right_1, #con_left_2, #con_right_2 {
+	margin: 3px;
+	float: left;
+}
+
+#con_left_1 {
+	border: 2px solid #E4E4E4;
+	margin-bottom: 10px;
+	padding: 1px;
+	width: 204px;
+	height: 242px;
+}
+
+.tit {
+	background: url("../images/tit-bg.gif") repeat-x scroll 0 0 transparent;
+	border-bottom: 1px solid #FFFFFF;
+	font-weight: bolder;
+	height: 23px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 23px;
+	padding: 10px 0 0 15px;
+}
+
+#con_left_1 li {
+	margin-left: 15px;
+	line-height: 26px;
+	font-weight: 600;
+}
+
+#con_left_1 li input {
+	width: 155px;
+	height: 20px;
+	border: 1px solid #c9c9c9;
+	padding: 0 5px;
+	line-height: 20px;
+}
+
+#con_left_1 li select {
+	width: 165px;
+	height: 20px;
+}
+
+#con_left_1 li input.btn {
+	background: url(/Public/images/btn.gif) no-repeat 0 0;
+	width: 69px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+	border: none;
+	line-height: 32px;
+	color: #fff;
+	margin-left: 35px;
+}
+
+#con_middle_1 {
+	width: 525px;
+}
+
+#con_right_1 {
+	float: right;
+	margin-bottom: 10px;
+	padding: 1px;
+	width: 204px;
+}
+
+#con_right_1 #top {
+	border: 2px solid #E4E4E4;
+	margin-bottom: 10px;
+	padding: 1px;
+	height: 160px;
+}
+
+#con_right_1 #top li {
+	margin-left: 15px;
+	padding-left: 14px;
+	overflow: hidden;
+	background: url(/Public/images/icon2.gif) no-repeat 0 13px;
+	height: 30px;
+	line-height: 30px;
+}
+
+#con_right_1 #bottom {
+	border: 2px solid #E4E4E4;
+	height: 65px;
+	background: url("/Public/images/downloadsoft-bg.gif") repeat-x;
+	position: relative;
+	padding: 0 5px 0 80px;
+}
+
+#bottom h3 {
+	border-bottom: 1px dashed #CCCCCC;
+	padding: 4px 0 2px;
+	font-size: 14px;
+	margin-bottom: 3px
+}
+
+#bottom h3 em {
+	color: #037103;
+	padding-left: 5px;
+}
+
+#bottom .img {
+	left: 8px;
+	position: absolute;
+	top: 6px;
+}
+
+#con_left_2 {
+	width: 743px;
+	position: relative;
+	overflow-y: visible;
+}
+
+#con_left_2 .tit2 {
+	background: #F2EADB;
+	border-color: #E1D1B5;
+	border-style: solid;
+	border-width: 1px 1px 2px;
+	padding-left: 20px;
+}
+
+#con_left_2 .tit2 h2.titclass {
+	color: #8A6622;
+	font-size: 14px;
+	font-weight: bolder;
+	line-height: 32px;
+	text-indent: 0;
+}
+
+#con_left_2 .more {
+	line-height: 16px;
+	padding-left: 9px;
+	position: absolute;
+	right: 17px;
+	top: 9px;
+	width: 42px;
+}
+
+#con_left_2 #mblist {
+	border: 1px solid #E1D1B5;
+	padding: 10px 0 10px 22px;
+	clear: both;
+}
+
+#con_left_2 #mblist dl {
+	display: inline;
+	float: left;
+	height: 206px;
+	margin: 10px 24px;
+	overflow: hidden;
+	position: relative;
+	width: 188px;
+}
+
+.mblista {
+	height: 26px;
+	left: 0;
+	line-height: 32px;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	top: 140px;
+	width: 186px;
+}
+
+.mblistb {
+	color: #888888;
+	height: 20px;
+	left: 0;
+	line-height: 20px;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	top: 166px;
+	width: 186px;
+}
+
+.mblistc {
+	height: 20px;
+	left: 0;
+	line-height: 20px;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	top: 186px;
+	width: 186px;
+}
+
+.mblistd {
+	height: 142px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 188px;
+}
+
+.mblistd img {
+	border: medium none;
+	height: 138px;
+	width: 184px;
+}
+
+#con_right_2 {
+	width: 204px;
+	float: right;
+}
+
+#con_right_2 .tit {
+	background: url("/Public/images/sitemode1-bg.gif") no-repeat scroll 0 0;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 18px;
+	padding-top: 0;
+}
+
+#con_right_2 .tit h3 {
+	background: url("/Public/images/sitemode1-bg.gif") no-repeat scroll
+		right -30px;
+	color: #333333;
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: 1px 1px #EDEEEF;
+}
+
+#con_right_2 .bb {
+	background: none repeat scroll 0 0 #F9F9F9;
+	border: 1px solid #CCCCCC;
+	padding: 10px;
+}
+
+#con_right_2 .bb ul {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+
+#con_right_2 .bb li {
+	border-top: 1px dashed #CCCCCC;
+	margin-bottom: 0 !important;
+	margin-top: -1px;
+	padding: 5px 0 5px 22px;
+	position: relative;
+	width: 168px;
+}
+
+#con_right_2 .bb li .nu {
+	background: #A68B56;
+	color: #FFFFFF;
+	font-weight: bold;
+	left: 0;
+	letter-spacing: -2px;
+	line-height: 15px;
+	position: absolute;
+	text-align: center;
+	top: 8px;
+	width: 15px;
+}
+
+#con_right_2 #hot_bottom {
+	margin-top: 15px;
+}
+
+#con_middle_1 img {
+	width: 523px;
+	height: 248px;
+}

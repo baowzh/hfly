@@ -1,0 +1,33 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('lists')}">管理员角色</a> |
+        <a class="on" href="{:U('add')}">添加角色</a>
+    </ul>
+</div>
+<form  name="myform" id="myform" action="{:U('add')}" method="post">
+<table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+  <tr>
+    <th width="10%">角色名称：</th>
+    <td>
+      <input type="text" name="name" id="name" class="input-text" />
+    </td>
+  </tr>
+    <tr>
+        <th width="10%">角色级别：</th>
+        <td>
+            <input type="text" name="level" id="level" class="input-text" />
+        </td>
+    </tr>
+  <tr>
+	 <th>状态：</th>
+	<td>
+        <input type="radio" name="status" id="status0">&nbsp;<label for="status0">禁用</label>&nbsp;&nbsp;
+        <input type="radio" name="status" id="status1" checked="checked">&nbsp;<label for="status1">启用</label>
+     </td>
+</tr>
+  </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit"  value=" 保 存 " class="button" name="submit">
+        <input TYPE="reset"  value=" 重 置 " class="button">
+    </div>
+</form>

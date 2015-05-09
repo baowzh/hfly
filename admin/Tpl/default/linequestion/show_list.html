@@ -1,0 +1,108 @@
+<script type="text/javascript">
+$(function(){
+	$.fn.allselect({
+			allselectclass:"allselect",
+			cselectname: "c_selected"
+	}); 
+});
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('show_list')}">线路咨询</a>
+    </ul>
+</div>
+
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th width="40"><input type="checkbox" value="" class="allselect" id="check_box">
+<label for="check_box" class="for_box">全选/全不选</label></th>
+                <th width="80">问题编号</th>
+                <th style="text-align:left">提问内容</th>
+                <th width="152">提问日期</th>
+                <th width="152">答复日期</th>
+                <th width="96">状态</th>
+                <th width="125">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="ulbc" id="tr_{$vo.id}">
+                    <td id="td_sel" align="center"><input type="checkbox" class="sel c_selected" id="sel_{$vo.id}" value="{$vo.id}" name="items[{$vo.id}]" /></td>
+                    <td align="center">{$vo.id}</td>
+                    <td style="text-align:left;line-height:1.5;">
+                      <div style="height:23px;padding-top:5px;">
+                        <span style="color:#848484;padding-left:3px;">{$vo.user_name}</span> 对 <span style="color:#66F">{$vo.line_name}</span>
+                      </div>
+					  <table class="dashed_table" width="100%"><tr>
+                      <td width="200px;"  style="word-break : break-all;">
+                        <span class="f_left">问:{$vo.question1}</span>
+                        <neq name="vo.answer" value="">
+                          <span class="f_left" style="clear:left;text-align:left;">答:{$vo.answer}</span>
+                        </neq>
+                      </td>
+                      </tr></table>
+                    </td>
+                    <td align="center">{$vo.publish_time|f_date}</td>
+                    <td align="center"><neq name="vo.answer_time" value="">{$vo.answer_time|f_date}<else />--</neq></td>
+                    <td align="center" id="checking_{$vo.id}">
+                     <eq name="vo.status" value="2">
+                       <span style="color:#0C0">已回答</span>
+                     <else />
+                       <span style="color:#F00">未回答</span>
+                     </eq>
+                    </td>
+                    <td align="center" id="control_{$vo.id}">
+                    <a href="javascript:void(0);" onclick="art.dialog.open('{:U('answer')}?id={$vo.id}',{title:'回答问题',width:640,height:480,window:'top',lock:'true'});">编辑回答</a>&nbsp;|&nbsp;<a href="{:U('del',array('id'=>$vo['id']))}" onclick="return atr_confirm(this.href)">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="删除"
+                   onclick="myform.action = '{:U('deleteall')}';return confirm_deleteall(this.form)"/>
+        <!-- input type="button" class="button" name="dosubmit" value="删除" onclick="myform.action='{:U('deleteall')}';return confirm_deleteall() / -->
+    </div>
+</form>
+
+<script language="javascript">
+    
+    function ajax_del(id){
+        var url = "{:U(ajax_del)}?id="+id;
+		
+        $.ajax({
+            url: url,
+            type: "POST",
+            complete :function(){
+            }, 
+            dataType: 'json', 
+            error: function() { alert('Ajax request error');},
+            success: function(result){
+                if(result==1){
+					art.dialog({
+						title: '删除提示',
+						content: '删除成功',
+						ok:function(){location.reload();},
+					});
+					//$("#tr_"+id).remove();
+					
+                }
+            }
+        }); 
+    }
+	
+	function sel_all(){
+        $('input.sel').each(function(index){
+            if($(this).attr('checked')){
+                $(this).removeAttr('checked');
+            }else{
+                $(this).attr('checked', 'checked');
+            }
+        });
+    }
+</script>
+<div class="page">{$page}</div>

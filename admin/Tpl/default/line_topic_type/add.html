@@ -1,0 +1,22 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('add')}">添加</a>
+    </ul>
+</div>
+<form name="myform" id="myform" action="{:U('add')}" method="post" target="main">
+    <input type="hidden" name="types" value="{$types}" />
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <td width="30%" align="right"><span class="red">*</span>名称:</td>
+            <td><input type="text"  class="input-text" name="names" id="names" /></td>
+        </tr>
+        <tr>
+            <td  align="right"><span class="red">*</span>排序:</td>
+            <td><input name="sort"  class="input-text" type="text" id="sort" value='' /> </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit"  value=" 保 存 " class="button" >
+        <input TYPE="reset"  value=" 重 置 " class="button">
+    </div>
+</form>

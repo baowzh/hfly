@@ -1,0 +1,81 @@
+<include file="Public:header" />
+<load href="../Public/Js/swf2ckeditor.js" />
+<script language="javascript">
+function formcheck()
+{
+	if($.trim($("#names").val())=='')
+	{
+		$("#msg_names").html("请填写名称");
+		$("#names").focus();
+		return false;
+	}
+	if($.trim($("#link").val())=='')
+	{
+		$("#msg_link").html("请填写名称");
+		$("#link").focus();
+		return false;
+	}
+}
+</script>
+
+<form action="__URL__/add_link" enctype="multipart/form-data" method="post" onSubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">添加外部链接</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="lists">栏目列表</a></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="添加" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+  <input type=hidden value=3 name="cid">
+<table border="0" cellspacing="0" cellpadding="0" class="t3">
+  <tr>
+    <td align="right"></span>选择栏目</td>
+    <td><label>
+        <select id="parentid" name="pid">
+{$option}
+    </select>
+    </label></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>栏目名称</td>
+    <td><label>
+      <input type="text" name="names" id="names" />
+    </label><span id="msg_names" class="msg"></span></td>
+  </tr>
+   <tr style="display:none">
+    <td align="right"><span class="msg">*</span>栏目图片</td>
+    <td><label>
+      <input type="file" name="up_image" id="up_image"/>
+    </label>
+    <span id="msg_up_image" class="msg"></span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>外部链接</td>
+    <td><label>
+      <input type="text" name="link" id="link" />
+    </label><span id="msg_link" class="msg"></span></td>
+  </tr>
+  <tr>
+    <td align="right">位置顺序</td>
+    <td><label>
+      <input type="text" name="sort" id="sort" />
+    </label><span id="msg_sort" class="msg"></span> <span id="msg_memo" class="msg">可以为空</span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>是否在导航显示</td>
+    <td><label>
+    <input type="radio" checked="" value="1" name="navigation">
+	是&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" value="0" name="navigation" />	
+    否
+    </label>
+    <span id="msg_config_key" class="msg"></span></td>
+  </tr>
+  </table>
+</form>
+<include file="Public:footer" />

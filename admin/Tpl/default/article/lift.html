@@ -1,0 +1,18 @@
+<include file="Public:header" />
+<table border="0" cellspacing="0" cellpadding="0"  class="t3" style="border-bottom: 1px solid #eee; " >
+<volist name="lists" id="v">
+  <tr >
+    
+    <td style="border-bottom: 1px solid #cccccc;" align="left"><a style="text-decoration: none" href="<if condition="$v.1 eq 1">edit_singly?{$v.0}
+<else /><if condition="$v.2 eq 0">
+<elseif condition="$v.2 eq 1" />article_list?{$v.0}
+<elseif condition="$v.2 eq 2" />图片模型
+<else />下载模型
+</if>
+</if>" target=main>{$v.6}</a></td>
+	 
+  </tr>
+   </volist>
+</table>
+
+<include file="Public:footer" />

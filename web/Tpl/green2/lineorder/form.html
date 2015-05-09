@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body onLoad="javascript:document.paymentForm.submit()">
+<form action="{:U('paymentapi/manage')}" name="paymentForm" id="paymentForm" method="post" >
+					<input type="hidden" name="MerchantID" value="{$list.MerchantID}" id="MerchantID">
+                    <input type="hidden" name="OrderId" value="{$list.OrderId}" id="OrderId">
+                    <input type="hidden" name="amount" value="{$list.amount}" id="amount">
+                    <input type="hidden" name="apiName" value="{$list.apiName}" id="apiName">
+                    <input type="hidden" name="AutoReceive" value="{$list.AutoReceive}" id="AutoReceive">
+                    <input type="hidden" name="Receive" value="{$list.Receive}" id="Receive">
+					<input type="hidden" name="bank" value="{$list.bank}" id="bank">
+					<input type="hidden" name="md5info" value="{$list.md5info}" id="md5info">
+</form>
+</body>
+</html>

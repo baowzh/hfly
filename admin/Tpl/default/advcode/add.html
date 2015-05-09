@@ -1,0 +1,52 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+      <a class="on" href="{:U('add')}">添加代码广告</a>
+    </ul>
+</div>
+<form name="myform" method="post" id="myform" action="{:U('advpic/pic_add')}" >
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="90"><span class="red">*</span>名称:</th>
+            <td colspan="2">
+                <input type="text" name="names" id="names" class="txt" datatype="*" nullmsg="请填写广告名称" errmsg="请填写广告名称" sucmsg=" "/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>广告位置</th>
+            <td colspan="2">
+                <input name="sort" type="text" id="sort" value='' class="txt" datatype="*" nullmsg="请填写广告位置" errmsg="请填写广告位置" sucmsg=" " />
+            </td>
+        </tr>
+        <tr><th><span class="red">*</span>状态：</th>
+            <td colspan="2">
+            <label class="msg_span"><input name="status" value="2"
+                          type="radio" checked="checked">&nbsp;启用</label>&nbsp;
+            <label class="msg_span"><input name="status" value="1"
+                          type="radio">&nbsp;停用</label>
+            </td>
+        </tr>
+
+        <tr>
+            <th><span class="red">*</span>广告内容</th>
+            <td><textarea name="content" id="content" cols="52" rows="13" datatype="*" nullmsg="请填写广告内容" errmsg="请填写广告内容" sucmsg=" "></textarea>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>广告描述</th>
+            <td colspan="2">
+                <input name="area_memo" type="text" class="txt" id="area_memo" value='' datatype="*" nullmsg="请填写广告描述" errmsg="请填写广告描述" sucmsg=" "/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>排序</th>
+            <td colspan="2">
+                <input name="sort" type="text" class="txt" id="sort" value='1' datatype="n" nullmsg="请填写排序" errmsg="请填写排序" sucmsg=" "/>
+            </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <input type="submit" name="submit" value=" 保 存 " class="button" >
+        <input type="reset" name="reset" value=" 重 置 " class="button">
+  </div>
+</form>

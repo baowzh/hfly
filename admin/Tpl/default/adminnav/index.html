@@ -1,0 +1,41 @@
+<include file="Public:header" />
+<style type="text/css">
+table.t2 tbody tr td.left{ text-align:left;}
+</style>
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+    <th colspan="2">菜单列表</th>
+  </tr>
+  <tr>
+    <td align="right"><div class="div_msg">{$message}</div></td>
+    <td class="buttom"><a class="bule" href="{:U('Adminnav/add')}">添加菜单</a></td>
+  </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" class="t2">
+<form name="myform" action="{:U("Adminnav/Order")}" method="post">
+<thead>
+  <tr>
+    <th  width="40">排序</th>
+    <th  width="40">菜单ID</th>
+    <th>菜单名</th>
+    <th width="220">管理操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  
+  {$Nav_menu_str}
+ </tbody>
+  
+</table>
+ <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="排序" />
+</div>
+</form>
+<include file="Public:footer" />
+<script type="text/javascript">
+function confirm_delete(url){
+	if(confirm("一旦删除将无法恢复，你确定要删除吗")){
+		location=url;
+	}	
+}
+</script>

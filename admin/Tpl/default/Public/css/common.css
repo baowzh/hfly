@@ -1,0 +1,335 @@
+@charset "UTF-8";
+/*
+WJ Reset
+1. reset 的目的不是清除浏览器的默认样式
+2. reset 的目的不是让默认样式在所有浏览器下一致，而是减少默认样式有可能带来的问题。
+*/
+/*begin reset*/
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */ {
+margin: 0;
+padding: 0;
+}
+/** 设置默认字体 **/
+body,
+button, input, select, textarea /* for ie */ {
+font: 14px/1.5 '微软雅黑','\5b8b\4f53';
+}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/** 重置列表元素 **/
+ul, ol { list-style: none; }
+
+/** 重置文本格式元素 **/
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+sup { vertical-align: text-top; } /* 重置，减少对行高的影响 */
+sub { vertical-align: text-bottom; }
+
+/** 重置表单元素 **/
+legend { color: #000; } /* for ie6 */
+fieldset, img { border: none; } /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea { font-size: 100%; } /* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+
+/** 重置表格元素 **/
+table { border-collapse: collapse; border-spacing: 0; } 
+/*end reset*/
+
+/*begin CSS通用样式库*/
+.dn{display:none;}
+.db{display:block;}
+.di{display:inline;}
+.dib{display:inline-block;}
+.h0{height:0;}
+.h7{height: 7px;}
+.h14{height:14px;}
+.h16{height:16px;}
+.h18{height:18px;}
+.h20{height:20px;}
+.h22{height:22px;}
+.h23{height:23px;}
+.h24{height:24px;}
+.h26{height:26px;}
+.h27{height:27px;}
+.h28{height:28px;}
+.h30{height:30px;}
+.h32{height:32px;}
+.h100{height: 100px;}
+.h130{height: 130px;}
+.minh350{min-height: 350px;}
+.minh500{min-height: 500px;}
+.minh550{min-height: 550px;}
+.lh14{line-height:14px;}
+.lh16{line-height:16px;}
+.lh18{line-height:18px;}
+.lh20{line-height:20px;}
+.lh22{line-height:22px;}
+.lh24{line-height:24px;}
+.lh26{line-height:26px;}
+.lh27{line-height:27px;}
+.lh28{line-height:28px;}
+.lh30{line-height:30px;}
+.lh32{line-height:32px;}
+.lh40{line-height: 40px;}
+.lh50{line-height: 50px;}
+
+.m0{margin:0;}
+.ml1{margin-left:1px;}
+.ml2{margin-left:2px;}
+.ml3{margin-left:3px;}
+.ml5{margin-left:5px;}
+.ml10{margin-left:10px;}
+.ml15{margin-left:15px;}
+.ml20{margin-left:20px;}
+.ml25{margin-left:25px;}
+.ml30{margin-left:30px;}
+.ml45{margin-left:45px;}
+.ml105{margin-left:105px;}
+.ml110{margin-left:110px;}
+.mr1{margin-right:1px;}
+.mr2{margin-right:2px;}
+.mr3{margin-right:3px;}
+.mr5{margin-right:5px;}
+.mr10{margin-right:10px;}
+.mr15{margin-right:15px;}
+.mr20{margin-right:20px;}
+.mr25{margin-right:25px;}
+.mr30{margin-right:30px;}
+.mr40{margin-right:40px;}
+.mt1{margin-top:1px;}
+.mt2{margin-top:2px;}
+.mt3{margin-top:3px;}
+.mt5{margin-top:5px;}
+.mt10{margin-top:10px;}
+.mt12{margin-top:12px;}
+.mt15{margin-top:15px;}
+.mt20{margin-top:20px;}
+.mt25{margin-top:25px;}
+.mt30{margin-top:30px;}
+.mt50{margin-top: 50px;}
+.mt70{margin-top: 70px;}
+.mt-13{margin-top: -13px;}
+.mb1{margin-bottom:1px;}
+.mb2{margin-bottom:2px;}
+.mb3{margin-bottom:3px;}
+.mb5{margin-bottom:5px;}
+.mb10{margin-bottom:10px;}
+.mb15{margin-bottom:15px;}
+.mb20{margin-bottom:20px;}
+.mb25{margin-bottom:25px;}
+.mb30{margin-bottom:30px;}
+.mb100{margin-bottom: 100px;}
+.ml-1{margin-left:-1px;}
+.mt-1{margin-top:-1px;}
+.mt-2{margin-top:-2px;}
+.mb-1{margin-bottom:-1px;}
+.p0{padding:0px;}
+.p1{padding:1px;}
+.pl1{padding-left:1px;}
+.pt1{padding-top:1px;}
+.pr1{padding-right:1px;}
+.pb1{padding-bottom:1px;}
+.pl2{padding-left:2px;}
+.pr2{padding-right:2px;}
+.pt2{padding-top:2px;}
+.pb2{padding-bottom:2px;}
+.pt10{padding-top: 10px;}
+.pt15{padding-top: 15px;}
+.pt12{padding-top:12px;}
+.pt30{padding-top: 30px;}
+.pl10{padding-left: 10px;}
+.pl15{padding-left: 15px;}
+.pl20{padding-left: 20px;}
+.pl50{padding-left: 50px;}
+.pr15{padding-right: 15px;}
+.pb10{padding-bottom: 10px;}
+.pb20{padding-bottom: 20px;}
+.pb30{padding-bottom: 30px;}
+.prl10{padding: 0 10px;}
+.prl15{padding: 0 15px;}
+.prl20{padding: 0 20px;}
+.ptb15{padding: 15px 0;}
+.prl40{padding:0 40px;}
+.ptb20{padding: 20px 0;}
+.ptb60{padding: 60px 0;}
+.p5{padding:5px;}
+.p10{padding:10px;}
+.p15{padding:15px;}
+.p20{padding:20px;}
+.p30{padding:30px;}
+.p40{padding:40px;}
+.p50{padding:50px;}
+.g0{color:#000;}
+.g3{color:#333;}
+.g4{color:#444;}
+.g6{color:#666;}
+.g9{color:#999;}
+.gc{color:#ccc;}
+.wh{color:white;}
+.f0{font-size:0;}
+.f10{font-size:10px;}
+.f11{font-size:11px;}
+.f12{font-size:12px;}
+.f13{font-size:13px;}
+.f14{font-size:14px;}
+.f16{font-size:16px;}
+.f17{font-size:17px;}
+.f18{font-size:18px;}
+.f20{font-size:20px;}
+.f24{font-size:24px;}
+.f32{font-size:32px;}
+.f36{font-size:36px;}
+.fa{font-family:Arial;}
+.ft{font-family:Tahoma;}
+.fv{font-family:Verdana;}
+.fs{font-family:'宋体';}
+.fw{font-family:'微软雅黑';}
+.b{font-weight:bold;}
+.i{font-style:inherit;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+.tl{text-align:left;}
+.tj{text-align:justify;}
+.tdl{text-decoration:underline;}
+.tdn,.tdn:hover,.tdn a:hover, a.tdl:hover{text-decoration:none;}
+.lt0 {letter-spacing:0;}
+.lt1 {letter-spacing:1px;}
+.bk {word-wrap:break-word;}
+.nowrap {white-space:nowrap;}
+.vm {vertical-align:middle;}
+.vb {vertical-align:bottom;}
+.vt {vertical-align:top;}
+.vtb {vertical-align:text-bottom;}
+.vn {vertical-align:-2px;}
+.l {float:left}
+.r {float:right}
+.cl {clear:both}
+.rel {position:relative}
+.abs {position:absolute}
+.zx1 {z-index:1}
+.zx2 {z-index:2}
+.poi {cursor:pointer}
+.def {cursor:default}
+.ovh {overflow:hidden}
+.ovs {overflow:scroll}
+.ova {overflow:auto}
+.vh {visibility:hidden}
+.vv {visibility:visible}
+.z {*zoom:1}
+.auto {margin-left:auto;margin-right:auto}
+/*end CSS通用样式库 */
+
+
+/*begin wjdbCSS样式库*/
+/*
+	1.这里指的是网站中常用的颜色.链接色.背景色.边框样式.单个margin,padding,width,height等这些属性  注意这个不能归入通用样式库中
+*/
+a{color: #4d4d4d;}
+a:hover{text-decoration: underline;color: #354872;}
+
+.fix{*zoom:1}
+.fix:after{display: block;content: '.';height: 0;clear: both;overflow: hidden;visibility: hidden;}
+.trans{
+    -webkit-transition:all .3s ease;
+    -moz-transition:all .3s ease;
+    -o-transition:all .3s ease;
+    -ms-transition:all .3s ease;
+    transition:all .3s ease
+}
+.ell{text-overflow: ellipsis;white-space: normal;overflow: hidden;}
+.cell{display: table-cell;width: 2000px;*display: inline-block;*width: auto;}
+
+/*Description 为了对齐文本然后用占位符来隐藏文字 没有想到其他更好的办法来做*/
+.text_hide{position: relative;z-index: -1;}
+
+.w50{width: 50px;}
+.w60{width: 60px;}
+.w80{width: 80px;}
+.w93{width: 93px;}
+.w100{width: 100px;}
+.w115{width: 115px;}
+.w120{width: 120px;}        /*.....可以在后面加网站用到的宽度*/
+.w150{width: 150px;}
+.w160{width: 160px;}
+.w200{width: 200px;}
+.w205{width: 205px;}
+.w240{width: 240px;}
+.w245{width: 245px;}
+.w250{width: 250px;}
+.w280{width: 280px;}
+.w300{width: 300px;}
+.w650{width: 650px;}
+.w690{width: 690px;}
+.w700{width: 700px;}
+
+.pct25{width: 25%;}
+.pct30{width: 30%;}
+.pct35{width: 35%;}
+.pct50{width: 50%;}/*.....百分比的宽度 用到其它的可在后面加  margin，padding同理*/
+
+.dbc{border: 1px solid #CCC} /*.....边框样式*/
+.dbd{border: 1px solid #ddd}
+.dbe{border: 1px solid #ddd;border-top:2px solid #FBAD19;}
+.bbdc9{border-bottom: 1px dotted #c9c9c9;}
+.bbtn{border-top:none;}
+.dbline{border-top:1px solid #d9d8d8;border-bottom:1px solid #ececec;}
+
+.bbd{border-bottom: 1px solid #ddd;}
+.bbf4{border-bottom: 1px solid #f4f4f4;}
+.bbfa{border-bottom: 1px solid #FFA613;}
+
+
+.bgwh{background-color:#FFF;}/*.....背景色*/
+.bged{background-color: #ededed;}
+.bgffe{background-color: #FFF1E5;}
+.bgf8{background-color: #F8F8F8;}
+
+.cff{color: #FFF;}/*.....网站前景色*/
+.c8c{color:#8c8c8c;}
+.c65{color: #656565;}
+.cff8{color: #ff8400}
+.cff0{color: #ff0000}
+.cfa6{color: #FFA600;}
+.c4c{color: #4C4C4C;}
+.c3b5{color: #3B5489;}
+.c3548{color: #354872;}
+.c358{color: #358D16}
+.c1 ,a.c1{color: #354872;/*蓝色*/}
+.c2 ,a.c2{color: #FFA600;/*黄色*/}
+.c3{color: #4d4d4d;/*灰色*/}
+.c4{color: #999;/*淡灰色*/}
+.c5{color: #FF6600;/*红色*/}
+
+.ls3{letter-spacing: 3.5px;}
+.ls4{letter-spacing: 4.5px}
+.td1{text-indent: 1em;}
+.td2{text-indent: 2em;}
+
+.boxsh{
+    -webkit-box-shadow:0 0 0 1px #eee;
+    -moz-box-shadow:0 0 0 1px #eee;
+    box-shadow:0 0 0 1px #eee;
+    background: #fff;
+    border: 1px solid #E9E9E9;
+}
+
+.float_two, .float_three, .float_four, .float_five, .float_six, .float_seven {float:left}
+.inline_two, .float_two {width:49.8%}
+.inline_three, .float_three {width:33.26%}
+.inline_four, .float_four {width:24.9%}
+.inline_five, .float_five {width:19.9%}
+.inline_six, .float_six {width:16.6%}
+.inline_seven, .float_seven {width:14.2%}
+.inline_fix {display:inline-block;width:100%;height:0; overflow:hidden}
+.wj_width{width: 980px;margin: 0 auto;}
+.wj_width1{width: 980px;margin: 0 auto;background: #fff;}
+/*end wjCSS样式库*/

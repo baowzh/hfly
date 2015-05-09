@@ -1,0 +1,47 @@
+<include file="Public:header" />
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">系统节点列表</th>
+  </tr>
+  <tr>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+  <td class="buttom"><a class="bule" href="__URL__/add">系统点增加</a></td>
+  </tr>
+  </table>
+<table border="0" cellspacing="0" cellpadding="0" class="t2">
+  <tr>
+  	<th>ID</th>
+    <th>使用名称</th>
+	<th>显示名称</th>
+    <th>标记</th>
+	<th>父等级</th>
+	<th>等级</th>
+    <th>操作</th>
+  </tr>
+  <volist name="list" id="vo">
+  <tr>
+  	<td>{$vo.id}</td>
+    <td>{$vo.value}</td>
+    <td>{$vo.name}</td>
+	<td>{$vo.info}</td>
+	<td>{$vo.pid}</td>
+	<td>
+    <if condition="$vo.level eq 1"><span class="cRed">项目</span>
+    <elseif condition="$vo.level eq 2"/><span class="cGreen">模块</span>
+	 <elseif condition="$vo.level eq 3"/><span style="color:#CC00CC">方法</span>
+    </if>
+    </td>
+	<td>
+    <a href="#" onclick= "javascript:if(confirm( '确定要删除该条记录吗？ '))location.href= '__URL__/del?{$vo.id}'">删除</a> 
+	&nbsp;|&nbsp;  
+	 <a href="#" onclick= "javascript:if(confirm( '确定编辑该条记录吗？ '))location.href= '__URL__/edit?{$vo.id}'">编辑</a> 
+    </td>
+  </tr>
+</volist>
+</table>
+<table>
+<tr>
+	<td><div class="page"> {$page} </div></td>
+  </tr>
+</table>
+<include file="Public:footer" />

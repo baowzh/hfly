@@ -1,0 +1,118 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('index')}">路线类型</a> |
+        <a href="{:U('add')}">添加</a>
+    </ul>
+</div>
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
+                <th style="text-align: left;">名称</th>
+                <th>英文名称</th>
+                <th>排序</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="types" id="vo">
+                <tr class="ulbc" id="tr_{$vo.id}">
+                    <td id="td_sel"><input type="checkbox" class="sel" id="sel_{$vo.id}" value="{$vo.id}"/></td>
+                    <td style="text-align: left;"><input type="text" name="names_{$vo.id}" id="names_{$vo.id}"
+                                                         value="{$vo.names}"/></td>
+                    <td><input type="text" name="page_names_{$vo.id}" id="page_names_{$vo.id}"
+                               value="{$vo.page_names}"/></td>
+                    <td><input type="text" name="sort[{$vo.id}]" id="sort_{$vo.id}" value="{$vo.sort}"/></td>
+                    <td>
+                        <a href="javascript:void(0);" onclick="ajax_save('{$vo.id}')">保存</a> |
+                        <a href="#" onclick="javascript:if(confirm( '确定要删除该条记录吗？ '))ajax_del({$vo.id});">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn" style="display: none;">
+        <input type="button" class="button" name="dosubmit" value="删除"
+               onclick="myform.action='{:U('deleteall')}';return confirm_deleteall()"/>
+        <input type="button" class="button" name="dosubmit" value="排序"
+               onclick="myform.action='{:U('sort_list')}';$('#myform').submit();"/>
+    </div>
+</form>
+<div class="page">{$page}</div>
+<script language="javascript">
+    function ajax_save(id){
+        var url = "ajax_save?id="+id;
+        var names = $('#names_'+id).val();
+        var page_names = $('#page_names_'+id).val();
+        var _sort = $('#sort_'+id).val();
+        $.ajax({
+            url: url,
+            type: "POST",
+            complete :function(){
+            },
+            dataType: 'json',
+            data: "names="+names+"&page_names="+page_names+"&sort="+_sort,
+            error: function() { alert('Ajax request error');},
+            success: function(result){
+                if(result==1){
+                    art.dialog.alert("保存成功");
+                }
+            }
+        });
+    }
+
+    function ajax_del(id){
+        var url = "ajax_del?id="+id;
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            complete :function(){
+            },
+            dataType: 'json',
+            error: function() { alert('Ajax request error');},
+            success: function(result){
+                if(result==1){
+                    //$("#tr_"+id).remove();
+                    art.dialog({
+                        title: '删除提示',
+                        content: '删除成功',
+                        ok:function(){location.reload();},
+                    });
+
+                }
+            }
+        });
+    }
+
+    function sel_all(){
+        $('input.sel').each(function(index){
+            if($(this).attr('checked')){
+                $(this).removeAttr('checked');
+            }else{
+                $(this).attr('checked', 'checked');
+            }
+        });
+    }
+
+    function save_all(){
+        $('input.sel').each(function(index){
+            if($(this).attr('checked')){
+                ajax_save($(this).val());
+            }
+        });
+    }
+
+    function del_all(){
+        if(confirm( '确定要删除这些记录吗？ ')){
+            $('input.sel').each(function(index){
+                if($(this).attr('checked')){
+                    ajax_del($(this).val());
+                }
+            });
+        }
+    }
+</script>

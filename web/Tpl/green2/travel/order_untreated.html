@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="../Public/css/travel.css"/>
+
+<div class="wrapper w1200">
+  <div class="clear"></div>
+    <div class="col-24 step_top" style="padding-left:20px;">
+        <div class="col-6 step"><img class="step_img" width="100%" src="/web/Tpl/green2/Public/images/step_bg.png"></img><span class="offset-2 step_font">1.选择路线</span></div>
+        <div class="col-6 step_two"><img width="100%" src="/web/Tpl/green2/Public/images/step_bg3.png"></img><span class="offset-2 step_font">2.提交订单</span></div>
+        <div class="col-6 step_three"><img width="100%" src="/web/Tpl/green2/Public/images/step_bg2.png"></img><span class="offset-2 step_font">3.等待支付</span></div>
+        <div class="col-6 step_four"><img width="100%" src="/web/Tpl/green2/Public/images/step_bg4.png"></img><span class="offset-2 step_font">4.支付完成</span></div>
+    </div>
+  <div class="col-24 untreated">
+    <div class="untreated_main">
+      <div class="number">
+        <div class="number_icon"><img src="../Public/images/r.jpg" width="53" height="48" /></div>
+        <div class="number_font"> <span class="number_font_css">订单号：<span class="font_red">{$usinfo.code}</span></span> <span class="number_font_css">订单已提交，正在为您处理（稍后我们工作人员确认订单后，请您进入会员中心进行支付）</span> </div>
+      </div>
+      <div class="handle">
+        <div class="handle_font"> <span class="font_brown">◆ 如因供应商下班期间（22：00-8：30），我们无法为您立即核实信息，将在早上8：30后处理您的订单并回电给您。请您耐心等待。</span><span class="font_brown">◆ 请您在出团后60天内登录本站点评出团的旅游线路（超过60天视为放弃），我们将返还50元至您的帐户。</span> </div>
+      </div>
+      <div class="step_title">
+        <h1 class="step_title_css">旅客信息</h1>
+      </div>
+      <div class="visitor">
+        <table width="896px" class="table_list">
+          <tr>
+            <th>编号</th>
+            <th>路线名称</th>
+            <th>出发城市</th>
+            <th>出发日期</th>
+            <th>人数</th>
+            <th>联系人</th>
+            <th>联系电话</th>
+            <th>总金额</th>
+            <th>使用奖金</th>
+            <th>使用卡券</th>
+                <th>预付金额</th>
+          </tr>
+          <tr>
+            <td>{$usinfo.code}</td>
+            <td>{$usinfo.names}</td>
+            <td>{$usinfo.go_city|_get_city}</td>
+            <td>{$usinfo.go_time}</td>
+            <td>{$usinfo.num}</td>
+            <td>{$usinfo.contact_name}</td>
+            <td>{$usinfo.contact_num}</td>
+            <td>{$usinfo.amount}</td>
+            <td>{$usinfo.used_award}</td>
+            <td>{$usinfo.pri_card}</td>
+                 <td>{$usinfo.earnest}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="handle_btn">
+                <div class="handle_btn_one">
+                   <a class="btn3 orange button" href="{:U('userline/route_order',array('id'=>$_GET['order_id']))}">查看本订单</a>
+                </div>
+
+                <div class="handle_btn_one">
+                    <a class="btn3 orange button" href="{:U('travel/detail',array('id'=>$_GET['order_id']))}">返回线路详细页</a>
+                </div>
+            </div>
+    </div>
+  </div>
+</div>

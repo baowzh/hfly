@@ -1,0 +1,42 @@
+<include file="Public:header" />
+<load href="__ROOT__/Admin/Vendor/editor/kindeditor.js" />
+<script type="text/javascript">
+	function formcheck()
+	{	
+		
+	}
+    KE.show({
+        id : 'content_1' //TEXTAREA输入框的ID
+   });
+</script>
+<form action="__URL__/propaganda" enctype="multipart/form-data" method="post" onsubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">宣传信息编辑</th>
+  </tr>
+  <tr>
+  <td><font color="#FF0000">{$message}</font></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="保存" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+  <input type=hidden value="{$objArticle['id']}" name="id">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr class="table_article">
+    <td align="right"><span class="msg">*</span>标题</td>
+    <td><label>
+      <input type="text" name="title" id="title" value="{$objArticle['title']}" />
+    </label><span id="msg_config_key" class="msg"></span></td>
+  </tr>
+  <tr class="table_article">
+    <td align="right"><span class="msg">*</span>内容</td>
+    <td><label>
+      <textarea name="contents" cols="70" rows="12" id="content_1">{$objArticle['contents']}</textarea>
+    </label><span id="msg_memo" class="msg"></span></td>
+  </tr>
+ <!-- <input type="hidden" id="times" name="times" value="{$objArticle['times']}" />-->
+  </table>
+</form>
+<include file="Public:footer" />

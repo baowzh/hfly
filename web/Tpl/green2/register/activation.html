@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="../Public/css/register.css"/>
+<div class="wrapper w1200">
+    <div class="col-24 content alpha">
+        <div class="col-24 content_top alpha">
+            <h1 class="col-10 content_top_font">会员激活</h1>
+        </div>
+        <div class="clear"></div>
+        <div class="user">
+            <div class="col-24 content_main">
+                <div class="send_mian">
+                    <div class="col-24 send">
+                        <span class="send_font">验证邮件已发送到您 <span class="send_font2">{$email_return.data.email} </span>邮箱！</span>
+                    </div>
+                    <div class="col-24 send">
+                        <span class="send_font3">请在24小时内点击邮件中的链接继续完成注册。</span>
+                    </div>
+                    <div class="col-24 clear"></div>
+                    <div class="col-9 send"><a class="btn primary block" href="{$email_return.email_server}">查看邮件</a></div>
+                        <span class="col-3 send_font3">
+                            <a class="btn primary block" href="{$resend}">重新发送邮件</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

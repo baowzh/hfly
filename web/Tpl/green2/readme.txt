@@ -1,0 +1,11 @@
+hotel:酒店
+index:首页
+login:登陆管理
+register:注册
+strategy:
+test:测试-无用页面
+travel:旅游线路管理
+user:用户管理
+userhotel:用户中心的酒店管理
+userviewpoint:用户中心的景点门票
+withdraw:提现

@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+.payding{ background:#FFF; padding:0 10px 10px 10px;}
+.untreated1{ margin-top:8px;padding:15px !important; border:1px solid #999; height:300px;  border: 1px solid #FFE4BF;
+    background:#FFF5E8;}
+.untreated{ margin-top:8px; padding:15px !important; border:1px solid #999; height:300px;
+    border: 1px solid #FFE4BF;
+    background:#FFF5E8;}
+
+.step_top{ padding:30px 0 0 3px; background:#FFF; height:100px;}
+.step_top div{ margin:0 3px;}
+.step_img{ position:relative;}
+.step_main{ margin-top:20px; }
+.step_right{  line-height:30px; font-size:14px; text-align:right; margin-right:20%;}
+.step_right1{  line-height:30px; font-size:14px; text-align: center; }
+.step_font{ font-size:12px;line-height:36px; position:relative; top:-40px; float:left;}
+.orange{ background:orange;}
+
+
+.success,.processed{ margin-top:10px; background: #FFF;}
+.success td,.success th, .processed td, .processed th{ text-align:center;}
+.number_icon{ line-height:45px; font-size:18px; color:#FF6600; font-weight:bold;}
+.button{border:#F60 thin solid;
+	-moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+	padding: 7px;
+	display:block;
+	color:#333 !important;}
+.orange{ background:orange;}
+.handle_btn_one {float: left;
+    padding-left: 40px; margin-top:30px;}
+table thead th, table thead td {background:  #FCE083 !important;}
+table th, table td { border:none !important;}
+.number_font_css{ font-size:14px; color:#FF6600; font-weight:bold;}
+.font_balck{ font-size:14px; color:black; }
+
+.untreated center{ height:240px;}
+.untreated center div{
+	margin:34px 0 0 0;
+	padding:36px 0;
+	background-color:#F9F9F9;
+	width:1128px;
+	border:#14B9D5 2px solid;
+	-moz-box-shadow: inset 0 0 6px 1px #0E788B;
+   -webkit-box-shadow:inset 0 0 6px 1px #0E788B;
+   box-shadow:inset 0 0 6px 1px #0E788B;
+	-moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+}
+.untreated center div span{
+	height:60px;
+	line-height:60px;
+	font-size:16px;
+	letter-spacing:2px;
+	color:red;
+	font-weight:bold;
+}
+.untreated center div table{ width:720px;}
+.untreated center div table tr td{ text-align:center;}
+.msg{
+	background-color:#FFF;
+	border:0;
+}

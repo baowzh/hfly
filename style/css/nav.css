@@ -1,0 +1,253 @@
+@charset "utf-8";
+
+* {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+	outline: none;
+	blr: expression(this.onFocus = this.blur ());
+}
+
+.sort .sort-list li.hover {
+	background: #028891
+}
+
+.sort .sort-ti, .sort .sort-list ul li.hover ul li a {
+	background: url(../images/bg-index-sort-v211.png) no-repeat
+}
+
+.sort .sort-list .bgs_1 {
+	background: url(../images/jiaoya.jpg) no-repeat 20px center;
+	padding-left: 20px;
+}
+
+.sort .sort-list .bgs_2 {
+	background: url(../images/cemoro.jpg) no-repeat 20px center;
+	padding-left: 20px;
+}
+
+.sort .sort-list .bgs_3 {
+	background: url(../images/feiji.png) no-repeat 20px center;
+	padding-left: 20px;
+}
+
+.sort .sort-list .bgs_4 {
+	background: url(../images/huiyi.jpg) no-repeat 20px center;
+	padding-left: 20px;
+}
+
+.sort .sort-list .bgs_5 {
+	background: url(../images/wang.jpg) no-repeat 20px center;
+	padding-left: 20px;
+}
+
+.sort .sort-list .bgs_6 {
+	background: url(../images/car.jpg) no-repeat 20px center;
+	padding-left: 20px;
+}
+
+.sort .sort-list .bgs_7 {
+	background: url(../images/dians.jpg) no-repeat 25px center;
+	padding-left: 20px;
+}
+
+.sort .sort-list .bgs_8 {
+	background: url(../images/son.jpg) no-repeat 20px center;
+	padding-left: 20px;
+}
+
+.sort .sort-list .bgs_1 span em {
+	font-style: normal;
+	font-size: 7px;
+	margin-right: 2px;
+	float: right
+}
+
+.sort .sort-list .bgs_2 span em {
+	font-style: normal;
+	font-size: 7px;
+	margin-right: 2px;
+	float: right
+}
+
+s
+
+
+
+.sort {
+	width: 222px;
+	height: auto;
+	float: left;
+	position: relative;
+	z-index: 20;
+}
+
+.sort .sort-ti {
+	height: 37px;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	font: 14px/35px \5fae\8f6f\96c5\9ed1;
+	color: #fff;
+	padding-left: 30px
+}
+
+.sort .sort-list {
+	border-top: 0;
+	height: 380px;
+	padding: 0 1px;
+}
+
+.sort .sort-list ul {
+	height: 380px;
+	position: relative
+}
+
+.sort .sort-list li {
+	width: 200px;
+	height: 47px;
+	line-height: 47px;
+	float: left;
+	border-bottom: 1px solid #f0fafa;
+}
+
+.sort .sort-list li a {
+	display: block;
+	height: 47px;
+	line-height: 47px;
+	font-size: 16px;
+	padding-left: 50px;
+	cursor: pointer;
+}
+
+.sort .sort-list li a span {
+	display: block;
+	height: 47px;
+	color: #04aeae
+}
+
+.sort .sort-list li.hover {
+	background-position: 0 -37px;
+	background-repeat: repeat-x
+}
+
+.sort .sort-list li.hover a {
+	color: #fff
+}
+
+.sort .sort-list li.hover span {
+	color: #fff
+}
+
+.sort .sort-list li a.sort-list-1 {
+	background-position: 15px 4px;
+}
+
+.sort .sort-list li.hover a.sort-list-1 {
+	background: url(../images/jiaoya.png) no-repeat left center
+}
+
+.sort .sort-list li a.sort-list-2 {
+	background-position: 15px -96px
+}
+
+.sort .sort-list li.hover a.sort-list-2 {
+	background: url(../images/cemoro.png) no-repeat left center
+}
+
+.sort .sort-list li a.sort-list-3 {
+	background-position: 15px -196px
+}
+
+.sort .sort-list li.hover a.sort-list-3 {
+	background: url(../images/feiji.jpg) no-repeat left center
+}
+
+.sort .sort-list li a.sort-list-4 {
+	background-position: 15px -296px
+}
+
+.sort .sort-list li.hover a.sort-list-4 {
+	background: url(../images/huiyi.png) no-repeat left center
+}
+
+.sort .sort-list li a.sort-list-5 {
+	background-position: 15px -396px
+}
+
+.sort .sort-list li.hover a.sort-list-5 {
+	background: url(../images/wang.png) no-repeat left center
+}
+
+.sort .sort-list li a.sort-list-6 {
+	background-position: 15px -496px
+}
+
+.sort .sort-list li.hover a.sort-list-6 {
+	background: url(../images/car.png) no-repeat left center
+}
+
+.sort .sort-list li a.sort-list-7 {
+	background-position: 15px -596px
+}
+
+.sort .sort-list li.hover a.sort-list-7 {
+	background: url(../images/dians.png) no-repeat 5px center
+}
+
+.sort .sort-list li a.sort-list-8 {
+	background-position: 15px -696px;
+	border-bottom: 0
+}
+
+.sort .sort-list li.hover a.sort-list-8 {
+	background: url(../images/son.png) no-repeat left center
+}
+
+.sort .sort-list li a.sort-list-8 span {
+	background: 0
+}
+
+.sort .sort-list ul ul {
+	display: none;
+	opacity: 0.6;
+}
+
+.sort .sort-list ul li.hover ul {
+	background: #fff;
+	left: 220px;
+	margin-top: -47px;
+	width: 120px;
+	z-index: 30;
+	position: absolute;
+	height: auto;
+	overflow: hidden;
+}
+
+.sort .sort-list ul li.hover ul li {
+	height: 27px;
+	padding: 0
+}
+
+.sort .sort-list ul li.hover ul {
+	display: block
+}
+
+.sort .sort-list ul li.hover ul li a {
+	height: 27px;
+	line-height: 27px;
+	font-size: 12px;
+	border-top: 0;
+	border-bottom: 0;
+	padding-left: 30px;
+	color: #333;
+	background-position: 15px -154px
+}
+
+.sort .sort-list ul li.hover ul li a:hover {
+	background-position: 15px -181px
+}

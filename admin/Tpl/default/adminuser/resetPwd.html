@@ -1,0 +1,72 @@
+<include file="Public:header" />
+<script language="javascript">
+function formcheck()
+{	
+    
+	if($.trim($("#pwd1").val())=='')
+	{
+		$("#msg_pwd1").text("请输入新密码");
+		$("#pwd1").focus();
+		return false;
+	}
+	if($.trim($("#pwd2").val())=='')
+	{
+		$("#msg_pwd2").text("请确认新密码");
+		$("#pwd2").focus();
+		return false;
+	}
+	if($.trim($("#pwd2").val())!=$.trim($("#pwd1").val()))
+	{
+		$("#msg_pwd2").text("两次输入密码不一致");
+		document.getElementById("pwd1").value='';
+		document.getElementById("pwd2").value='';
+		$("#pwd1").focus();
+		return false;
+	}
+	
+}
+</script>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FF0000;
+	float: left;
+}
+-->
+</style>
+<form action="__URL__/resetPwd" method="post" onSubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="3">修改密码</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="edit?{$list['id']}">会员编辑</a></td>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+  
+  	<td class="buttom">
+  	<label >
+     <input type="submit" name="submit" id="submit" value="确认修改" />
+  	</label>  </td>
+  </tr>
+  </table>
+  <table cellpadding="0" cellspacing="0" class="t2">
+   <input type="hidden" class="float_left" name="id" id="id" value="{$list['id']}" />
+  <tr height="25px">
+    <td width="150" align="right">用户名：</td>
+	<td><input name="login_name" type="text" class="float_left" id="login_name" value="{$list['login_name']}" readonly="readonly" style="color:#999999"/>
+      <div id="msg_login_name" class="div_msg"></div></td>	
+    </tr>
+
+  <tr height="25px">
+    <td width="150" align="right"><span class="STYLE1">*&nbsp;</span>新密码：</td>
+    <td><input name="pwd1" type="password" class="float_left" id="pwd1" value=""/>
+      <div id="msg_pwd1" class="div_msg"></div></td>
+  </tr>
+  <tr height="25px">
+    <td width="150" align="right"><span class="STYLE1">*&nbsp;</span>确认新密码：</td>
+    <td> <input name="pwd2" type="password" class="float_left" id="pwd2"/>
+    <div id="msg_pwd2"  class="div_msg"></div></td>
+  </tr>
+</table>
+</form>
+<include file="Public:footer"/>

@@ -1,0 +1,35 @@
+{__NOLAYOUT__}
+<tbody id="body_{=id=}">
+<tr>
+    <td align="right" style="border-top:1px solid #333;">选择：</td>
+    <td style="border-top:1px solid #333;">
+        <input name="date_id[{=id=}]" type="hidden" value="{=id=}"/>
+        <input name="st[{=id=}]" type="checkbox" class="sel" value="{=id=}">
+    </td>
+</tr>
+<tr>
+    <td align="right" style="width: 100px;">日期：</td>
+    <td>
+        <input type="text" name="date_start[{=id=}]" id="date_start_{=id=}" class="fl calender" value="{=price_date_start=}"/>
+        - <input type="text" name="date_end[{=id=}]" id="date_end_{=id=}" class="fl calender" value="{=price_date_end=}"/>
+        <span for="date_start_{=id=}"></span> <span for="date_end_{=id=}"></span></td>
+</tr>
+<tr>
+    <td align="right" style="width: 100px;">门市价：</td>
+    <td>
+        <input type="text" name="stage_RACKRATE[{=id=}]" id="stage_RACKRATE_{=id=}" class="number" value="{=RACKRATE=}"/>
+    </td>
+</tr>
+<tr>
+    <td align="right" style="width: 100px;"><span class="msg">*</span>成人价：</td>
+    <td>
+        <input type="text" name="stage_adult[{=id=}]" id="stage_adult_{=id=}" class="text number" value="{=price_adult=}"/>
+    </td>
+</tr>
+<tr>
+    <td align="right" style="width: 100px;"><span class="msg">*</span>儿童价：</td>
+    <td>
+        <input type="text" name="stage_children[{=id=}]" id="stage_children_{=id=}" class="text number" value="{=price_children=}"/>
+    </td>
+</tr>
+</tbody>

@@ -1,0 +1,149 @@
+/*
+This software is allowed to use under GPL or you need to obtain Commercial or Enterise License
+to use it in not GPL project. Please contact sales@dhtmlx.com for details
+*/
+.dhx_cal_container{background-color: #E6F1FF;font-family:Tahoma;font-size:10pt;position:relative;overflow:hidden;border:1px solid #D7EAFF; border-left:0px;}
+.dhx_cal_container div{-moz-user-select:none;-moz-user-select:-moz-none;}
+
+
+.dhx_cal_navline{height:20px;position:absolute;z-index:3;width:750px;color:#2F3A48;}
+.dhx_cal_navline div{position:absolute;top:2px;white-space:nowrap;}
+.dhx_cal_navline .dhx_cal_date{font-weight:600;left:210px; color:#0069cb; font-size:14px}
+
+.dhx_cal_button .dhx_left_bg{width:1px;overflow:hidden;height:17px;z-index:20;top:0;}
+
+.dhx_cal_prev_button{background:url(imgs/l.gif) no-repeat;width:50px;height:17px;left:10px;cursor:pointer; margin-top:2px;}
+
+.dhx_cal_next_button{background:url(imgs/r.gif) no-repeat;width:50px;height:17px;left:70px;cursor:pointer;margin-top:2px;}
+
+/* 今天 */
+.dhx_cal_today_button{background-image:url(imgs/today.gif);width:29px;height:18px;left:430px;cursor:pointer;text-align:center;text-decoration:underline;}
+
+.dhx_cal_today_button1{background-image:url(imgs/today.gif);width:29px;height:18px;left:410px;cursor:pointer;text-align:center;text-decoration:underline;}
+
+.dhx_cal_tab{width:59px;height:19px;text-align:center;text-decoration:underline;padding-top:2px;cursor:pointer;-webkit-border-top-left-radius:4px;-webkit-border-top-right-radius:4px;-moz-border-radius-topleft:4px;-moz-border-radius-topright:4px;border-top-left-radius:4px;border-top-right-radius:4px;}
+
+.dhx_cal_tab.active{text-decoration:none;cursor:default;font-weight:bold;border:1px solid #D7EAFFborder-bottom:0;background-color:#C2D5FC;}
+
+
+.dhx_cal_header{position:absolute;left:10px;top:23px;border-top:1px solid #D7EAFF;border-right:1px solid #D7EAFF;z-index:2;overflow:hidden;color:#2F3A48; font-size:14px; height:25px;}
+
+.dhx_cal_data{border-top:1px solid #D7EAFF;position:absolute;top:44px;overflow-y:auto;overflow-x:hidden; }
+
+/* 星期的样式 */
+.dhx_scale_bar{position:absolute;text-align:center;background-color: #D2E8FF;padding-top:3px;border-left:1px solid #D7EAFF; color: #0066CC}
+
+.dhx_scale_holder{position:absolute;border-right:1px solid #D7EAFF;background-image:url(imgs/databg.png);}
+.dhx_scale_holder_now{position:absolute;border-right:1px solid #D7EAFF;background-image:url(imgs/databg_now.png);}
+
+.dhx_scale_hour{height:41px;width:50px;border-bottom:1px dotted #8894A3;text-align:center;line-height:40px;color:#586A7E;overflow:hidden;}
+
+/* 日期数字 */
+.dhx_month_head{background-color: #ECF5FF;color:#2F3A48;border-left:1px solid #D7EAFF;height:18px;padding-right:6px;padding-top:3px;text-align:right;}
+
+.dhx_month_body{background-color:#FFF;border-left:1px solid #D7EAFF;}
+
+
+/* 当天的样式 */
+.dhx_now .dhx_month_body{background-color:#E2EDFF;}
+.dhx_now .dhx_month_head{background-color:#D1DEF4;font-weight:bold;}
+
+
+/* 不存在天数的样式 */
+.dhx_after .dhx_month_body,.dhx_before .dhx_month_body{background-color:#fff;}
+.dhx_after .dhx_month_head,.dhx_before .dhx_month_head{background-color: #F6F6F6;color:#94A6BB;}
+
+.dhx_cal_drag{position:absolute;z-index:9999;background-color:#FFE763;border:1px solid #B7A543;opacity:.5;filter:alpha(opacity=50);}
+
+.dhx_loading{position:absolute;width:128px;height:15px;background-image:url(imgs/loading.gif);z-index:9999;}
+
+.dhx_multi_day_icon,.dhx_multi_day{background-color:#E1E6FF;background-repeat:no-repeat;border-right:1px dotted #8894A3;}
+
+.dhx_multi_day{position:absolute;border-top:1px dotted #8894A3;}
+
+.dhx_multi_day_icon{background-image:url(imgs/clock_big.gif);}
+
+.dhx_multi_day_icon_small{background-image:url(imgs/clock_small.gif);}.dhx_multi_day_icon,.dhx_multi_day_icon_small{background-position:center center;background-color:#E1E6FF;background-repeat:no-repeat;border-bottom:1px dotted #8894A3;border-right:1px dotted #8894A3;}.dhtmlxLayoutPolyContainer_dhx_skyblue .dhx_cal_container{background-color:#d0e5ff;}
+
+.dhx_cal_event div{background-color:#FFE763;border:1px solid #B7A543;color:#887A2E;overflow:hidden;width:100%;font-family:Tahoma;font-size:8pt;}
+
+
+
+
+
+
+
+
+
+
+/*  多个报价 */
+.dhx_move_denied .dhx_cal_event .dhx_header,.dhx_move_denied .dhx_cal_event .dhx_title{cursor:default;}.dhx_cal_event .dhx_header{height:1px;margin-left:1px;border-width:1px 1px 0 1px;cursor:pointer;}
+
+.dhx_cal_event .dhx_title{height:28px;border-width:0 1px 1px 1px;border-bottom-style:dotted;font-size:12pt;font-weight:bold;text-align:center;background-position:right;background-repeat:no-repeat;cursor:pointer;}
+.dhx_cal_event .dhx_body{border-width:0 1px 1px 1px;padding:5px;}
+.dhx_resize_denied .dhx_cal_event .dhx_footer{cursor:default;}
+.dhx_cal_event .dhx_footer{height:1px;margin-left:2px;border-width:0 1px 1px 1px;cursor:s-resize;}
+.dhx_cal_event_line{background-color:#efefef;border-radius:3px;font-family:Tahoma;font-size:8pt;height:45px;padding-left:10px;color:#887A2E;cursor:pointer;overflow:hidden; margin-left:3px;}
+
+/* 有报价的字体    */
+.dhx_cal_event_clear{font-family:Tahoma;font-size:9pt;height:35px;color: #FF6600;overflow:hidden;cursor:pointer; margin-left:5px; line-height:35px;  text-align:center}
+
+.dhx_month_body span{ color:#666; text-align:left; }
+
+.dhx_cal_container i{font-size:8pt;color: #FF3300; float:right; margin-right:2px; font-style:normal; }
+
+
+.dhx_cal_container font{font-family:Tahoma;font-size:8pt;color: #ccc; float:right; margin-right:2px; font-style:normal}
+
+
+
+
+
+/* 日历弹出层 */
+div.sample_popup { z-index: +1000;}
+div.menu_form_header{
+cursor:move
+}
+div.sample_popup div.menu_form_header
+{
+border-bottom: 0px;
+cursor: default;
+cursor:move;
+height: 20px;
+line-height:24px;
+vertical-align: middle;
+background:#0170d9;
+color:#FFF;
+text-decoration: none;
+font-weight: 900;
+font-size: 13px;
+padding-left:10px;
+overflow:hidden;
+width:496px;
+overflow:hidden
+}
+div.sample_popup div.menu_form_body
+{
+border: 3px solid #0170d9;
+background:#FFF;
+font-size:12px;
+float:left
+}
+div.sample_popup img.menu_form_exit
+{
+float: right;
+margin: 5px 5px 0px 0px;
+cursor: pointer;
+}
+
+div.sample_popup form
+{
+margin: 0px;
+padding: 8px 10px 10px 10px;
+}
+.menu_form_body a {
+text-decoration: none;
+}
+
+
+

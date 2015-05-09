@@ -1,0 +1,293 @@
+@charset "utf-8";
+
+body, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, html, input, li, ol,
+	p, ul {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+fieldset, img {
+	border: 0
+}
+
+ol, ul, li {
+	list-style-type: none
+}
+
+caption, th {
+	text-align: left
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+	font-weight: 400
+}
+
+input, select, textarea {
+	outline: 0
+}
+
+abbr {
+	border-bottom: none
+}
+
+.clearfix {
+	zoom: 1
+}
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+	font-size: 0;
+	height: 0;
+	line-height: 0;
+	visibility: hidden
+}
+
+.lfloat {
+	float: left
+}
+
+.rfloat {
+	float: right
+}
+
+.clear {
+	clear: both;
+}
+
+a {
+	text-decoration: none;
+	font-family: "微软雅黑";
+	color: #333
+}
+
+body {
+	background: #efefef
+}
+
+.header {
+	width: 100%;
+	height: 162px;
+	background: #FFF
+}
+
+.head {
+	width: 1200px;
+	height: 45px;
+	margin: 0 auto;
+	border-bottom: 1px solid #d5d5d5
+}
+
+.head_left {
+	width: 315px;
+	height: 45px;
+	line-height: 50px;
+	float: left;
+	background: url(../images/logo2.jpg) no-repeat left center;
+	padding-left: 45px;
+	color: #727272;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	font-weight: bold
+}
+
+.head_right {
+	width: 300px;
+	height: 45px;
+	line-height: 45px;
+	float: right;
+}
+
+.head_right li {
+	float: left;
+	margin-right: 15px
+}
+
+.head_right li a {
+	color: #727272;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	font-weight: bold
+}
+
+.head_right .weixin {
+	background: url(../images/weixin.jpg) no-repeat left center;
+	padding-left: 36px;
+}
+
+.head_right .weibo {
+	background: url(../images/weibo.jpg) no-repeat left center;
+	padding-left: 31px;
+}
+
+.head_right .help {
+	background: url(../images/help.jpg) no-repeat left center;
+	padding-left: 28px;
+}
+
+.search {
+	width: 1200px;
+	height: 110px;
+	margin: 0 auto;
+}
+
+.search .logo {
+	float: left;
+	margin-top: 20px;
+}
+
+.dectails {
+	float: right;
+	width: 419px;
+	height: 66px;
+	margin-top: 18px
+}
+
+.dectails li {
+	padding-right: 55px;
+}
+
+.dectails .hotline {
+	color: #07b3b2;
+	font-family: "微软雅黑";
+	font-size: 24px;
+	font-weight: bold;
+	text-align: right;
+	margin-bottom: 8px;
+	background: url(../images/rexian.jpg) no-repeat 110px center;
+}
+
+.dectails .shuru {
+	width: 272px;
+	float: left;
+	border: 1px solid #05b5b5
+}
+
+.dectails .buts {
+	width: 80px;
+	height: 30px;
+	float: left;
+	background: #05b5b5;
+	border: 1px solid #05b5b5;
+	color: #fff;
+	cursor: pointer;
+	font-size: 15px;
+	font-family: "微软雅黑";
+}
+
+.navs {
+	width: 100%;
+	height: 59px;
+	background: #05b5b5
+}
+
+.nav {
+	width: 1200px;
+	height: 58px;
+	line-height: 58px;
+	margin: 0 auto;
+}
+
+.nav li {
+	float: left;
+	margin-right: 10px;
+}
+
+.nav .curt {
+	background: #028891
+}
+
+.nav li a {
+	color: #fff;
+	padding: 0px 20px;
+}
+
+.footer {
+	width: 100%;
+	height: 420px;
+	background: #028c96
+}
+
+.foottop {
+	width: 100%;
+	height: 36px;
+	background: #04aeae
+}
+
+.footcont {
+	width: 1150px;
+	height: 178px;
+	padding-left: 50px;
+	margin: 0 auto;
+	margin-top: 25px;
+	color: #fff;
+	border-bottom: 1px solid #fff
+}
+
+.footbox {
+	width: 220px;
+	height: 178px;
+	float: left;
+	margin-left: 10px
+}
+
+.footbox h3 {
+	font-size: 20px;
+	margin-bottom: 18px;
+}
+
+.footbox li a {
+	color: #fff;
+	font-size: 14px;
+}
+
+.footbottom {
+	width: 720px;
+	height: 145px;
+	margin: 0 auto;
+	margin-top: 30px;
+	text-align: center;
+}
+
+.footbottom a {
+	color: #fff;
+	padding: 0px 8px;
+	font-size: 18px;
+}
+
+.footbottom  ul {
+	width: 656px;
+	height: 25px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.footbottom li {
+	float: left;
+	text-align: center;
+	color: #fff
+}
+
+.hotlines {
+	width: 550px;
+	margin: 0 auto;
+	color: #fff;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.footbottom  p {
+	width: 690px;
+	margin: 0 auto;
+	color: #fff;
+	text-align: center;
+	margin-top: 10px
+}

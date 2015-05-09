@@ -1,0 +1,98 @@
+@charset "utf-8";
+
+body {
+	background-color: #efefef;
+}
+
+.mainpage {
+	margin: 20px auto;
+	height: 340px;
+	border-radius: 10px 10px 10px 10px;
+	width: 700px;
+	background: #00acac;
+}
+
+.districtlist {
+	width: 460px;
+	height: 340px;
+	padding: 5px 0px 5px 5px;
+	float: left;
+}
+
+.district {
+	float: left;
+	width: 217px;
+	height: 160px;
+	margin: 3px;
+	background: #eee;
+	position: relative;
+}
+
+.district img {
+	width: 217px;
+	height: 160px;
+}
+
+.district .desc {
+	width: 217px;
+	height: 22px;
+	position: absolute;
+	bottom: 0px;
+	background-color: #eee;
+	text-align: right;
+	opacity: 0.6;
+	color: #00acac;
+}
+
+.district .desc .text {
+	width: 100px;
+	height: 22px;
+	float: right;
+	font-size: 18px;
+}
+
+.district .desc .icon {
+	width: 22px;
+	height: 22px;
+	float: right
+}
+
+.district .desc li {
+	list-style-type: none;
+	background: url(../images/ding.png) center no-repeat;
+	padding-left: 0px;
+	margin-left: 0px;
+	text-align: right;
+}
+
+.companey {
+	width: 220px;
+	background: #00acac;
+	height: 200px;
+	float: left;
+	margin: 15px 15px 15px 0px;
+}
+
+.companey .name {
+	font-size: 45px;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+}
+
+.companey .desc {
+	font-size: 18px;
+	color: #fff;
+	text-align: left;
+	font-weight: bold;
+	height: 25px;
+	padding-left: 25px;
+	background: url(../images/logosmall.jpg) no-repeat left top;
+	margin-left: 10px;
+}
+
+.companey .tel {
+	font-size: 22px;
+	color: #fff;
+	font-weight: bold;
+}

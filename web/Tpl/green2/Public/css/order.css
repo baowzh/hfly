@@ -1,0 +1,48 @@
+/*------------------------- ¾Æµê¶©µ¥Ö§¸¶Ò³Ãæ Begin -------------------------*/
+.pay-method .use-amount{
+	width:400px;
+	height:45px;
+	line-height:45px;
+}
+.pay-method .ui-tabs, .pay-method .use-amount{
+	margin:20px 0;
+}
+.pay-method .ui-tabs ul label{
+	line-height:28px;
+	text-align:center;
+}
+.pay-method .ui-tabs ul li a{
+	font-weight:bold;
+}
+.pay-method .ui-widget-content{
+	background-color:transparent;
+}
+.banklist ul li{
+	border:#CCC thin solid;
+	background-color:#FFF;
+	vertical-align:middle;
+	padding-left:10px;
+	width:224px;
+	margin: 4px;
+	display:inline-block;
+}
+.banklist ul li:hover{
+	border:#0CF thin solid;
+}
+.banklist ul li, .banklist ul li label, .banklist ul li input, .banklist ul li img{
+	cursor:pointer;
+}
+.bill th{
+	text-align:right;
+}
+.bill th, .bill td{
+	border:0;
+}
+.c_red{
+	color:red;
+}
+.largebutton{
+	padding:12px 20px;
+	margin-bottom:10px;
+}
+/*-------------------------- ¾Æµê¶©µ¥Ö§¸¶Ò³Ãæ end --------------------------*/

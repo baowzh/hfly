@@ -1,0 +1,78 @@
+<include file="./Tpl/Public/header.html" />
+            <style type="text/css">
+                .mainnav_title{ display:none;}
+                h1 { height:30px;line-height:30px;font-size:14px;padding-left:15px;background:#EEE;border-bottom:1px solid #ddd;border-right:1px solid #ddd;overflow:hidden;zoom:1;margin-bottom:10px;}
+                h1 b {color:#3865B8;}
+                h1 span {color:#ccc;font-size:10px;margin-left:10px;}
+                #Profile{ width:48%; height:191px; float:left;margin:5px 15px 0 0;}
+                #system {width:48%;float:left;margin:5px 15px 0 0;}
+                .list ul{ border:1px #ddd solid;  overflow:hidden;border-bottom:none;}
+                .list ul li{ border-bottom:1px #ddd solid; height:26px;  overflow:hidden;zoom:1; line-height:26px; color:#777;padding-left:5px;}
+                .list ul li span{ display:block; float:left; color:#777;width:100px;}
+
+                #sitestats {width:48%; height:191px; float:left;margin:5px 0  0 0;overflow:hidden;}
+                #sitestats div {_width:99.5%;border:1px solid #ddd;overflow:hidden;zoom:1;}
+                #sitestats ul {overflow:hidden;zoom:1;width:102%;padding:2px 0 0 2px;_padding:1px 0 0 1px;height:132px;}
+                #sitestats ul li {float:left;height:44px; float:left; width:16.1%;_width:16.3%;text-align:center;border-right:1px solid #fff;border-bottom:none;}
+                #sitestats ul li b {float:left;width:100%;height:21px;line-height:22px;  background:#EFEFEF;color:#777;font-weight:normal;}
+                #sitestats ul li span {float:left;width:100%;color:#3865B8;background:#F8F8F8;height:21px;line-height:21px;overflow:hidden;zoom:1;}
+
+                #tripecnews {width:48%;float:left;margin:5px 15px 0 0;}
+
+                #tabs {margin:0px auto;overflow:hidden;border:1px solid #ccc; height:214px;}
+                #tabs .title {overflow:hidden;background:url(../Public/Images/tab_bottom_line_1.jpg) repeat-x 0 26px;height:27px;}
+                #tabs .title ul li {float:left;margin-left:-1px;height:26px;line-height:26px;background:#EAEEF4;padding:0px 10px;border:1px solid #ccc;border-top:0;border-bottom:0;}
+                #tabs .title ul li.on {background:#FFF;height:27px;}
+                #tabs .content_1 { overflow:hidden;border-top:none;}
+                #tabs .tabbox {display:none;padding:10px;}
+
+                #tabs .tabbox ul li {background:url(../Public/Images/ico_1.gif) no-repeat 4px 11px;padding-left:13px;border-bottom:1px #ddd dashed; height:27px;  line-height:26px;color:#333 }
+                #tabs .tabbox ul li a {color:#333}
+                #tabs .tabbox ul li a:hover {color:#FB0000;}
+                #tabs .tabbox ul li span.date {float:right;color:#777}
+                #tripec_sn {color:#FB0000;font-weight:normal;}
+                #tripec_license {font-weight:normal;color:blue;}
+                #tripec_license a {color:#FB0000;}
+            </style>
+            <div id="Profile" class="list">
+                <h1><b>个人信息</b><span>Profile&nbsp; Info</span></h1>
+                <ul>
+                    <li><span>会员名:</span>{$_SESSION.admin_login_names}</li>
+                    <li><span>所属会员组:</span>{$group_name}</li>
+                    <li><span>最后登陆时间:</span>{$_SESSION.last_login_time|date="Y-m-d H:i:s",###}</li>
+                    <li><span>最后登陆IP:</span>{$_SESSION.last_login_ip}</li>
+                    <li><span>登陆次数:</span>{$_SESSION.login_count}次</li>
+                </ul>
+            </div>
+            <div id="sitestats" >
+                <h1><b>网站统计</b><span>Site&nbsp; Stats</span></h1>
+                <div>
+                    <ul>
+                        <li><b>旅游线路</b><br>
+                                <span>{$counts.line}</span></li>
+
+                        <li><b>线路订单</b><br>
+                                <span>{$counts.line_order}</span></li>
+
+                        <li><b>文章总数</b><br>
+                                <span>{$counts.article}</span></li>
+                        <li><b>会员总数</b><br>
+                                <span>{$counts.user}</span></li>
+                        <li><b>栏目总数</b><br>
+                                <span>{$counts.article_section}</span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                        <li><b></b><span></span></li>
+                    </ul>
+                </div>
+            </div>
+           
+<include file="./Tpl/Public/footer.html" />

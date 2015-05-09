@@ -1,0 +1,88 @@
+body {
+	
+}
+
+.GridView {
+	font-size:9pt;
+}
+
+.GridHead td {
+	font-size:9pt;
+	background-color:#fff;/**you can change the header BG here*/
+	font-weight:bold;
+	height:25px;
+	padding-left:5px;
+	color: black;	
+}
+
+.GridHead a {
+	color: black;
+	white-space: nowrap;
+	text-decoration: none;	
+}
+
+.GridHead a:hover{
+	color: black;
+}
+
+.GridHighLightRow td {/*dafult name*/
+	background-color: #EFF3FF;
+}
+
+.GRIDTREESTYLE{
+	font-size:9pt;
+}
+
+.GRIDTREESTYLE a{
+	white-space: nowrap;
+	color: #0000FF;
+	text-decoration: none;
+}
+
+.GRIDTREESTYLE a:hover{
+	color: #0000FF;
+	text-decoration: underline;
+}
+
+.GRIDTREESTYLE a.nodeSel{
+	background-color: #DEEFEF;
+}
+
+.MenuRoot td {
+	font-size:9pt;
+	/*font-weight:bold;*/
+}
+
+.MenuRoot a {
+	color: #333;
+	white-space: nowrap;
+	text-decoration: none;	
+}
+
+.MenuRoot a:hover{
+	color: #333;
+	/*border:#83C2C2 solid;
+	border-width:0px 0px 1px;*/
+}
+
+.MENUTREESTYLE{
+	color:#666;
+	font-size:9pt;
+}
+
+.MENUTREESTYLE a{
+	white-space: nowrap;
+	color: #333;
+	text-decoration: none;
+}
+
+.MENUTREESTYLE a:hover{
+	color: #333;	
+	border:#83C2C2 solid;
+	border-width:0px 0px 1px;	
+	/*text-decoration: underline;*/
+}
+
+.MENUTREESTYLE a.nodeSel{
+	background-color: #DEEFEF;
+}

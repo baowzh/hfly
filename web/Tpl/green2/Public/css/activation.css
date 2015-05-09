@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 会员激活发送到邮箱css end */
+.content{width:958px; height:460px;border:solid 1px #EBEBEB; margin-top:10px;}
+.content_top{height:40px; background:url("../images/title_bg.jpg") repeat-x;}
+.content_top_font{ font-family:"微软雅黑"; font-size:18px; font-weight:normal; color:#525252; padding-left:20px; line-height:40px;}
+.user{ height:250px;}
+.send_mian2{ margin-top:70px;}
+.send{height:30px; padding-left:290px;}
+.send_font9{ font-family:"宋体"; font-size:14px; color:#666666; font-weight:bold; line-height:30px;}
+.send_font2{color:#71B250;}
+.send_font3{color:#999999; font-size:14px; line-height:30px;}
+.btn_check{ width:145px; height:38px; background:url(../images/btn_check.jpg) no-repeat; margin-left:290px; margin-top:5px;}
+.send_font4{ color:#1D80CC; line-height:30px;}
+.send_font4 a{ color:#1D80CC; text-decoration:none; font-size:14px;}
+.send_font4 a:hover{ text-decoration:underline;}
+/* 会员激活发送到邮箱css end */

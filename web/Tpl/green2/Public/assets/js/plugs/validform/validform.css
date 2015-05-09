@@ -1,0 +1,93 @@
+@font-face {
+    font-family: 'Glyphicons_Halflings';
+    src: url("../../../fonts/glyphicons-halflings-regular.eot");
+    src: url("../../../fonts/glyphicons-halflings-regular.eot-#iefix") format('embedded-opentype'),
+    url("../../../fonts/glyphicons-halflings-regular.woff") format('woff'),
+    url("../../../fonts/glyphicons-halflings-regular.ttf") format('truetype'),
+    url("../../../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular") format('svg'); }
+
+.Validform_tipbox{
+    position:relative;
+    font-family: 'Glyphicons_Halflings';
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: normal;
+    height:26px;
+    line-height:26px;
+    margin-left:12px;
+    padding-right:5px;
+    min-width: 150px;
+    color:red;
+    display: inline-block;
+}
+.Validform_tipbox s{
+    font-family: simsun;
+    text-decoration: none;
+    display: block;
+    top:0px;
+    height: 26px;
+    overflow: hidden;
+    position: absolute;
+    line-height: 26px;
+    font-size: 15px;
+    width: 9px;
+}
+.Validform_tipbox s.s1{
+    color: red;
+    left: -9px;
+	display: none;
+}
+
+.Validform_tipbox s.s2{
+    color:#fff;
+    left:1px;
+}
+.Validform_tipbox span{
+    position:relative;
+    display: block;
+    font-size: 12px;
+    left:0px;
+    font-family: "宋体", "新宋体", Arial;
+    line-height:26px;
+    height: 26px;
+    vertical-align: middle;
+    letter-spacing: 1px;
+}
+.Validform_tipbox span:before{
+    font-family: 'Glyphicons_Halflings';
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: normal;
+    padding-left:2px;
+    content:"\e082";
+}
+.Validform_tipbox.info{
+    border-color:blue;
+    color:blue;
+}
+.Validform_tipbox.info s.s1{
+    color:blue;
+}
+.Validform_tipbox.info span:before{
+    content:"\e086";
+}
+.Validform_tipbox.success,.Validform_tipbox.loading{
+    border: none;
+}
+.Validform_tipbox.success s,.Validform_tipbox.loading s{
+    display: none;
+}
+.Validform_tipbox.success span{
+    color: green;
+}
+.Validform_tipbox.success span:before{
+    content: "\e013";
+}
+.Validform_tipbox.loading span{
+    color:#808080;
+    background: url(onLoad.gif) no-repeat 1px center;
+}
+.Validform_tipbox.loading span:before{
+    content: "..";
+    opacity:0;
+}

@@ -1,0 +1,51 @@
+<include file="Public:header" />
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">报单中心列表</th>
+  </tr>
+  <tr>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+  <td class="buttom"><a class="bule" href="__URL__/add">增加报单中心</a></td>
+  </tr>
+  </table>
+<table border="0" cellspacing="0" cellpadding="0" class="t2">
+  <tr>
+    <th>用户名</th>
+    <th>奖金钱包</th>
+    <th>电子钱包</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  <volist name="list" id="vo">
+  <tr>
+    <td>{$vo.login_name}</td>
+    <td>{$vo.amount}</td>
+    <td>{$vo.e_amount}</td>
+    <td>
+    <if condition="($vo.status eq 1)"><span class="cGreen">已审核
+	<else /><span class="cRed"> 未审核
+	</if>
+	</td>
+    <td>
+    <if condition="$vo.user_type neq 0">
+    <a href="#" onclick=confirms("agent_audit?{$vo.user_id}","您确认要激活么")>激活</a>
+    &nbsp;|&nbsp;
+    <a href="#" onclick=confirms("agent_list_del?{$vo.user_id}","您确认要删除么")>删除</a>
+    </if>
+   </td>
+  </tr>
+</volist>
+<if condition="$list eq null">
+ <tr>
+ <td colspan="8">
+   <p class="font_12_red"  align="left">当前没有报单中心成员</p>
+    </td>
+ </tr>
+ </if>
+</table>
+<table>
+<tr>
+	<td><div class="page"> {$page} </div></td>
+  </tr>
+</table>
+<include file="Public:footer" />

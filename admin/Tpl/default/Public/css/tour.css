@@ -1,0 +1,92 @@
+.lineNav {
+	padding:10px 0 0 10px;
+	border-bottom:1px #d8d8d8 solid;
+	zoom:1;
+	overflow:hidden;
+	margin-bottom:10px;
+}
+.lineNav li {
+	float:left;
+	width:79px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	border:1px #d8d8d8 solid;
+	border-width:1px 1px 0 1px;
+	margin-right:10px;
+	cursor:pointer;
+}
+.lineNav li.yes {
+	border:1px #d8d8d8 solid;
+	border-width:1px 1px 0 1px;
+	background:#f6f6f6;
+	font-weight:bold;
+}
+.lineRowSub {
+	height:26px;
+	line-height:26px;
+	background:url(../Images/lineRowSubBg.gif);
+	border:1px #d8d8d8 solid;
+	border-width:0 1px;
+}
+.lineRowSub li {
+	float:left;
+	height:16px;
+	line-height:16px;
+	border-right:1px #d8d8d8 solid;
+	padding:5px 10px;
+	cursor:pointer;
+}
+.lineRowSub li.yes {
+	background:#fff;
+	border-top:1px #d8d8d8 solid;
+	padding:4px 10px 5px 10px;
+}
+.lineRowTexts {
+	border:1px #d8d8d8 solid;
+	border-width:0 1px 1px 1px;
+	padding:9px;
+	background:#fff;
+}
+.lineDest {
+    border: 1px solid #7F9DB9;   
+    overflow: visible;
+    padding: 0 9px;
+	padding-bottom:10px;	
+    width: 640px;
+}
+
+.lineDestTit {
+    font-weight: bold;
+    height: 25px;
+    padding:0 9px;
+}
+
+#cal_box img{ float:right; margin:5px;}
+
+.linePopPrice {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #FFAB00;
+    display: none;
+    position: absolute;
+    width: 300px;
+}
+.linePopPriceTit {
+    background: url("../Images/pricePopTit.gif") repeat scroll 0 0 transparent;
+    font-weight: bold;
+    height: 17px;
+    line-height: 17px;
+    padding: 5px 10px;
+}
+
+.linePopPriceTit span {
+    float: right;
+}
+
+.linePopPriceText {
+    padding: 10px;
+}
+
+.linePopPriceEnd {
+    padding: 0 0 10px 10px;
+}

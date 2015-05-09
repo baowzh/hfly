@@ -1,0 +1,15 @@
+/* CSS Document */
+
+html,body{ font-size:12px; margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd{ margin:0;padding:0;}
+
+ul,li{list-style-type:none;}
+
+a{ text-decoration:none;}
+a:hover{color:#f50; text-decoration:underline;}
+
+.li_end,.li_end a{border-right:none !important; padding-right:0 !important; margin-right:0 !important;}
+
+img{ border:none;}
+
+.clear{ clear:both; float:none;}

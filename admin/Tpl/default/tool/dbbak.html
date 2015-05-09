@@ -1,0 +1,44 @@
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+    <tr>
+        <th colspan="2">备份数据</th>
+    </tr>
+    <tr>
+        <td>
+            <div class="div_msg">{$message}</div>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0"  width="100%">
+            <thead>
+            <tr>
+                <th>&nbsp;&nbsp;</th>
+                <th>数据表</th>
+                <th>说明</th>
+                <th>记录数</th>
+                <th>大小</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="arr" id="vo">
+                <tr>
+                    <td><input type="checkbox" name="arrTables[]" value="{$vo.Name}" checked></td>
+                    <td>{$vo.Name}</td>
+                    <td>{$vo.Comment}</td>
+                    <td>{$vo.Rows}</td>
+                    <td>{$vo.Data_length}</td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <p>
+            <input name="btnSubmit" type="submit" class="inputButton" id="btnSubmit" value=" 备份 " onClick="backup()"
+                   style="display:block">
+            <input name="btnDoing" type="button" class="inputButton" id="btnDoing" value="正在备份，此过程可能需要几分钟。请稍候...... "
+                   style="display:none">
+        </p>
+        <span class="msg"><a href="__APP__/Dbdown"> 备份数据库到本地</a></span>
+    </div>
+</form>

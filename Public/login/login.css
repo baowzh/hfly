@@ -1,0 +1,55 @@
+
+body { background: url("images/login_bg.jpg") repeat-x rgb(255, 255, 255); margin: 0px; padding: 0px; font-family: ËÎÌו; font-size: 12px; }
+
+img { border: 0px currentColor; }
+
+a { color: rgb(168, 168, 168); text-decoration: none; }
+
+a:hover { color: rgb(102, 102, 102); text-decoration: none; }
+
+* { margin: 0px auto; padding: 0px; }
+
+.clr { clear: both; }
+
+.top_link { width: 510px; height: 74px; text-align: right; color: rgb(149, 149, 149); margin-top: 30px; }
+
+.top_bg { background: url("images/login_top.jpg") no-repeat; width: 988px; height: 93px; }
+
+.logo a { width: 292px; height: 93px; text-indent: -9999px; float: left; display: block; }
+
+.right_words { width: 272px; height: 50px; color: rgb(153, 153, 153); padding-right: 70px; float: right; }
+
+.center_bg { width: 988px; height: 180px; }
+
+.ad_bg { background: url("images/login_letad.jpg") no-repeat; width: 612px; height: 180px; float: left; }
+
+.input_bg { background: url("images/login_inputbg.jpg") no-repeat; width: 273px; height: 180px; float: left; }
+
+.input_bg p { width: 233px; height: 40px; color: rgb(156, 158, 157); }
+
+.input_bg h1 { width: 233px; height: 26px; color: rgb(51, 51, 51); font-family: "Microsoft YaHei"; font-size: 18px; font-weight: normal; border-bottom-color: rgb(204, 204, 204); border-bottom-width: 1px; border-bottom-style: solid; }
+
+.input_bg h2 { width: 233px; padding-left: 17px; margin-top: 14px; float: left; }
+
+.user_bg { background: url("images/login_userbg.gif") no-repeat; border: currentColor; width: 229px; height: 32px; color: rgb(51, 51, 51); line-height: 32px; padding-left: 26px; }
+
+.user_pass { background: url("images/login_passbg.gif") no-repeat; border: currentColor; width: 229px; height: 32px; color: rgb(51, 51, 51); line-height: 32px; padding-left: 26px; }
+.user_verify { background: url("images/verify.gif") no-repeat; border: currentColor; width: 98px; height: 32px; color: rgb(51, 51, 51); line-height: 32px; padding-left: 26px; }
+.ver_img{ vertical-align:middle;margin-left:12px;}
+.input_foot { width: 988px; height: 111px;  }
+
+.about { width: 612px; height: 111px; float: left; }
+
+.about h1 { width: 560px; color: rgb(153, 153, 153); line-height: 40px; font-size: 12px; font-weight: bold; }
+
+.about p { width: 560px; color: rgb(153, 153, 153); line-height: 23px; }
+
+.go { background: url("images/login_inputgo.jpg") no-repeat; width: 273px; height: 111px; color: rgb(168, 168, 168); float: left; }
+
+.go span { padding-left: 26px; }
+
+.sub_go { background: url("images/login_go.jpg") no-repeat; border: currentColor; width: 119px; height: 28px; }
+
+.sub_go:hover { background: url("images/login_go2.jpg") no-repeat; width: 119px; height: 28px; cursor: pointer; }
+
+.webfoot { width: 480px; height: 80px; text-align: right; color: rgb(153, 153, 153); line-height: 80px; font-family: Verdana; font-size: 11px; margin-top: 30px; display: block; }

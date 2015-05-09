@@ -1,0 +1,35 @@
+<include file="Public:header" />
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">组成员列表</th>
+  </tr>
+  <tr>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+  </tr>
+  </table>
+<table border="0" cellspacing="0" cellpadding="0" class="t2">
+  <tr>
+	<th>成员名称</th>
+	<th>所在组别</th>
+    <th>操作</th>
+  </tr>
+  <volist name="list" id="vo">
+  <tr>
+  	<td>{$vo.id}</td>
+    <td>{$vo.name}</td>
+	<td>{$vo.remark}</td>
+    <td>{$vo.pid}</td>
+	 <td> 
+    <a href="#" onclick= "javascript:if(confirm( '确定要删除该条记录吗？ '))location.href= 'del?{$vo.id}'">删除</a> 
+	&nbsp;|&nbsp;  
+	 <a href="#" onclick= "javascript:if(confirm( '确定编辑该条记录吗？ '))location.href='edit?{$vo.id}'">编辑</a> 
+    </td>
+  </tr>
+</volist>
+</table>
+<table>
+<tr>
+	<td><div class="page"> {$page} </div></td>
+  </tr>
+</table>
+<include file="Public:footer" />

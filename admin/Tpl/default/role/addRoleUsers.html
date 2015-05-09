@@ -1,0 +1,52 @@
+<include file="Public:header" />
+<script language="javascript">
+function formcheck()
+{
+}
+</script>
+<form action="addRoleUsers" method="post" onSubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="3">添加组成员</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="roleUsers">组员列表</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<if condition="$adminUser eq null"> <span style="color:#FF0000">没有可添加的组成员</span></if></td>
+  <td align="right"><div class="div_msg">{$message}</div>
+  </td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="保存" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+
+  <table cellpadding="0" cellspacing="0" class="t3">
+  <tr>
+    <td   align="right" width="150"><span class="msg">*</span>用户名：</td>
+    <td>
+	<label>
+      <select id="user_id"  name="user_id" class="float_left" style="width:100px;">
+	  	 <option value="">请选择成员</option>
+	  	  <volist name="adminUser" id="vo1" >
+                <option value="{$vo1.id}" >{$vo1.login_name}</option>
+		 </volist>
+        </select>
+    </label>
+    <span id="msg_status" class="msg"></span></td>
+  </tr>
+  <tr>
+    <td align="right" width="150"><span class="msg">*</span>用户组别：</td>
+    <td>
+	<label>
+      <select  name="role_id" class="float_left" id="role_id" style="width:100px;">
+	  	  <volist name="Roles_list" id="vo" >
+                <option value="{$vo.id}">{$vo.name}</option>
+		 </volist>
+        </select>
+    </label>
+    <span id="msg_status" class="msg"></span></td>
+  </tr>
+</table>
+</form>
+<include file="Public:footer"/>

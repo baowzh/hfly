@@ -1,0 +1,119 @@
+<include file="Public:header" />
+<style type="text/css">
+.div1 { width: 142px; height: 158px; background-color: #F0F0EE; margin: 5px;float: left;}
+.div2 { float:left;height:128px;width:142px; margin-top:2px;}
+.div3 { float:left;margin:8px 0px 0px 2px;height:12px;}
+</style>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('show_list')}">线路列表</a>
+        <a class="on" href="{:U('pic_list')}/line_id/{$line_id}">线路图片列表</a>
+    </ul>
+</div>
+<form name="myform" id="myform" action="{:U('imgdeleteall')}" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th width="50" class="selectAll"><span><a href="javascript:void(0);" onclick="sel_all();">全选</a></span></th>
+                <th width="50" class="add"><span><a href="javascript:void(0);" onclick="art.dialog.open('__URL__/pic_add/line_id/{$line_id}',{title:'添加',width:600,height:300,window:'top',lock:'true'});">添加</a></span></th>
+                <th width="50" class="del"><span><a href="javascript:void(0);" onclick="return confirm_deleteall(this.form);">删除</a></span></th>
+                <th></th>
+            </tr>
+            </thead>
+        	<tbody>
+              <tr class="ulbc">
+                  <td id="td_sel" colspan="5"><ul>
+                  <volist name="list" id="vo">
+                      <li><div id="tr_{$vo.id}" class="div1">
+                          <div class="div2" align="center">
+                              <img src="__ROOT__{$vo.m_picPath}" title="{$vo.title}" width="136" height="128">
+                          </div>
+                          <div class="div3">
+                          <input type="checkbox" class="sel" id="sel_{$vo.id}" name="items[]" value="{$vo.id}" />&nbsp;&nbsp;<a href="{:U('pic_del',array('id'=>$vo['id'],'line_id'=>$line_id))}" onclick= "return atr_confirm(this.href)">删除</a>
+                          </div>
+                      </div></li>
+                  </volist>
+                  </ul></td>
+              </tr>
+          </tbody>
+        </table>
+    </div>
+</form>
+<div class="page">{$page} </div>
+<script language="javascript">
+    function ajax_save(id){
+        var url = "__URL__/ajax_save?id="+id;
+        var names = $('#names_'+id).val(); 
+        var sort = $('#sort_'+id).val();
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            complete :function(){
+            }, 
+            dataType: 'json', 
+            data: "names="+names+"&sort="+sort,
+            error: function() { alert('Ajax request error');},
+            success: function(result){
+                if(result==1){
+                    showTips( '保存成功', 33, 1 );
+                }
+            }
+        }); 
+    }
+    
+    function ajax_cover(id){
+        var url = "__URL__/ajax_cover?id="+id;
+        $.ajax({
+            url: url,
+            type: "POST",
+            complete :function(){
+            }, 
+            dataType: 'json',
+            error: function() { alert('Ajax request error');},
+            success: function(result){
+                if(result==1){
+                    showTips( '设置成功', 33, 1 );
+                }
+            }
+        }); 
+    }
+    
+    function sel_all(){
+        $('input.sel').each(function(index){
+            if($(this).attr('checked')){
+                $(this).removeAttr('checked');
+            }else{
+                $(this).attr('checked', 'checked');
+            }
+        });
+    }
+    
+    function save_all(){
+        $('input.sel').each(function(index){
+            if($(this).attr('checked')){
+                ajax_save($(this).val());
+            }
+        });
+    }
+    
+    function del_all(){
+        if(confirm( '确定要删除该条记录吗？ ')){
+            $('input.sel').each(function(index){
+                if($(this).attr('checked')){
+                    ajax_del($(this).val());
+                }
+            });
+        }
+    }
+    
+    function cover(){
+        $('input.sel').each(function(){
+            if($(this).attr('checked')){
+                ajax_cover($(this).val());
+            }
+        });
+    }
+</script>
+<include file="Public:footer" />

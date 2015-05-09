@@ -1,0 +1,67 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+      <a class="on" href="{:U('update')}?id={$id}" target="_self">编辑点评内容</a>
+    </ul>
+</div>
+<form action="" method="post" onSubmit="return formcheck();">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="730">
+        <tr>
+            <th width="99" height="18">景点名称：</th>
+            <td>
+             {$view.view_name}
+          </td>
+        </tr>
+        <tr>
+            <th>类型评分：</th>
+            <td>
+              <span class="f_left" style="margin-right:18px;">景点设施：
+              <input name="decoration" type="text" value="{$view.decoration}" size="5" maxlength="3" id="decoration" />
+              </span>
+              <span class="f_left" style="margin-right:18px;">交通情况：
+              <input name="traffic" type="text" value="{$view.traffic}" size="5" maxlength="3" />
+              </span>
+              <span class="f_left" style="margin-right:18px;">卫生情况：
+              <input name="hygiene" type="text" value="{$view.hygiene}" size="5" maxlength="3" />
+              </span>
+              <span class="f_left" style="margin-right:18px;">特产评分：
+              <input name="goods" type="text" value="{$view.goods}" size="5" maxlength="3" />
+              </span>
+              <span class="f_left" style="margin-right:18px;">性价比：
+              <input name="prices" type="text" value="{$view.prices}" size="5" maxlength="3" /></span></td>
+        </tr>
+        <tr>
+            <th>我的印象：</th>
+            <td><ul>
+            
+              <volist name="imprs" id="vo">
+                <li class="f_left">
+                  <input name="impr_type[]" type="checkbox" value="{$vo.id}" id="{$vo.id}" <in name="vo.id" value="$impr_type">checked</in> datatype="*" nullmsg="请至少勾选一项印象" errmsg="请至少勾选一项印象" sucmsg=" " min="1" /><label for="{$vo.id}">{$vo.names}</label>
+                </li>
+              </volist>
+            </ul></td>
+        </tr>
+        <tr>
+            <th>点评内容：</th>
+            <td><textarea name="content" cols="90" rows="10" id="content">{$view.content}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <th>排序：</th>
+            <td><input name="sort" type="text" value="{$view.sort}" size="8" maxlength="7" />
+            </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" class="button" name="save" value=" 保 存 ">
+        <input TYPE="reset" value=" 重 置 " class="button">
+  </div>
+</form>
+<script type="text/javascript">
+
+	function formcheck()
+	{
+		$("#add_form").submit();
+		return;
+	} 
+</script>
+<include file="Public:footer"/>

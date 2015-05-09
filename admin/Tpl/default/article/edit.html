@@ -1,0 +1,111 @@
+<script type="text/javascript">
+    var root = "__ROOT__", index = "__Index__";
+</script>
+<link rel="stylesheet"
+	href="__ROOT__/Public/Plugins/uploadify/uploadify.css" />
+<script type="text/javascript"
+	src="__ROOT__/Public/Plugins/uploadify/jquery.uploadify-3.1.min.js"></script>
+<script type="text/javascript"
+	src="__ROOT__/Public/Plugins/uploadify/jquery.jUpload.js"></script>
+<script type="text/javascript">
+     $(function () {
+		 $('#show_msg').show();
+                $("#upload1").jUpload({
+                    trigger_id: "t_upload1",
+                    uploader: "{:U('uploadify/head_img')}",
+                    queueID: "upload1-queue",
+                    formData: {
+                        "<?php echo session_name(); ?>": "<?php echo session_id(); ?>",
+                        "savePath": "/Upload/images/articles/",
+                        "saveRule": "time",
+                        "divId": "img1"
+                    },
+                    success: function (data, info) {
+						$("#photo_1").val(data[0].path);
+						art.dialog.alert(info);
+                    }
+                });
+            })
+function formcheck()
+{
+	return true;
+}
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+      <a href="{:U('lists')}">文章列表</a> |
+      <a class="on" href="{:U('edit')}?id={$id}">编辑文章</a>
+    </ul>
+</div>
+
+<form action="{:U('edit')}/id/{$id}" enctype="multipart/form-data" method="post" onSubmit="return formcheck();" id="add_form">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="126" style="width:120px;"><span class="red">*</span>栏目选择：</th>
+            <td colspan="2">
+               <select name="cid" class="txt">
+                 <volist name="a_sections" id="vo">
+                    <option value="{$vo.id}" <eq name="vo.id" value="$article.cid"> selected="selected"</eq>>{$vo.names}</option>
+                 </volist>
+               </select>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>标题：</th>
+            <td colspan="2"><input name="title" type="text" class="txt" id="title" value="{$article.title}" size="60" datatype="*" nullmsg="请填写文章标题" errmsg="请填写文章标题" sucmsg=" "/></td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>内容：</th>
+            <td><textarea name="content" cols="100" rows="20" id="content" class="kind-text" datatype="*1-65535" nullmsg="请填写文章内容" errmsg="文章内容最多填写65535个字符" sucmsg=" ">{$article.content}</textarea></td>
+            <td width="220">&nbsp;</td>
+        </tr>
+        <tr>
+          <th><span class="red">*</span>文章来源：</th>
+          <td colspan="2"><input name="source" type="text" class="txt" id="source" value="{$article.source}" size="30" datatype="*" nullmsg="请填写文章来源" errmsg="请填写文章来源" sucmsg=" "/></td>
+        </tr>
+        <tr>
+          <th>文章封面：</th>
+          <td colspan="2"><div id="img1"></div>
+                    <div id="upload1-queue" style="margin-top:6px;"></div>
+                <input class="isFile" type="hidden" id="photo_1" name="pic_front"/>
+                    <input data-msg-isFile="请上传图片" class="isFile" id="upload1" name="file_upload1" type="file"/>
+                    <div class="f_left" style="margin:12px 0 0 6px;">
+                    <a class="upload_bt" href="javascript:void(0);" id="t_upload1" onclick="$('#show_msg').hide();">点击上传</a>
+                    </div><span class="Validform_checktip f_left" id="show_msg" style="color:#F00">若不修改图片则此项无需更改</span></td>
+        </tr>
+        <tr>
+          <th>现用图片：</th>
+          <td colspan="2">
+            <neq name="article.pic" value="">
+              <img src="__ROOT__{$article.pic}" style="max-width:580px;min-width:420px" />
+            </neq>
+          </td>
+        </tr>
+        <tr>
+          <th>文章来源地址：</th>
+          <td colspan="2"><input name="source_url" type="text" class="txt" id="source_url" value="{$article.source_url}" size="60" datatype="url" ignore="ignore" errmsg="请正确填写文章来源地址" sucmsg=" " /></td>
+        </tr>
+        <tr>
+          <th><span class="red">*</span>状态：</th>
+          <td colspan="2" height="30"><input name="status" type="radio" id="status_1" value="1" <eq name="article.status" value="1"> checked="checked"</eq> /><label for="status_1">启用</label>&nbsp;
+           <input name="status" type="radio" id="status_2" value="0" <eq name="article.status" value="0"> checked="checked"</eq> /><label for="status_2">停用</label>
+          </td>
+        </tr>
+        <tr>
+          <th><span class="red">*</span>排序：</th>
+          <td colspan="2" height="30"><input name="sort" class="txt" type="text" id="sort" value="{$article.sort}" datatype="n" nullmsg="请填写排序" errmsg="请填写数字" sucmsg=" " />
+          </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" value=" 保 存 " name="save" class="button">
+        <input TYPE="reset" value=" 重 置 " class="button">
+  </div>
+</form>
+<script type="text/javascript">$(function () {
+    $("#upload2").jUpload({
+        trigger_id: "jtrigger",
+        queueID:"queueID"
+    });
+})
+</script>

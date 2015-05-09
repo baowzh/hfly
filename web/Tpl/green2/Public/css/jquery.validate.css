@@ -1,0 +1,6 @@
+﻿.lineH_41{ line-height:41px;}
+
+em.error {overflow:hidden;zoom:1;background:url("../Images/unchecked.gif") no-repeat 4px; margin-left:10px;  padding-left: 19px;color:red; height:41px; line-height:41px;}
+em.success {overflow:hidden;zoom:1;background:url("../Images/checked.gif") no-repeat 4px;margin-left:10px;  padding-left: 19px;color:red;height:41px; line-height:41px;}
+#login_box li{ height:48px; padding-top:10px; margin:0; float:none; clear:both;}
+#login_box em.error{clear:both; height:15px;line-height:15px; margin-left:130px; margin-top:0;}

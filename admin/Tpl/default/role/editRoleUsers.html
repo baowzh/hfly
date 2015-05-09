@@ -1,0 +1,43 @@
+<include file="Public:header" />
+<script language="javascript">
+function formcheck()
+{
+}
+</script>
+<form action="editRoleUsers" method="post" onSubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="3">成员组别修改</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="roleUsers">会员列表</a></td>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="保存" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+
+  <table cellpadding="0" cellspacing="0" class="t3">
+  <tr height="25px">
+    <td width="150" align="right">用户名：</td>
+    <td>
+      <input type="text" class="float_left" name="login_name" id="name" value="{$adminUser['login_name']}" readonly="" style="color:#333333"/>
+	   <input type="hidden" class="float_left" name="user_id" id="id" value="{$adminUser['id']}"/>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>用户组别</td>
+    <td>
+	<label>
+      <select id="role_id"  name="role_id" class="float_left" >
+	  	  <volist name="Roles_list" id="vo">
+                <option value="{$vo.id}">{$vo.name}</option>
+		 </volist>
+        </select>
+    </label>
+    <span id="msg_status" class="msg"></span></td>
+  </tr>
+</table>
+</form>
+<include file="Public:footer"/>

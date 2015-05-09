@@ -1,0 +1,115 @@
+/*------------------------- ¾ÆµêµãÆÀÒ³Ãæ begin -------------------------*/
+.ppam { margin-left:25px;}
+.hide{ display:none;}
+.th{ width:100px;}
+.impr_li {  padding:5px 9px !important; margin:1px;border:2px white solid; cursor:pointer; list-style:none; float:left; color:white;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius:6px;
+}
+.txt{ width: 80px; height:25px;; border: 1px solid #cccccc; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset; padding:3px; line-height: 1.42857; vertical-align: middle; background-color: white; color: #555555; background-image: none; margin-right: 10px; line-height:20px;}
+.impr_li.red{ background-color:#CA032D;}
+.txt_id{width: 200px; height:25px;; border: 1px solid #cccccc; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset; padding:3px; line-height: 1.42857; vertical-align: middle; background-color: white; color: #555555; background-image: none; margin-right: 10px;}
+.impr_li.red{ background-color:#CA032D;}
+.impr_li.green{ background-color:#7CB30D;}
+.impr_li.gray{ background-color:#999;}
+.impr_li.brown{ background-color:#A95A34}
+.impr_li.pink{ background-color:#F957B4;}
+.impr_li.blue{ background-color:#0D93E3;}
+.impr_li.orange{ background-color:#F5A40C;}
+.impr_li.purple{ background-color:#8B05B1;}
+.side li .col-2{ width:85px !important; }
+/*------------------------- ¾ÆµêµãÆÀÒ³Ãæ end -------------------------*/
+
+/*------------------------- ¾Æµê²é¿´¶©µ¥Ò³Ãæ begin -------------------------*/
+.people_list{color:#838383;}
+.people_list th,td{ height:28px;vertical-align:middle;}
+.people_list th{ width:132px; text-align:right}
+.people_list td{ text-align:left;}
+.yellowlink{
+	background-color:#FFC924;
+	border:#ECB100 thin solid;
+	-moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+	padding:3px 24px;
+	display:inline-block;
+	margin: 10px 10px 10px 0;
+	color:#333 !important;
+}
+.graylink{
+	background-color:#FFDA68;
+	border:#FFCC33 thin solid;
+	-moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+	padding:3px 24px;
+	display:inline-block;
+	margin: 10px 10px 10px 0;
+	color:white !important;
+}
+/*------------------------- ¾Æµê²é¿´¶©µ¥Ò³Ãæ end -------------------------*/
+
+
+/*------------------------- ¾ÆµêÌîÐ´¶©µ¥Ò³Ãæ begin -------------------------*/
+.form_td { text-align:right !important;} 
+.user_table th { text-align:right; line-height:38px; height:38px;}
+.user_table .txt { line-height:24px; height:24px;}
+.room_date_down .font_orange{ color:#F90; padding:0;}
+/*------------------------- ¾ÆµêÌîÐ´¶©µ¥Ò³Ãæ end -------------------------*/
+
+
+/*------------------------- ¾Æµê²é¿´ÎÊ´ðÒ³Ãæ begin -------------------------*/
+.que_time{ margin-bottom:15px; color:#638145}
+.hotel_q_a{ border-bottom:solid 1px #D0F0CA;}
+.hotel_answer{ color:#666; line-height:25px; font-size:14px; margin-bottom:15px;}
+.hotel_wait{ color:#F00; line-height:25px; font-size:12px; margin-bottom:15px;}
+/*------------------------- ²âÊÔÌí¼Ó end -------------------------*/
+
+
+.table_list ,table  th,  table td { 
+    border-top: none !important; border-bottom: 1px dotted #E4E7EA;}
+ul.side{ border-bottom:3px solid #14B9D5; height:33px;  padding:0px;}
+table.people_list th ,table.people_list td {border-bottom:none !important;}
+.col-19.omega.page_content.one1 li {
+    margin-left: 25px;
+    border-bottom: 3px solid rgb(20, 185, 213);
+    height: 33px; width:94.7%;}
+.table_list.questions{	box-shadow: 2px 2px 7px rgb(153, 153, 153); margin-bottom:15px;}
+.table_list.questions span{ font-weight:normal;}
+
+/*-------- ¾ÆµêÆµµÀÒ³ --------*/
+.ei-slider-loading{margin-top:0; height:250px !important;}
+
+
+/*---------------- ´ú½ðÈ¯ÁÐ±í ----------------*/
+.serial-list{
+	-moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+	box-shadow:0 3px 2px 0 #999;
+   -moz-box-shadow:0 3px 2px 0 #999;
+   -webkit-box-shadow:0 3px 2px 0 #999;
+	overflow:hidden;
+	font-size:13px;
+}
+.serial-list table{ border-collapse:collapse; }
+.serial-list table th, .serial-list table td{
+	text-align:center;
+}
+.serial-list table tr{
+	height:30px;
+}
+.serial-list table th{
+	background-color:#B9CA91;
+	font-size:14px;
+}
+.serial-list table td{
+	background-color:#FFF;
+	font-size:13px;
+}
+#page{
+	font-size:13px;
+	padding:15px 0 0 6px;
+}
+.tip{padding:15px 3px 4px 3px; font-size:14px; letter-spacing:1px;}

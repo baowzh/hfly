@@ -1,0 +1,84 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('show_list')}">景点列表</a> |
+        <a href="{:U('add')}">添加景点</a>
+    </ul>
+</div>
+<form action="" method="get">
+    <table class="search_table" width="100%">
+        <tr>
+            <td class="search">
+                标题: <input id="title" type="text" class="input-text" name="title" value="{$title}"/>
+                &nbsp;
+                <input type="submit" name="submit" value="查询" class="button"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
+                <th style="text-align: left;">名称</th>
+                <th>排序</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="ulbc" id="tr_{$vo.id}">
+                    <td id="td_sel"><input type="checkbox" class="sel" id="sel_{$vo.id}" value="{$vo.id}" name="items_{$vo.id}" /></td>
+                    <td style="text-align: left;">
+                        <input type="text" name="names_{$vo.id}" id="names_{$vo.id}" value="{$vo.names}"
+                               style=" width: 300px; border:0px;" readonly="readonly"/>
+                    </td>
+                    <td><input type="text" name="sort[{$vo.id}]" id="sort_{$vo.id}" value="{$vo.sort}"/></td>
+                    <td>
+                        <a href="javascript:void(0);" onclick="ajax_save('{$vo.id}')">保存</a>&nbsp;|&nbsp;<a href="__URL__/edit/id/{$vo.id}">编辑</a>&nbsp;|&nbsp;
+                        <a href="__URL__/del/id/{$vo.id}" onclick="return atr_confirm(this.href)">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="删除" onclick="myform.action='{:U('deleteall')}';"/>
+        <input type="button" class="button" name="dosubmit" value="排序"
+               onclick="myform.action='{:U('sort_list')}/p/{$p}';$('#myform').submit();"/>
+    </div>
+</form>
+<div class="page">{$page}</div>
+<script language="javascript">
+  function ajax_save(id){
+	  var url = "{:U(ajax_save)}?id="+id;
+	  var names = $('#names_'+id).val(); 
+	  var _sort = $('#sort_'+id).val();
+	  $.ajax({
+		  url: url,
+		  type: "POST",
+		  complete :function(){
+		  }, 
+		  dataType: 'json', 
+		  data: "names="+names+"&sort="+_sort,
+		  error: function() { alert('Ajax request error');},
+		  success: function(result){
+			  if(result==1){
+				  art.dialog.alert("保存成功");
+			  }
+		  }
+	  }); 
+  }
+  
+  function sel_all(){
+	  $('input.sel').each(function(index){
+		  if($(this).attr('checked')){
+			  $(this).removeAttr('checked');
+		  }else{
+			  $(this).attr('checked', 'checked');
+		  }
+	  });
+  }
+</script>

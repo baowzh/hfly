@@ -1,0 +1,271 @@
+<script type="text/javascript" src="../Public/js/jquery.xl_calendar.js"></script>
+<script type="text/javascript" src="../Public/js/travel.js"></script>
+<script type="text/javascript" src="/style/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+    $(function() {
+        var url = "{:U('consult',array('id'=>$line_base['id']))}";
+        $("input[name=consult_submit]").bind("click", function() {
+            $.ajax({url: url,
+                data: {},
+                async: false
+            });
+        });
+		
+		var url = "{:U('order_ping_act',array('id'=>$line_base['id']))}";
+        $("input[name=pin_submit]").bind("click", function() {
+            $.ajax({url: url,
+                data: {},
+                async: false
+            });
+        });
+		
+    });
+</script>
+<div class="contents_nei">
+      <div class="topcont">
+     <div class="cont_title">
+       <h1>{$line_base.names}</h1>
+       <div class="cont_nav">
+         <a href="">呼和浩特旅游</a> 
+         <a href="">包团自由行</a> 
+         <a href="">3日游</a>|
+         <a href="">关注（8429）</a>|
+         <a href="">喜欢（6666）</a>|
+         <a href="">游客咨询与互动（4）</a>|
+         <a href="">查看人数与价格 </a>|
+         <a href="">查看费用包含 </a>|
+         <a href="">查看或发起拼团 </a>
+       </div>
+      </div>
+      
+      <div>
+         <img alt="" width="1200" height="570" src="/style/images/cont.jpg"  >
+      </div>
+    </div>  
+      <div class="cont_sumit">
+          <h4>&nbsp;</h4>
+         
+          <div>
+<table width="100%" cellpadding="0" cellspacing="1" bgcolor="dadada"  style="padding:0px; border:1px solid #42c7c7"> 
+  <tbody><tr bgcolor="#cef0f1" height="50">  
+    <td width="80" align="center">线路编号</td> 
+    <td bgcolor="#FFFFFF" width="180" style="color:#fe3d00; font-weight:bold">{$line_base.code}</td> 
+    <td width="80" align="center">出发地点</td> 
+    <td bgcolor="#FFFFFF" width="180" style="color:#585556">{$start_city_belong.names}</td> 
+    <td width="80" align="center">成团方式</td> 
+    <td bgcolor="#FFFFFF" width="180" style="color:#585556">{$line_base.ly_type}</td> 
+    <td align="center">发团公司</td> 
+    <td bgcolor="#FFFFFF" style="color:#585556">{$line_base.compnay}</td> 
+  </tr>
+  <tr bgcolor="#cef0f1" height="50">  
+    <td align="center" width="80">合同下载</td> 
+    <td bgcolor="#FFFFFF" width="180" style="color:#585556">下单后(无须支付)自动发送</td> 
+    <td align="center" width="80">合作拼团</td> 
+    <td bgcolor="#FFFFFF" width="180"><a href="#plist.html" style="cursor:pointer; color:#585556">查看/发起  (已有<span id="pings">0</span>个拼团)</a></td> 
+    <td align="center" width="80">优惠政策</td> 
+    <td bgcolor="#FFFFFF" width="180"><a style="cursor:pointer;color:#585556" onclick="showTipsWindown('游记返现规则','ajaxs','/ajax/article_ajax.do?id=381',650,350);" );"="">游记返现</a> <a style="cursor:pointer" onclick="showTipsWindown('老客户优惠规则','ajaxs','/ajax/article_ajax.do?id=382',650,350);" );"="">老客户优惠</a> </td> 
+    <td align="center">支付方式</td> 
+    <td bgcolor="#FFFFFF" style="color:#585556">支付宝、银行柜台、ATM转账</td> 
+  </tr>
+  <tr bgcolor="#cef0f1" height="50">  
+    <td align="center" width="80">服务流程</td> 
+    <td bgcolor="#FFFFFF" colspan="5" width="700"><img src="/style/images/ht.jpg" width="723" height="67" alt="服务流程"></td>
+    <td colspan="2" rowspan="4" bgcolor="#FFFFFF" align="center"><img src="/style/images/services_img.gif" width="250" height="240" alt="客服微信：xingye_cc，客服电话：400 627 1861"></td> 
+  </tr>
+  <tr bgcolor="#cef0f1" height="50">  
+    <td align="center" width="80">行程预览</td> 
+    <td bgcolor="#FFFFFF" colspan="5" width="700" style="color:#585556">{$line_base.ps}</td> 
+    </tr>   
+  <tr bgcolor="#cef0f1" height="50">  
+    <td align="center" width="80">特别告知</td> 
+    <td bgcolor="#FFFFFF" colspan="5" width="700">
+	<img src="/style/images/chose.jpg" width="621" height="286" alt="VIP">
+	<br>
+	
+</td> 
+    </tr>    
+</tbody></table>
+</div>
+
+      </div>
+      <if condition="$travel_price_list neq ''">
+      <div class="boat">
+      <div id="pricetitle" style="margin:10px 0px 0px 0px;">
+              <ul style="padding:0; margin:0;">
+                <li><a id="bbc_btn_0" style="cursor:pointer" onclick="tabit(this,5)" class="postion">2-3人包团</a></li>
+                <li><a id="bbc_btn_1" style="cursor:pointer" onclick="tabit(this,5)">4-6人包团</a></li>
+                <li><a id="bbc_btn_2" style="cursor:pointer" onclick="tabit(this,5)">7-9人包团</a></li>
+                <li><a id="bbc_btn_3" style="cursor:pointer" onclick="tabit(this,5)">10-12人包团</a></li>
+                <li><a id="bbc_btn_4" style="cursor:pointer" onclick="tabit(this,5)">13人及以上</a></li>
+              </ul>
+            </div>
+            <div class="pricecontent" style="margin-left:0px;width:100%;">
+               <div id="bbc_div_0" style="display: block;position: relative">
+                  <input tabindex="1" type="text" name="go_time" id="go_time" style="display:none" />
+                  <textarea id="travel_price_list" style="display: none;">{$travel_price_list}</textarea>
+                  <div tabindex="2" class="the_calendar"></div>
+                  <span style="display:none"><span id="price_type">周末价</span></span>
+                  <span class="scroll_REF" style="height:0;">&nbsp;</span>
+               </div>
+               <div id="bbc_div_1" style=" display:none;  border-top: 1px #05b5b5 solid;">如果您的人数大于4人，那么需要单独报价，请致电400-627-1861或加微信xingye_cc获取(要求越详细报价越精准)</div>
+               <div id="bbc_div_2" style=" display:none;  border-top: 1px #05b5b5 solid;">如果您的人数大于7人，那么需要单独报价，请致电400-627-1861或加微信xingye_cc获取(要求越详细报价越精准)</div>
+               <div id="bbc_div_3" style=" display:none;  border-top: 1px #05b5b5 solid;">如果您的人数大于10人，那么需要单独报价，请致电400-627-1861或加微信xingye_cc获取(要求越详细报价越精准)</div>
+               <div id="bbc_div_4" style=" display:none;  border-top: 1px #05b5b5 solid;">如果您的人数大于13人，那么需要单独报价，请致电400-627-1861或加微信xingye_cc获取(要求越详细报价越精准)</div>
+            </div>
+       
+      </div>
+      </if>
+      
+      <div class="pins"> 
+      <div id="trip_title" style="width:100%; margin-left:0px;margin-right:0px;margin-bottom:0px;">
+	     <ul style="padding:0; margin:0;">
+		    <li><a id="bbs_btn_0" style="cursor:pointer" onclick="tabit(this,2)" class="postion">拼团自由行</a></li>
+		    <li><a id="bbs_btn_1" style="cursor:pointer" onclick="tabit(this,2)">拼团说明</a></li>
+		    <li style="width:300px;background:none;border-top:none;border-right:none;color:#993300;font-weight:bold;font-size:12px; padding-bottom:0px;"><a style="cursor:pointer" onclick="showTipsWindown('发起拼团','{:U('order_ping',array('id'=>$line_base['id']))}');" ><img src="/style/images/faqi.jpg" width="191" height="52" alt="发起拼团"></a></li>
+	     </ul>
+	     <div class="clear"></div>
+       </div>
+       <div id="bbs_div_0" style="display:block;">
+            <div id="plist">
+                <table width="100%" cellpadding="0" cellspacing="1" bgcolor="dfdfdf" align="center" style="text-align:center "> 
+                   <tbody>
+                      <tr align="center" bgcolor="#cef0f1" style="font-weight:bold; color:#007c86; font-size:15px;border:1px solid #0db7b7;">  
+                         <td width="168" height="50" style="border:1px solid #0db7b7;">发起人</td> 
+                         <td width="168" style="border:1px solid #0db7b7">报名截止</td> 
+                         <td width="168" style="border:1px solid #0db7b7">旅行时间</td> 
+                         <td width="168" style="border:1px solid #0db7b7">目标人数</td> 
+                         <td width="168" style="border:1px solid #0db7b7">最终人数</td> 
+                         <td width="168" style="border:1px solid #0db7b7">诚意金</td> 
+                         <td width="168" style="border:1px solid #0db7b7">感谢金</td> 
+                      </tr> 
+                      <empty name="ping_list">
+                        <tr align="center" bgcolor="#FFFFFF">  
+                            <td style="color:#3c393b; font-weight:bold; font-size:15px; border:1px solid #0db7b7" align="center" colspan="8" height="35">暂时没有人发起拼团，你来做第一个吧</td> 
+                        </tr>  
+                      <else/>
+                         <volist name="ping_list" id="ping">
+                           <tr align="center" bgcolor="#FFFFFF" >  
+                              <td width="168" height="50" style="border:1px solid #0db7b7;">{$ping.name}</td> 
+                              <td width="168" style="border:1px solid #0db7b7; ">{$ping.start}</td> 
+                              <td width="168" style="border:1px solid #0db7b7; ">{$ping.ends}</td> 
+                              <td width="168" style="border:1px solid #0db7b7; ">{$ping.mins}人</td> 
+                              <td width="168" style="border:1px solid #0db7b7; ">{$ping.maxs}人</td> 
+                              <td width="168" style="border:1px solid #0db7b7; ">{$ping.cmoney}</td> 
+                              <td width="168" style="border:1px solid #0db7b7; ">{$ping.cheap}%</td> 
+                          </tr> 
+                         </volist>
+                      </empty>
+                   </tbody>
+                </table> 
+            </div>
+       </div>
+       <div id="bbs_div_1" style="display:none;">
+              <div class="ptripdiv">
+              <table width="100%" cellpadding="0" cellspacing="0" align="center" class="ptrip"> 
+              <tbody>
+                  <tr>  <td><span>  »  什么是拼团？</span><br>拼团是兴业旅行社推出的一种新兴合作旅行模式，以小包团为基准，最终按实际成行人数的小包团价格计费，主要是为解决人数少价格较高和部分人喜欢人多热闹等问题。发起拼团者可指定人数以及提出其他要求，同时还可以获取<font color="#993300">感谢金</font>，保证旅行质量的同时，结交更多朋友，节省更多经费；</td></tr>
+                  <tr><td><span>  »  如何拼团？</span><br>拼团有三种方式，一是参加官方发布的准拼团，另一种是自行发布拼团计划，最后一种是参加其他人发布的拼团；</td></tr>
+                  <tr><td><span>  »  什么是诚意金？</span><br>为提高拼团的成功率，同时也为保障团友相互的权益，发布或者参加拼团都必须预付诚意金，拼团成功后抵作团费；</td></tr>
+                  <tr><td><span>  »  诚意金能退吗？</span><br>对于发起者而言，如没有人跟团，随时可申请退款，如在报名截止日期前有人跟团，那么诚意金不退，如报名截止日期已到，且人数未达目标人数，诚意金全额退还；<br>对于跟团者而言，诚意金一经支付，报名截止日期未到或已达到目标人数，不接受退款申请，如退团且没有其他人补上的情况下，诚意金不退，如果截止到报名日期未达到指定人数，那么诚意金全额退还；<br>不退的诚意金留给未退团团友充当团费，诚意金退款              时间为24小时；</td></tr>
+                  <tr><td><span>  »  什么是感谢金？</span><br>为感谢发起者，拼团成功后，所有跟团者需一起帮发起者支付的部分团费，具体比例以发起者标注为准，最低为不收取，最高为发起者团费总额的10%，跟团者按人平均分配，成人与儿童均一样；</td></tr>
+                  <tr><td><span>  »  什么是官方拼团？</span><br>官方拼团是由兴业发起的拼团，一般均为保证发团，具体以说明为准，官方拼团在未达到报名截止日期诚意金不退，达到报名截止日期但人数达到目标人数，诚意金也不退，不退的诚意金不作为其他团友的团费；</td></tr>
+                  <tr><td><span>  »  什么是服务费？</span><br>服务费是指官方发起的拼团，拼团成功后，所有团友需要额外支付的费用(如1%，即为个人团费总额的1%)；</td></tr>
+                  <tr><td><span>  »  拼团成功后该怎么办？</span><br>拼团成功后(达到目标人数视为拼团成功)，需要在24小时内补足预定金，为防止中途有人退团导致不能成行，故预定金为30%，有人退团，预定金不退，团正常发，不管几人，且价格按拼团成功人数计，预定金为我方补充团费成本，不返还给其他团友，请知晓；<div id="plist.html"></div></td> </tr>  
+              </tbody>
+              </table>
+              </div>
+       </div>
+
+      <empty name="zutuan_list">
+      <else/>
+       <div class="baoming" >
+              <table width="100%" cellpadding="0" cellspacing="1" bgcolor="dfdfdf" align="center" style=" "> 
+                   <tbody>
+                      <tr align="center" bgcolor="#cef0f1" style="font-weight:bold; color:#007c86; font-size:15px;border:1px solid #0db7b7;">  
+                      <td width="131" height="50" style="border:1px solid #0db7b7;">团号</td> 
+                      <td width="131" style="border:1px solid #0db7b7">开始日期</td> 
+                      <td width="131" style="border:1px solid #0db7b7">结束日期</td> 
+                      <td width="131" style="border:1px solid #0db7b7">成人单价/预付</td> 
+                      <td width="131" style="border:1px solid #0db7b7">儿童单价/预付</td> 
+                      <td width="131" style="border:1px solid #0db7b7">要求人数</td> 
+                      <td width="131" style="border:1px solid #0db7b7">限制</td> 
+                      <td width="131" style="border:1px solid #0db7b7">余位</td> 
+                      <td width="131" style="border:1px solid #0db7b7">&nbsp;</td> 
+                      </tr> 
+                         <volist name="zutuan_list" id="vo">
+                           <tr align="center" bgcolor="#fff" style="font-weight:bold; color:#585757; font-size:15px;border:1px solid #0db7b7;">  
+                                <td width="131" height="40" style="border:1px solid #0db7b7;">{$vo.names}</td> 
+                                <td width="131" style="border:1px solid #0db7b7">{$vo.opentime}</td> 
+                                <td width="131" style="border:1px solid #0db7b7">{$vo.endtime}</td> 
+                                <td width="131" style="border:1px solid #0db7b7">￥{$vo.man_price}/{$vo.man_price_yufu}</td> 
+                                <td width="131" style="border:1px solid #0db7b7">￥{$vo.er_price}/{$vo.er_price_yufu}</td> 
+                                <td width="131" style="border:1px solid #0db7b7">最少{$vo.count_ren}人</td> 
+                                <td width="131" style="border:1px solid #0db7b7">无</td> 
+                                <td width="131" style="border:1px solid #0db7b7">N/A</td> 
+                                <td width="131" bgcolor="fe5b22" style="border:1px solid #0db7b7; text-align:center"><a style="cursor:pointer; color:#FFF" onclick="showTipsWindown('预定{$vo.names}','{:U('order_ding',array('id'=>$vo[id]))}');">我要报名</a></td> 
+                           </tr>  
+                         </volist>
+                  </tbody>
+            </table> 
+         </div>
+        </empty>
+         
+      </div>
+      
+      <div class="detail_road">
+         <h4>&nbsp;</h4>
+         <div class="line_my_content">
+           <if condition="$view_method eq 2">
+            <div class="feature">{$lineinfo.General}</div>
+            <else/>
+            <include file="travel:day_model" />
+          </if>
+         </div>
+         <h2>费用包含</h2>
+         <div class="feature">{$lineinfo.contain}</div>
+         <h2>费用不包含</h2>
+         <div class="feature">{$lineinfo.notcontain}</div>
+         <h2>自费项目</h2>
+         <div class="feature">{$lineinfo.selfpay}</div>
+         <h2>预订须知</h2>
+         <div class="feature"> {$lineinfo.order_info} </div>
+         <h2>温馨提示</h2>
+         <div class="feature"> {$lineinfo.tip}</div>
+      </div>
+      
+      <div class="hudong">
+        <h4>&nbsp;</h4>
+        <div class="sumitss">
+            <form action="{:U('consult',array('id'=>$line_base['id']))}" ajax="true" class="check-form" method="post" id="consult">
+                   <textarea name="question1" id="textarea" datatype="*5-255" cols="55" rows="5" class="textarea" tip="请输入文本" nullmsg="请输入文本"></textarea>
+                  <input name="consult_submit" type="submit" value="提交咨询" class="btn warning active"></td>
+            </form>
+        </div>
+        <div class="dialog"  id="lists_que">
+          <empty name="lists_que">
+                <span class="down" style="text-align:center">该产品暂无咨询信息！ </span>
+          <else/>
+                <span class="down">&nbsp;</span>
+               <volist name="lists_que" id="que">
+                   <div class="dialog_left">
+                        <div class="toux"><img height="45" src="/style/images/niu.jpg" ></div>
+                        <div class="dia_cont">{$que.question1}</div>
+                        <div class="clear"></div>
+                   </div>
+                   <if condition="$que['answer'] neq ''">
+                   <div class="dialog_right">
+                       <div class="toux"><img height="45" src="/style/images/touxi.jpg" ></div>
+                       <div class="dia_cont">{$que.answer|default="请等待回复"}</div>
+                       <div class="clear"></div>
+                   </div>
+                   </if>
+                </volist>
+            </empty>
+          
+        </div>
+        <div class="clear"></div>
+    </div>
+  </div>
+  
+
+

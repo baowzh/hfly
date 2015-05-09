@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*景点管理_查看订单css*/
+.page_content_nav{ padding:10px 10px 10px 10px;}
+.order{  }
+.title_order{ background:#F5F5F5; height:34px; width:99.9% !important; }
+.title_order2{ background:#F5F5F5; height:34px; width:99.9% !important; }
+.order_font{font-size:14px; color:#666666; font-weight:bold; line-height:34px; padding-left:20px; display:block;}
+.order_main{ font-size:12px; color:#838383; line-height:34px; margin-left:80px; }
+.order_main_t{ font-size:12px; color:#838383; line-height:34px;  background:#F5F5F5;}
+.order_main_f{ padding-left:50px;}
+.order_main_red{ color:#F00;}
+
+/*调试添加css end*/
+.add{border:none !important;}

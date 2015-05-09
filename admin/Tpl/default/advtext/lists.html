@@ -1,0 +1,67 @@
+<script type="text/javascript">
+    $(function(){
+        $.fn.allselect({
+            allselectclass:"allselect",//class
+            cselectname: "c_selected"//name
+        });
+    });
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('lists')}">文字广告</a> |
+        <a href="{:U('add')}">添加</a>
+    </ul>
+</div>
+
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th><a href="javascript:void(0);" onclick="sel_all()">全选</a></th>
+                <th>标题</th>
+                <th>显示顺序</th>
+                <th>起始时间</th>
+                <th>结束时间</th>
+                <th>展示区域</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="lists" id="vo">
+                <tr>
+                    <td><input type="checkbox" class="sel" id="sel_{$vo.aid}" value="{$vo.aid}" name="items_{$vo.aid}" /></td>
+                    <td>{$vo.title}</td>
+                    <td>{$vo.f_sort}</td>
+                    <td>{$vo.start_time|f_date}</td>
+                    <td>{$vo.end_time|f_date}</td>
+                    <td>{$vo.area}</td>
+                    <td>
+                        <a href="{:U('edit',array('id'=>$vo['aid']))}" >编辑</a>&nbsp;|&nbsp;<a href="{:U('del',array('id'=>$vo['aid']))}" onclick="return atr_confirm(this.href,'确认删除吗')">删除</a>
+                    </td>
+
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="删除" onclick="myform.action='{:U('deleteall')}';"/>
+        <input type="button" class="button" name="dosubmit" value="排序"
+               onclick="myform.action='{:U('sort_list')}';$('#myform').submit();"/>
+        {$page}
+    </div>
+</form>
+<script type="text/javascript">
+function sel_all(){
+    $('input.sel').each(function(index){
+        if($(this).attr('checked')){
+            $(this).removeAttr('checked');
+        }else{
+            $(this).attr('checked', 'checked');
+        }
+    });
+}
+
+</script>
+

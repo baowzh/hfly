@@ -1,0 +1,7 @@
+{__NOLAYOUT__}
+<volist name="target_list" id="tarid" empty="无城市记录">
+    <label>
+    <input id="target_{$tarid.id}" datatype="*" errormsg="至少选择一个目的地" submsg=" " fortip="target_list" min="1" type="checkbox" name="target[]" <in name= "tarid.area_id" value="$default" >checked="checked"</in> value="{$tarid.area_id}">&nbsp;
+      {$tarid.names}</label>
+  </volist>
+

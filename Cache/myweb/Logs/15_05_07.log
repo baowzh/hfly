@@ -1,0 +1,51 @@
+[ 2015-05-07T20:55:20+08:00 ] 127.0.0.1 /myweb/
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000590s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000751s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.007760s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007910s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000423s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000412s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000293s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000494s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001860s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.000573s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000657s ]
+
+[ 2015-05-07T20:55:27+08:00 ] 127.0.0.1 /myweb/index.php
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000584s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000695s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.000950s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.001047s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000381s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000417s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000261s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000496s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001776s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.000598s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000678s ]
+
+[ 2015-05-07T20:55:30+08:00 ] 127.0.0.1 /myweb/index.php
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000881s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001063s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.001568s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.001742s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000578s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000555s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000420s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000741s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002697s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.000806s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000945s ]
+

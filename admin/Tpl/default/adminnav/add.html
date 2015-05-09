@@ -1,0 +1,74 @@
+<include file="Public:header" />
+<script type="text/javascript">
+	function formcheck()
+{
+	if($.trim($("#names").val())=='')
+	{
+		$("#msg_names").text("请输入菜单名称");
+		$("#names").focus();
+		return false;
+	}
+	if($.trim($("#sort").val())=='')
+	{
+		$("#msg_sort").text("请输入排序");
+		$("#sort").focus();
+		return false;
+	}
+	if($.trim($("#url").val())=='')
+	{
+		$("#msg_url").text("请输入URL");
+		$("#sort").focus();
+		return false;
+	}
+} 
+</script>
+<form action="{:U('Adminnav/add')}" method="post" onsubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">添加菜单</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="{:U('Adminnav/index')}">菜单列表</a></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="保存" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+  <input type=hidden value="{$article_edit['id']}" name="id">
+<table border="0" cellspacing="0" cellpadding="0"  class="t3">
+<tr class="table_article">
+    <td align="right">&nbsp;</td>
+    <td><font color="red">{$message}</font></td>
+  </tr>
+  <tr class="table_article">
+    <td align="right">上级菜单</td>
+    <td><label>
+    <select id="pid" name="pid">
+      <option value="0">≡ 作为一级菜单 ≡</option>
+     	 {$option_str} 
+	  </select>
+    </label></td>
+  </tr>
+  <tr class="table_article">
+    <td align="right"><span class="msg">*</span>菜单名称</td>
+    <td><label>
+      <input type="text" name="names" id="names" value="" />
+    </label><span id="msg_names" class="msg"></span></td>
+  </tr>
+  <tr class="table_article">
+    <td align="right"><span class="msg">*</span>排序</td>
+    <td><label>
+      <input type="text" name="sort" id="sort" value="0" />
+    </label><span id="msg_sort" class="msg"></span></td>
+  </tr>
+  <tr class="table_article">
+    <td align="right"><span class="msg">*</span>URL</td>
+    <td>
+    <label>
+      <input name="url" type="text" id="url" value="#" size="50" maxlength="50" />
+    </label><span id="msg_url" class="msg"></span></td>
+  </tr>  
+  </table>
+</form>
+<include file="Public:footer" />

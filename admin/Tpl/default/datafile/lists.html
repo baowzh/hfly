@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    $(function(){
+        $.fn.allselect({
+            allselectclass:"allselect",//class
+            cselectname: "c_selected"//name
+        });
+    });
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a class="on" href="{:U('lists')}">未使用的图片</a>
+    </ul>
+</div>
+
+<form name="myform" id="myform" action="{:U('delfile')}" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+            <tr>
+                <th><input type="checkbox" value="" class="allselect" id="check_box">
+                    <label for="check_box" class="for_box">全选/全不选</label></th>
+                <th>图片预览</th>
+                <th>存放路径</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="lists" id="vo">
+                <tr>
+                    <td id="td_sel"><input type="checkbox" name="deleteall[]" class="sel c_selected" id="sel_{$vo.id}" value="{$vo.path}"/></td>
+                    <td><a href="{$vo.img_path}" target="_blank"><img src="{$vo.img_path}" style="max-width: 50px; max-height: 50px;" alt="{$vo.img_path}"/></a></td>
+                    <td>{$vo.path}</td>
+                    <td>{$vo.filemtime|f_time}</td>
+                    <td>
+                        <a href="{:U('download')}?filename={$vo['url']}" >下载</a>&nbsp;|&nbsp;
+                        <a href="{:U('delfile')}?filename={$vo['url']}" onclick="return atr_confirm(this.href,'确认删除吗')">删除</a>
+                    </td>
+
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+        <input type="button" class="button" name="dosubmit" value="删除"
+               onclick="return confirm_deleteall()"/>
+        {$page}
+    </div>
+</form>
+
+

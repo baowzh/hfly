@@ -1,0 +1,56 @@
+<include file="Public:header" />
+<style type="text/css">
+.div1 { width: 142px; height: 158px; background-color: #F0F0EE; margin: 5px;float: left;}
+.div2 { float:left;height:128px;width:142px; margin-top:2px;}
+.div3 { float:left;margin:8px 0px 0px 2px;height:12px;}
+</style>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('show_list')}">线路列表</a>
+        <a class="on" href="{:U('tao_list')}/line_id/{$line_id}">线路套餐列表</a>
+        <a href="__URL__/tao_add/line_id/{$line_id}">添加套餐</a>
+    </ul>
+</div>
+<form name="myform" id="myform" action="{:U('imgdeleteall')}" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0"  width="100%">
+            <thead>
+                <tr>
+                    <th width="80"><a href="javascript:void(0);" onclick="sel_all();">ID</a></th>
+                    <th style="text-align: left;">团号</th>
+                    <th>开始日期</th>
+                    <th>结束日期</th> 
+                    <th>成人单价/预付</th> 
+                    <th>儿童单价/预付</th> 
+                    <th>要求人数</th> 
+                    <th>限制</th> 
+                    <th>状态</th> 
+                    <th>&nbsp;</th> 
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="ulbc" id="tr_{$vo.id}">
+                    <td id="td_sel">{$vo.id}</td>
+                    <td style="text-align: left;">{$vo.names}</td>
+                    <td>{$vo.opentime}</td>
+                    <td>{$vo.endtime}</td>
+                    <td>{$vo.man_price}/{$vo.man_price_yufu}</td>
+                    <td>{$vo.er_price}/{$vo.er_price_yufu}</td>
+                    <td>{$vo.count_ren}</td>
+                    <td>{$vo.place}</td>
+                    <td><if condition="$vo.status eq 0">隐藏<elseif condition="$vo.status eq 1" />显示</if></td>
+                    <td>
+                    <a href="{:U('tao_edit',array('id'=>$vo['id'],'line_id'=>$line_id))}">编辑</a>&nbsp;
+                    <a href="{:U('tao_del',array('id'=>$vo['id'],'line_id'=>$line_id))}" onclick= "return atr_confirm(this.href)">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        
+        
+    </div>
+</form>
+
+<include file="Public:footer" />

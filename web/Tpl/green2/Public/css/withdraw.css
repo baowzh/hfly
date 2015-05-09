@@ -1,0 +1,13 @@
+/* CSS Document */
+
+/*提交现金CSS begin*/
+.tab_content{ font-weight:normal; background:#fff; text-align:justify; font-size:14px; line-height:20px; color:#333; display:block; height:auto; min-height:200px;}
+.tab_content ul .button{ color:#0033cc; font-size:12px; color:blue; float:left; padding:2px;}
+/*提交现金CSS end*/
+
+/*提现申请CSS begin*/
+table.form { text-align:justify; font-size:14px; line-height:43px; color:#666666; padding:0; margin:-15px 0;  }
+table.form input.form1{  border:1px solid #aabbcc;   font-size:12px; line-height:12px; padding:0px 5px; margin-top:10px; margin-right:10px; height:25px; color:#303030;}
+table.form .textright{text-align:right}
+#lineheight50 { line-height:50px;}
+/*提现申请CSS end*/

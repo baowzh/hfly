@@ -1,0 +1,59 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('lists')}">文字广告</a> |
+        <a class="on" href="{:U('add')}">添加</a>
+    </ul>
+</div>
+<form name="myform" method="post" id="myform" action="{:U('add')}" >
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="10%"><span class="red">*</span>名称:</th>
+            <td width="90%">
+                <input type="text" name="title" id="title" class="input-text"/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>广告开始时间</th>
+            <td><input name="start_time" type="text" id="start_time" value='' class="input-text calender"/></td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>广告结束时间</th>
+            <td>
+                <input name="end_time" type="text" id="end_time" value='' class="input-text calender"/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>展示区域</th>
+            <td>
+                <volist name="lists" id="vo">
+                    <label><input id="area_id[]" name="area_id" value="{$vo.id}" type="radio">{$vo.names}</label>
+                </volist>
+            </td>
+        </tr>
+        <tr><th><span class="red">*</span>状态：</th>
+            <td>
+                <label><input name="status" value="1"
+                              type="radio" checked="checked">启用</label>
+                <label><input name="status" value="0"
+                              type="radio">停用</label>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>排序</th>
+            <td>
+                <input name="sort" type="text"  class="input-text url" id="pos" value=''/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>广告链接</th>
+            <td>
+                <input name="url" class="input-text url" type="text" id="url" value=''/>
+            </td>
+        </tr>
+    </table>
+    <div id="img1"></div>
+    <div id="btnbox" class="btn">
+        <input type="submit" name="submit" value=" 保 存 " class="button" >
+        <input type="reset" name="reset" value=" 重 置 " class="button">
+    </div>
+</form>

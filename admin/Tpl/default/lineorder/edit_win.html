@@ -1,0 +1,64 @@
+<form action="" method="post" target="main">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="640">
+        <tr>
+            <th width="99" height="18">订单号：</th>
+            <td>{$list.code}</td>
+        </tr>
+        <tr>
+            <th height="18">订单状态：</th>
+            <td><if condition="$list.o_status eq '1'">待处理
+            <elseif condition="$list.o_status eq '2'"/>待付款
+            <elseif condition="$list.o_status eq '3'"/>已付款
+            <elseif condition="$list.o_status eq '4'"/>已出团
+            <elseif condition="$list.o_status eq '5'"/>已点评
+            <elseif condition="$list.o_status eq '6'"/>已结束
+            <elseif condition="$list.o_status eq '7'"/>已取消
+        </if></td>
+        </tr>
+        <tr>
+            <th height="18">旅游线路名称：</th>
+            <td>{$list.names}</td>
+        </tr>
+        <tr>
+            <th height="18">出游人数：</th>
+            <td>{:count($order_userinfolist)}</td>
+        </tr>
+        <tr>
+            <th height="18">总金额：</th>
+            <td><input name="amount" value='{$list.total_money}'></td>
+        </tr>
+        <tr>
+            <th height="18">预付金额：</th>
+            <td><input name="front_money" value="{$list.o_front_money}"></td>
+        </tr>
+        <tr>
+            <th height="18">使用奖金：</th>
+            <td><input name="used_award" value="{$list.used_award}"></td>
+        </tr>
+        <tr>
+            <th height="18">出发日期：</th>
+            <td><input name="go_time" value="{$list.go_time|f_date}"></td>
+        </tr>
+        <tr>
+            <th height="18">联系人：</th>
+            <td><input name="contact_name" value="{$list.contact_name}"></td>
+        </tr>
+        <tr>
+            <th height="18">联系方式：</th>
+            <td><b>电话：</b><input name="contact_num" value="{$list.contact_num}">&nbsp;&nbsp;<b>Email：</b><input name="contact_email" value="{$list.contact_email}"></td>
+        </tr>
+        </tr>
+        <volist name="order_userinfolist" id='vo'>
+            <tr>
+                <th height="18">第{$i}位游客：</th>
+                <td><b>姓名：</b>{$vo.names}&nbsp;/&nbsp;<b><if condition="$vo.credentials eq '0'">身份证<elseif condition="$vo.credentials eq '1'" />护照<elseif condition="$vo.credentials eq '2'">军官证<elseif condition="$vo.credentials eq '3'">回乡证<elseif condition="$vo.credentials eq '4'">台胞证<elseif condition="$vo.credentials eq '5'">国际海员证</if> ：</b>{$vo.content}</td>
+                                            </tr>
+                                            </volist>
+                                            </tr>
+                                            <tr>
+                                                <th height="18">点评奖金：</th>
+                                                <td><input name="review_award" value="{$list.review_award}"></td>
+                                            </tr>
+                                            </table>
+    <div id="btnbox" class="btn"><input type="submit" name="submit" value=" 保 存 " class="button"><input type="reset" name="reset" value=" 重 置 " class="button"></div>
+                                            </form>

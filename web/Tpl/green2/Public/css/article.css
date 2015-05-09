@@ -1,0 +1,90 @@
+/* CSS Document */
+
+#body{
+	background-color:#ebebeb;
+	margin-top:10px;
+	border:1px solid #D9D9D9;
+}
+#body .title{
+	background:url(../images/bg47.jpg) repeat-x;
+	height:46px;
+}
+#body .title h3{
+	padding:0 20px;
+	margin:0;
+	font-family:"微软雅黑";
+	font-size:18px;
+	font-weight:bold;
+	letter-spacing:2px;
+	line-height:46px;
+}
+#body .row table{
+	background-color:#ebebeb;
+	width:100%;
+	border-collapse:collapse;
+	margin:0;
+	padding:0;
+}
+#body .row table td{
+	margin:0;
+	padding:0;
+	border:none;
+	vertical-align:top;
+}
+#body .row .list{
+	background-color:#ebebeb;
+	color:#354872;
+}
+#body .row .list ul{
+	margin:0;
+	padding:0;
+}
+#body .row .list li{
+	height:51px;
+	padding-left:20px;
+	border-bottom:#E5E5E5 solid thin;
+	line-height:51px;
+	cursor:pointer;
+	font-size:15px;
+	position:relative;
+}
+#body .row .list li:not([class='on']):hover{
+	background-color:rgba(190, 190, 190, 0.2);
+	color:inherit;
+}
+#body .row .list a{ color:inherit;}
+#body .row .list li span{
+	margin-right: 20px;
+	position: absolute;
+	right:0px;
+	font-size:18px;
+}
+#body .row .list .on{
+	background-color:#69BAE4;
+	color:#FFF;
+	font-weight:bold;
+}
+#body .row .content{
+	background-color:#FFF;
+	width:970px;
+	-moz-box-shadow:-2px 0 2px #BBB;              
+   -webkit-box-shadow:-2px 0 2px #BBB;           
+   box-shadow:-2px 0 2px #BBB;
+}
+#body .row .content .body{padding:15px;}
+
+.content .body .article-list{
+	height:135px;
+	width:100%;
+	border-collapse:collapse;
+	background-color:#F4F4F4 !important;
+}
+.content .body .article-list .text{padding:10px !important;}
+.content .body .article-list .booked{
+	color:#CE8B00;
+	font-size:13px;
+}
+.content .body .article-list .gray{color:#777;text-indent:2em;}
+.article-list a{ font-size:16px; border-bottom:dashed thin #09C}
+.page{margin:15px;}
+p{margin:0 !important;padding:0 !important;}

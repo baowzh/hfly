@@ -1,0 +1,25 @@
+<div class="col-19 omega page_content">
+  <div class="col-4 alpha title on">账户明细</div>
+  <div class="col-18 alpha body">
+    <table width="100%" class="table_list">
+      <tr>
+        <th>流水号</th>
+        <th>说明</th>
+        <th>金额</th>
+        <th>时间</th>
+        <th>余额</th>
+      </tr>
+      <volist name="list" id="vo"> 
+	<tr>
+          <td>{$vo.id}</td>
+          <td>{$vo.reason}</td>
+          <td>{$vo.amount}</td>
+          <td>{$vo.adddate} {$vo.addtime}</td>
+          <td>{$vo.remain}</td>
+	</tr>
+      </volist>
+    </table>
+     <div class="page">{$page}</div>
+  </div>
+</div>
+

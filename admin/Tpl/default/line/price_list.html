@@ -1,0 +1,128 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('show_list')}">线路列表</a> |
+        <a class="on" href="{:U('price_list',array('line_id'=>$line_id))}">线路价格</a>
+    </ul>
+</div>
+<link href="../Public/css/tour.css" type='text/css' rel='stylesheet'/>
+<link rel="stylesheet" href="../Public/css/travle.css" type="text/css"/>
+<link rel="stylesheet" href="__ROOT__/Public/Plugins/agenda/agenda.css" type="text/css"/>
+<script type="text/javascript" src="__ROOT__/Public/Plugins/agenda/jquery.agenda.js"></script>
+<script type="text/javascript" src="../Public/js/jquery.set_stage.js"></script>
+
+<script language="javascript">
+    //指定天数的价格列表
+    var Public = '../Public'
+    //var price={$price_day_json};
+</script>
+价格优先级说明：指定日期价格=>指定阶段价格=>指定星期价格=>基本价格
+<form action="{:U('price_update')}" method="post">
+    <input name="line_id" type="hidden" value="{$line_id}"/>
+    <ul class="lineNav">
+        <li id="line_1" class="showline yes">基本价格</li>
+        <li id="line_2" class="showline">按阶段</li>
+        <li id="line_3" class="showline">按星期</li>
+        <li id="line_4" class="showline">指定日期</li>
+        <li id="line_5" class="showline">费用说明</li>
+    </ul>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" id="b_line_1" class="table_form">
+        <tr>
+            <td align="right" style="width: 100px;"><em>门市价</em>：</td>
+            <td>
+                <input type="text" name="RACKRATE" id="RACKRATE" class="text required number" value="{$price_pt.RACKRATE}"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">*<em>成人价</em>：</td>
+            <td>
+                <input type="text" name="price_adult" id="price_adult" class="text required number" value="{$price_pt.price_adult}"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">*<em>儿童价</em>：</td>
+            <td>
+                <input type="text" name="price_children" id="price_children" class="text required" value="{$price_pt.price_children}"/>
+            </td>
+        </tr>
+    </table>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" id="b_line_2" class="table_form" style="display:none">
+        <thead>
+        <tr>
+            <th colspan="2">
+                <ul class="lineNav">
+                    <li class="add_stage">添加新阶段</li>
+                    <li class="del_stage">删除选中阶段</li>
+                </ul>
+            </th>
+        </tr>
+        </thead>
+
+    </table>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" id="b_line_3" class="table_form" style="display:none">
+        {~$day=array(1=>"一",2=>"二",3=>"三",4=>"四",5=>"五",6=>"六",7=>"日")}
+        <volist name="day" id="d"> {~$price=$price_date[$key]}
+            <tr>
+                <td align="right" style="width: 100px;">星期{$d}：</td>
+                <td> 门市：
+                    <input type="text" name="date_RACKRATE_{$key}" id="date_RACKRATE_{$key}" class="number" value="{$price.RACKRATE}"/>
+                    成人：
+                    <input type="text" name="date_adult_{$key}" id="date_adult_{$key}" class="number" value="{$price.price_adult}"/>
+                    儿童：
+                    <input type="text" name="date_children_{$key}" id="date_children_{$key}" class="number" value="{$price.price_children}"/>
+                </td>
+            </tr>
+        </volist>
+    </table>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" id="b_line_4" style="display:none" class="table_form">
+        <tr>
+            <td id="agenda">
+            </td>
+        </tr>
+    </table>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" id="b_line_5" class="t2" style="display:none">
+        <tr>
+            <td> 费用包含</td>
+            <td><textarea name="contain" id="contain" class="kind-text">{:stripslashes($contain['contain'])}</textarea>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td> 费用不包含</td>
+            <td>
+                <textarea name="notcontain" id="notcontain" class="kind-text">{:stripslashes($contain['notcontain'])}</textarea>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td> 自费项目</td>
+            <td><textarea name="selfpay" id="selfpay" class="kind-text">{:stripslashes($contain['selfpay'])}</textarea>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <div style="height: 45px;"></div>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" value=" 保 存 " class="button">
+        <input TYPE="reset" value=" 重 置 " class="button">
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var agenda_data = '{$price_day_json}';
+        agenda_data= $.parseJSON(agenda_data);
+        var stage_data = '{$price_stage|json_encode}';
+        var stage_data_html = '{$stage_data_html}';
+        stage_data = $.parseJSON(stage_data);
+        $("#agenda").agenda({data: agenda_data});
+        $("#b_line_2").set_stage({data: stage_data, data_html: stage_data_html});
+        $(".showline").click(function () {
+            var id = this.id;
+            $('#b_' + id).show().siblings("table").hide();
+            $(this).addClass("yes").siblings("li").removeClass("yes");
+            $('#PriceForm').hide();
+            $(".linePopPrice").hide();
+        });
+
+    });
+
+</script>

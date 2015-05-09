@@ -1,0 +1,35 @@
+<include file="Public:header" />
+<load href="../Public/Js/swf2ckeditor.js" />
+<form action="__URL__/edit" enctype="multipart/form-data" method="post" >
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">回复留言</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="messages">留言列表</a></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="回复" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+  <input type=hidden value={$liuyan_edit['id']} name="id">
+<table border="0" cellspacing="0" cellpadding="0" class="t3">
+  <tr>
+    <td align="right"></span>留言日期</td>
+    <td><label><div>{$liuyan_edit['user_time']}</div></label></td>
+  </tr>
+  <tr>
+    <td align="right"></span>留言信息</td>
+    <td><label><div>{$liuyan_edit['content']}</div></label></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>回复</td>
+    <td><label>
+    <textarea name="contents" cols="50" rows="5" id="memo">{$liuyan_edit['contents']}</textarea>
+    </label>
+    <span id="msg_memo" class="msg"></span></td>
+  </tr>
+  </table>
+</form>
+<include file="Public:footer" />

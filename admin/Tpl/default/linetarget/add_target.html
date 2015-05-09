@@ -1,0 +1,141 @@
+<form name="myform" method="post" id="myform" action="{:U('linetarget/add_target')}" target="main">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="20%"><span class="red">*</span>出发城市:</th>
+            <td width="80%">
+                <select name="start_id">
+                    <option>请选择..</option>
+                    <volist name="start_city" id="sid">
+                        <option value="{$key}">{$sid}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th width="20%"><span class="red">*</span>线路类型:</th>
+            <td width="80%">
+                <select name="type_id">
+                    <option>请选择..</option>
+                    <volist name="line_type" id="ltid">
+                        <option value="{$key}">{$ltid}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>目的地:</th>
+            <td>
+                <select id="sel_1" name="cid0">
+                    <volist name="area_id[0]" id="vo">
+                        <option value="{$vo.id}">{$vo.names}</option>
+                    </volist>
+                </select>
+                <select id="sel_2" name="cid1">
+                    <volist name="area_id[1]" id="vo">
+                        <option value="{$vo.id}">{$vo.names}</option>
+                    </volist>
+                </select>
+                <select id="sel_3" name="cid2">
+                    <volist name="area_id[2]" id="vo">
+                        <option value="{$vo.id}">{$vo.names}</option>
+                    </volist>
+                </select>
+                <select id="sel_4" name="cid3">
+                    <volist name="area_id[3]" id="vo">
+                        <option value="{$vo.id}">{$vo.names}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>热门推荐:</th>
+            <td>
+                <label>
+                    <input type="radio" name="classify" value="1"/>是
+                </label>
+                <label>
+                    <input type="radio" name="classify" value="0" checked="checked"/>否
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>排序:</th>
+            <td>
+                <input type="text" name="sort" id="title" class="input-text"/>
+            </td>
+        </tr>
+    </table>
+    <div id="img1"></div>
+    <div style="height: 50px;"></div>
+    <div id="btnbox" class="btn">
+        <input type="submit" name="submit" value=" 保 存 " class="button">
+        <input type="reset" name="reset" value=" 重 置 " class="button">
+    </div>
+</form>
+<script type="text/javascript">
+    /*
+     * citybelong 所属城市四级联动下拉菜单
+     */
+    $(function ($) {
+        $("#sel_1").change(sel1);
+        $("#sel_2").change(sel2);
+        $("#sel_3").change(sel3);
+    });
+    function sel1() {
+        $.ajax({
+            type: "get",
+            url: "{:U('citySelect')}", dataType: "json",
+            data: {ciy: $("#sel_1").val()},
+            success: function (sel_2) {
+                $("#sel_4").hide();
+                $("#sel_3").hide();
+                $("#sel_2").hide();
+                $("#sel_2").empty();
+                $("#sel_3").empty();
+                $("#sel_4").empty();
+                if (sel_3 != null) {
+                    for (s in sel_2) {
+                        $("#sel_2").append("<option value='" + sel_2[s].id + "'>" + sel_2[s].names + "</option>");
+                    }
+                    $("#sel_2").show();
+                    sel2();
+                }
+            }});
+    }
+    function sel2() {
+        $.ajax({
+            type: "get",
+            url: "{:U('citySelect')}", dataType: "json",
+            data: {ciy: $("#sel_2").val()},
+            success: function (sel_3) {
+                $("#sel_4").hide();
+                $("#sel_3").hide();
+                $("#sel_3").empty();
+                $("#sel_4").empty();
+                if (sel_3 != null) {
+                    for (s in sel_3) {
+                        $("#sel_3").append("<option value='" + sel_3[s].id + "'>" + sel_3[s].names + "</option>");
+                    }
+                    $("#sel_3").show();
+                    sel3();
+                }
+            }});
+    }
+    function sel3() {
+        $.ajax({
+            type: "get",
+            url: "{:U('citySelect')}", dataType: "json",
+            data: {ciy: $("#sel_3").val()},
+            success: function (sel_4) {
+                $("#sel_4").hide();
+                $("#sel_4").empty();
+                if (sel_4 != null) {
+                    for (s in sel_4) {
+                        $("#sel_4").append("<option value='" + sel_4[s].id + "'>" + sel_4[s].names + "</option>");
+                    }
+                    $("#sel_4").show();
+                }
+            }});
+    }
+    /** citybelong 所属城市四级联动下拉菜单 **/
+</script>

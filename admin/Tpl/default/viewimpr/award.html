@@ -1,0 +1,19 @@
+<div id="nav" class="mainnav_title">
+  <ul>
+    <a class="on" href="#">点评奖金</a>
+  </ul>
+</div>
+<form action="{:U('check')}" method="post" target="main" >
+  <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="640">
+    <tr>
+      <th width="120" height="18"><span class="red">*</span>请输入奖金：</th>
+      <td width="150"><input type="text" name="bonus_comm" class="txt" id="bonus_comm" value="{$info.bonus_comm|intval}" datatype="n,numrange" min="0" max="{$info.bonus_comm|intval}" nullmsg="请填写奖金" errormsg="请填写整数" sucmsg=" " style="width:148px;" /><input name="impr_id" type="hidden" value="{$info.id}" /></td>
+      <td></td>
+    </tr>
+  </table>
+  <div id="btnbox" class="btn">
+    <INPUT TYPE="submit" class="button" name="save" value=" 确 认 ">
+    <input TYPE="reset" value=" 重 置 " class="button">
+  </div>
+</form>
+<include file="Public:footer"/>

@@ -1,0 +1,69 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+      <a class="on" href="{:U('show_list')}">地区库</a>
+    </ul>
+</div>
+<form name="myform" id="myform" action="" method="post">
+    <div class="table-list">
+        <table cellspacing="0" cellpadding="0" width="100%">
+
+            <thead>
+            <tr>
+                <th><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
+                <th style="text-align: left;">名称</th>
+<!--                <if condition="$pid == 1"><th>国旗</th></if>-->
+                <th>英文名称</th>
+                <th>排序</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="ulbc" id="tr_{$vo.id}">
+                    <td id="td_sel" align="center"><input type="checkbox" class="sel" id="sel_{$vo.id}" value="{$vo.id}" name="items_{$vo.id}"/></td>
+                    <td style="text-align: left;">
+                        <a href="{:U(\'show_list\')}?pid={$vo.id}">{$vo.names}</a>
+                    </td>
+<!--                    <if condition="$pid == 1"><td align="center"><img width="50px" height="40px" src="__ROOT__/web/File/flag/{$vo.id}.gif" /></td></if>-->
+                    <td align="center">{$vo.names_en}</td>
+                    <td align="center">{$vo.sort}</td>
+					<td align="center">
+                  <a href="{:U(\'show_list\')}?pid={$vo.id}">
+                      <if condition="$vo.levels == 1">国家&nbsp;|&nbsp;</if>
+                      <if condition="$vo.levels == 2">省市&nbsp;|&nbsp;</if>
+                      <if condition="$vo.levels == 3">城市&nbsp;|&nbsp;</if>
+                      <if condition="$vo.levels == 4">县/景区&nbsp;|&nbsp;</if>
+                  </a>
+                  <a href="javascript:;" onclick="art.dialog.open('{:U('edit')}?id={$vo.id}',{title:'地区编辑',width:550,height:400,window:'top',lock:'true'});">编辑</a>&nbsp;
+                <if condition="$vo.levels gt 4">
+                  |&nbsp;
+                  <a href="javascript:;" onclick="art.dialog.confirm('确定删除吗？',
+                  function()
+                  {
+                     document.location.href='{:U(\'del\')}?id={$vo.id}';
+                  })">删除</a></td>
+                </if>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn">
+       <!--  <input type="button" class="button" name="dosubmit" value="删除" onclick=""/>-->
+        <input type="submit" class="button" name="dosubmit" value="删除" onclick="myform.action='{:U('deleteall')}';"/>
+    </div>
+</form>
+<div class="page">{$page}</div>
+<script type="text/javascript">
+function sel_all(){
+    $('input.sel').each(function(index){
+        if($(this).attr('checked')){
+            $(this).removeAttr('checked');
+        }else{
+            $(this).attr('checked', 'checked');
+        }
+    });
+}
+
+
+</script>

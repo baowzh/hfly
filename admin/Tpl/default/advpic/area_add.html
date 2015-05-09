@@ -1,0 +1,54 @@
+<script type="text/javascript">
+    var root = "__ROOT__", index = "__Index__";</script>
+<link rel="stylesheet"
+      href="__ROOT__/Public/Plugins/uploadify/uploadify.css" />
+<script type="text/javascript"
+src="__ROOT__/Public/Plugins/uploadify/jquery.uploadify-3.1.min.js"></script>
+<script type="text/javascript"
+src="__ROOT__/Public/Plugins/uploadify/jquery.jUpload.js"></script>
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('show_lists')}">图片广告</a> |
+        <a class="on" href="{:U('pic_add')}">添加</a>
+    </ul>
+</div>
+<form name="myform" method="post" id="myform" action="{:U('advpic/area_add')}" >
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="10%"><span class="red">*</span>区域名:</th>
+            <td width="90%">
+                <input type="text" name="names" id="names" class="input-text"/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>英文标识:</th>
+            <td><input name="names_en" type="text" id="start_time" value='' class="input-text"/></td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>排序:</th>
+            <td>
+                <input name="sort" type="text" id="end_time" value='' class="input-text"/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>状态:</th>
+            <td>
+                <label><input name="status" value="1" type="radio">启用</label>
+                <label><input name="status" value="2" type="radio">禁用</label>
+            </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <input type="submit" name="submit" value=" 保 存 " class="button" >
+        <input type="reset" name="reset" value=" 重 置 " class="button">
+    </div>
+</form>
+<script type="text/javascript">
+    $(function() {
+        $("#picpath").jUpload({
+            success: function(data, info) {
+
+            }
+        });
+    })
+</script>

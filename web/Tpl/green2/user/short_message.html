@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="../Public/css/user.css"/>
+<script type="text/javascript" src="../Public/js/jquery.claymore.js"></script>
+
+<div class="wrapper w1200">
+<div style="margin-top:12px;"></div>
+    <div class="clear"></div>
+	<div class="col-24">
+    	<div class="col-6 alpha page_button_list">
+        	<div class="title">我的会员首页</div>
+            <ul class="claymore">
+              <li><a href="#">旅游线路</a></li>
+              <ul class="m2" style="display: none;">
+                  <li><a href="#">哈哈1</a> </li>
+                  <li><a href="#">哈哈2</a> </li>
+                  <li><a href="#">哈哈3</a> </li>
+              </ul>
+              <li><a href="#">旅游线路</a></li>
+              <ul class="m2" style="display: none;">
+                    <li><a href="#">哈哈1</a> </li>
+                    <li><a href="#">哈哈2</a> </li>
+                    <li><a href="#">哈哈3</a> </li>
+              </ul>
+              <li><a href="#">酒店管理</a></li>
+              <ul class="m2" style="display: none;">
+                    <li><a href="#">哈哈1</a> </li>
+                    <li><a href="#">哈哈2</a> </li>
+                    <li><a href="#">哈哈3</a> </li>
+              </ul>
+              <li><a href="#">景点管理</a></li>
+              <ul class="m2" style="display: none;">
+                    <li><a href="#">哈哈1</a> </li>
+                    <li><a href="#">哈哈2</a> </li>
+                    <li><a href="#">哈哈3</a> </li>
+              </ul>
+              <li><a href="#">游记攻略</a></li>
+              <li><a href="#">个人账户信息</a></li>
+            </ul>
+        </div>
+		<div class="col-19 omega page_content">
+        	<div class="col-4 alpha title on">收件箱</div>
+            <div class="col-17 alpha body">
+            	<table width="100%" class="table_list">
+                	<tr>
+                      <th>标题</th>
+                      <th>日期</th>
+                      <th>操作</th>
+                    </tr>
+                    <tr>
+                      <td>冻结账号</td>
+                      <td>2013-10-12 16:15</td>
+                      <td>删除&nbsp;&nbsp;查看</td>
+                    </tr>
+                    <tr>
+                      <td>冻结账号</td>
+                      <td>2013-10-12 16:15</td>
+                      <td>删除&nbsp;&nbsp;查看</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(".claymore").children("li").click(function(){
+        $(".claymore").children("li").each(function(){
+            $(".claymore").children("li").next("ul.m2").hide();
+        });
+        $(this).next("ul.m2").show();
+    });
+</script>

@@ -1,0 +1,71 @@
+<include file="Public:header" />
+<load href="__ROOT__/Admin/Vendor/editor/kindeditor.js" />
+<script language="javascript">
+function formcheck()
+{
+	/*if($.trim($("#cid").val())=='')
+	{
+		$("#msg_cid").text("请输入栏目");
+		$("#cid").focus();
+		return false;
+	}
+	if($.trim($("#title").val())=='')
+	{
+		$("#msg_title").text("请选择标题");
+		$("#title").focus();
+		return false;
+	}
+
+
+	if($.trim($("#contents").val())=='')
+	{
+		$("#msg_contents").text("请输入内容");
+		$("#contents").focus();
+		return false;
+	}*/
+}
+    KE.show({
+        id : 'content_1' //TEXTAREA输入框的ID
+   });
+</script>
+<form action="__URL__/add" enctype="multipart/form-data" method="post" onsubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">添加文章</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="lists">文章列表</a></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="保存" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+  <input type=hidden value=2 name="cid">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr class="table_article">
+    <td align="right"></span>栏目</td>
+    <td><label>
+    <select id="parentid" name="pid">
+{$option}
+    </select>
+    </label>
+    <span id="msg_cid" class="msg"></span>
+    </td>
+  </tr>
+  <tr class="table_article">
+    <td align="right"><span class="msg">*</span>标题</td>
+    <td><label>
+      <input type="text" name="title" id="title" />
+    </label><span id="msg_title" class="msg"></span></td>
+  </tr>
+  <tr class="table_article">
+    <td align="right"><span class="msg">*</span>内容</td>
+    <td><label>
+      <textarea name="contents" cols="70" rows="12" id="content_1"></textarea>
+    </label><span id="msg_contents" class="msg"></span></td>
+  </tr>
+  <input type="hidden" id="times" name="times" value="{}" />
+  </table>
+</form>
+<include file="Public:footer" />

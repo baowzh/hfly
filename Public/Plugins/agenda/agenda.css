@@ -1,0 +1,61 @@
+.agenda_box {
+    width: 496px;
+    border: 1px solid #4EABCA;
+}
+
+.agenda_box .agenda_title {
+    height: 29px;
+}
+
+.agenda_box .agenda_title span {
+    background: url("images/calendar_bg.gif") repeat-x scroll 0 0 transparent;
+    color: #FFFFFF;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    height: 29px;
+    line-height: 28px;
+    text-align: center;
+    width: 448px;
+}
+.agenda_box .agenda_title .title_left{
+    background: url("images/calendar_left.gif") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    float: left;
+    height: 29px;
+    width: 24px;
+    margin: 0;
+}
+.agenda_box .agenda_title .title_right {
+    background: url("images/calendar_right.gif") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    float: left;
+    height: 29px;
+    width: 24px;
+    margin: 0;
+}
+.agenda_box .table_date tbody td{
+    vertical-align: top;
+}
+
+.agenda_box .table_date tbody .vallist_del{
+    float: right;
+    width: 15px;
+}
+.agenda_box .table_date tbody span{
+    float: right;
+    display: inline;
+    height: auto;
+}
+.agenda_box .table_date tbody .dataval{
+    clear:both;
+    color: #FF6602;
+    padding-top:15px ;
+}
+.linePopPrice {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #FFAB00;
+    display: none;
+    position: absolute;
+    width: 300px;
+}

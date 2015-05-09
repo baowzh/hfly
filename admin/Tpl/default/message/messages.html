@@ -1,0 +1,60 @@
+<include file="Public:header" />
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FF0000;
+	float: left;
+}
+
+.texthidden{
+	width:300px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	border:1px solid #ddd;
+	text-align: left;
+	 }
+-->
+</style>
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="3">留言列表</th>
+  </tr>
+  <tr>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+   <td align="left"><div class="div_msg">{$flag}</div></td>
+  </tr>
+  </table>
+<table border="0" cellspacing="0" cellpadding="0" class="t2">
+  <tr>
+    <th>用户</th>
+    <th>内容</th>
+    <th>留言日期</th>
+	<th>回复日期</th>
+    <th>操作</th>
+  </tr>
+  <volist name="content" id="vo">
+  <tr>
+    <td>
+	{$vo.user_name}
+	</td>
+     <td width="150" style="text-align: lift;"> <div class="texthidden">{$vo.content}</div></td>
+    <td>{$vo.user_time}
+	<td>{$vo.admin_time}
+</td>
+    <td>
+	 <a href="__URL__/browse?{$vo.id}">查看</a>
+	 &nbsp;|&nbsp;
+    <a href="__URL__/edit?{$vo.id}">回复</a>
+    &nbsp;|&nbsp;
+    <a href="#" onclick=confirms("del?{$vo.id}","您确认要删除么")>删除</a>
+    </td>
+  </tr>
+</volist>
+</table>
+<table>
+<tr>
+	<td><div class="page">{$page}</div></td>
+  </tr>
+</table>
+<include file="Public:footer" />

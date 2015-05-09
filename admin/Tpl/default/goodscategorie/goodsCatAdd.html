@@ -1,0 +1,125 @@
+<include file="Public:header" />
+<script language="javascript">
+function formcheck()
+{	
+	if($.trim($("#names").val())=='')
+	{
+		$("#msg_names").text("请输入栏目");
+		$("#names").focus();
+		return false;
+	}
+	var  sel=document.getElementById( "pid"); 
+	if(sel.value== ""){
+         $("#msg_pid").text("上级分类不可以为空");
+		 $("#pid").focus();
+		 return   false;
+     }
+	if($.trim($("#sort").val())=='')
+	{
+		alert("请填写排序");
+		$("#sort").focus();
+		return false;
+	}
+}
+</script>
+<div style="color:red">{$message}</div>
+<form action="__URL__/goodsCatAdd" enctype="multipart/form-data" method="post" onsubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">添加商品分类</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="index.php?{getencrypt str='goods_categories-list'}">商品分类列表</a></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="保存" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+<table border="0" cellspacing="0" cellpadding="0" class="t3">
+  <tr>
+    <td align="right"><span class="msg">*</span>分类名称：</td>
+    <td><label>
+      <input type="text" name="names" id="names" />
+    </label><span id="msg_names" class="msg"></span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>上级分类：</td>
+    <td><label>
+      <select name="pid" id="pid">
+		{$option}
+      </select>
+    </label><span id="msg_pid" class="msg"></span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>排序：</td>
+    <td><label>
+      <input name="sort" type="text" id="sort" size="5" value="50" />
+    </label><span id="msg_sort" class="msg"></span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="msg">*</span>是否显示：</td>
+    <td>
+    <table>
+        <tr>
+          <td width="50" class="nosolid"><label>
+            <input name="states" type="radio" id="states_0" value="1" checked="checked" />
+            是</label></td>
+          <td width="50" class="nosolid"><label>
+            <input type="radio" name="states" value="0" id="states_1" />
+            否</label></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr style="display:none;">
+    <td align="right"><span class="msg">*</span>是否显示在导航栏：</td>
+    <td><label></label>
+      <table>
+        <tr>
+          <td width="50" class="nosolid"><label>
+            <input name="showinnav" type="radio" id="showinnav_0" value="1" checked="checked" />
+            是</label></td>
+          <td width="50" class="nosolid"><label>
+            <input type="radio" name="showinnav" value="0" id="showinnav_1" />
+            否</label></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr style="display:none;">
+    <td align="right">设置为首页推荐：</td>
+    <td><table width="230">
+      <tr>
+        <td class="nosolid"><label>
+          <input type="checkbox" name="rectype_0" value="1" id="rectype_0" />
+          精品</label></td>
+        <td class="nosolid"><label>
+          <input type="checkbox" name="rectype_1" value="2" id="rectype_1" />
+          最新</label></td>
+        <td class="nosolid"><label>
+          <input type="checkbox" name="rectype_2" value="3" id="rectype_2" />
+          热门</label></td>
+      </tr>
+    </table>
+
+    </td>
+  </tr>
+  <tr>
+    <td align="right">关键字：</td>
+    <td>
+    <label>
+      <textarea name="keyinfo" cols="50" rows="5" id="keyinfo"></textarea>
+    </label>
+    </td>
+  </tr>
+  <tr>
+    <td align="right">分类描述：</td>
+    <td>
+    <label>
+      <textarea name="memo" cols="50" rows="5" id="memo"></textarea>
+    </label>
+    </td>
+  </tr>
+</table>
+</form>
+<include file="Public:footer" />

@@ -1,0 +1,38 @@
+<div class="main_lines" style="padding-top:25px; min-height:650px; margin-bottom:20px">
+   <div class="container">
+    <div class="row">
+        <div class="span12">
+            <ul class="breadcrumb"><li><a href="/" hidefocus="true">首页</a> <span class="divider">/</span></li><li><a href="/info/inland_news.html" hidefocus="true">国内旅游快讯</a> <span class="divider">/</span></li><li class="active">快讯列表</li></ul>
+        </div>
+    </div>
+  </div>
+
+  <div class="container">
+	<div class="row">
+		<div class="span12">
+		    <div class="left_part">
+                <div class="left_Recommend ">
+                    <div id="infos" class="Recommend_title">资讯类别</div>
+                    <div class="Recommend_box">
+                        <ul class="infos">
+                             <volist name="list" id="vo">
+                             <li <eq name="vo.id" value="$content['Section_id']">class="on"</eq>><a href="<eq name='detailtype' value='0'>   {:U('detail')}?detail={$vo.id} <else/> {:U('notice')}</eq>">{$vo.names}</a></li>
+                             </volist>
+                        </ul>
+                    </div>
+                </div>
+             
+            </div>
+            <div class="right_part ">
+                <div class="news newscontent">
+                    <h3>{$content.title}</h3>
+                    <div class="summary">2014-8-5 14:47:54</div>
+                    <div class="content">{$content.content}</div>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div style="clear:both"></div>
+</div>
+<div style="clear:both"></div>

@@ -1,0 +1,70 @@
+<include file="Public:header" />
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="4">商品列表</th>
+  </tr>
+  <tr>
+  <td>
+  <form id="form1" name="form1" method="post" action="__URL__/lists">
+  <div class="float_left">
+  	<select name="findtype" id="findtype">
+       <option value="names">商品名称</option>  	
+       <option value="code">商品编号</option>
+       <option value="keyvalue">商品关键字</option>
+     </select>
+  </div>
+  <div class="float_left">
+  <input name="values" id="values" type="text" />
+  </div>
+  <div class="float_left">
+  <input name="submit" type="submit" value="查询" />
+  </div>
+  </form>
+  </td>
+  <td><div class="div_msg">{$message}</div></td>
+  <td class="buttom"><a class="bule" href="__URL__/add">添加商品</a></td>
+  </tr>
+  </table>
+<table border="0" cellspacing="0" cellpadding="0" class="t2">
+  <tr>
+    <th>商品ID</th>
+    <th>商品编号</th>
+    <th>商品名称</th>
+	 <th>关键字</th>
+    <th>销售价</th>
+    <th>库存</th>
+    <th>上架</th>
+    <th>品牌</th>
+    <th>操作</th>
+  </tr>
+ <volist name="list" id="vo">
+  <tr>
+    <td>{$vo.id}</td>
+    <td><a target="_blank">{$vo.code}</a></td>
+    <td><a target="_blank">{$vo.names}</a></td>
+	 <td>{$vo.keyvalue}</td>
+    <td>{$vo.price_sell}</td>
+    <td>{$vo.inventory}</td>
+    <td>{$vo.issell}</td>
+    <td><if condition="$vo.bnames eq ''">--<else/>{$vo.bnames}</if></td>
+    <td>
+    <a href="#" onclick=confirms("__URL__/edit?{$vo.id}","您是要浏览么")>浏览</a>&nbsp;|&nbsp;
+	<a href="#" onclick=confirms("__URL__/edit?{$vo.id}","您确认要删除么")>编辑</a>&nbsp;|&nbsp;
+    <a href="#" onclick=confirms("__URL__/del?{$vo.id}","您确认要删除么")>删除</a></td>
+  </tr>
+</volist>
+
+<if condition="$list eq null">
+ <tr>
+ <td colspan="8">
+   <p class="font_12_red"  align="left">暂无商品</p>
+    </td>
+ </tr>
+ </if>
+</table>
+<table>
+<tr>
+	<td><div class="page"> {$departstr} </div></td>
+  </tr>
+</table>
+<include file="Public:footer" />

@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+li {list-style:none;}
+
+/*路线管理_旅游线路问答css*/
+.route_q_a{ border-bottom:solid 1px #D0F0CA; margin-bottom:15px;}
+.route_questions{ font-size:14px; font-weight:bold; line-height:34px;}
+.route_wait{ color:#F00; font-size:12px;line-height:34px;}
+.route_answer{ color:#666; line-height:25px; font-size:14px; margin-bottom:10px;}
+
+.col-4.alpha.title.on{ margin-left:25px; margin-top:10px; font-weight:bold;}
+.alpha.body{margin-left:25px;}
+/*路线管理_线订单css end*/
+.page_content li  {
+    line-height: 30px;
+    text-align: center;
+}
+.page_content li.on {
+    background: none repeat scroll 0 0 #14B9D5;
+    border: 0 none;
+    border-radius: 0;
+    color: #FFFFFF;
+    height: 30px;
+    text-align: center;
+}
+ul.side1 {
+    border-bottom: 3px solid #14B9D5;
+    height: 33px;
+    padding: 0px;
+}
+table li{ list-style:none;}
+.table_list, table th, table td {
+    border-bottom: 1px dotted #E4E7EA;
+    border-top: medium none !important;
+	
+}
+.route_mag_nav, .route_review_nav, .route_questions_nav{ background:#FFF; margin-top:10px; padding-bottom:10px;}
+.page_nav{ margin-left:25px;}
+.alpha_nav{ border-bottom:3px solid #14B9D5; margin-left:25px;}
+.title.on{ background:#14B9D5; line-height:25px; color:#FFFFFF; text-align:center; width:120px;}
+/*路线管理_线点评css end*/
+.alpha.title.add{margin-top:7px;}
+
+

@@ -1,0 +1,76 @@
+body{ background:url(../images/body_bg.gif) repeat;}
+.bg_container{ height:0; position:relative; overflow:visible;}
+.left_t_bg{ width:231px; height:520px; position:absolute; top:-10px; left:-231px; background:url(../images/left_t_bg.gif) no-repeat top left; z-index:-99}
+
+.right_t_bg{ width:227px; height:520px; position:absolute; top:-10px; right:-227px; background:url(../images/right_t_bg.gif) no-repeat top left;z-index:-99}
+
+.left_b_bg{ width:231px; height:386px; position:absolute; bottom:-8px; left:-231px; background:url(../images/left_b_bg.gif) no-repeat ;z-index:-99}
+
+.right_b_bg{ width:227px; height:386px; position:absolute; bottom:-8px; right:-227px; background:url(../images/right_b_bg.gif) no-repeat  0 ;z-index:-99}
+.left_c_bg{ width:231px; height:386px; position:absolute; bottom:376px; left:-231px; background:url(../images/left_c_bg.gif) repeat-y ;z-index:-100;}
+
+.right_c_bg{ width:227px; height:386px; position:absolute; bottom:376px; right:-227px; background:url(../images/right_c_bg.gif) repeat-y  0 ;z-index:-100;}
+
+/* CSS Document */
+/*登陆条*/
+#loginbar{  width:100%;min-width:965px; height:30px;min-width:1024px;background-color: #F5F5F5;border-bottom: 1px solid #DCDCDC; overflow:hidden;}
+#loginbar #login{ width:965px; line-height:32px; margin:0 auto;}
+#loginbar ul{ float:right;display:inline;  }
+#loginbar ul li{ float:left; display:inline; }
+#loginbar ul li a{padding:0 5px;border-right:1px solid #999;}
+
+
+/*bannar*/
+#bannar{ width:965px;margin:0px auto; height:75px; padding:10px 0; background:url(../images/bannar_bg.gif)}
+#bannar #b_left{ width:440px; float:left;}
+#bannar #b_right{ width:159px; float:right; margin-right:12px;}
+
+
+
+/** 导航条*/
+#header{width:965px;height:60px; text-align:center; margin:0 auto;}
+#header ul{width:965px;height:60px; background:url(/Public/images/nav_bg.gif); text-align:center;}
+#header ul li{float:left;height:60px; line-height:75px; margin:0 25px; overflow:hidden;}
+
+#header a{font-weight:700;color:#292929; font-size:14px;}
+#header a:hover{font-weight:700;color:#f50;}
+#header li.selected a{ color:#0099FF};
+
+
+#sitepathnav{line-height: 30px;margin: -5px auto 0;width: 965px;}
+#content_l{ float:left; width:210px;  margin-right:5px;}
+#con_left_1 li{ margin-left:15px; line-height:26px; font-weight:600;}
+#con_left_1 li input{ width:155px; height:20px; border:1px solid #c9c9c9; padding:0 5px; line-height:20px;}
+#con_left_1 li select{ width:165px; height:20px;}
+#con_left_1 li input.btn{ background:url(/Public/images/btn.gif) no-repeat 0 0; width:69px; height:30px; margin:0; padding:0; border:none; line-height:32px; color:#fff; margin-left:35px;}
+.tit {background: url("../images/tit-bg.gif") repeat-x scroll 0 0 transparent;border-bottom: 1px solid #FFFFFF;font-weight: bolder;height: 23px;font-size:14px;font-weight:600;line-height: 23px;padding: 10px 0 0 15px;}
+#content_l #con_left_1{border: 2px solid #E4E4E4;margin-bottom: 10px;padding: 1px;width: 204px;height:242px;}
+
+#content_l #hot_top .tit {background: url("/Public/images/sitemode1-bg.gif") no-repeat scroll 0 0; height:30px;line-height: 30px;padding-left: 18px; padding-top:0;}
+#content_l #hot_top .tit h3 {background: url("/Public/images/sitemode1-bg.gif") no-repeat scroll right -30px;color: #333333;font-size: 14px;font-weight: bold;text-shadow: 1px 1px #EDEEEF;}
+#content_l .bb {background: none repeat scroll 0 0 #F9F9F9;border: 1px solid #CCCCCC;padding: 10px;}
+#content_l .bb ul {overflow: hidden;position: relative;width: 100%;}
+#content_l .bb li {border-top: 1px dashed #CCCCCC;margin-bottom: 0 !important;margin-top: -1px;padding: 5px 0 5px 22px;position: relative;width: 168px;}
+#content_l .bb li .nu {background:#A68B56;color: #FFFFFF;font-weight: bold;left: 0;letter-spacing: -2px;line-height: 15px;position: absolute;text-align: center;top: 8px;width: 15px;}
+
+#content_r{ float:right; width:745px;}
+
+#content_r #page{ text-align:center;}
+
+
+/*尾部焦点*/
+#footfoucs{width:965px;height:45px;margin:0 auto; border-bottom:1px solid #b17f65;}
+#footfoucs .foucs{ float:left; width:25%; height:45px;}
+#footfoucs .foucs h2{ width:50px; float:left; margin:0 8px; line-height:45px;}
+#footfoucs .foucs p{ line-height:18px; margin-top:5px;}
+
+
+/*页脚*/
+#footer { padding:5px 0; width:965px; background:url(/Public/images/footer.gif); margin:0 auto;}
+#footer p{ text-align:center; line-height:18px;}
+
+#content{ width:965px; margin:0 auto; clear:both;  background:#d4d1c9;}
+
+.l_18{ line-height:18px;}
+
+

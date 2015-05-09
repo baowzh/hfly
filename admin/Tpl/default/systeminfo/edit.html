@@ -1,0 +1,70 @@
+<include file="Public:header" />
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">节点编辑</th>
+  </tr>
+  <tr>
+  <td align="right"><div class="div_msg">{$message}</div></td>
+  <td class="buttom"><a class="bule" href="__URL__/lists">节点列表</a></td>
+  </tr>
+  </table>
+<form method='post'  id="form1"  action="__URL__/edit">
+<table cellpadding=0 cellspacing=0 class="t3">
+<input type="hidden" name="id"  value="{$Role_edit['id']}"/></td>
+<tr>
+	<td class="tRight" >名称：</td>
+	<td class="tLeft" >
+	<input type="text" name="value"  value="{$Role_edit['value']}"/></td>
+</tr>
+<tr>
+	<td class="tRight" >显示名：</td>
+	<td class="tLeft" >
+	<input type="text"  name="name" value="{$Role_edit['name']}"></td>
+</tr>
+<tr>
+	<td class="tRight">父层:</td>
+	<td class="tLeft">
+	 <SELECT name="pid">
+	  <volist name="list" id="vo">
+	  	<if condition="$Role_edit.pid eq vo.id">
+		<option value="{$vo.id}" selected="selected">{$pid_name}</option>
+		<else/>
+		<option value="{$vo.id}">{$vo.name}</option>
+		</if>
+	</volist>
+	</SELECT>	</td>
+</tr>
+<tr>
+	<td class="tRight">层位置：</td>
+	<td>
+	<SELECT  name="level">
+	 <if condition="$Role_edit.level eq 1">
+		  <option value="1" selected="selected">项目</option>
+		  <option value="2">模块</option>
+		  <option value="3">方法</option>
+	   <elseif condition="$Role_edit.level eq 2"/>
+	     <option value="1">项目</option>
+		 <option value="2" selected="selected">模块</option>
+		 <option value="3">方法</option>
+		<elseif condition="$Role_edit.level eq 3"/>
+	     <option value="1">项目</option>
+		 <option value="2">模块</option>
+		 <option value="3" selected="selected">方法</option>
+     </if>
+	</SELECT>	</td>
+</tr>
+<tr>
+	<td class="tRight tTop">描 述：</td>
+	<td class="tLeft">
+	<TEXTAREA class="large bLeft" name="info"  rows="5" cols="57" >{$Role_edit['info']}</textarea></td>
+</tr>
+<tr>
+	<td></td>
+<td>
+<input type="submit" value="修改" name="submit">&nbsp;&nbsp;
+<input type="reset" class="reset imgButton" value="清空" ></td>
+</tr>
+</table>
+</form>
+</div>
+</div>

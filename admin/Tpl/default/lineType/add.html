@@ -1,0 +1,41 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('index')}">路线类型</a> |
+        <a class="on" href="{:U('add')}">添加</a>
+    </ul>
+</div>
+<form id="myform" action="{:U('add')}" method="post">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="10%"><span class="red">*</span>名称</th>
+            <td><input type="text" name="names" id="names" class="required"/></td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>排序</th>
+            <td><input name="sort" type="text" id="sort" validate="{required:true,number:true,min:1}" value=''/></td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>英文名</th>
+            <td>
+                <input type="text" name="page_names" id="page_names" validate="required:true,english:true"/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>状态</th>
+            <td>
+                <input type="radio" name="status" id="status1" value="1" checked="checked">
+                <label for="status1">显示</label>
+                <input type="radio" name="status" id="status0" value="0">
+                <label for="status0"> 隐藏</label>
+            </td>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>
+            <td>
+                    <INPUT TYPE="submit" name="submit"  value=" 保 存 " class="button" >
+                    <input TYPE="reset"  value=" 重 置 " class="button">
+            </td>
+        </tr>
+    </table>
+
+</form>

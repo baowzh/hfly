@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+
+img{ border:0;}
+.logo{ height:90px;}
+.content{ width:958px; height:460px; border:solid 1px #EBEBEB; margin-top:10px;}
+.content_top{ width:960px; height:40px; background:url("../images/title_bg.jpg") repeat-x;}
+.content_top_font{ font-family:"微软雅黑"; font-size:18px; font-weight:normal; color:#525252; padding-left:20px; line-height:40px;}
+.content_main{ width:958px; height:392px;}
+.content_main_left{ width:594px; height:358px; border-right:solid 1px #EBEBEB; float:left; clear:both; margin-top:20px; padding-left:20px;}
+.content_main_left_number{ width:306px; height:34px; margin-top:15px;}
+.content_main_left_number_title{height:34px; font-family:"宋体"; font-size:14px; line-height:34px;color:#525252; float:left;}
+.content_main_left_number_number2_box{width:224px; height:32px; float:right;border:solid 1px #AABBCC;}
+.content_main_left_reading{ width:226px; height:30px;}
+.login_forget{ width:190px; height:30px;margin-left:50px; margin-top:20px;}
+.btn_reg{ width:80px; height:30px; background:url(../images/btn_user.jpg) no-repeat; float:left;}
+.content_main_right{ width:334px; height:324px; float:left;padding-left:20px; margin-top:20px;}
+.font_login_title{height:30px; }
+.btn_login{ width:135px; height:32px; margin-top:10px;}
+.forget{ height:30px; float:right;}
+.forget_font{line-height:30px; font-size:14px;}
+.forget_font a{ color:#FF6600; text-decoration: none;}
+.forget_font a:hover{ text-decoration:underline;}
+.web_map{ height:30px; line-height:30px;}
+.page_content{ margin-left:0px;min-height:540px;}
+.col-19.omega.page_content.one li{ margin-left:25px; border-bottom:3px solid #14B9D5; height:33px; width:94.7%;}
+.col-19.omega.page_content ul.side1{width:94.7%;margin-left:25px; }
+.col-19.omega.page_content ul.side{width:94.7%;margin-left:25px; }
+
+
+/*查看我的短信CSS begin*/
+.content_main_right_massage-box{ width:100%; height:auto; margin-bottom:18px;
+-moz-box-shadow:2px 2px 7px #999;              
+-webkit-box-shadow:2px 2px 7px #999;           
+box-shadow:2px 2px 7px #999; 
+}
+.content_main_right_massage-box .title{ height:40px;line-height:40px; background:#fff; text-align:left; font-weight:normal; color:#666666; padding:0px 15px ; display:block; border-bottom:1px dotted #ccc;}
+.content_main_right_massage-box .massage{ font-weight:normal; background:#fff; text-align:justify; font-size:14px; line-height:28px; color:#666666; padding:14px 20px ; display:block; height:auto; min-height:200px;}
+.rev_font{ color:#390;}
+/*查看我的短信CSS end*/
+
+/*提交现金CSS begin*/
+.tab_content{ font-weight:normal; background:#fff; text-align:justify; font-size:14px; line-height:20px; color:#333; display:block; height:auto; min-height:200px;}
+.tab_content ul .button{ color:#0033cc; font-size:12px; color:blue; float:left; padding:2px;}
+/*提交现金CSS end*/
+
+/*提现申请CSS begin*/
+table.form { text-align:justify; font-size:14px; line-height:43px; color:#666666; padding:0; margin:-15px 0;  }
+table.form input.form1{  border:1px solid #aabbcc;   font-size:12px; line-height:12px; padding:0px 5px; margin-top:10px; margin-right:10px; height:25px; color:#303030;}
+table.form .textright{text-align:right}
+/*提现申请CSS end*/
+
+
+
+
+/*用户修改资料CSS*/
+.find_pas{ height:40px; border-bottom:dashed 1px #CCC; margin-bottom:20px; background:url(../images/acc_find.jpg) 20px 13px no-repeat;}
+.find_pas span{ line-height:40px; padding-left:50px;}
+.account_new_title{ font-size:14px; color:#666666; padding-left:64px;}
+.send_email{ width:600px; margin:0 auto; padding-top:20px;}
+.send_email_left{ width:69px; height:59px; background:url(../images/mail_icon.jpg); float:left;}
+.send_email_right{ float:left; margin-top:10px; padding-left:10px;}
+.send_email_right span{ display:block;}
+.send_email_font{ font-size:14px; color:#666;}
+.send_email_font2{ color:#0099FF; font-size:12px;}
+.send_email_font2 a{ color:#0099FF;}
+.send_email_font2 a:hover{ color:#F60;}
+/*用户修改资料CSS end*/
+
+
+/*找回密码CSS*/
+.phone_find{ width:650px; height:120px; border: solid 1px #E8E8E8;}
+.phone_find_left{ width:170px; height:120px; border-right:solid 1px #E8E8E8; background:url(../images/phone.jpg) no-repeat 40px 20px; float:left;}
+.phone_find_left2{ width:170px; height:120px; border-right:solid 1px #E8E8E8; background:url(../images/mailbox.jpg) no-repeat 40px 20px; float:left;}
+.phone_find_center{ width:340px;float:left; height:120px;}
+.phone_find_center span{ font-family:"微软雅黑"; font-size:20px; color:#666666; padding:40px 0 0 30px; display:block;}
+.phone_find_right{ width:130px;float:right; height:40px; margin-top:50px;}
+/*找回密码CSS结束*/
+
+
+.col-18.omega.page_content{ margin-left:5px !important; }
+.table_form input.txt{ min-width:200px !important;}

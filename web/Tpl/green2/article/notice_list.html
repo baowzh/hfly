@@ -1,0 +1,45 @@
+<link href="../Public/css/article.css" rel="stylesheet" type="text/css">
+
+<div class="wrapper w1200">
+  <div class="col-24" id="body">
+    <div class="title">
+      <h3>{$title}</h3>
+    </div>
+    <div class="row">
+      <table>
+        <tr>
+          <td class="list">
+          	<div>
+              <ul>
+                <volist name="list" id="vo">
+                  <a href="{:U('notice')}"><li <eq name="vo.id" value="$detail_id">class="on"</eq>>{$vo.names} <span>&gt;</span></li></a>
+                </volist>
+              </ul>
+            </div>
+          </td>
+          <td class="content" height="450px;">
+            <volist name="content" id="vo">
+              <div class="body">
+                <table class="article-list">
+                  <tr>
+                    <td height="32" class="text"><a href="{:U('notice')}?id={$vo.id}">{$vo.title}</a></td>
+                  </tr>
+                  <tr>
+                    <td class="text"><p class="gray">{$vo.content|f_html|msubstr=0,94}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="18" class="text">
+                      <span class="booked">发布时间：{$vo.create_time|date="Y年m月d日 H:i:s", ###}</span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </volist>
+            <div class="page">{$page}</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

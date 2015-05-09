@@ -1,0 +1,32 @@
+<include file="Public:header" />
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">备份数据</th>
+  </tr>
+  <tr>
+  <td><div class="div_msg">{$message}</div></td>
+  <td>&nbsp;</td>
+  </tr>
+  </table>
+<form name="formBackup" id="formBackup" method="post" action="">
+    <table border="0" cellspacing="0" cellpadding="0" class="t2">
+  <tr>
+  	<th>备份文件</th>
+    <th>大小</th>
+    <th>下载</th>
+    <th>恢复</th>
+    <th>删除</th>
+  </tr>
+  <volist name="arr" id="vo">
+  <tr>
+  	<td>file</td>
+    <td>{$vo.size}</td>
+     <td><a href="download.php?action=db&file={file}">下载此备份</a></td>
+    <td><a href="?action=import&file={file}" onClick="return confirm('您将使用“ {.file} ”这个备份数据恢复，是否确定？');">使用此备份恢复</a></td>
+    <td>{<a href="?action=delete&file={file}" onClick="return confirm('您将删除“ {file} ”这个备份，是否确定？');">删除此备份</a></td>
+  </tr>
+</volist>
+</table>
+  
+</form>
+<include file="Public:footer" />

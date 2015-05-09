@@ -1,0 +1,133 @@
+@charset "utf-8";
+/* CSS Document */
+/*头部CSS样式 begin*/
+.topbar{ background:url(../images/header_a_bg.png) repeat-x; height:31px; line-height:31px; }
+.tobarul li{ float:left; margin-right:3px;}
+.header .bg{ background:url(../images/calbg.jpg) right no-repeat;}
+.header .bg .citybox{ margin-top:28px;}
+.header .bg .citybox b{ float:left; font-size:20px; color:#444;}
+.header .bg .cityChange{float:left; padding-bottom:5px; margin-top:8px;}
+.header .bg a.citySelect{ color:#14a00b; padding:1px;}
+.cityList{ background: #f8fdf7;border: 1px solid #c6ecb7;border-radius: 5px;position: absolute;left: -100px;top: 20px;z-index: 1001;		}
+.cityList li a{ color:#15a50d; text-decoration:none; font-weight:bold;padding:10px; text-align: center;  display:block; width:140px;border-bottom: 1px solid #edf8eb;}
+.cityList li a:hover{ background:#edf8eb; color:#ff9900}
+
+.nav{ height:38px; background:url(../images/menu_bg02.jpg); }
+.nav li{ line-height:38px; float:left; }
+.nav li a{ color:#FFF; width:86px; float:left; background:url(../images/line1.png) right center no-repeat; text-align:center;}
+.nav li a:hover{ color: #459a07; width:86px; background:url(../images/menu_li_bg1.png) no-repeat center bottom;}
+.nav li a.onthis{ color: #459a07; width:86px; background:url(../images/menu_li_bg1.png) no-repeat center bottom; }
+.hot_link dd,.hot_link dt,.hot_link dd li{ float:left; margin-left:5px; color:#E6DCE6;}
+.hot_menu .bg { background:url(../images/header_bottom_bg.png) center center no-repeat; height:31px; font-size:12px; line-height:31px;}
+.hot_link dt { margin-left:16px; color: #000; }
+.hot_link dd li a{color:#FF9801;}
+/*头部CSS样式 end*/
+
+/*脚部CSS样式 begin*/
+.footer .link{ text-align:center;}
+.footer .link strong{ font-weight:normal;line-height:24px;} 
+.footer .link strong a{ margin: 0 5px;}
+/*脚部CSS样式 end*/
+
+/*前台页面统一样式CSS begin*/
+.web_map { height:40px !important;line-height:40px !important; color:#686868; display:block;}
+.page_button_list li { height:40px; line-height:40px; border-left:1px #c6ecb7 solid;
+					   border-bottom:1px #c6ecb7 solid;
+					   border-right:1px #c6ecb7 solid;
+					   background-color:#f8fdf7; padding-left:15px; color:#ff9900; font-size:14px; font-weight:bold;}
+.page_button_list li a { color:#ff9900;}
+.page_button_list .title { height:34px; background-color:#15a50d; line-height:34px; color:white; font-weight:bold; font-size:14px; padding-left:10px; border-bottom:1px #c6ecb7 solid;}
+.page_button_list .m2 li{ background-color:#c6ecb7; }
+.page_content a { color:#666666;}
+.page_content .title { height:34px; line-height:34px; color:#666666; font-size:14px; text-align:center; border-top:1px solid #e7e7e7; border-left:1px solid #e7e7e7; border-right:1px solid #e7e7e7;}
+.page_content .on { background-color:#ff9900; color:white; font-weight:bold; border-top:1px solid #ff9900; border-left:1px solid #ff9900; border-right:1px solid #ff9900;}
+.page_content .body { border:1px solid #e7e7e7; padding: 25px 20px; min-height:200px;}
+.sidebar{ border:solid 1px #EBEBEB;}
+.sidebar_title{height:34px; background:#119E09;}
+.sidebar_title_f{color:#FFF; line-height:34px; font-size:18px !important; padding-left:10px;}
+.sidebar_title_f2{color:#FFF; line-height:34px; font-size:14px; text-align:center;}               
+.sidebar_main{ font-size:12px; color:#119E09; border-bottom: solid 1px #DEDEDE; line-height:30px;}
+.sidebar_nav{color:#666666;}
+.sidebar_nav li{ font-size:12px; color:#666666; display:block; float:left; width:70px; line-height:20px; padding-left:5px;}
+.sidebar_nav li a{ color:#666666;}
+.sidebar_nav li a:hover{ text-decoration:underline;}
+.sidebar_hot{ width:46px; height:40px; margin-top:10px;}
+.sidebar_hot_left{ width:46px; height:36px; float:left;}
+.sidebar_hot_right{ width:100px; height:36px; float:right;}
+.sidebar_hot_right_f{ color:#666;}
+.sidebar_hot_right_f a{color:#666;}
+.sidebar_hot_right_f a:hover{ text-decoration:underline;}
+.sidebar_hot_right_c{ color:#F60; font-weight:bold;}
+.on{line-height:22px; color:#3366CC; font-size:14px; font-weight:bold;}
+.on a{color:#3366CC;}
+.on a:hover{ text-decoration:underline; color:#F90;}
+.down{line-height:22px; color:#666; font-size:12px; padding-left:10px;}
+.filter_page{ margin:0 auto;width: auto; padding:20px 0 20px 0; text-align:center; font-size:12px;}
+.filter_page a{ border:solid 1px #CCC; padding:2px 4px 2px 4px; margin:0 3px; color:#999;}
+.filter_page a:hover{ color:#F60; }
+.filter_page a.filter_pages{ border:solid 1px #CCC; padding:2px 4px 2px 4px; margin:0 3px; color: #F00; font-weight:bold;}
+.hot_route{ font-size:14px; font-weight:bold; color:#666666; line-height:34px; padding-left:20px; float:left;}
+.hot_more{ float:right; color:#666; line-height:34px; padding-right:20px;}
+.hot_more a{color:#666;}
+.font_red{ color:#F00;}
+.font_red a{ color:#F00;}
+.font_brown{ font-size:12px; color:#666;}
+.font_orange{ color:#F60;}
+.step_main_right{border:solid 1px #EBEBEB;}
+.step_main_font{ padding:0 0 0 10px;}
+.amount{ width:179px; margin:0 auto; border-top:solid 1px #EBEBEB; margin-top:20px;}
+.amount_btn{ padding:10px 0 10px 50px;}
+.step_whole{ width:716px; margin:0 auto;}
+.step_top{ height:40px;}
+.step{ width:236px; height:40px; background:url(../images/step_bg.jpg); float:left;}
+.step_font{ display:block; padding-left:75px;line-height:40px;}
+.step_two{ width:236px; height:40px; background:url(../images/step_bg2.jpg); float:left; margin-left:3px;}
+.step_font2{display:block; padding-left:75px;line-height:40px; color:#FFF;}
+.step_three{ width:236px; height:40px; background:url(../images/step_bg3.jpg); float:left;margin-left:3px;}
+.travel{height:318px;border:solid 1px #DEDEDE;}
+.travel_main{ border:solid 1px #EBEBEB; margin-top:10px; height:auto;}
+.travel_title{ height:34px; background:url(../images/l_title_bg_t2.jpg) repeat-x; border-bottom:solid 2px #FF9900;}
+.ide_main2{ margin-top:10px; height:20px; color:#666;}
+.use{ margin-top:10px;}
+.use_right{ height:20px;}
+.revise_btn{ margin-left:10px;}
+.ide_left{ float:left;}
+.ide_right{float:left; margin-top:1px;}
+.font_blue{ color:#09F;}
+.hotel_banner{ width:100%;}
+/*前台页面统一样式CSS end*/
+
+/*表格样式：列表表格 begin*/
+.table_list { border-collapse:collapse; border:1px #cccccc solid;}
+.table_list th { border:1px #cccccc solid; height:40px; background-color:#f5f5f5; font-size:13px; font-weight:bold; text-align:center; color:#666666; line-height:40px;}
+.table_list td { border:1px #cccccc solid; height:40px; font-size:13px; text-align:center; color:#666666;vertical-align: middle;}
+.table_list li { clear:both; text-align:left; padding-left:10px;}
+.table_list tr:nth-child(odd) { background-color:#fbfbfb;}
+.table_list tr:nth-child(even) { background-color:white;}
+.table_list tr:hover { background-color:#feffd0;}
+/*表格样式：列表表格 end*/
+
+/*表格样式：表单表格 begin*/
+.table_form { border-collapse:collapse;}
+.table_form th { min-height:41px; height:41px; width:120px; font-size:14px; text-align:right; color:#666666; vertical-align: middle; line-height:18px;}
+.table_form td { min-height:41px; font-size:12px; text-align:left; color:#444; vertical-align: middle; line-height:18px;}
+.table_form span { line-height:24px; float:left;}
+.table_form .important { color:red !important;}
+.table_form .txt { height:24px; line-height:24px;float:left;}
+.table_form .textarea { line-height:18px; float:left;}
+.table_form .select { height:24px; line-height:24px; padding:2px 2px;}
+.table_form .kind-text { width:520px; height:300px;}
+.table_form li { text-align:left; padding:3px 6px; float:left;}
+/*表格样式：表单表格 end*/
+
+
+/*背景色CSS begin*/
+.blue { background-color:#39F;}
+.green { background-color:#799D3C;}
+.pink { background-color:#F69;}
+.orange { background-color:#F90;}
+.red { background-color:#FD2853;}
+.brown { background-color:#9A6921;}
+.purple { background-color:#AC59FF;}
+.gray { background-color:#888;}
+/*背景色CSS end*/

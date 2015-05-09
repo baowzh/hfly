@@ -1,0 +1,62 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('lists')}">图片广告</a> |
+        <a class="on" href="{:U('edit',array('id'=>$lists['id']))}">编辑广告</a>
+    </ul>
+</div>
+<form name="myform" method="post" id="myform" action="{:U('edit')}" >
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="10%"><span class="red">*</span>名称:</th>
+            <td width="90%">
+                <input type="text" name="title" id="title" class="input-text" value="{$lists.title}"/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>广告开始时间</th>
+            <td><input name="start_time" type="text" id="start_time" value='{$lists.start_time|f_date}' class="input-text calender"/></td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>广告结束时间</th>
+            <td>
+                <input name="end_time" type="text" id="end_time" value='{$lists.end_time|f_date}' class="input-text calender"/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>展示区域</th>
+            <td>
+        <volist name="areas" id="vo">
+            <label><input <if condition="$vo.id eq $lists['area_id']">checked="checked"<else /></if> id="area_id[]" name="area_id" value="{$vo.id}" type="radio">{$vo.names}</label>
+        </volist>
+        </td>
+        </tr>
+        <tr><th><span class="red">*</span>状态：</th>
+            <td>
+                <label><input name="status" value="1"
+                              type="radio" <if condition="$lists.status eq '1'">checked="checked"<else /></if> >启用</label>
+                <label><input name="status" value="0"
+                              type="radio" <if condition="$lists.status eq '0'">checked="checked"<else /></if> >停用</label>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th><span class="red">*</span>排序</th>
+            <td>
+                <input name="sort" type="text" class="input-text url"  id="sort" value='{$lists.sort}'/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>广告链接</th>
+            <td>
+                <input name="url" type="text" class="input-text url"  id="url" value='{$lists.url}'/>
+            </td>
+		<input type="hidden" class="text" name="id" id="id" value="{$lists.id}"/>
+
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <input type="submit" name="submit" value=" 保 存 " class="button" >
+        <input type="reset" name="reset" value=" 重 置 " class="button">
+    </div>
+</form>

@@ -1,0 +1,92 @@
+<div class="col-19 omega page_content">
+    <div style="margin-top:12px;"></div> 
+    <div class="col-5 alpha title ppam "><h3><strong>线路点评</strong></h3></div>
+    <div class="col-18 alpha body add">
+        <form action="{:U('userline/route_impr',array('id'=>$_GET['id']))}" method="post" name="myform" id="myform">
+            <table width="100%" class="bordered">
+                <tr>
+                    <th>线路编号：</th>
+                    <td>{$list.code}</td>
+                </tr>
+                <tr>
+                    <th>线路名称：</th>
+                    <td>{$list.names}</td>
+                </tr>
+                <tr>
+                    <th>行程：</th>
+                    <td><label><input name="travel" type="radio" id="_good" value="5" checked="checked" /></label><label for="_good">非常好</label>&nbsp;&nbsp;
+                        <label><input name="travel" type="radio" id="_middle" value="4" /></label>
+                        <label for="_middle">很好</label>&nbsp;&nbsp;
+                        <label><input name="travel" type="radio" id="_bad" value="3" /></label>
+                        <label for="_bad">一般</label>&nbsp;&nbsp;
+                        <label><input name="travel" type="radio" id="_worse" value="2" /></label>
+                        <label for="_worse">差</label>&nbsp;&nbsp;
+                        <label><input name="travel" type="radio" id="_worst" value="1" /></label>
+                        <label for="_worst">非常差</label></td>
+
+
+                </tr>
+                <tr>
+                    <th>导游：</th>
+                    <td><label><input name="guide" type="radio" id="_good1" value="5" checked="checked" /></label><label for="_good1">非常好</label>&nbsp;&nbsp;
+                        <label><input name="guide" type="radio" id="_middle1" value="4" /></label>
+                        <label for="_middle1">很好</label>&nbsp;&nbsp;
+                        <label><input name="guide" type="radio" id="_bad1" value="3" /></label>
+                        <label for="_bad1">一般</label>&nbsp;&nbsp;
+                        <label><input name="guide" type="radio" id="_worse1" value="2" /></label>
+                        <label for="_worse1">差</label>&nbsp;&nbsp;
+                        <label><input name="guide" type="radio" id="_worst1" value="1" /></label>
+                        <label for="_worst1">非常差</label></td>
+
+
+                </tr>
+                <tr>
+                    <th>交通：</th>
+                    <td><label><input name="traffic" type="radio" id="_good2" value="5" checked="checked" /></label><label for="_good2">非常好</label>&nbsp;&nbsp;
+                        <label><input name="traffic" type="radio" id="_middle2" value="4" /></label>
+                        <label for="_middle2">很好</label>&nbsp;&nbsp;
+                        <label><input name="traffic" type="radio" id="_bad2" value="3" /></label>
+                        <label for="_bad2">一般</label>&nbsp;&nbsp;
+                        <label><input name="traffic" type="radio" id="_worse2" value="2" /></label>
+                        <label for="_worse2">差</label>&nbsp;&nbsp;
+                        <label><input name="traffic" type="radio" id="_worst2" value="1" /></label>
+                        <label for="_worst2">非常差</label></td>
+
+
+                </tr>
+                <tr>
+                    <th>住宿：</th>
+                    <td><label><input name="room" type="radio" id="_good3" value="5" checked="checked" /></label><label for="_good3">非常好</label>&nbsp;&nbsp;
+                        <label><input name="room" type="radio" id="_middle3" value="4" /></label>
+                        <label for="_middle3">很好</label>&nbsp;&nbsp;
+                        <label><input name="room" type="radio" id="_bad3" value="3" /></label>
+                        <label for="_bad3">一般</label>&nbsp;&nbsp;
+                        <label><input name="room" type="radio" id="_worse3" value="2" /></label>
+                        <label for="_worse3">差</label>&nbsp;&nbsp;
+                        <label><input name="room" type="radio" id="_worst3" value="1" /></label>
+                        <label for="_worst3">非常差</label></td>
+
+
+                </tr>
+                <tr>
+                    <th>客户印象：</th>
+                    <td id="imprs">
+                <volist name="imprlist" id="vo">
+                    <li class="li impr_li" value="{$vo.id}" checkid="{$key}">{$vo.names}
+                    <input name="impr[]" id="impr_type_{$key}" type="checkbox" value="{$vo.id}" /></li>
+                </volist>
+                </td>
+                </tr>
+                <tr>
+                    <th>内容：</th>
+                    <td height="125"><textarea name="content" id="content" cols="55" rows="5" class="textarea"></textarea></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><input name="submit" id="submit" class="btn2 gray" type="submit" value="   点评   " /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</div>

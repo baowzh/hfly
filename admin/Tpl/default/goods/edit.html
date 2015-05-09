@@ -1,0 +1,402 @@
+<include file="Public:header" />
+<load href="__ROOT__/Admin/Vendor/editor/kindeditor.js" />
+<link rel="stylesheet" type="text/css" href="skin/default/css/picupload.css">
+<script language="javascript">
+KE.show({
+	id : 'details' //TEXTAREA输入框的ID
+});
+
+function _getId(ID){
+	return document.getElementById(ID)
+}
+
+function showDetailTab(ID){
+	for(var i=1;i<8;i++){
+	if(ID==i){
+		_getId('detailTab'+i).blur();
+		_getId("detailTab"+i).className="on";
+		_getId("detail"+i).style.display="block";
+	}else{
+		_getId("detailTab"+i).className="off";
+		_getId("detail"+i).style.display="none";
+	}
+	}
+	return false;
+}
+	
+function formcheck()
+{	
+	if($.trim($("#names").val())=='')
+	{
+		alert("请填写商品名称");
+		$("#names").focus();
+		return false;
+	}
+	if($.trim($("#code").val())=='')
+	{
+		alert("请填写商品编号");
+		$("#code").focus();
+		return false;
+	}
+	if($.trim($("#keyvalue").val())=='')
+	{
+		alert("请填写商品名称");
+		$("#keyvalue").focus();
+		return false;
+	}
+	if($.trim($("#bid").val())=='-1')
+	{
+		alert("请选择商品品牌");
+		$("#bid").focus();
+		return false;
+	}
+	if($.trim($("#units").val())=='')
+	{
+		alert("请填写计量单位");
+		$("#units").focus();
+		return false;
+	}
+	if($.trim($("#memo").val())=='')
+	{
+		alert("请填写商品简介");
+		$("#memo").focus();
+		return false;
+	}
+	if($.trim($("#price_sell").val())=='')
+	{
+		alert("请填写销售价");
+		$("#price_sell").focus();
+		return false;
+	}
+	var reg	= new RegExp(/^\d*\.?\d{0,2}$/);
+	if (! reg.test($("#price_sell").val()))
+	{
+        alert("请正确输入销售价");
+		$("#price_sell").focus();
+		return false;
+	}
+	if (Number($("#price_sell").val()) < 0.01) {
+		alert("销售价最小是0.01");
+		$("#price_sell").focus();
+		return false;
+	}
+	if($.trim($("#price_cost").val())=='')
+	{
+		alert("请填写成本价");
+		$("#price_cost").focus();
+		return false;
+	}
+	if (! reg.test($("#price_cost").val()))
+	{
+        alert("请正确输入成本价");
+		$("#price_cost").focus();
+		return false;
+	}
+	if (Number($("#price_cost").val()) < 0.01) {
+		alert("成本价最小是0.01");
+		$("#price_cost").focus();
+		return false;
+	}
+	if($.trim($("#price_market").val())=='')
+	{
+		alert("请填写市场价");
+		$("#price_market").focus();
+		return false;
+	}
+	if (! reg.test($("#price_market").val()))
+	{
+        alert("请正确输入市场价");
+		$("#price_market").focus();
+		return false;
+	}
+	if (Number($("#price_market").val()) < 0.01) {
+		alert("市场价最小是0.01");
+		$("#price_market").focus();
+		return false;
+	}
+	if($.trim($("#goods_no").val())=='')
+	{
+		alert("请填写货号");
+		$("#goods_no").focus();
+		return false;
+	}
+	if($.trim($("#weight").val())=='')
+	{
+		alert("请填写重量");
+		$("#weight").focus();
+		return false;
+	}
+	if($.trim($("#inventory").val())=='')
+	{
+		alert("请填写商品库存");
+		$("#inventory").focus();
+		return false;
+	}
+	if($.trim($("#details").val())=='')
+	{
+		alert("请填写详细介绍");
+		$("#details").focus();
+		return false;
+	}
+	var  sel=document.getElementById( "cid"); 
+	if(sel.value== ""){
+         alert("请选择商品类别");
+		 $("#cid").focus();
+		 return  false;
+     }
+	if($.trim($("#image").val())=='')
+	{
+		alert("第一张图片是必须的");
+		$("#image").focus();
+		return false;
+	}
+	
+}
+function getFullPath(obj) {
+	if (obj) {
+		var image = new Image();
+		// ie
+		if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
+			obj.select();
+			image.src = document.selection.createRange().text;
+			if(document.selection.createRange().text=='')
+			{return '../Public/editor/images/nopic.gif';}
+			else return document.selection.createRange().text;
+		}
+		// firefox
+		else if (window.navigator.userAgent.indexOf("Firefox") >= 1) {
+			if (obj.files) {
+				image.src = obj.files.item(0).getAsDataURL();
+				if(obj.files.item(0).getAsDataURL()=='')
+				{return '../Public/editor/images/nopic.gif';}
+				else return obj.files.item(0).getAsDataURL();
+			}
+			if(obj.value=='')
+			{return '../Public/editor/images/nopic.gif';}
+			else return obj.value;
+		}
+
+		if(obj.value=='')
+		{return '../Public/editor/images/nopic.gif';}
+		else return obj.value;
+	}
+}
+</script>
+
+<form action="__URL__/edit" name="form1" enctype="multipart/form-data" method="post" onSubmit="return formcheck();">
+<table border="0" cellspacing="0" cellpadding="0" class="t1">
+  <tr>
+  	<th colspan="2">添加商品</th>
+  </tr>
+  <tr>
+  <td><a class="bule" href="__URL__/lists">商品列表</a></td>
+  <td class="buttom"><label>
+    <input type="submit" name="submit" id="submit" value="保存" />
+    <input type="reset" name="reset" id="reset" value="重置" />
+  </label></td>
+  </tr>
+  </table>
+<div>
+  <ul class="detailTab" id="detailTab">
+    <li><a href="javascript:void(0)" id="detailTab1" class="on" onClick="showDetailTab('1')">基本信息</a></li>
+    <li><a href="javascript:void(0)" id="detailTab2" class="off" onClick="showDetailTab('2');editor()">详细介绍</a></li>
+    <li><a href="javascript:void(0)" id="detailTab3" class="off" onClick="showDetailTab('3')">商品类别</a></li>
+    <li><a href="javascript:void(0)" id="detailTab4" class="off" onClick="showDetailTab('4')">商品属性</a></li>
+    <li><a href="javascript:void(0)" id="detailTab5" class="off" onClick="showDetailTab('5')">商品相册</a></li>
+    <li><a href="javascript:void(0)" id="detailTab6" class="off" onClick="showDetailTab('6')">商品标签</a></li>
+    <li><a href="javascript:void(0)" id="detailTab7" class="off" onClick="showDetailTab('7')">相关商品</a></li>
+    <li><a href="javascript:void(0)" id="detailTab8" class="off" onClick="showDetailTab('8')">相关文章</a></li>
+  </ul>
+</div>
+<div id="detail1" class="detail" style="display:block;">
+<table border="0" cellspacing="0" cellpadding="0" class="t3">
+<input type="hidden" name="id" id="id" value="{$goods_obj['id']}"/>
+  <tr>
+    <td align="right">商品名称:</td>
+    <td><label>
+      <input type="text" name="names" id="names" value="{$goods_obj['names']}"/>
+    </label><span class="msg">*</span></td>
+  </tr>
+  <tr>
+    <td align="right">商品编号：{$goods_obj['code']}</td>
+    <td><label>
+      <input type="text" name="code" id="code" value="{$goods_obj['code']}" readonly="readonly" />
+    </label><span class="msg">*</span></td>
+  </tr>
+  <tr>
+    <td align="right">商品关键词：</td>
+    <td><label>
+      <input type="text" name="keyvalue" id="keyvalue" value="{$goods_obj['keyvalue']}"/>
+    </label><span class="msg">*</span></td>
+  </tr>
+  <tr>
+    <td align="right">品牌：</td>
+    <td>
+    <label>
+      <select name="bid" id="bid">
+        <option value="-1">请选择</option>
+      <volist name="list_brand" id="vo">
+        <option value="{$vo.id}">{$vo.names}</option>
+        </volist>
+      </select>
+    </label><span class="msg">*</span>
+    </td>
+  </tr>
+  <tr>
+    <td align="right">计量单位：</td>
+    <td><label>
+      <input type="text" name="units" id="units" value="{$goods_obj['units']}"/>
+    </label><span class="msg">*</span></td>
+  </tr>
+  <tr>
+    <td align="right">简介：</td>
+    <td><textarea name="memo" id="memo" cols="50" rows="5" id="keys">{$goods_obj['memo']}</textarea><span class="msg">*</span>
+    <br />
+    简短的商品介绍,请不要超过255字节
+    </td>
+  </tr>
+  <tr>
+    <td align="right">是否上架销售：</td>
+    <td><label></label>
+      <table>
+        <tr>
+          <td width="50" class="nosolid"><label>
+		  	<if condition="$goods_obj['issell'] eq 1"> 
+			 <input name="issell" type="radio" id="issell_0" value="1" checked="checked" />是</label></td>
+          		<td width="50" class="nosolid"><label>
+            <input type="radio" name="issell" value="0" id="issell_1" /> 否</label><span class="msg">*</span></td>
+			<else /> 
+			 <input name="issell" type="radio" id="issell_0" value="1" />是</label></td>
+          		<td width="50" class="nosolid"><label>
+            <input type="radio" name="issell" value="0" id="issell_1" checked="checked" /> 否</label><span class="msg">*</span></td>
+			</if>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td align="right">销售价：</td>
+    <td><input type="text" name="price_sell" id="price_sell" value="{$goods_obj['price_sell']}"/>
+	<span class="msg">*</span></td>
+  </tr>
+   <tr>
+    <td align="right">成本价：</td>
+    <td><input type="text" name="price_cost" id="price_cost" value="{$goods_obj['price_cost']}"/>
+	<span class="msg">*</span></td>
+  </tr>
+   <tr>
+    <td align="right">市场价：</td>
+    <td><input type="text" name="price_market" id="price_market"  value="{$goods_obj['price_market']}"/><span class="msg">*</span></td>
+  </tr>
+  <tr>
+    <td align="right">货号：</td>
+    <td><input type="text" name="goods_no" id="goods_no"  value="{$goods_obj['goods_no']}"/><span class="msg">*</span></td>
+  </tr>
+  <tr>
+    <td align="right">重量：</td>
+    <td><input type="text" name="weight" id="weight" value="{$goods_obj['weight']}"/><span class="msg">*</span></td>
+  </tr>
+  <tr>
+    <td align="right">库存：</td>
+    <td><input type="text" name="inventory" id="inventory" value="{$goods_obj['inventory']}"/><span class="msg">*</span></td>
+  </tr>
+</table>
+</div>
+<div id="detail2" class="detail" style="display:none;">
+<table border="0" cellspacing="0" cellpadding="0" class="t2">
+<tr>
+<th>详细介绍<span class="msg">*</span></th>
+</tr>
+ <tr>
+   <td>
+    <textarea name="details" id="details" cols="50" rows="5" style="width:720px;height:280px;">{$goods_obj['details']}</textarea>
+   </td>
+  </tr>
+</table>
+</div>
+
+<div id="detail3" class="detail" style="display:none;">
+     <select name="cid" id="cid">
+		{$goodcate}
+      </select>
+</div>
+<div id="detail4" class="detail" style="display:none;">
+<table border="0" cellspacing="0" cellpadding="0" class="t3">
+<tr>
+<td width="163px" align="right">商品类型：</td>
+<td>
+	<label>
+     <select name="tid" id="tid">
+        <option value="-1">通用商品类型</option>
+		  <volist name="list_goods_type" id="vo">
+        <option value="{$vo.id}">{$vo.names}</option>
+</volist>
+      </select>
+    </label>
+</td>
+</tr>
+  
+</table>
+</div>
+<div id="detail5" class="detail" style="display:none;">
+<table>
+<tr>
+<td align="center" width="110px"><img id="img_goodpic1" width="100px" src="__TMPL__/Public/editor/images/nopic.gif" /></td>
+<td align="center" width="110px"><img id="img_goodpic2" width="100px" src="__TMPL__/Public/editor/images/nopic.gif" /></td>
+<td align="center" width="110px"><img id="img_goodpic3" width="100px" src="__TMPL__/Public/editor/images/nopic.gif" /></td>
+<td align="center" width="110px"><img id="img_goodpic4" width="100px" src="__TMPL__/Public/editor/images/nopic.gif" /></td>
+<td style="display:none" align="center" width="110px"><img id="img_goodpic5" width="100px" src="__TMPL__/Public/images/nopic.gif" /></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" class="t3">
+ <tr>
+    <td align="right">第一张图片</td>
+    <td><!--"AddPreview('#img_goodpic1','#goodpic1')"-->
+    <input type="file" name="image" id="image" onChange="document.getElementById('img_goodpic1').src=getFullPath(this);"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="right">第二张图片</td>
+    <td>
+    <input type="file" name="goodspic2" id="goodspic2" onChange="document.getElementById('img_goodpic2').src=getFullPath(this);"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="right">第三张图片</td>
+    <td>
+    <input type="file" name="goodspic3" id="goodspic3" onChange="document.getElementById('img_goodpic3').src=getFullPath(this);"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="right">第四张图片</td>
+    <td>
+    <input type="file" name="goodspic4" id="goodspic4" onChange="document.getElementById('img_goodpic4').src=getFullPath(this);"/>
+    </td>
+  </tr>
+  <tr style="display:none">
+    <td align="right">第五张图片</td>
+    <td>
+    <input type="file" name="goodspic5" id="goodspic5" onChange="document.getElementById('img_goodpic5').src=getFullPath(this);"/>
+    </td>
+  </tr>
+</table>
+</div>
+<div id="detail6" class="detail" style="display:none;">
+		  <volist name="list_goods_type" id="vo">
+<label>
+<input type="checkbox" name="goods_tag[]" value="{$vo.id}" id="goods_tag"
+	<volist name="list_this_goods_tag" id="vv">
+		<if condition="$vo.id eq $vv.gtid ">  checked="checked" 
+		</if> 
+	</volist>
+	 />
+	 {$vo.names}</label><br />
+	 </volist>
+</div>
+<div id="detail7" class="detail" style="display:none;">
+相关商品
+</div>
+<div id="detail8" class="detail" style="display:none;">
+相关文章
+</div>
+</form>
+<include file="Public:footer" />

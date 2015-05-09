@@ -1,0 +1,19 @@
+<link rel="stylesheet"  href="../Public/css/route_q.css"/>
+        <div class="col-19 omega page_content one route_review_nav">
+        <div style="margin-top:12px;"></div>
+         <li><a href="#" class="col-2 title on col-full">旅游线路点评</a>
+        	 <a href="{:U('userline/route_mag')}" class="col-2 alpha title ">我要点评</a>
+         </li>
+            <div class="col-18 alpha body">
+                <volist name="list" id="vo">
+            	<div class="content_main_right_massage-box">
+                	<div class="title"><b>编号：</b>{$vo.code}</div>
+                    <div class="title"><b>路线名称：</b>{$vo.names}</div>
+                    <div class="title"><b>行程：</b><span class="rev_font">{$vo.travel}</span>&nbsp;&nbsp;<b>导游：</b><span class="rev_font">{$vo.guide}</span>&nbsp;&nbsp;<b>交通：</b><span class="rev_font">{$vo.traffic}</span>&nbsp;&nbsp;<b>住宿：</b><span class="rev_font">{$vo.room}</span>&nbsp;&nbsp;<b>满意度：</b><span class="rev_font">{$vo.point}</span>&nbsp;&nbsp;<b>点评奖金：</b><span class="rev_font"><if condition="($vo['review_award']!='') OR ($vo['review_award']!='0')">{$vo.review_award}元<else />无</if></span></div>
+    <div class="title">{$vo.content}</div>
+    <div class="title"><b>印象：</b><span class="rev_font"><volist name="vo['impr_name']" id="vo2">{$vo2}</volist></span></div>                
+                </div>
+                    </volist>
+            </div>
+        </div>
+<div class="page">{$page}</div>

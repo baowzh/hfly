@@ -1,0 +1,35 @@
+@charset "utf-8";
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, em, button { margin:0; padding:0; }
+html { background-color:#FFF; }
+body { background-color:#FFF; font-size:12px; line-height:1.5; font-family:Tahoma,Simsun,sans-serif; color:#333; }
+img, fieldset { margin:0; padding:0; border:0; }
+input, textarea {font-size:12px;}
+table { border-collapse:collapse; }
+a { color:#0065bb; text-decoration:none; outline:none; }
+a:hover { text-decoration:underline; }
+h1, h2, h3, h4, h5 { font-family:Arial,Simsun,sans-serif; }
+ul li, ol li { list-style:none; }
+dfn { font-style:normal; font-size:12px; font-family:Arial !important; }
+select { padding:1px; font-family:Arial,Simsun,sans-serif; border:1px solid #CCC; background-color:#FFF; }
+input[type="text"] { padding:3px; border:solid 1px #CCC; box-shadow: 1px 1px 3px #DDDDDD inset; }
+input[type="text"]:focus{ background-color:#f1f9ff; border-color:#5d9de5 #67a1e2 #67a1e2 #5d9de5; border-style:solid; border-width:1px;box-shadow: 1px 1px 3px #d0dee6 inset;}
+.basefix,.layoutfix { *zoom:1; }
+.basefix:after,.layoutfix:after { clear:both; content:'.'; display:block; height:0; overflow:hidden; }
+.float_left { float:left !important; }
+.float_right { float:right !important; }
+.invisible { visibility:hidden !important; }
+.hidden { display:none !important; }
+.border_none { border:0 none !important; }
+.base_price { font-style:normal; font-family: arial; text-decoration:none; }
+.base_price dfn { font-family: Arial, Simsun; font-size: 12px; }
+.base_price strong {font-family:Verdana;}
+.input_error {background-color: #FFF7D9 !important;border-color: #D80000 #E50000 #E50000 #D80000 !important;border-style: solid;}
+.input_default { color:#808080 !important; }
+.inputSel{ color:#808080;}
+/* labels&it's input */
+.base_label { _padding-bottom: 1px; *display: inline-block; border-bottom:1px solid transparent; _border-bottom:none; _font-family:Simsun; cursor: pointer; }
+.base_label:hover { border-bottom: 1px dashed #aaa; }
+.base_label input { margin: -4px 3px 0 0; *margin-top: -2px; width: 12px; height: 12px; overflow:hidden; border: none; font-family:Arial; vertical-align: middle; }
+/* alert */
+.c_alert { padding-left:7px; background: url(http://pic.c-ctrip.com/common/bg_alertinfo.gif) no-repeat 0 -8px; overflow:hidden; }
+.c_alertinfo { padding:4px 5px 4px 8px; border:1px solid #ffb533; border-left:0; color:#333;font-size:12px;line-height:20px;background-color:#fff5d1; }

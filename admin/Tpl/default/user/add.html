@@ -1,0 +1,56 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('show_list')}">会员列表</a> |
+        <a class="on" href="{:U('add')}">添加会员</a>
+    </ul>
+</div>
+<form name="myform" id="myform" action="{:U('add')}" method="post">
+	
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <tr>
+            <th width="10%"><span class="red">*</span>用户名：</th>
+            <td>
+                <input type="text" class="input-text" name="username" id="username" datatype="*" nullmsg="请输入用户名" errmsg="用户名不能为空"/>
+            </td>
+          
+        </tr>
+        <tr>
+            <th><span class="red">*</span>登录密码：</th>
+            <td><input name="password" type="password" class="input-text" id="password" datatype="*" nullmsg="请输入密码" errmsg="密码不能为空"/>
+
+                <div id="msg_pwd" class="div_msg"></div>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>重复登录密码：</th>
+            <td><input name="password2" type="password" class="input-text" id="password2" datatype="*" nullmsg="再次输入密码" errmsg="两次密码不一致"/>
+            </td>
+        </tr>
+       
+        <tr>
+            <th><span class="red">*</span>联系电话：</th>
+            <td><input name="phone" type="text" class="input-text" id="phone" datatype="n" nullmsg="请输入常用联系电话" errmsg="联系电话不能为空" sucmsg=""/>
+            </td>
+        </tr>
+         <tr>
+            <th>Email：</th>
+            <td><input name="email" type="text" class="input-text" id="email" />
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>状态：</th>
+            <td>
+                <input type="radio" id="status_1" name="status" value="1" checked>&nbsp;<label for="status_1">激活</label>&nbsp;&nbsp;
+                <input type="radio" id="status_0" name="status" value="0">&nbsp;<label for="status_0">锁定</label>
+            </td>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>
+            <td>
+                <input type="submit" name="submit" value=" 保 存 " class="button"/>
+                <input type="reset" value=" 重 置 " class="button"/>
+            </td>
+        </tr>
+    </table>
+
+</form>

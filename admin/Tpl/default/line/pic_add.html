@@ -1,0 +1,81 @@
+<script type="text/javascript">
+    var root = "__ROOT__", index = "__Index__";
+</script>
+<link rel="stylesheet"
+	href="__ROOT__/Public/Plugins/uploadify/uploadify.css" />
+<script type="text/javascript"
+	src="__ROOT__/Public/Plugins/uploadify/jquery.uploadify-3.1.min.js"></script>
+<script type="text/javascript"
+	src="__ROOT__/Public/Plugins/uploadify/jquery.jUpload.js"></script>
+<script type="text/javascript">
+   $(function () {
+	   $('#show_msg').hide();
+			  $("#upload1").jUpload({
+				  trigger_id: "t_upload1",
+				  uploader: "{:U('uploadify/head_img')}",
+				  queueID: "upload1-queue",
+				  formData: {
+					  "<?php echo session_name(); ?>": "<?php echo session_id(); ?>",
+					  "savePath": "/Upload/images/line_pic/",
+					  "saveRule": "time",
+					  "divId": "img1",
+					  "thumb": 1,
+					  "thumbMaxWidth": '{:C("thumbMaxWidth")}',
+					  "thumbMaxHeight": '{:C("thumbMaxHeight")}',
+					  "thumbPrefix": 'b_,m_,s_'
+				  },
+				  success: function (data, info) {
+					  $("#photo_1").val(data[0].path);
+					  art.dialog.alert(info);
+				  }
+			  });
+		  })
+function formcheck()
+{
+	if($("#photo_1").val()==""){
+		$('#show_msg').show();
+		return false;
+	}
+	return true;
+}
+</script>
+<div id="nav" class="mainnav_title">
+    <ul>
+      <a class="on" href="{:U('pic_add')}">添加线路图片</a>
+    </ul>
+</div>
+
+<form action="{:U('pic_add',array('line_id'=>$line_id))}" enctype="multipart/form-data" method="post" onSubmit="return formcheck();" target="main">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="580">
+        <tr>
+            <th width="86"><span class="red">*</span>名称&nbsp;</th>
+        <td><span class="f_left">
+        <input type="text" name="names" id="names" value="{$objLine.names}" class="txt" datatype="*" nullmsg="请填写图片名称" errmsg="请填写图片名称" sucmsg=" " />
+        </span><span class="Validform_checktip f_left"></span>
+         <input type="hidden" id="line_id" name="line_id" value="{$line_id}"></td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>图片&nbsp;</th>
+            <td><div id="img1"></div>
+                    <div id="upload1-queue" style="margin-top:6px;"></div>
+                <input class="isFile" type="hidden" id="photo_1" name="pic_front"/>
+                    <input data-msg-isFile="请上传图片" class="isFile" id="upload1" name="file_upload1" type="file"/>
+                    <input type="hidden" id="file_name" name="file_name"/>
+                    <div class="f_left" style="margin:12px 0 0 6px;">
+                    <a class="upload_bt" href="javascript:void(0);" id="t_upload1" onclick="$('#show_msg').hide();">点击上传</a>
+                    </div><span class="Validform_checktip f_left Validform_wrong" id="show_msg">请先上传图片再提交</span></td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" value=" 保 存 " name="save" class="button">
+        <input TYPE="reset" value=" 重 置 " class="button">
+    </div>
+</form>
+<script type="text/javascript">$(function () {
+    $("#upload2").jUpload({
+        trigger_id: "jtrigger",
+        queueID:"queueID"
+    });
+})
+</script>
+<include file="Public:footer" />

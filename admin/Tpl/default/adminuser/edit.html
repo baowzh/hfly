@@ -1,0 +1,60 @@
+<div id="nav" class="mainnav_title">
+    <ul>
+        <a href="{:U('lists')}">管理员列表</a> |
+        <a class="on" href="{:U('add')}">添加管理员</a>
+    </ul>
+</div>
+<form name="myform" id="myform" action="{:U('edit')}" method="post">
+    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
+        <input type="hidden" name="id" id="id" value="{$list['id']}"/>
+        <tr>
+            <th width="10%"><span class="red"></span>用户名：</th>
+            <td>
+                <input type="text" name="login_name" id="login_name" value="{$list['login_name']}" readonly="readonly"
+                       style="color:#999999" class="input-text"/>
+            </td>
+        </tr>
+        <tr>
+            <th>姓名：</th>
+            <td><input name="true_name" type="text" class="input-text" id="true_name" value="{$list['true_name']}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>地址：</th>
+            <td>
+                <input name="adre" type="text" class="input-text" id="adre" value="{$list['adre']}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>联系电话：</th>
+            <td><input name="tel" type="text" class="input-text" id="tel" value="{$list['tel']}"/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="red">*</span>用户组别：</th>
+            <td>
+
+                <select id="group" name="group">
+                    <volist name="roles" id="vo">
+                        <_option value="{$vo.id}" _value="{$list.group}">{$vo.name}</_option>
+                    </volist>
+                </select>
+
+            </td>
+        </tr>
+
+        <tr>
+            <th><span class="red">*</span>状态：</th>
+            <td>
+                <input type="radio" id="status1" name="status" value="1" _value="{$list.status}"/>&nbsp;<label
+                    for="status1">正常</label>&nbsp;&nbsp;
+                <input type="radio" id="status0" name="status" value="0" _value="{$list.status}"/>&nbsp;<label
+                    for="status0">锁定</label>
+            </td>
+        </tr>
+    </table>
+    <div id="btnbox" class="btn">
+        <INPUT TYPE="submit" value=" 保 存 " class="button" name="submit">
+        <input TYPE="reset" value=" 重 置 " class="button">
+    </div>
+</form>

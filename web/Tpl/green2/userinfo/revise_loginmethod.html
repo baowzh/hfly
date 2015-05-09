@@ -1,0 +1,47 @@
+<script src="../Public/js/jquery.xl_calendar.js" type="text/javascript"></script>
+<div class="col-19 omega page_content">
+<div style="margin-top:12px;"></div>
+        	<ul class="side1">             
+              <li> <a href="{:U('userinfo/revise_userdetail')}" class="col-3 alpha title ">用户修改资料</a></li>
+              <li> <a href="{:U('userinfo/revise_password')}" class="col-3 alpha title">用户修改密码</a></li>
+              <li class="col-3 title on">登录方式修改</li>
+          </ul>
+            <div class="col-18 alpha body">
+              <form action="{:U('userinfo/revise_loginmethod')}" method="post" name="myform" id="myform" class="check-form">
+            	 <table class="table_form" width="100%">
+					<tr>
+                      <th width="13%">用户名：</th>
+                      <td width="200px">{$detail.username}&nbsp;&nbsp;(不可修改)</td>
+                    </tr>
+                     
+                         <tbody>
+                    <tr>
+                      <th width="13%" style='padding-bottom:60px;'>E-mail：</th>
+                       
+                        <td width="200px"><input type="text" name="email" id="email" class="txt" value='{$user.email}' size="30" datatype="e"/><br><br><input name="" id="" class="btn sm primary" type="submit" value="   修改   " /></td>
+                        <td style='padding-bottom:60px;'><div class="Validform_tipbox error" for="email"></div></td>
+                       
+                    </tr>
+                         </tbody>
+                    
+                    
+                            
+                 </table>
+                  </form>
+                 <form action="{:U('userinfo/revise_loginmethod')}" method="post" name="myform" id="myform" class="check-form">
+            	 <table class="table_form" width="100%" >
+                         <tbody>
+                     <tr>
+                      <th width="13%" style='padding-bottom:60px;'>手机号码：</th>
+                      <td width="200px"><input type="text" name="phone" id="phone" class="txt" value='{$user.phone}' size="30" datatype="m"/><br><br><input name="" id="" class="btn sm primary" type="submit" value="   修改   " /></td>
+                      <td style='padding-bottom:60px;'><div class="Validform_tipbox error" for="phone"></div></td>
+                    </tr> 
+                         </tbody>
+                    
+                    
+                            
+                 </table>
+                  </form>
+               
+            </div>
+        </div>
