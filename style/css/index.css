@@ -2101,6 +2101,11 @@ td.day:not (.disable ):hover {
 	font-weight: bold;
 	font-size: 36px;
 }
+.travelpointname a{
+	color: #05b5b5;
+	font-weight: bold;
+	font-size: 36px;
+}
 
 .travelpoint {
 	

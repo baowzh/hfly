@@ -39,7 +39,7 @@
       </div>
       
       <div>
-         <img alt="" width="1200" height="570" src="/style/images/cont.jpg"  >
+         <img alt="" width="1200" height="570" src="__ROOT__/style/images/cont.jpg"  >
       </div>
     </div>  
       <div class="cont_sumit">
@@ -69,8 +69,8 @@
   </tr>
   <tr bgcolor="#cef0f1" height="50">  
     <td align="center" width="80">服务流程</td> 
-    <td bgcolor="#FFFFFF" colspan="5" width="700"><img src="/style/images/ht.jpg" width="723" height="67" alt="服务流程"></td>
-    <td colspan="2" rowspan="4" bgcolor="#FFFFFF" align="center"><img src="/style/images/services_img.gif" width="250" height="240" alt="客服微信：xingye_cc，客服电话：400 627 1861"></td> 
+    <td bgcolor="#FFFFFF" colspan="5" width="700"><img src="__ROOT__/style/images/ht.jpg" width="723" height="67" alt="服务流程"></td>
+    <td colspan="2" rowspan="4" bgcolor="#FFFFFF" align="center"><img src="__ROOT__/style/images/services_img.gif" width="250" height="240" alt="客服微信：xingye_cc，客服电话：400 627 1861"></td> 
   </tr>
   <tr bgcolor="#cef0f1" height="50">  
     <td align="center" width="80">行程预览</td> 
@@ -79,7 +79,7 @@
   <tr bgcolor="#cef0f1" height="50">  
     <td align="center" width="80">特别告知</td> 
     <td bgcolor="#FFFFFF" colspan="5" width="700">
-	<img src="/style/images/chose.jpg" width="621" height="286" alt="VIP">
+	<img src="__ROOT__/style/images/chose.jpg" width="621" height="286" alt="VIP">
 	<br>
 	
 </td> 
@@ -121,7 +121,7 @@
 	     <ul style="padding:0; margin:0;">
 		    <li><a id="bbs_btn_0" style="cursor:pointer" onclick="tabit(this,2)" class="postion">拼团自由行</a></li>
 		    <li><a id="bbs_btn_1" style="cursor:pointer" onclick="tabit(this,2)">拼团说明</a></li>
-		    <li style="width:300px;background:none;border-top:none;border-right:none;color:#993300;font-weight:bold;font-size:12px; padding-bottom:0px;"><a style="cursor:pointer" onclick="showTipsWindown('发起拼团','{:U('order_ping',array('id'=>$line_base['id']))}');" ><img src="/style/images/faqi.jpg" width="191" height="52" alt="发起拼团"></a></li>
+		    <li style="width:300px;background:none;border-top:none;border-right:none;color:#993300;font-weight:bold;font-size:12px; padding-bottom:0px;"><a style="cursor:pointer" onclick="showTipsWindown('发起拼团','{:U('order_ping',array('id'=>$line_base['id']))}');" ><img src="__ROOT__/style/images/faqi.jpg" width="191" height="52" alt="发起拼团"></a></li>
 	     </ul>
 	     <div class="clear"></div>
        </div>
@@ -248,13 +248,13 @@
                 <span class="down">&nbsp;</span>
                <volist name="lists_que" id="que">
                    <div class="dialog_left">
-                        <div class="toux"><img height="45" src="/style/images/niu.jpg" ></div>
+                        <div class="toux"><img height="45" src="__ROOT__/style/images/niu.jpg" ></div>
                         <div class="dia_cont">{$que.question1}</div>
                         <div class="clear"></div>
                    </div>
                    <if condition="$que['answer'] neq ''">
                    <div class="dialog_right">
-                       <div class="toux"><img height="45" src="/style/images/touxi.jpg" ></div>
+                       <div class="toux"><img height="45" src="__ROOT__/style/images/touxi.jpg" ></div>
                        <div class="dia_cont">{$que.answer|default="请等待回复"}</div>
                        <div class="clear"></div>
                    </div>

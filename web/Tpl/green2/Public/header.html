@@ -40,7 +40,7 @@
         <li <eq name="current" value="index">class="curt"</eq>><a href="/" >首页</a></li>
         <volist name="navlist" id="vs" mod='3'>
         <li>
-<!--          <a href="{:U('/index.php',array('id'=>$vs['id']))}">{$vs.names}</a> -->
+<!--          <a href="{:U('',array('id'=>$vs['id']))}">{$vs.names}</a> -->
            <a href=" __ROOT__/index.php?id={$vs['id']}">{$vs.names}</a>
         </li>
         </volist>
