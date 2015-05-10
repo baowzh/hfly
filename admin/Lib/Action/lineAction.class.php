@@ -38,6 +38,8 @@ class lineAction extends CommonAction {
 			$this->display();
 		} else {
 			$Line = D('Line');
+			$linebelongto=$_POST['linebelongto'];
+			$Line->linebelongto=$linebelongto;
 			$LineInfo = M("LineInfo");
 			$LineTravel = D("LineTravel");
 			$LineTravelSection = D("LineTravelSection");

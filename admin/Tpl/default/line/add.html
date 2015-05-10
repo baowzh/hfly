@@ -1,319 +1,352 @@
 <div id="nav" class="mainnav_title">
-    <ul>
-        <a href="{:U('show_list')}">线路列表</a> |
-        <a class="on" href="{:U('add')}">添加线路</a>
-    </ul>
+	<ul>
+		<a href="{:U('show_list')}">线路列表</a> |
+		<a class="on" href="{:U('add')}">添加线路</a>
+	</ul>
 </div>
-<link href="../Public/css/tour.css" type='text/css' rel='stylesheet'/>
+<link href="../Public/css/tour.css" type='text/css' rel='stylesheet' />
 <form action="{:U('add')}" method="post">
-<ul class="lineNav">
-    <li id="line_1" class="showline yes">基本资料</li>
-    <li id="line_2" class="showline">行程安排</li>
-    <li id="line_3" class="showline">其它内容</li>
-</ul>
-<table border="0" id="b_line_1" cellspacing="0" cellpadding="0" class="table_form" width="100%">
-    <tr>
-        <th width="10%"><span class="red">*</span><em class="tit">线路名称</em>：</th>
-        <td><input type="text" datatype="*5-50" name="names" id="names" class="txt"/>
-        </td>
-    </tr>
-    <tr>
-        <th><span class="red">*</span><em>线路编号</em>：</th>
-        <td><input type="text" name="code" id="code" class="txt" datatype="s5-50" ajaxUrl="{:U('is_code')}" /></td>
-    </tr>
-    
-    
-    <tr>
-        <th width="10%"><span class="red">*</span>发团公司：</th>
-        <td><input type="text" name="compnay" id="compnay" class="txt" value="{$line_list.compnay}" />
-        </td>
-    </tr>
-    <tr>
-        <th width="10%"><span class="red">*</span>成团方式：</th>
-        <td><input type="text"  name="ly_type" id="ly_type" class="txt" value="{$line_list.ly_type}" />
-        </td>
-    </tr>
-    
-    <tr>
-        <th><span class="red">*</span>SEO优化：</th>
-        <td>
-            <input id="box_SEO" type="checkbox" name="SEO"/>
-            <label for="box_SEO">SEO优化</label>
-        </td>
-    </tr>
-    <tr name="seo">
-        <th>SEO标题：</th>
-        <td><textarea name="title" rows="2" cols="20" id="title" style="height:50px;width:600px;"></textarea>
-            <span id="box_title" class="Dp">建议不超出30个字</span></td>
-    </tr>
-    <tr name="seo">
-        <th>SEO关键词：</th>
-        <td><textarea name="keyword" rows="2" cols="20" id="keyword" style="height:50px;width:600px;"></textarea>
-            <span id="box_keyword" class="Dp">将被搜索引擎用来搜索您网站的关键内容，每个关键字用英文逗号分隔</span></td>
-    </tr>
-    <tr name="seo">
-        <th>SEO描述：</th>
-        <td><textarea name="detail" rows="2" cols="20" id="detail" style="height:50px;width:600px;"></textarea>
-            <span id="box_detail" class="Dp">描述中请不要带英文的逗号，建议不超出80个字</span></td>
-    </tr>
-    <tr>
-        <th><span class="red">*</span><em>参团性质</em>：</th>
-        <td>
-            <input id="line_type1" type="radio" name="line_type" value="1" checked="checked" datatype="n"/>
-            <label for="line_type1">参团游</label>
-            <input id="line_type2" type="radio" name="line_type" value="2"/>
-            <label for="line_type2">自由行</label>
-            <input id="line_type3" type="radio" name="line_type" value="3"/>
-            <label for="line_type3">团队游</label>
-            <input id="line_type4" type="radio" name="line_type" value="4"/>
-            <label for="line_type4">自驾游</label>
-        </td>
-    </tr>
-    <tr>
-        <th><span class="red">*</span><em>行程天数</em>：</th>
-        <td><input type="text" maxlength="3" name="trip_days" id="trip_days" class="txt" value="1" datatype="/^[1-9]\\d{0,2}$/" /></td>
-    </tr>
-    <tr>
-        <th><span class="red">*</span><em>往返交通</em>：</th>
-        <td><input type="text" name="traffic" id="traffic" class="txt" datatype="s2-10"/></td>
-    </tr>
-    <tr>
-        <th><span class="red">*</span>出发城市：</th>
-        <td><select id="city_id" name="city_id" datatype="hastarget">
-            <volist name="start_city" id="vo">
-                <option value="{$vo.cid}">{$vo.names}</option>
-            </volist>
-        </select></td>
-    </tr>
-    <tr>
-        <th>目的地类型：</th>
-        <td><select id="target_type" name="target_type">
-            <volist name="city_type" id="vo">
-                <option value="{$vo.id}">{$vo.names}</option>
-            </volist>
-        </select>
-        </td>
-    </tr>
-    <tr>
-        <th><em>目的地</em>：</th>
-        <td style="line-height: normal">
-            <div id="Line_target" class="lineDest">                
-            </div>
+	<ul class="lineNav">
+		<li id="line_1" class="showline yes">基本资料</li>
+		<li id="line_2" class="showline">行程安排</li>
+		<li id="line_3" class="showline">其它内容</li>
+	</ul>
+	<table border="0" id="b_line_1" cellspacing="0" cellpadding="0"
+		class="table_form" width="100%">
+		<tr>
+			<th width="10%"><span class="red">*</span><em class="tit">线路名称</em>：</th>
+			<td><input type="text" datatype="*5-50" name="names" id="names"
+				class="txt" /></td>
+		</tr>
+		<tr>
+			<th><span class="red">*</span><em>线路编号</em>：</th>
+			<td><input type="text" name="code" id="code" class="txt"
+				datatype="s5-50" ajaxUrl="{:U('is_code')}" /></td>
+		</tr>
 
-        </td>
-    </tr>
-    <tr>
-        <th>行程预览：</th>
-        <td><textarea name="ps" rows="2" cols="20" id="ps" style="height:50px;width:600px;">{$line_list.ps}</textarea>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">线路主题：</td>
-        <td>
-      <span id="L_OfferedProperties">
-      <volist name="line_topic" id="ltid">
-          <input id="topic" type="radio" name="topic" value="{$ltid.id}"
-          <eq name="key" value="0">checked="checked"</eq>
-          />
-          <label>{$ltid.names}</label>
-      </volist>      
-      </span> <span id="msg_topic" class="msg"></span>
-        </td>
 
-    </tr>
+		<tr>
+			<th width="10%"><span class="red">*</span>发团公司：</th>
+			<td><input type="text" name="compnay" id="compnay" class="txt"
+				value="{$line_list.compnay}" /></td>
+		</tr>
+		<tr>
+			<th width="10%"><span class="red">*</span>成团方式：</th>
+			<td><input type="text" name="ly_type" id="ly_type" class="txt"
+				value="{$line_list.ly_type}" /></td>
+		</tr>
 
-    <tr>
-        <td align="right"><em>预约定金</em>：</td>
-        <td><input name="front_money" type="text" class="txt"  id="front_money" value='' maxlength="10" datatype="*1-10"/>
-            <label style="float: left"> 每人</label>
-    </tr>
-    <tr>
-        <td align="right"><em>诚意金</em>：</td>
-        <td><input name="cmoney" type="text" class="txt"  id="cmoney" value='' maxlength="10" datatype="*1-10"/>
-            <label style="float: left"> 每人</label>
-    </tr>
-    
-    <tr>
-        <td align="right">属性：</td>
-        <td><input id="property1" type="radio" name="property" value="1" checked="checked"/>
-            <label for="property1">普通</label>
-            <input id="property2" type="radio" name="property" value="2"/>
-            <label for="property2">特价</label>
-            <input id="property3" type="radio" name="property" value="3"/>
-            <label for="property3">新品</label>
-            <input id="property4" type="radio" name="property" value="4"/>
-            <label for="property4">热门</label>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">状态：</td>
-        <td><label><input id="status" type="radio" name="status" value="0" <eq name="line_list.status" value="0">checked="checked"</eq>/>显示</label>
-            <label><input id="status" type="radio" name="status" value="1" <eq name="line_list.status" value="1">checked="checked"</eq>/>隐藏</label>
-        </td>
-    </tr>
-    <tr>
-        <td align="right"><em>排序</em>：</td>
-        <td><input name="sort" type="text" class="input-text-c txt" id="sort" style="width:50px" value='50'
-                   maxlength="3"/></td>
-    </tr>
-    <tr>
-        <td height="50">&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
-<table style="display: none;" id="b_line_2" border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
-    <tr>
-        <th width="10%">编辑模式：</th>
-        <td>
-            <input id="type2" type="radio" name="edit_model" value="2" checked="checked"
-                   onclick="$('#Classical').hide();$('#General').show();"/>&nbsp;&nbsp;
-            <label for="type2">可视化编辑模式</label>
-            <input id="type1" type="radio" name="edit_model" value="1"
-                   onclick="$('#General').hide();$('#Classical').show();"/>&nbsp;
-            <label for="type1">按天编辑模式</label>&nbsp;
-        </td>
-    </tr>
-    <tr>
-    <th>行程安排：</th>
-    <td>
-        <div id="General">
-            <textarea name="General" class="kind-text" style="width:90%"></textarea>
-        </div>
-        <div id="Classical" style="display:none;">
-            <select id="qh_day" class="valid">
-                <option value="1">第1天</option>
-            </select>
+		<tr>
+			<th><span class="red">*</span>SEO优化：</th>
+			<td><input id="box_SEO" type="checkbox" name="SEO" /> <label
+				for="box_SEO">SEO优化</label></td>
+		</tr>
+		<tr name="seo">
+			<th>SEO标题：</th>
+			<td><textarea name="title" rows="2" cols="20" id="title"
+					style="height: 50px; width: 600px;"></textarea> <span
+				id="box_title" class="Dp">建议不超出30个字</span></td>
+		</tr>
+		<tr name="seo">
+			<th>SEO关键词：</th>
+			<td><textarea name="keyword" rows="2" cols="20" id="keyword"
+					style="height: 50px; width: 600px;"></textarea> <span
+				id="box_keyword" class="Dp">将被搜索引擎用来搜索您网站的关键内容，每个关键字用英文逗号分隔</span></td>
+		</tr>
+		<tr name="seo">
+			<th>SEO描述：</th>
+			<td><textarea name="detail" rows="2" cols="20" id="detail"
+					style="height: 50px; width: 600px;"></textarea> <span
+				id="box_detail" class="Dp">描述中请不要带英文的逗号，建议不超出80个字</span></td>
+		</tr>
+		<tr>
+			<th><span class="red">*</span><em>参团性质</em>：</th>
+			<td><input id="line_type1" type="radio" name="line_type"
+				value="1" checked="checked" datatype="n" /> <label for="line_type1">包团自由行</label>
+				<input id="line_type2" type="radio" name="line_type" value="2" /> <label
+				for="line_type2">纯团玩</label> <input id="line_type3" type="radio"
+				name="line_type" value="3" /> <label for="line_type3">常规团</label> <input
+				id="line_type4" type="radio" name="line_type" value="4" /> <label
+				for="line_type4">团体策划</label></td>
+		</tr>
+		<tr>
+			<th><span class="red">*</span><em>行程天数</em>：</th>
+			<td><input type="text" maxlength="3" name="trip_days"
+				id="trip_days" class="txt" value="1" datatype="/^[1-9]\\d{0,2}$/" /></td>
+		</tr>
+		<tr>
+			<th><span class="red">*</span><em>往返交通</em>：</th>
+			<td><input type="text" name="traffic" id="traffic" class="txt"
+				datatype="s2-10" /></td>
+		</tr>
+		<tr>
+			<th><span class="red">*</span>出发城市：</th>
+			<td><select id="city_id" name="city_id" datatype="hastarget">
+					<volist name="start_city" id="vo">
+					<option value="{$vo.cid}">{$vo.names}</option>
+					</volist>
+			</select></td>
+		</tr>
+		<tr>
+			<th>目的地类型：</th>
+			<td><select id="target_type" name="target_type">
+					<volist name="city_type" id="vo">
+					<option value="{$vo.id}">{$vo.names}</option>
+					</volist>
+			</select></td>
+		</tr>
+		<tr>
+			<th><em>目的地</em>：</th>
+			<td style="line-height: normal">
+				<div id="Line_target" class="lineDest"></div>
+			</td>
+		</tr>
+		<tr>
+			<th><em>线路归属地区</em>：</th>
+			<td style="line-height: normal"><select id="linebelongto"
+				name="linebelongto">
+					<option value="">请选择</option>
+					<option value="0471">呼和浩特</option>
+					<option value="0470">呼伦贝尔</option>
+					<option value="0479">锡林郭勒盟</option>
+					<option value="0483">阿拉善盟</option>
+			</select></td>
+		</tr>
+		<tr>
+			<th>行程预览：</th>
+			<td><textarea name="ps" rows="2" cols="20" id="ps"
+					style="height: 50px; width: 600px;">{$line_list.ps}</textarea></td>
+		</tr>
+		<tr>
+			<td align="right">线路主题：</td>
+			<td><span id="L_OfferedProperties"> <volist
+						name="line_topic" id="ltid"> <input id="topic"
+						type="radio" name="topic" value="{$ltid.id}"
+					<eq name="key" value="0">checked="checked"</eq> /> <label>{$ltid.names}</label>
+					</volist>
+			</span> <span id="msg_topic" class="msg"></span></td>
 
-            <div id="day_1" class="line_day">
-                <table width="100%">
-                    <tr>
-                        <th width="60">行程安排：</th>
-                        <td>第1天</td>
-                    </tr>
-                    <tr>
-                        <th>行程标题：</th>
-                        <td><input class="formTitle" type="text" size="50" value="" name="title_1" id="title_1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>用餐：</th>
-                        <td><input type="checkbox" id="dining_1_1" value="1" name="dining_1[]">
-                            <label for="dining_1_1">早餐</label>
-                            <input id="dining_1_2" type="checkbox" value="2" name="dining_1[]">
-                            <label for="dining_1_2">中餐</label>
-                            <input id="dining_1_3" type="checkbox" value="3" name="dining_1[]">
-                            <label for="dining_1_3">晚餐</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>住宿：</th>
-                        <td><input id="stay_1" class="valid" type="text" maxlength="50" name="stay_1"></td>
-                    </tr>
-                </table>
-                <div class="lineRowText">
-                    <ul id="ActivityTitle_1" class="lineRowSub">
-                        <li><img class="add-con" alt="增加1段" src="../Public/images/toolsAdd.png"></li>
-                        <li><img class="del-con" alt="删除1段" src="../Public/images/toolsDell.png"></li>
-                        <li class="yes">第<b>1</b>段</li>
-                    </ul>
-                    <div id="TravelText_1" class="lineRowText">
-                        <table style="width: 100%;" id="container_1_1" style="background:rgb(255, 243, 217);">
-                            <tr>
-                                <th width="6%">标题：</th>
-                                <td>
-                                    <input type="text" class="formTitle" id="activity_title_1_1"
-                                           name="activity_title_1_1">
-                                </td>
-                            </tr>
+		</tr>
 
-                            <tr>
-                                <th>内容：</th>
-                                <td><textarea class="linePlan-text" id="activity_text_1_1" name="activity_text_1_1">第1天第1段内容....</textarea>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
+		<tr>
+			<td align="right"><em>预约定金</em>：</td>
+			<td><input name="front_money" type="text" class="txt"
+				id="front_money" value='' maxlength="10" datatype="*1-10" /> <label
+				style="float: left"> 每人</label>
+		</tr>
+		<tr>
+			<td align="right"><em>诚意金</em>：</td>
+			<td><input name="cmoney" type="text" class="txt" id="cmoney"
+				value='' maxlength="10" datatype="*1-10" /> <label
+				style="float: left"> 每人</label>
+		</tr>
 
-        </div>
-</table>
-<table width="100%" border="0" cellpadding="0" cellspacing="0" id="b_line_3" style="display: none" class="table_form">
-    <tr>
-        <th width="10%"> <em>特色介绍</em>：</th>
-        <td><textarea style="width:100%;height:350px" name="special_info" id="special_info" class="kind-text" datatype="*25-65535" errmsg="请输入25到65535个字符之间的特色介绍"></textarea></td>
-        <td style="width:150px;"><div class='Validform_checktip'></div></td>
-    </tr>
-    <tr>
-        <th> <em>预定需知</em>：</th>
-        <td><textarea name="order_info" style="width:100%" id="order_info" class="kind-text" datatype="*25-65535" errmsg="请输入25到65535个字符之间的预定需知"></textarea></td>
-        <td><div class='Validform_checktip'></div></td>
-    </tr>
-    <tr>
-        <th> <em>温馨提示</em>：</th>
-        <td><textarea name="tip" style="width:100%" id="L_Reminder" class="kind-text" datatype="*25-65535" errmsg="请输入25到65535个字符之间的温馨提示"></textarea></td>
-        <td><div class='Validform_checktip'></div></td>
-    </tr>
-</table>
-<div id="btnbox" class="btn">
-    <INPUT TYPE="submit" value=" 保 存 " class="button">
-    <input TYPE="reset" value=" 重 置 " class="button">
-</div>
+		<tr>
+			<td align="right">属性：</td>
+			<td><input id="property1" type="radio" name="property" value="1"
+				checked="checked" /> <label for="property1">普通</label> <input
+				id="property2" type="radio" name="property" value="2" /> <label
+				for="property2">特价</label> <input id="property3" type="radio"
+				name="property" value="3" /> <label for="property3">新品</label> <input
+				id="property4" type="radio" name="property" value="4" /> <label
+				for="property4">热门</label></td>
+		</tr>
+		<tr>
+			<td align="right">状态：</td>
+			<td><label><input id="status" type="radio" name="status"
+					value="0"
+				<eq name="line_list.status" value="0">checked="checked"</eq>/>显示</label> <label><input
+					id="status" type="radio" name="status" value="1"
+				<eq name="line_list.status" value="1">checked="checked"</eq>/>隐藏</label></td>
+		</tr>
+		<tr>
+			<td align="right"><em>排序</em>：</td>
+			<td><input name="sort" type="text" class="input-text-c txt"
+				id="sort" style="width: 50px" value='50' maxlength="3" /></td>
+		</tr>
+		<tr>
+			<td height="50">&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<table style="display: none;" id="b_line_2" border="0" cellspacing="0"
+		cellpadding="0" class="table_form" width="100%">
+		<tr>
+			<th width="10%">编辑模式：</th>
+			<td><input id="type2" type="radio" name="edit_model" value="2"
+				checked="checked"
+				onclick="$('#Classical').hide();$('#General').show();" />&nbsp;&nbsp;
+				<label for="type2">可视化编辑模式</label> <input id="type1" type="radio"
+				name="edit_model" value="1"
+				onclick="$('#General').hide();$('#Classical').show();" />&nbsp; <label
+				for="type1">按天编辑模式</label>&nbsp;</td>
+		</tr>
+		<tr>
+			<th>行程安排：</th>
+			<td>
+				<div id="General">
+					<textarea name="General" class="kind-text" style="width: 90%"></textarea>
+				</div>
+				<div id="Classical" style="display: none;">
+					<select id="qh_day" class="valid">
+						<option value="1">第1天</option>
+					</select>
+
+					<div id="day_1" class="line_day">
+						<table width="100%">
+							<tr>
+								<th width="60">行程安排：</th>
+								<td>第1天</td>
+							</tr>
+							<tr>
+								<th>行程标题：</th>
+								<td><input class="formTitle" type="text" size="50" value=""
+									name="title_1" id="title_1"></td>
+							</tr>
+							<tr>
+								<th>用餐：</th>
+								<td><input type="checkbox" id="dining_1_1" value="1"
+									name="dining_1[]"> <label for="dining_1_1">早餐</label> <input
+									id="dining_1_2" type="checkbox" value="2" name="dining_1[]">
+									<label for="dining_1_2">中餐</label> <input id="dining_1_3"
+									type="checkbox" value="3" name="dining_1[]"> <label
+									for="dining_1_3">晚餐</label></td>
+							</tr>
+							<tr>
+								<th>住宿：</th>
+								<td><input id="stay_1" class="valid" type="text"
+									maxlength="50" name="stay_1"></td>
+							</tr>
+						</table>
+						<div class="lineRowText">
+							<ul id="ActivityTitle_1" class="lineRowSub">
+								<li><img class="add-con" alt="增加1段"
+									src="../Public/images/toolsAdd.png"></li>
+								<li><img class="del-con" alt="删除1段"
+									src="../Public/images/toolsDell.png"></li>
+								<li class="yes">第<b>1</b>段
+								</li>
+							</ul>
+							<div id="TravelText_1" class="lineRowText">
+								<table style="width: 100%;" id="container_1_1"
+									style="background:rgb(255, 243, 217);">
+									<tr>
+										<th width="6%">标题：</th>
+										<td><input type="text" class="formTitle"
+											id="activity_title_1_1" name="activity_title_1_1"></td>
+									</tr>
+
+									<tr>
+										<th>内容：</th>
+										<td><textarea class="linePlan-text"
+												id="activity_text_1_1" name="activity_text_1_1">第1天第1段内容....</textarea>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+	</table>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		id="b_line_3" style="display: none" class="table_form">
+		<tr>
+			<th width="10%"><em>特色介绍</em>：</th>
+			<td><textarea style="width: 100%; height: 350px"
+					name="special_info" id="special_info" class="kind-text"
+					datatype="*25-65535" errmsg="请输入25到65535个字符之间的特色介绍"></textarea></td>
+			<td style="width: 150px;"><div class='Validform_checktip'></div></td>
+		</tr>
+		<tr>
+			<th><em>预定需知</em>：</th>
+			<td><textarea name="order_info" style="width: 100%"
+					id="order_info" class="kind-text" datatype="*25-65535"
+					errmsg="请输入25到65535个字符之间的预定需知"></textarea></td>
+			<td><div class='Validform_checktip'></div></td>
+		</tr>
+		<tr>
+			<th><em>温馨提示</em>：</th>
+			<td><textarea name="tip" style="width: 100%" id="L_Reminder"
+					class="kind-text" datatype="*25-65535"
+					errmsg="请输入25到65535个字符之间的温馨提示"></textarea></td>
+			<td><div class='Validform_checktip'></div></td>
+		</tr>
+	</table>
+	<div id="btnbox" class="btn">
+		<INPUT TYPE="submit" value=" 保 存 " class="button"> <input
+			TYPE="reset" value=" 重 置 " class="button">
+	</div>
 </form>
 <script type="text/javascript" src="../Public/js/jquery.linePlan.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $('#box_SEO').trigger("click").click(function () {
-            if ($(this).attr("checked") == "checked") {
-                $('tr[name="seo"]').show();
-            } else {
-                $('tr[name="seo"]').hide();
-            }
-        });
-        $(".showline").bind("click", function () {
-            var i = $(".showline").index($(this)) + 1;
-            for (var j = 1; j <= 3; j++) {
-                if (i == j) {
-                    $("#line_" + j).addClass("yes");
-                    $("#b_line_" + j).show();
-                } else {
-                    $("#line_" + j).removeClass("yes");
-                    $("#b_line_" + j).hide();
-                }
-            }
-        });
-        $("#city_id,#target_type").bind("change",function () {
+	$(function() {
+		$('#box_SEO').trigger("click").click(function() {
+			if ($(this).attr("checked") == "checked") {
+				$('tr[name="seo"]').show();
+			} else {
+				$('tr[name="seo"]').hide();
+			}
+		});
+		$(".showline").bind("click", function() {
+			var i = $(".showline").index($(this)) + 1;
+			for (var j = 1; j <= 3; j++) {
+				if (i == j) {
+					$("#line_" + j).addClass("yes");
+					$("#b_line_" + j).show();
+				} else {
+					$("#line_" + j).removeClass("yes");
+					$("#b_line_" + j).hide();
+				}
+			}
+		});
+		$("#city_id,#target_type")
+				.bind(
+						"change",
+						function() {
 
-            var city_id = $("#city_id").val();
-            var target_type = $("#target_type").val();
-            var reurl = "{:U('ajax_target')}";
+							var city_id = $("#city_id").val();
+							var target_type = $("#target_type").val();
+							var reurl = "{:U('ajax_target')}";
 
-            var data={city_id:city_id,target_type:target_type};
-            $.ajax({
-                type: "POST",
-                url: reurl,
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert(errorThrown);
-                },
-                data:data,
-                dataType: "text",
-                success: function (html) {
+							var data = {
+								city_id : city_id,
+								target_type : target_type
+							};
+							$
+									.ajax({
+										type : "POST",
+										url : reurl,
+										error : function(XMLHttpRequest,
+												textStatus, errorThrown) {
+											alert(errorThrown);
+										},
+										data : data,
+										dataType : "text",
+										success : function(html) {
 
-                    try {
-                        var obj = jQuery.parseJSON(html);
-                    } catch (e) {
-                        $("#Line_target").html('<div class="Validform_checktip Validform_wrong" style="display: block;">目的地获取异常</div>');
-                    }
-                    if (obj.status == 1) {
-                        $("#Line_target").html(obj.data);
-                    } else {
-                        $("#Line_target").html('<div class="Validform_checktip Validform_wrong" style="display: block;">无目的地记录</div>');
-                    }
-                    $("#city_id").trigger("blur");
-                }
-            });
-        }).trigger("change");
-        $("#trip_days").linePlan({data: ""});
-    })
-
+											try {
+												var obj = jQuery
+														.parseJSON(html);
+											} catch (e) {
+												$("#Line_target")
+														.html(
+																'<div class="Validform_checktip Validform_wrong" style="display: block;">目的地获取异常</div>');
+											}
+											if (obj.status == 1) {
+												$("#Line_target")
+														.html(obj.data);
+											} else {
+												$("#Line_target")
+														.html(
+																'<div class="Validform_checktip Validform_wrong" style="display: block;">无目的地记录</div>');
+											}
+											$("#city_id").trigger("blur");
+										}
+									});
+						}).trigger("change");
+		$("#trip_days").linePlan({
+			data : ""
+		});
+	})
 </script>

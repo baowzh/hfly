@@ -30,22 +30,22 @@ class indexAction extends CommonAction {
 		
 		$Line1 = $mod_Line->where("line_type = '1'")->order('sort,id desc')->limit(2)->select();
 		$this->assign('Line1', $Line1);
-		$Line11 = $mod_Line->where("line_type = '1'")->order('id desc')->limit(10)->select();
+		$Line11 = $mod_Line->where("line_type = '1'")->order('id desc')->limit(2)->select();
 		$this->assign('Line11', $Line11);
 		
 		$Line2 = $mod_Line->where("line_type = '2'")->order('sort,id desc')->limit(2)->select();
 		$this->assign('Line2', $Line2);
-		$Line22 = $mod_Line->where("line_type = '2'")->order('id desc')->limit(10)->select();
+		$Line22 = $mod_Line->where("line_type = '2'")->order('id desc')->limit(2)->select();
 		$this->assign('Line22', $Line22);
 		
 		$Line3 = $mod_Line->where("line_type = '3'")->order('sort,id desc')->limit(2)->select();
 		$this->assign('Line3', $Line3);
-		$Line33 = $mod_Line->where("line_type = '3'")->order('id desc')->limit(10)->select();
+		$Line33 = $mod_Line->where("line_type = '3'")->order('id desc')->limit(2)->select();
 		$this->assign('Line33', $Line33);
 		
 		$Line4 = $mod_Line->where("line_type = '4'")->order('sort,id desc')->limit(2)->select();
 		$this->assign('Line4', $Line4);
-		$Line44 = $mod_Line->where("line_type = '4'")->order('id desc')->limit(10)->select();
+		$Line44 = $mod_Line->where("line_type = '4'")->order('id desc')->limit(2)->select();
 		$this->assign('Line44', $Line44);
 
 		$property = $mod_Line->where("property = '4'")->order('sort,id desc')->limit(4)->select();

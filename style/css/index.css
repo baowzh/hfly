@@ -2084,8 +2084,8 @@ td.day:not (.disable ):hover {
 
 .travellinecomm {
 	font-size: 14px;
-	width: 50px;
-	text-align: center;
+	width: 150px;
+	text-align: left;
 	float: left;
 	margin: 3px;
 }

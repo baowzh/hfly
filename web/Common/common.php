@@ -45,7 +45,13 @@ function showTags($tags) {
 	}
 	return $str;
 }
-
+function get_special_info1($lineid = "0") {
+	static $line_info = null;
+	if ($line_info === null)
+		$line_info = M("line_info");
+	$content = $line_info->where("lid=$lineid")->getField("special_info");
+	return preg_replace("/\<.*?\>/", "", $content);
+}
 /**
  * 根据id获取后台用户的指定字段的值
  * @staticvar null $user_list

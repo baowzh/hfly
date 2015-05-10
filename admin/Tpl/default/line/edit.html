@@ -59,13 +59,13 @@
         <th><span class="red">*</span>参团性质：</th>
         <td>
             <input type="radio" id="line_type1" name="line_type" value="1" _value="{$line_list.line_type}"/>
-            <label for="line_type1">参团游</label>
+            <label for="line_type1"> 包团自由行</label>
             <input type="radio" id="line_type2" name="line_type" value="2" _value="{$line_list.line_type}"/>
-            <label for="line_type2">自由行</label>
+            <label for="line_type2">纯团玩</label>
             <input type="radio" id="line_type3" name="line_type" value="3" _value="{$line_list.line_type}"/>
-            <label for="line_type3">团队游</label>
+            <label for="line_type3">常规团</label>
             <input type="radio" id="line_type4" name="line_type" value="4" _value="{$line_list.line_type}"/>
-            <label for="line_type4">自驾游</label>
+            <label for="line_type4">团体策划</label>
         </td>
     </tr>
     <tr>
@@ -100,8 +100,17 @@
 
             </div>
     </tr>
-    
-    
+    <tr>
+			<th><em>线路归属地区</em>：</th>
+			<td style="line-height: normal"><select id="linebelongto"
+				name="linebelongto">
+					<option value="">请选择</option>
+					<option value="0471">呼和浩特</option>
+					<option value="0470">呼伦贝尔</option>
+					<option value="0479">锡林郭勒盟</option>
+					<option value="0483">阿拉善盟</option>
+			</select></td>
+		</tr>
     <tr>
         <th>行程预览：</th>
         <td><textarea name="ps" rows="2" cols="20" id="ps" style="height:50px;width:600px;">{$line_list.ps}</textarea>

@@ -20,6 +20,7 @@ class LineModel extends Model {
         array("target", "check_call", "至少选择一个目的地地址", 1, 'callback', 3),
         array("front_money", "/^[1-9]\d*$/", "请用0到100之间的数作为订金的百分比", 1),
         array("sort", "/^[0-9]\d*$/", "请输入一个有效数字作为排序字段", 1),
+        array("linebelongto", "require", "线路归属地区必须填写", 1)
     );
     protected $_auto = array(
         array('target', 'implode_call', 3, 'callback'),
