@@ -1,0 +1,146 @@
+
+<style type="text/css">
+<!--
+body {
+	background-color: #f7f7f7;
+}
+
+.a td {
+	border: 1px #d7d7d7 solid;
+	padding: 5px 5px 5px 5px;
+}
+
+.aa {
+	border: 1px #D9D9D9 solid;
+	background-color: #ffffff;
+	padding: 20px;
+}
+
+.aaa {
+	border: 1px #d7d7d7 solid;
+	background-color: #ffffff;
+	padding: 20px;
+}
+
+.aaaaa {
+	background-color: #f3f3f3;
+}
+-->
+</style>
+<form method="post" name="f" id="f"  action="{:U('order_pay')}"
+	target="_blank">
+	<input type="hidden" value="" name="orderid" value="{$orderid}">
+	<input type="hidden" value="" name="price"value"{$price}">
+	<table align="center" class="aa">
+		<tr>
+			<td>
+				<TABLE cellSpacing=0 cellPadding=0 border="0" class="aaaaa">
+					<TR>
+						<TD colspan="3" align="center"
+							style="font-size: 24px; height: 80px">
+							<!--           <img src="/logo.gif" boeder="0" /><BR>兴业旅行社在线支付通道 电话400-627-1861 -->
+						</TD>
+					</TR>
+					<TR>
+						<TD class=form-right colspan="2">
+							<table class="aaa a">
+								<tr>
+									<TD colspan="6" align="center">订单姓名：{$name} |
+										订单编号：{$orderid} | 付款金额：{$price}元</TD>
+								</tr>
+								<tr>
+									<td colspan="6" style="font-size: 24px;" align="center">选择支付方式</td>
+								</tr>
+								<tr>
+									<td><input type="radio" name="pay_bank" value="directPay"
+										checked><img
+										src="__ROOT__/style/images/bank/alipay_1.gif" border="0" /></td>
+								</tr>
+								<tr>
+									<td colspan="6" style="font-size: 24px;" align="center">网银/信用卡</td>
+								</tr>
+								<tr>
+									<td><input type="radio" name="pay_bank" value="ICBCB2C" /><img
+										src="__ROOT__/style/images/bank/ICBC_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="CMB" /><img
+										src="__ROOT__/style/images/bank/CMB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="CCB" /><img
+										src="__ROOT__/style/images/bank/CCB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="BOCB2C"><img
+										src="__ROOT__/style/images/bank/BOC_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="ABC" /><img
+										src="__ROOT__/style/images/bank/ABC_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="CIB" /><img
+										src="__ROOT__/style/images/bank/CIB_OUT.gif" border="0" /></td>
+								</tr>
+								<tr>
+									<td><input type="radio" name="pay_bank" value="SPDB" /><img
+										src="__ROOT__/style/images/bank/SPDB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="GDB"><img
+										src="__ROOT__/style/images/bank/GDB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="CITIC" /><img
+										src="__ROOT__/style/images/bank/CITIC_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="CEBBANK" /><img
+										src="__ROOT__/style/images/bank/CEB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="COMM" /><img
+										src="__ROOT__/style/images/bank/COMM_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="CMBC" /><img
+										src="__ROOT__/style/images/bank/CMBC_OUT.gif" border="0" /></td>
+								</tr>
+								<tr>
+									<td><input type="radio" name="pay_bank" value="POSTGC" /><img
+										src="__ROOT__/style/images/bank/PSBC_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="BJBANK" /><img
+										src="__ROOT__/style/images/bank/BJBANK.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="SPABANK" /><img
+										src="__ROOT__/style/images/bank/SPABANK_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="SPABANK"><img
+										src="__ROOT__/style/images/bank/SDB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="SHBANK" /><img
+										src="__ROOT__/style/images/bank/SHBANK_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="NBBANK" /><img
+										src="__ROOT__/style/images/bank/NBBANK_OUT.gif" border="0" /></td>
+								</tr>
+								<tr>
+									<td><input type="radio" name="pay_bank" value="BJRCB" /><img
+										src="__ROOT__/style/images/bank/BJRCB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="FDB" /><img
+										src="__ROOT__/style/images/bank/FDB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="SHRCB" /><img
+										src="__ROOT__/style/images/bank/SHRCB.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank"
+										value="WZCBB2C-DEBIT" /><img
+										src="__ROOT__/style/images/bank/WZCBB2C-DEBIT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="HZCBB2C" /><img
+										src="__ROOT__/style/images/bank/HZCB_OUT.gif" border="0" /></td>
+								</tr>
+								<tr>
+									<td><input type="radio" name="pay_bank" value="ICBCBTB" /><img
+										src="__ROOT__/style/images/bank/ENV_ICBC_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="CCBBTB" /><img
+										src="__ROOT__/style/images/bank/ENV_CCB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="SPDBB2B" /><img
+										src="__ROOT__/style/images/bank/ENV_SPDB_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="ABCBTB" /><img
+										src="__ROOT__/style/images/bank/ENV_ABC_OUT.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="BOCBTB" /><img
+										src="__ROOT__/style/images/bank/BOC_OUT_B2B.gif" border="0" /></td>
+									<td><input type="radio" name="pay_bank" value="CMBBTB" /><img
+										src="__ROOT__/style/images/bank/CMB_OUT_B2B.gif" border="0" /></td>
+								</tr>
+							</table>
+						</TD>
+					</TR>
+					<TR>
+						<TD bgcolor="#FFFFFF" class=form-right colspan="2" align="center"
+							height="80px"><INPUT type="submit"
+							style="BORDER-TOP-STYLE: none; FONT-SIZE: 14px; HEIGHT: 40px; WIDTH: 190px; BORDER-BOTTOM-STYLE: none; FONT-WEIGHT: bold; COLOR: #fff; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; PADDING-LEFT: 0px; BORDER-LEFT-STYLE: none; LINE-HEIGHT: 40px; PADDING-RIGHT: 0px; background: url(__ROOT__/style/images/bank/sub_bg.gif) no-repeat center"
+							value="立即支付订单"></TD>
+					</TR>
+					<TR>
+						<TD bgcolor="#FFFFFF" class=form-right colspan="2" align="center"
+							style="font-size: 12px;" height="50px"><a
+							href="http://www.xingye.cn/help/pay.html" target="_blank">银行柜台/网银/ATM/支付宝/对公/等直接转账，点此查看收款账户，转账完毕后务必通知客服查收确认</a></TD>
+					</TR>
+				</TABLE>
+				</form>

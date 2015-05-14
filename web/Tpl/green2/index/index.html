@@ -1,9 +1,9 @@
-
+<if condition="$areaid eq null">
 <div class="tanchu1">
 	<div class="tanbox">
 		<div class="tan_left">
 			<li class="lasts" style="position: relative;"><a
-				href="__ROOT__/index.php?id=0471"> <img alt=""
+				href="__ROOT__/index.php?areaid=0471"> <img alt=""
 					src="style/images/lvxing.jpg">
 			</a>
 				<div
@@ -15,7 +15,7 @@
 					</div>
 				</div></li>
 			<li class="lasts" style="position: relative;"><a
-				href="__ROOT__/index.php?id=0470"> <img alt=""
+				href="__ROOT__/index.php?areaid=0470"> <img alt=""
 					src="style/images/hs2.jpg">
 			</a>
 				<div
@@ -27,7 +27,7 @@
 					</div>
 				</div></li>
 			<li class="lasts" style="position: relative;"><a
-				href="__ROOT__/index.php?id=0479"> <img alt=""
+				href="__ROOT__/index.php?areaid=0479"> <img alt=""
 					src="style/images/hs3.jpg">
 			</a>
 				<div
@@ -41,7 +41,7 @@
 					</div>
 				</div></li>
 			<li class="lasts" style="position: relative;"><a
-				href="__ROOT__/index.php?id=0483"> <img alt=""
+				href="__ROOT__/index.php?areaid=0483"> <img alt=""
 					src="style/images/hs4.jpg">
 			</a>
 				<div
@@ -65,13 +65,15 @@
 				<img alt="" width="80" height="32" src="style/images/hotlines.jpg">
 				<p>400-000-0000</p>
 			</div>
-			<div class="zixun">
-				<input type="button" value="马上咨询"> <input type="button"
-					value="稍后咨询" onclick="$('.tanchu1').hide();">
-			</div>
+<!-- 			<div class="zixun"> -->
+<!-- 				<input type="button" value="马上咨询" onclick="$('.tanchu1').hide()"> -->
+<!-- 				<input type="button" value="稍后咨询" -->
+<!-- 					onclick="javascript:latercounsel();"> -->
+<!-- 			</div> -->
 		</div>
 	</div>
 </div>
+</if>
 <link rel="stylesheet" href="style/css/popwindow.css">
 <link rel="stylesheet" type="text/css" href="style/css/nav.css" />
 <link rel="stylesheet" type="text/css" href="style/css/css.css" />
@@ -93,8 +95,8 @@
 				<ul>
 
 					<li class="bgs_1"><a
-						href="{:U('travel/index',array('id'=>1))}" class="sort-list-1"><span>包团自由行
-								<em>后付费行程</em>
+						href="{:U('travel/index',array('id'=>1,'areaid'=>$areaid))}"
+						class="sort-list-1"><span>包团自由行 <em>后付费行程</em>
 						</span> </a>
 						<ul>
 							<li><a href="{:U('travel/index',array('id'=>1,'day'=>1))}">一日游</a></li>
@@ -104,8 +106,8 @@
 							<li><a href="{:U('travel/index',array('id'=>1,'day'=>5))}">五日游</a></li>
 						</ul></li>
 					<li class="bgs_2"><a
-						href="{:U('travel/index',array('id'=>2))}" class="sort-list-2"><span>纯玩团
-								<em>后付费行程</em>
+						href="{:U('travel/index',array('id'=>2,'areaid'=>$areaid))}"
+						class="sort-list-2"><span>纯玩团 <em>后付费行程</em>
 						</span></a>
 						<ul>
 							<li><a href="{:U('travel/index',array('id'=>2,'day'=>1))}">一日游</a></li>
@@ -116,9 +118,8 @@
 						</ul></li>
 
 					<li class="bgs_2"><a
-						href="{:U('travel/index',array('id'=>2))}" class="sort-list-2"><span>常规团
-
-						</span></a>
+						href="{:U('travel/index',array('id'=>2,'areaid'=>$areaid))}"
+						class="sort-list-2"><span>常规团 </span></a>
 						<ul>
 							<li><a href="{:U('travel/index',array('id'=>2,'day'=>1))}">一日游</a></li>
 							<li><a href="{:U('travel/index',array('id'=>2,'day'=>2))}">二日游</a></li>
@@ -128,7 +129,8 @@
 						</ul></li>
 
 					<li class="bgs_3"><a
-						href="{:U('travel/index',array('id'=>3))}" class="sort-list-3"><span>会议策划</span></a>
+						href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}"
+						class="sort-list-3"><span>会议策划</span></a>
 						<ul>
 							<li><a href="{:U('travel/index',array('id'=>3,'day'=>1))}">一日游</a></li>
 							<li><a href="{:U('travel/index',array('id'=>3,'day'=>2))}">二日游</a></li>
@@ -137,7 +139,8 @@
 							<li><a href="{:U('travel/index',array('id'=>3,'day'=>5))}">五日游</a></li>
 						</ul></li>
 					<li class="bgs_4"><a
-						href="{:U('travel/index',array('id'=>4))}" class="sort-list-4"><span>团体策划</span></a>
+						href="{:U('travel/index',array('id'=>4,'areaid'=>$areaid))}"
+						class="sort-list-4"><span>团体策划</span></a>
 						<ul>
 							<li><a href="{:U('travel/index',array('id'=>4,'day'=>1))}">一日游</a></li>
 							<li><a href="{:U('travel/index',array('id'=>4,'day'=>2))}">二日游</a></li>
@@ -146,7 +149,8 @@
 							<li><a href="{:U('travel/index',array('id'=>4,'day'=>5))}">五日游</a></li>
 						</ul></li>
 					<li class="bgs_5"><a
-						href="{:U('travel/index',array('id'=>5))}" class="sort-list-5"><span>自驾游</span></a>
+						href="{:U('travel/index',array('id'=>5,'areaid'=>$areaid))}"
+						class="sort-list-5"><span>自驾游</span></a>
 						<ul>
 							<li><a href="{:U('travel/index',array('id'=>5,'day'=>1))}">一日游</a></li>
 							<li><a href="{:U('travel/index',array('id'=>5,'day'=>2))}">二日游</a></li>
@@ -169,7 +173,7 @@
 			<div class="pre"></div>
 			<div class="next"></div>
 			<ul class="oUlplay">
-				<Wj:advert name="index_banner" id="ad" limit="3" adcount="adcount"
+				<Wj:advert name="index_banner" id="ad" limit="5" adcount="adcount"
 					order="ad.sort">
 					<li><a target="_blank" href="{$ad.url}"><img
 							src="{$ad.pic|get_file}" alt="{$ad.pic|get_file='names'}" /></a></li>
@@ -190,19 +194,24 @@
 	</div>
 	<div class="banner_right">
 		<h3>实时预定咨询</h3>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
-		<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
+		<div id="scrollDiv" style="margin-top: 17px;">
+			<ul>
+				<ul></ul>
+				<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月23日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月24日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月25日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月26日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月27日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月28日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月29日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月30日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年3月01日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月02日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月03日]</a></li>
+				<li><a href="">童** 2大1小 线路0061[2015年2月04日]</a></li>
+			</ul>
+		</div>
 	</div>
 </div>
 
@@ -212,44 +221,66 @@
 		<p>风情额济纳胡杨林</p>
 	</div>
 	<div class="boxs">
-		<a href=""><img alt="" width="200" height="145"
-			src="style/images/jing.jpg" /></a>
+		<if condition="count($lmwyi)!=0"> <volist name="lmwyi" id="vo">
+		<a href="{$vo.source_url}"><img alt="" width="200" height="145"
+			src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<if condition="count($lmwyi)==0"> <a href=""><img alt=""
+			width="200" height="145" src="style/images/jing.jpg" /></a> </if>
+
 	</div>
 	<div class="boxs three">
 		<h4>畅游内蒙</h4>
 		<p>内蒙旅行第一站</p>
 	</div>
 	<div class="boxs">
-		<a href=""><img alt="" width="200" height="145"
-			src="style/images/thr.jpg" /></a>
+		<if condition="count($cynmgi)!=0"> <volist name="cynmgi" id="vo">
+		<a href="{$vo.source_url}"><img alt="" width="200" height="145"
+			src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<if condition="count($cynmgi)==0"> <a href=""><img alt=""
+			width="200" height="145" src="style/images/thr.jpg" /></a> </if>
 	</div>
 	<div class="boxs five">
 		<h4>身未动，心已远</h4>
 
 	</div>
 	<div class="boxs">
-		<a href=""><img alt="" width="200" height="145"
-			src="style/images/fives.jpg" /></a>
+		<if condition="count($swdxyyi)!=0"> <volist name="swdxyyi"
+			id="vo"> <a href="{$vo.source_url}"><img alt=""
+			width="200" height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<if condition="count($swdxyyi)==0"> <a href=""><img alt=""
+			width="200" height="145" src="style/images/fives.jpg" /></a> </if>
+
 	</div>
 	<div class="boxs">
-		<a href=""><img alt="" width="200" height="145"
-			src="style/images/jing2.jpg" /></a>
+		<if condition="count($mzfqi)!=0"> <volist name="mzfqi" id="vo">
+		<a href="{$vo.source_url}"><img alt="" width="200" height="145"
+			src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<if condition="count($mzfqi)==0"> <a href=""><img alt=""
+			width="200" height="145" src="style/images/jing2.jpg" /></a> </if>
+
 	</div>
 	<div class="boxs sen">
 		<h4>民族风情</h4>
 
 	</div>
 	<div class="boxs">
-		<a href=""><img alt="" width="200" height="145"
-			src="style/images/six.jpg" /></a>
+		<if condition="count($cygjmhnmi)!=0"> <volist name="cygjmhnmi"
+			id="vo"> <a href="{$vo.source_url}"><img alt=""
+			width="200" height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<if condition="count($cygjmhnmi)==0"> <a href=""><img alt=""
+			width="200" height="145" src="style/images/six.jpg" /></a> </if>
+
 	</div>
 	<div class="boxs eigt">
 		<h4>成陵</h4>
 		<p>穿越古今 梦回蒙古</p>
 	</div>
 	<div class="boxs">
-		<a href=""><img alt="" width="200" height="145"
-			src="style/images/six.jpg" /></a>
+		<if condition="count($wmlxi)!=0"> <volist name="wmlxi" id="vo">
+		<a href="{$vo.source_url}"><img alt="" width="200" height="145"
+			src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<if condition="count($wmlxi)==0"> <a href=""><img alt=""
+			width="200" height="145" src="style/images/six.jpg" /></a> </if>
 	</div>
 	<div class="boxs nine">
 		<h4>完美旅行</h4>
@@ -572,7 +603,7 @@
 			<li<if condition="$mod eq 1 "> style="margin-right:0px"</if>><a
 				href="{:U('viewpoint/detail',array('id'=>$vo['id']))}"
 				target="_blank"><img alt="{$vo.names}" width="413" height="275"
-					src="{$vo.pic}" /></a>
+					src="__ROOT__/{$vo.pic}" /></a>
 				<div class="tui">&nbsp;</div>
 				<div id="showa" class="shaw" style="display: none">
 					<a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}">{$vo.names}</a>
@@ -619,3 +650,28 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function AutoScroll(obj) {
+		$(obj).find("ul:first").animate({
+			marginTop : "-20px"
+		}, 500, function() {
+			$(this).css({
+				marginTop : "0px"
+			}).find("li:first").appendTo(this);
+		});
+	}
+	$(document).ready(function() {
+		setInterval('AutoScroll("#scrollDiv")', 3000)
+	});
+	var latercounsel = function() {
+		$('.tanchu1').hide();
+		$.ajax({
+			type : "POST",
+			url : '__ROOT__/index.php/index/latercounsel?latercounsel=1',
+			dataType : "html",
+			success : function(html) {
+				// alert(html);
+			}
+		});
+	};
+</script>

@@ -16,13 +16,15 @@ class travelAction extends CommonAction {
 	public function index() {
 
 		$id  = isset($_GET['id']) ? intval($_GET['id']) : 0; //获取分页页码
-		$day = isset($_GET['day']) ? intval($_GET['day']) : 1; //获取分页页码
+		$day = $_GET['day']; //? intval($_GET['day']) : 1; //获取分页页码
 		$this->assign('id', $id);
-		$this->assign('day', $day);
 		$View = M("Line");
 		$where = 'status=0';
 		if($id>0)  $where .=" and line_type='$id' ";
-		if($day>0) $where .=" and trip_days='$day' ";
+		if($day!=null&&$day>0){
+			$this->assign('day', $day);
+			if($day>0) $where .=" and trip_days='$day' ";
+		}
 		$count = $View->where($where)->count();
 		$p = isset($_GET['p']) ? intval($_GET['p']) : 1; //获取分页页码
 		class_exists("Page") or import("ORG.Util.Page");
@@ -162,7 +164,6 @@ class travelAction extends CommonAction {
 
 	public function order_ping() {
 		layout(false); // 临时关闭当前模板的布局功能
-
 		$id = $_GET["id"] ? intval($_GET["id"]) : 0;
 		$line = M("line");
 		$line_base = $line->find($id);
@@ -273,19 +274,24 @@ class travelAction extends CommonAction {
 	}
 
 	public function order_pay() {
-
 		if (!$_POST['orderid']) {
 			$this->error("线路选择错误");
 		}
 		$user = M('user');
-		$order_id = $_POST['order_id'];
-		$table_line_order = M('line_order')->getTableName() . " line_order";
+		$order_id = $_POST['orderid'];
+		$table_line_order = M('LinePin')->getTableName() . " Line_Pin";
 		$list = M()->table($table_line_order)
-		->where("id='$order_id' AND user_id='{$_SESSION['user_id']}'")
+		->where("orderid='$order_id'")
 		->find();
-		$should_amount = $list['amount'] - $list['used_award'] - $list['pri_card'];
-		$earnest = _get_front_money($list['line_id'], $should_amount);
-
+		$should_amount = $list['price'] ;
+		$name = $list['name'] ;
+		$phone = $list['phone'] ;
+		$this->assign("price", $should_amount);
+		$this->assign("name", $name);
+		$this->assign("phone", $phone);
+		$this->assign("orderid",$order_id);
+		//$earnest = _get_front_money($list['line_id'], $should_amount);
+       /*
 		if ($_POST['psw_on']) {
 			$uinfo = $user->where("id ='$id' AND password='" . md5($_POST['password']) . "'")->find();
 			if ($uinfo) {
@@ -301,10 +307,28 @@ class travelAction extends CommonAction {
 			}
 		} else {
 
-		}
+		}*/
+		$this->display();
 	}
+	/**
+	 *  调用支付宝后者网银钱包进行支付
+	 */
+	public function paymoney() {
+		$pay_bank= $_POST['pay_bank'];
+		$orderid= $_POST['orderid'];
+		if($pay_bank=='directPay'){// 支付宝直接支付
+			// 组织数据调用支付宝接口
+			
+			
+		}else{
+			//组织数据调用网银钱包接口
+			
+		}
+		
+		
 
-
+		
+	}
 	public function detail() {
 		$id = $_GET["id"] ? intval($_GET["id"]) : 0;
 		$line = M("line");

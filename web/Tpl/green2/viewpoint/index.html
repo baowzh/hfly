@@ -4,93 +4,14 @@
 <link rel="stylesheet" type="text/css"
 	href="__ROOT__/style/css/css.css" />
 <script type="text/javascript" src="__ROOT__/style/js/lrtk.js"></script>
-<!--  
-<div class="baotuan" style="min-height:500px;height:830px;">
-	<div class="travel">
-		<div class="line_left">
-			<div class="travelpointname">旅行景点</div>
-			<div style="float: left; margin-left: 10px;" class="travelpoint">
-				<div class="recommendedch">HOT</div>
-				<div class="recommendeden">RECOMMEDDED ROUTES</div>
-			</div>
-		</div>
-		<div class="line_center">
-			<li class="curtent"><a href="">一日游</a></li>
-			<li><a href="">二日游</a></li>
-			<li><a href="">三日游</a></li>
-			<li><a href="">四日游</a></li>
-			<li><a href="">五日游</a></li>
-		</div>
-		<div class="line_right">
-			<a href="">更多推存</a>
-		</div>
-	</div>
-
-	<div class="bao_detail" style="width:100%;min-height:460px;height: auto !important;">
-		<div class="bao_left" style="width:100%;min-height:460px;height: auto !important;">
-
-			<li style="width: 370px;"><a href="#" target="_blank"> <img
-					alt="" width="370" height="295" src="__ROOT__/style/images/hhht1.jpg">
-					<div class="desc">
-						<span class="price">￥1000</span> <span class="adds">呼和浩特</span>
-						<p>XXXXXX草原行 3天</p>
-					</div>
-			</a>
-				<div class="tui">&nbsp;</div>
-				</li>
-			<li style="width: 370px;"><a href="#" target="_blank"> <img
-					alt="" width="370" height="295" src="__ROOT__/style/images/hhht1.jpg">
-					<div class="desc">
-						<span class="price">￥1000</span> <span class="adds">呼和浩特</span>
-						<p>XXXXXX草原行 3天</p>
-					</div>
-			</a>
-				<div class="tui">&nbsp;</div></li>
-			<li style="width: 370px;"><a href="#" target="_blank"> <img
-					alt="" width="370" height="295" src="__ROOT__/style/images/hhht1.jpg">
-					<div class="desc">
-						<span class="price">￥1000</span> <span class="adds">呼和浩特</span>
-						<p>XXXXXX草原行 3天</p>
-					</div>
-			</a>
-				<div class="tui">&nbsp;</div></li>
-				<li style="width: 370px;"><a href="#" target="_blank"> <img
-					alt="" width="370" height="295" src="__ROOT__/style/images/hhht1.jpg">
-					<div class="desc">
-						<span class="price">￥1000</span> <span class="adds">呼和浩特</span>
-						<p>XXXXXX草原行 3天</p>
-					</div>
-			</a>
-				<div class="tui">&nbsp;</div></li>
-				<li style="width: 370px;"><a href="#" target="_blank"> <img
-					alt="" width="370" height="295" src="__ROOT__/style/images/hhht1.jpg">
-					<div class="desc">
-						<span class="price">￥1000</span> <span class="adds">呼和浩特</span>
-						<p>XXXXXX草原行 3天</p>
-					</div>
-			</a>
-				<div class="tui">&nbsp;</div></li>
-				<li style="width: 370px;"><a href="#" target="_blank"> <img
-					alt="" width="370" height="295" src="__ROOT__/style/images/hhht1.jpg">
-					<div class="desc">
-						<span class="price">￥1000</span> <span class="adds">呼和浩特</span>
-						<p>XXXXXX草原行 3天</p>
-					</div>
-			</a>
-				<div class="tui">&nbsp;</div></li>
-		</div>
-
-	</div>
-</div>
---> 
 <div class="main_lines">
    <div class="travel">
-      <div class="line_left"><img src="style/images/hot.jpg" alt="" width="402" height="57" ></div>
+      <div class="line_left"><img src="__ROOT__/style/images/hot.jpg" alt="" width="402" height="57" ></div>
    </div>
    <div class="mianconent">
       <volist name="list" id="vo" mod='3'>
       <li <if condition="$mod eq 2 ">  class="lasts"</if>>
-          <a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}" target="_blank"><img alt="{$vo.names}" width="376" height="247" src="{$vo.id|get_line_img}" ></a>
+          <a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}" target="_blank"><img alt="{$vo.names}" width="376" height="247" src="__ROOT__/{$vo.pic}" ></a>
           <div class="desc"><span class="adds"><a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}">{$vo.names}</a></span></div>
       </li>
       </volist>

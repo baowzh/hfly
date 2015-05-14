@@ -117,7 +117,6 @@
         </td>
     </tr>
     
-    
     <tr>
         <th>线路主题：</th>
         <td>
@@ -129,8 +128,6 @@
       </span>
         </td>
     </tr>
-
-    
     <tr>
         <td align="right"><em>预约定金</em>：</td>
         <td><input name="front_money" type="text" class="txt" id="front_money" value='{$line_list.front_money}' maxlength="10" datatype="*1-10" />
@@ -191,9 +188,12 @@
             <textarea name="General" rows="2" cols="20" id="L_Text" class="kind-text" style="height:300px;width:80%;">{:stripslashes($line_list['General'])}</textarea>
         </div>
         <div id="Classical" <eq name="line_list.edit_model" value="2">style="display:none;"</eq>>
+           <!--  
             <select id="qh_day" class="valid">
                 <option value="1">第1天</option>
             </select>
+            -->
+             <input type="hidden" name="qh_day" id="qh_day" value="1">
             <div id="day_1" class="line_day">
                 <table width="100%">
                     <tr>

@@ -189,6 +189,7 @@ class lineAction extends CommonAction {
 			}
 			next($Travel);
 		}
+		
 		$this->ajaxReturn($data);
 	}
 

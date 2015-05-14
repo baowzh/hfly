@@ -69,7 +69,8 @@
 	width: 1150px;
 	margin: 0 auto;
 	margin-top: 35px;
-	min-height: 900px;
+/* 	min-height: 900px; */
+	min-height: 400px;
 	background: #FFF;
 	margin-bottom: 25px;
 }
@@ -80,11 +81,12 @@
 	float: left;
 	position: relative;
 	margin-right: 10px;
-	margin-bottom: 35px;
+		margin-bottom: 5px;
+/* 	margin-bottom: 35px; */
 }
 
 .mianconent li .desc {
-	height: 60px;
+	height: 40px;
 	padding: 10px
 }
 

@@ -36,7 +36,7 @@ class CommonAction extends Action {
 		$about = M("article")->where("cid='1' and status=1")->order("id asc")->limit(10)->select();
 		$this->assign('aboutlist', $about);
 		
-		
+		$selemenu=
 		$nav = M("Viewpoint");
 		$navlist = $nav->order('sort,id desc')->limit(4)->select();
 		$this->assign('navlist', $navlist);
@@ -94,10 +94,10 @@ class CommonAction extends Action {
 		$cityList = $CityBelong->getCityList();
 		$this->assign("cityList", $cityList);
 		$this->assign("currentCity", $CityBelong->getCurrentCity($cityList));
-
-		$this->assign("tour_type", D("LineType")->getTypeList());
+		$this->assign("tour_type", D("LineType")->getTypeList());		
+		$this->assign("selmenu", $_GET["areaid"]);	
+		//echo $_GET["areaid"];
 		$this->assign("current", strtolower($this->getActionName()));
-
 		$this->assign("css_list", explode(",", MODULE_NAME));
 		$this->assign("js_list", explode(",", "jquery-1.8.3.min,common,SuperSlide-v2.0"));
 	}
