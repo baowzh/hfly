@@ -40,13 +40,13 @@
   show: 1  
   url: viewpoint/show_list
 -
-  names: 模板管理
+  names: 订单管理
   id: 7
   pid: 0
   sort: 0
   enable: 1
-  show: 0  
-  url: index/main
+  show: 1  
+  url: lineorder/show_list
 -
   names: 广告管理
   id: 8
@@ -135,15 +135,6 @@
   enable: 1
   show: 1  
   url: line/add
--
-  names: 线路订单
-  id: 21
-  pid: 4
-  sort: 0
-  enable: 1
-  show: 1  
-  url: lineorder/show_list
-
 -
   names: 线路咨询
   id: 23
