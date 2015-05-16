@@ -7,72 +7,130 @@ $(function(){
 });
 </script>
 <div id="nav" class="mainnav_title">
-    <ul>
-        <a class="on" href="{:U('show_list')}">线路列表</a> |
-        <a href="{:U('add')}">添加线路</a>
-    </ul>
+	<ul>
+		<a class="on" href="{:U('show_list')}">线路列表</a> |
+		<a href="{:U('add')}">添加线路</a>
+	</ul>
 </div>
 <form action="{:U('show_list')}" method="get">
-    <table class="search_table" width="100%">
-        <tr>
-            <td class="search">
-                标题: <input id="title" type="text" class="input-text" name="names" value="{$get.names}"/>
-                &nbsp;
-                <input type="submit" value="查询" class="button"/>
-            </td>
-        </tr>
-    </table>
+	<table class="search_table" width="100%">
+		<tr>
+			<td class="search">名称: <input id="title" type="text"
+				class="input-text" name="names" value="{$get.names}" />
+			</td>
+			<td class="search">地区: <select name="areaid" id="areaid"
+				class="input-text">
+					<option value=""<if condition="$get.areaid eq null">selected="true"
+						</if>>请选择
+					</option>
+					<option value="0471"<if condition="$get.areaid eq '0471'">selected="true"
+						</if>>呼和浩特
+					</option>
+					<option value="0470"<if condition="$get.areaid eq '0470'">selected="true"
+						</if>>呼伦贝尔
+					</option>
+					<option value="0479"<if condition="$get.areaid eq '0479'">selected="true"
+						</if>>锡林郭勒盟
+					</option>
+					<option value="0483"<if condition="$get.areaid eq '0483'">selected="true"
+						</if>>阿拉善盟
+					</option>
+			</select>
+			</td>
+			<td class="search">产品类型: <select name="linetype" id="linetype"
+				class="input-text">
+					<option value=""<if condition="$get.linetype eq ''">selected="true"</if>>请选择
+					</option>
+					<option value="1"<if condition="$get.linetype eq '1'">selected="true"</if>>包团自由行
+					</option>
+					<option value="2"<if condition="$get.linetype eq '2'">selected="true"</if>>纯团玩
+					</option>
+					<option value="3"<if condition="$get.linetype eq '3'">selected="true"</if>>常规团
+					</option>
+					<option value="4"<if condition="$get.linetype eq '4'">selected="true"</if>>团队策划
+					</option>
+			</select>
+			</td>
+			<td class="search">状态: <select name="status" id="status"
+				class="input-text">
+					<option value=""<if condition="$get.status eq ''">selected="true"</if>>请选择
+					</option>
+					<option value="0"<if condition="$get.status eq '0'">selected="true"</if>>已上线
+					</option>
+					<option value="1"<if condition="$get.status eq '1'">selected="true"</if>>已下线
+					</option>
+			</select> &nbsp; <input type="submit" value="查询" class="button" />
+			</td>
+		</tr>
+	</table>
 </form>
 <form name="myform" id="myform" action="" method="post">
-    <div class="table-list">
-        <table cellspacing="0" cellpadding="0"  width="100%">
-            <thead>
-                <tr>
-                    <th width="80"><a href="javascript:void(0);" onclick="sel_all();">全选</a></th>
-                    <th>封面</th>
-                    <th>编号</th>
-                    <th style="text-align: left;">名称</th>
-                    <th>属性</th>
-                    <th>出发城市</th>
-                    <th>排序</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-            <volist name="list" id="vo">
-                <tr class="ulbc" id="tr_{$vo.id}">
-                    <td id="td_sel"><input type="checkbox" name="deleteall[{$vo.id}]" class="sel c_selected" id="sel_{$vo.id}" value="{$vo.id}"/></td>
-                    <td><img src='{$vo.id|get_line_img}' style="width:100px;height:80px" /></td>
-                    <td><span>{$vo.code}</span></td>
-                    <td style="text-align: left;">
-                        <a href="__ROOT__/index.php/travel/detail/id/{$vo.id}" target="_blank">
-                            {$vo.names}
-                        </a>
-                    </td>
-                    <td><if condition="$vo.property eq 1">普通<elseif condition="$vo.property eq 2" />特价<elseif condition="$vo.property eq 3"/>新品<elseif condition="$vo.property eq 4"/>热门</if></td>
-                <td>{$vo.city_id|_get_city}</td>
-                <td><input type="text" name="sort[{$vo.id}]" id="sort_{$vo.id}" value="{$vo.sort}"/></td>
+	<div class="table-list">
+		<table cellspacing="0" cellpadding="0" width="100%">
+			<thead>
+				<tr>
+					<th width="40"><a href="javascript:void(0);"
+						onclick="sel_all();">全选</a></th>
+					<th>封面</th>
+					<th>编号</th>
+					<th style="text-align: left;">名称</th>
+					<th width="40">属性</th>
+					<th width="80">出发城市</th>
+					<th width="80">类型</th>
+					<th width="40">排序</th>
+					<th width="40">状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<volist name="list" id="vo">
+				<tr class="ulbc" id="tr_{$vo.id}">
+					<td id="td_sel"><input type="checkbox"
+						name="deleteall[{$vo.id}]" class="sel c_selected"
+						id="sel_{$vo.id}" value="{$vo.id}" /></td>
+					<td><img src='{$vo.id|get_line_img}'
+						style="width: 100px; height: 80px" /></td>
+					<td><span>{$vo.code}</span></td>
+					<td style="text-align: left;"><a
+						href="__ROOT__/index.php/travel/detail/id/{$vo.id}"
+						target="_blank">
+							<p>{$vo.names}</p>
+					</a></td>
+					<td><if condition="$vo.property eq 1">普通<elseif
+							condition="$vo.property eq 2" />特价<elseif
+							condition="$vo.property eq 3" />新品<elseif
+							condition="$vo.property eq 4" />热门</if></td>
+					<td>{$vo.city_id|_get_city}</td>
+					<td><if condition="$vo.line_type eq 1">包团自由行<elseif
+							condition="$vo.line_type eq 2" />纯玩团<elseif
+							condition="$vo.line_type eq 3" />常规团<elseif
+							condition="$vo.line_type eq 4" />团队策划</if></td>
+					<td><input type="text" name="sort[{$vo.id}]"
+						id="sort_{$vo.id}" value="{$vo.sort}" style="width: 40px;" /></td>
+					<td><if condition="$vo['status'] eq 1"> 下线 </if> <if
+							condition="$vo['status'] eq 0"> 上线 </if></td>
 
-                <td>
-                    <a href="__URL__/pic_list/line_id/{$vo.id}">图片</a>&nbsp;
-                    <a href="__URL__/price_list/line_id/{$vo.id}">报价</a>&nbsp;
-                    <a href="__URL__/tao_list/line_id/{$vo.id}">套餐价格</a>&nbsp;
-                    <a href="__URL__/edit/id/{$vo.id}">编辑</a>&nbsp;
-                    <a href="__URL__/del/id/{$vo.id}" onclick="return atr_confirm(this.href)">删除</a>
-                </td>
-                </tr>
-            </volist>
-            </tbody>
-        </table>
-        <input type="hidden" name="base_pos" value="{~echo MODULE_NAME}">
-        <div class="btn">
-            <input type="button" class="button" name="dosubmit" value="删除"
-                   onclick="myform.action = '{:U('deleteall')}';return confirm_deleteall(this.form)"/>
-            <input type="button" class="button" name="dosubmit" value="排序"
-                   onclick="myform.action = '{:U('line/reset_sort',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');"/>
-        </div>
-        <div class="page">{$page}</div>
-    </div>
+					<td><a href="__URL__/pic_list/line_id/{$vo.id}">图片</a>&nbsp; <a
+						href="__URL__/price_list/line_id/{$vo.id}">报价</a>&nbsp; <a
+						href="__URL__/tao_list/line_id/{$vo.id}">套餐价格</a>&nbsp; <a
+						href="__URL__/edit/id/{$vo.id}">编辑</a>&nbsp; <a
+						href="__URL__/del/id/{$vo.id}"
+						onclick="return atr_confirm(this.href)">删除</a>&nbsp; <a
+						href="__URL__/online/id/{$vo.id}">上线</a>&nbsp; <a
+						href="__URL__/offline/id/{$vo.id}">下线</a></td>
+				</tr>
+				</volist>
+			</tbody>
+		</table>
+		<input type="hidden" name="base_pos" value="{~echo MODULE_NAME}">
+		<div class="btn">
+			<input type="button" class="button" name="dosubmit" value="删除"
+				onclick="myform.action = '{:U('deleteall')}';return confirm_deleteall(this.form)" />
+			<input type="button" class="button" name="dosubmit" value="排序"
+				onclick="myform.action = '{:U('line/reset_sort',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');" />
+		</div>
+		<div class="page">{$page}</div>
+	</div>
 </form>
 <script type="text/javascript">
 	function sel_all(){

@@ -5,7 +5,7 @@
 	</ul>
 </div>
 <link href="../Public/css/tour.css" type='text/css' rel='stylesheet' />
-<form action="{:U('add')}" method="post">
+<form action="{:U('add')}" method="post" id="infform">
 	<ul class="lineNav">
 		<li id="line_1" class="showline yes">基本资料</li>
 		<li id="line_2" class="showline">行程安排</li>
@@ -15,7 +15,7 @@
 		class="table_form" width="100%">
 		<tr>
 			<th width="10%"><span class="red">*</span><em class="tit">线路名称</em>：</th>
-			<td><input type="text" datatype="*5-50" name="names" id="names"
+			<td><input type="text" datatype="*5-150" name="names" id="names"
 				class="txt" /></td>
 		</tr>
 		<tr>
@@ -87,6 +87,7 @@
 					</volist>
 			</select></td>
 		</tr>
+		<!-- 
 		<tr>
 			<th>目的地类型：</th>
 			<td><select id="target_type" name="target_type">
@@ -95,12 +96,14 @@
 					</volist>
 			</select></td>
 		</tr>
+		 
 		<tr>
 			<th><em>目的地</em>：</th>
 			<td style="line-height: normal">
 				<div id="Line_target" class="lineDest"></div>
 			</td>
 		</tr>
+		-->
 		<tr>
 			<th><em>线路归属地区</em>：</th>
 			<td style="line-height: normal"><select id="linebelongto"
@@ -117,6 +120,7 @@
 			<td><textarea name="ps" rows="2" cols="20" id="ps"
 					style="height: 50px; width: 600px;">{$line_list.ps}</textarea></td>
 		</tr>
+		<!--  
 		<tr>
 			<td align="right">线路主题：</td>
 			<td><span id="L_OfferedProperties"> <volist
@@ -127,6 +131,7 @@
 			</span> <span id="msg_topic" class="msg"></span></td>
 
 		</tr>
+		-->
 
 		<tr>
 			<td align="right"><em>预约定金</em>：</td>
@@ -155,9 +160,9 @@
 			<td align="right">状态：</td>
 			<td><label><input id="status" type="radio" name="status"
 					value="0"
-				<eq name="line_list.status" value="0">checked="checked"</eq>/>显示</label> <label><input
+				<eq name="line_list.status" value="0">checked="checked"</eq>/>上线</label> <label><input
 					id="status" type="radio" name="status" value="1"
-				<eq name="line_list.status" value="1">checked="checked"</eq>/>隐藏</label></td>
+				<eq name="line_list.status" value="1">checked="checked"</eq>/>下线</label></td>
 		</tr>
 		<tr>
 			<td align="right"><em>排序</em>：</td>
@@ -188,12 +193,12 @@
 					<textarea name="General" class="kind-text" style="width: 90%"></textarea>
 				</div>
 				<div id="Classical" style="display: none;">
-				    <!-- 
+					<!-- 
 					<select id="qh_day" class="valid">
 						<option value="1">第1天</option>
 					</select>
                     -->
-                    <input type="hidden" name="qh_day" id="qh_day" value="1">
+					<input type="hidden" name="qh_day" id="qh_day" value="1">
 					<div id="day_1" class="line_day">
 						<table width="100%">
 							<tr>
@@ -276,11 +281,20 @@
 		</tr>
 	</table>
 	<div id="btnbox" class="btn">
-		<INPUT TYPE="submit" value=" 保 存 " class="button"> <input
+		<INPUT TYPE="submit" value="保 存 " class="button">
+		<INPUT TYPE="button" value="下一步" class="button" onclick="javascript:submitandsetprice();">
+		 <input
 			TYPE="reset" value=" 重 置 " class="button">
 	</div>
+	<input type="hidden" name="submitandnext" id="submitandnext" value='0'>
 </form>
 <script type="text/javascript" src="../Public/js/jquery.linePlan.js"></script>
+<script type="text/javascript">
+function submitandsetprice(){
+    $('#submitandnext').val('1');
+	document.forms[0].submit();
+}
+</script>
 <script type="text/javascript">
 	$(function() {
 		$('#box_SEO').trigger("click").click(function() {
@@ -302,6 +316,7 @@
 				}
 			}
 		});
+		/*
 		$("#city_id,#target_type")
 				.bind(
 						"change",
@@ -346,9 +361,12 @@
 											$("#city_id").trigger("blur");
 										}
 									});
-						}).trigger("change");
+						}
+						
+				).trigger("change");
+		*/
 		$("#trip_days").linePlan({
 			data : ""
 		});
-	})
+	});
 </script>

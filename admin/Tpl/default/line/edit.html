@@ -84,6 +84,7 @@
             </volist>
         </select></td>
     </tr>
+   <!-- 
     <tr>
         <th>目的地类型：</th>
         <td><select id="target_type" name="target_type"  class="txt">
@@ -100,6 +101,7 @@
 
             </div>
     </tr>
+    -->
     <tr>
 			<th><em>线路归属地区</em>：</th>
 			<td style="line-height: normal"><select id="linebelongto"
@@ -116,7 +118,7 @@
         <td><textarea name="ps" rows="2" cols="20" id="ps" style="height:50px;width:600px;">{$line_list.ps}</textarea>
         </td>
     </tr>
-    
+    <!--  
     <tr>
         <th>线路主题：</th>
         <td>
@@ -128,6 +130,7 @@
       </span>
         </td>
     </tr>
+    -->
     <tr>
         <td align="right"><em>预约定金</em>：</td>
         <td><input name="front_money" type="text" class="txt" id="front_money" value='{$line_list.front_money}' maxlength="10" datatype="*1-10" />
@@ -154,8 +157,8 @@
 
     <tr>
         <th>隐藏：</th>
-        <td><label><input id="status" type="radio" name="status" value="0" <eq name="line_list.status" value="0">checked="checked"</eq>/>显示</label>
-            <label><input id="status" type="radio" name="status" value="1" <eq name="line_list.status" value="1">checked="checked"</eq>/>隐藏</label>
+        <td><label><input id="status" type="radio" name="status" value="0" <eq name="line_list.status" value="0">checked="checked"</eq>/>上线</label>
+            <label><input id="status" type="radio" name="status" value="1" <eq name="line_list.status" value="1">checked="checked"</eq>/>下线</label>
         </td>
     </tr>
     <tr>
@@ -274,10 +277,18 @@
 </table>
 <div id="btnbox" class="btn">
     <INPUT TYPE="submit" value=" 保 存 " class="button">
+    <INPUT TYPE="button" value="下一步" class="button" onclick="javascript:submitandsetprice();">
     <input TYPE="reset" value=" 重 置 " class="button">
 </div>
+<input type="hidden" name="submitandnext" id="submitandnext" value='0'>
 </form>
 <script type="text/javascript" src="../Public/js/jquery.linePlan.js"></script>
+<script type="text/javascript">
+function submitandsetprice(){
+    $('#submitandnext').val('1');
+	document.forms[0].submit();
+}
+</script>
 <script language="javascript">
     $(function () {
         $('#box_SEO').trigger("click").click(function () {
@@ -299,6 +310,7 @@
                 }
             }
         });
+        /*
         $("#city_id,#target_type").bind("change",function () {
 
             var city_id = $("#city_id").val();
@@ -330,7 +342,7 @@
                     $("#city_id").trigger("blur");
                 }
             });
-        }).trigger("change");
+        }).trigger("change");*/
         $("#trip_days").linePlan({
             data:"{:U('ajax_edit',array('id'=>$line_list['id']))}"
         });
