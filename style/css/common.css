@@ -146,23 +146,24 @@ body {
 
 .dectails {
 	float: right;
-	width: 419px;
+	width: 380px;
 	height: 66px;
 	margin-top: 18px
 }
 
 .dectails li {
-	padding-right: 55px;
+/* 	padding-right: 55px; */
 }
 
 .dectails .hotline {
 	color: #07b3b2;
 	font-family: "微软雅黑";
 	font-size: 24px;
+	width:360px;
 	font-weight: bold;
 	text-align: right;
 	margin-bottom: 8px;
-	background: url(../images/rexian.jpg) no-repeat 110px center;
+	background: url(../images/rexian.jpg) no-repeat 10px center;
 }
 
 .dectails .shuru {

@@ -28,15 +28,15 @@ class uploadifyAction extends CommonAction {
             mk_dir($upload->savePath);
         }
         $other_key = array(
-            "maxSize" => 3145728,
+            "maxSize" => 6291456,
             "saveRule" => "uniqid",
             "hashType" => null,
             "autoCheck" => null,
             "uploadReplace" => null,
             "allowTypes" => null,
             "thumb" => null,
-            "thumbMaxWidth" => null,
-            "thumbMaxHeight" => null,
+            "thumbMaxWidth" => 1200,
+            "thumbMaxHeight" => 700,
             "thumbPrefix" => null,
             "thumbSuffix" => null,
             "thumbPath" => null,
@@ -103,7 +103,8 @@ class uploadifyAction extends CommonAction {
         }
         $file_manager = M("file_manager");
         foreach ($file_info["info"] as $k => $file) {
-            $path = $savePath . $file["savename"];
+          $path = $savePath . $file["savename"];
+        	//$path = $savePath . $file["names"];
             $img_size = GetImageSize(ROOT_PATH . "." . $path);
             $data = array(
                 "names" => $file["name"],
@@ -118,6 +119,7 @@ class uploadifyAction extends CommonAction {
             $file_info["info"][$k]["id"] = $file_manager->add($data);
         }
         $this->ajaxReturn($file_info["info"], $file_info["Msg"], 1);
+        
     }
 
 }

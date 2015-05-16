@@ -14,8 +14,7 @@
 	type="text/javascript"></script>
 <script type="text/javascript"
 	src="__ROOT__/Public/Plugins/jquery.artDialog/iframeTools.js"></script>
-<link rel="stylesheet"
-	href="__ROOT__/style/css/common.css">
+<link rel="stylesheet" href="__ROOT__/style/css/common.css">
 <link rel="stylesheet" href="__ROOT__/style/css/index.css">
 <link rel="stylesheet" href="../Public/assets/css/workless.css">
 <link rel="stylesheet" href="../Public/css/style_index.css">
@@ -36,8 +35,18 @@
 			<div class="logo">
 				<img src="../Public/images/logo.jpg">
 			</div>
+			<div class="dectails" style="width: 230px; margin-top: 58px;">
+				<!-- 				<li class="hotline" style="background:none;width:200px;">&nbsp;</li> -->
+				<li style="padding-right: 0px;">
+				<input type="text"
+					class="shuru" style="width: 120px;" value="请输入手机号"
+					onFocus="if(value==defaultValue){value='';this.style.color='#999'}"
+					onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+					<input
+					type="button" value="订单查询" class="buts" /></li>
+			</div>
 			<div class="dectails">
-				<li class="hotline">400-000-0000</li>
+				<li class="hotline">400-000-0000&nbsp;</li>
 				<li><input type="text" class="shuru" /><input type="button"
 					value="搜索" class="buts" /></li>
 			</div>

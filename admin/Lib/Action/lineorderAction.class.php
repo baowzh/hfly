@@ -22,14 +22,14 @@ class lineorderAction extends CommonAction {
 
     public function select_win() {
         $id = $_GET['id'];
-        $lineOrder = M('lineOrder');
+        $lineOrder = M('linePin');
         $user_table = M('user')->getTableName() . " user";
         $order_table = $lineOrder->getTableName() . " line_pin";
         $line_table = M('line')->getTableName() . " line";
         $order_userinfo = M('order_userinfo');
         $list = $lineOrder->table($order_table)
                 ->field("*,line_pin.status o_status,line_pin.id o_id,line_pin.front_money o_front_money,line_pin.amount o_amount")
-                ->join("$user_table on user.id=line_pin.user_id")
+               // ->join("$user_table on user.id=line_pin.user_id")
                 ->join("$line_table on line.id=line_pin.line_id")
                 ->where("line_pin.id='$id'")
                 ->find();
@@ -51,7 +51,7 @@ class lineorderAction extends CommonAction {
             $order_userinfo = M('order_userinfo');
             $list = $lineOrder->table($order_table)
                     ->field("*,line_pin.status o_status,line_pin.id o_id,line_pin.front_money o_front_money,line_pin.amount o_amount")
-                    ->join("$user_table on user.id=line_pin.user_id")
+                   // ->join("$user_table on user.id=line_pin.user_id")
                     ->join("$line_table on line.id=line_pin.line_id")
                     ->where("line_pin.id='$id'")
                     ->find();
@@ -79,7 +79,7 @@ class lineorderAction extends CommonAction {
     //处理状态
     public function set_status() {
         $id = $_GET['id'];
-        $lineOrder = M('lineOrder');
+        $lineOrder = M('linePin');
         $orderinfo = $lineOrder->where("id='$id'")->find();
         if ($orderinfo['status'] == 1) {
             $orderinfo = $lineOrder->where("id='$id'")->setField('status', '2');

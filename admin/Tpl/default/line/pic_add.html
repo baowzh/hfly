@@ -19,12 +19,13 @@
 					  "savePath": "/Upload/images/line_pic/",
 					  "saveRule": "time",
 					  "divId": "img1",
-					  "thumb": 1,
+					  "thumb": 3,
 					  "thumbMaxWidth": '{:C("thumbMaxWidth")}',
 					  "thumbMaxHeight": '{:C("thumbMaxHeight")}',
 					  "thumbPrefix": 'b_,m_,s_'
 				  },
 				  success: function (data, info) {
+					 // alert(data[0].path);
 					  $("#photo_1").val(data[0].path);
 					  art.dialog.alert(info);
 				  }

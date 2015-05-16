@@ -264,7 +264,8 @@ class lineAction extends CommonAction {
 		$list = $LinePic->where($map)->order("istitlepage,sort")->select();
 		foreach ($list as $k => $li) {
 			$patharr = explode("/", $li["pic_path"]);
-			$patharr[count($patharr) - 1] = "m_" . $patharr[count($patharr) - 1];
+			//$patharr[count($patharr) - 1] = "m_" . $patharr[count($patharr) - 1];
+			$patharr[count($patharr) - 1] = $patharr[count($patharr) - 1];
 			$path = join("/", $patharr);
 			$list[$k] = array_merge($list[$k], array("m_picPath" => $path));
 		}

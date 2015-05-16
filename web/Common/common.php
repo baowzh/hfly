@@ -330,7 +330,8 @@ function get_line_img($line_id, $type = 's') {
 	if (!in_array($type, array('s', 'm', 'b', "p")))
 		unset($path);
 	$pre = array("s" => "s_", "m" => "m_", "b" => "b_", "p" => "");
-	return $path ? __ROOT__ . dirname($path) . "/{$pre[$type]}" . basename($path) : "--";
+	// return $path ? __ROOT__ . dirname($path) . "/{$pre[$type]}" . basename($path) : "--";
+	return $path ? __ROOT__ . dirname($path) . "/" . basename($path) : "--";
 }
 
 function get_hotel_img($hotel_id, $type = 's') {
