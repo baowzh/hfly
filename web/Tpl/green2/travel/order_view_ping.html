@@ -1,0 +1,74 @@
+<div id="nav" class="mainnav_title">
+	<ul>
+		<if condition="$type eq 0"> <a class="on"
+			href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
+			href="__URL__/show_list?type=1&line_id={$line_id}">报名拼团订单</a> <a
+			href="__URL__/show_list?type=2&line_id={$line_id}">普通订单</a> </if>
+
+		<if condition="$type eq 1"> <a
+			href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
+			href="__URL__/show_list?type=1&line_id={$line_id}" class="on">报名拼团订单</a>
+		<a href="__URL__/show_list?type=2&line_id={$line_id}">普通订单</a> </if>
+
+
+		<if condition="$type eq 2"> <a
+			href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
+			href="__URL__/show_list?type=1&line_id={$line_id}">报名拼团订单</a> <a
+			href="__URL__/show_list?type=2&line_id={$line_id}" class="on">普通订单</a>
+		</if>
+	</ul>
+</div>
+<div class="dogview">
+	<form method="post" target="_blank" action="{:U('order_pay')}">
+		<input type="hidden" name="orderid" value="{$vo.orderid}" />
+		<table>
+			<tr>
+				<td class="names">线路编号</td>
+				<td class="ru">团长（发起人）</td>
+				<td class="names">报名截止</td>
+				<td class="names">旅行时间</td>
+				<td class="names">目标人数</td>
+				<td class="ru">最多人数</td>
+				<td class="names">应付诚意金</td>
+				<td class="names">感谢金</td>
+			</tr>
+			<tr>
+				<td class="names" rowspan="2"></td>
+				<td class="ru"></td>
+				<td class="names"></td>
+				<td></td>
+				<td class="names"></td>
+				<td class="ru"></td>
+				<td class="names"></td>
+				<td class="names"></td>
+			</tr>
+			<tr>
+				<td class="ru" colspan="7"></td>
+
+			</tr>
+			<tr>
+				<td class="names">人数</td>
+				<td class="ru"><span>{$vo.people}男{$vo.woman}女{$vo.chd}儿童</span></td>
+				<td class="names">人数要求</td>
+				<td class="ru">{$vo.mins}-{$vo.maxs}人</td>
+			</tr>
+			<tr>
+				<td>
+					<table width="100%">
+						<tr>
+							<td>跟团</td>
+							<td>团成员</td>
+							<td>人数</td>
+							<td>应付诚意金</td>
+							<td>已付诚意金</td>
+						</tr>
+						<tr>
+							<td colspan="5">还没有人跟团报名，注：只有支付诚意金的订单别人才能报名</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+		</table>
+	</form>
+</div>

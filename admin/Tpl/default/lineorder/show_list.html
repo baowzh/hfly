@@ -1,66 +1,108 @@
 <form action="{:U('show_list')}" method="get">
-<div id="nav" class="mainnav_title">
-  <ul>
-     <a class="on" href="__URL__/show_list/type/0/line_id/{$line_id}">拼团订单</a>
-     <a href="__URL__/show_list/type/1/line_id/{$line_id}">报名订单</a>
-  </ul>
-</div>
+	<div id="nav" class="mainnav_title">
+		<ul>
+			<if condition="$type eq 0"> <a class="on"
+				href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
+				href="__URL__/show_list?type=1&line_id={$line_id}">报名拼团订单</a> <a
+				href="__URL__/show_list?type=2&line_id={$line_id}">普通订单</a> </if>
+			 
+			<if condition="$type eq 1">
+			 <a
+				href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
+				href="__URL__/show_list?type=1&line_id={$line_id}" class="on">报名拼团订单</a>
+			<a href="__URL__/show_list?type=2&line_id={$line_id}">普通订单</a> </if>
+			
 
-<table class="search_table" width="100%">
-        <tr>
-            <td class="search">
-                关键词: <input id="search_key" type="text" class="input-text" name="names" value="{$search_key}"/>
-                <input type="submit" value="查询" class="button"/>
-            </td>
-        </tr>
-    </table>
+			<if condition="$type eq 2"> <a
+				href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
+				href="__URL__/show_list?type=1&line_id={$line_id}">报名拼团订单</a> <a
+				href="__URL__/show_list?type=2&line_id={$line_id}" class="on">普通订单</a>
+			</if>
+		</ul>
+	</div>
+
+	<table class="search_table" width="100%">
+		<tr>
+			<td class="search">关键词: <input id="search_key" type="text"
+				class="input-text" name="names" value="{$search_key}" /> <!-- 			<input -->
+				<!-- 				type="submit" value="查询" class="button" /> -->
+			</td>
+			<td class="search">联系方式: <input id="search_key" type="text"
+				class="input-text" name="names" value="{$search_key}" /> <!-- 			<input -->
+				<!-- 				type="submit" value="查询" class="button" /> -->
+			</td>
+			<td class="search">订单号: <input id="search_key" type="text"
+				class="input-text" name="names" value="{$search_key}" /> <input
+				type="submit" value="查询" class="button" />
+			</td>
+		</tr>
+	</table>
 </form>
-<form name="myform" id="myform" action="{:U('LineTarget/order_target')}" method="post">
-    <div class="table-list">
-        <table cellspacing="0" cellpadding="0" width="100%">
-            <thead><tr>
-                <th>订单ID</th>
-				<th>订单号</th>
-                <th>用户名</th>
-                <th>线路名</th>
-                    <th>总费用</th>
-		<th>状态</th>
-                <th>操作</th>
-            </tr></thead>
+<form name="myform" id="myform" action="{:U('LineTarget/order_target')}"
+	method="post">
+	<div class="table-list">
+		<table cellspacing="1" cellpadding="1" width="100%">
+			<thead>
+				<tr style="background: #fff;">
+					<th>订单ID</th>
+					<th>订单号</th>
+					<th>联系人</th>
+					<th>线路名</th>
+					<th>报名时间</th>
+					<th>发团日期&人数&价格</th>
+					<th>组团方式</th>
+					<th>总费用</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
 
-            <tbody id="content">
-            <volist name="list" id="vo">
-                <tr>
-				<td>{$vo.id}</td>
-					<td>{$vo.o_code}</td>
-                                            <td>{$vo.user_id|get_user}</td>
-                    <td>{$vo.names}</td>
-                    <td>{$vo.o_amount}</td>
-                        <td><if condition="$vo.o_status eq '1'">待处理
-                          <elseif condition="$vo.o_status eq '2'"/>待付款
-                              <elseif condition="$vo.o_status eq '3'"/>已付款
-                                  <elseif condition="$vo.o_status eq '4'"/>已出团
-                                      <elseif condition="$vo.o_status eq '5'"/>已点评
-                                          <elseif condition="$vo.o_status eq '6'"/>已结束
-                                              <elseif condition="$vo.o_status eq '7'"/>已取消
-                      </if></td>
-                        <td><a href="javascript:void(0);" onclick="select_win({$vo.o_id});">查看</a><if condition="$vo.o_status eq '1'">&nbsp;|&nbsp;<a href="{:U('lineorder/set_status',array('id'=>$vo['o_id']))}" onclick="return atr_confirm(this.href,'确定处理该订单吗?')">处理订单</a>&nbsp;|&nbsp;<a href="javascript:void(0);" onclick="edit_win({$vo.o_id});">编辑</a>
-                          <elseif condition="$vo.o_status eq '2'"/>&nbsp;|&nbsp;<a href="javascript:void(0);" onclick="edit_win({$vo.o_id});">编辑</a>
-                              <elseif condition="$vo.o_status eq '3'"/>&nbsp;|&nbsp;<a href="{:U('lineorder/set_status',array('id'=>$vo['o_id']))}" onclick="return atr_confirm(this.href,'确定处理该订单吗?')">处理出团</a>
-                                  <elseif condition="$vo.o_status eq '4'"/>
-                                      <elseif condition="$vo.o_status eq '5'"/>
-                                          <elseif condition="$vo.o_status eq '6'"/>
-                                              <elseif condition="$vo.o_status eq '7'"/>
-                      </if></td>
-                </tr>
-            </volist>
-            </tbody>
+			<tbody id="content">
+				<volist name="list" id="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					<td>{$vo.orderid}</td>
+					<td>{$vo.name}<br>{$vo.phone}
+					</td>
+					<td>{$vo.names}</td>
+					<td>{$vo.orderdate}</td>
+					<td>{$vo.start}<br>{$vo.num}人 <br> 每人￥{$vo.cmoney}元
+					</td>
+					<td><if condition="$vo.line_type eq '1'">包团自由行 <elseif
+							condition="$vo.line_type eq '2'" />纯玩团 <elseif
+							condition="$vo.line_type eq '3'" />纯玩团 <elseif
+							condition="$vo.line_type eq '4'" />团队策划 </if></td>
+					<td>￥{$vo.price}元</td>
+					<td><if condition="$vo.state eq '0'">待付款 <elseif
+							condition="$vo.state eq '1'" />待付款 <elseif
+							condition="$vo.state eq '3'" />已付款 <elseif
+							condition="$vo.state eq '4'" />已出团 <elseif
+							condition="$vo.state eq '5'" />已点评 <elseif
+							condition="$vo.state eq '6'" />已结束 <elseif
+							condition="$vo.state eq '7'" />已取消 </if></td>
+					<td><a href="javascript:void(0);"
+						onclick="select_win({$vo.o_id});">查看</a> <if
+							condition="$vo.o_status eq '1'">&nbsp;|&nbsp;<a
+							href="{:U('lineorder/set_status',array('id'=>$vo['o_id']))}"
+							onclick="return atr_confirm(this.href,'确定处理该订单吗?')">处理订单</a>&nbsp;|&nbsp;<a
+							href="javascript:void(0);" onclick="edit_win({$vo.o_id});">编辑</a>
+						<elseif condition="$vo.o_status eq '2'" />&nbsp;|&nbsp;<a
+							href="javascript:void(0);" onclick="edit_win({$vo.o_id});">编辑</a>
+						<elseif condition="$vo.o_status eq '3'" />&nbsp;|&nbsp;<a
+							href="{:U('lineorder/set_status',array('id'=>$vo['o_id']))}"
+							onclick="return atr_confirm(this.href,'确定处理该订单吗?')">处理出团</a> <elseif
+							condition="$vo.o_status eq '4'" />发起退款<elseif
+							condition="$vo.o_status eq '5'" /> <elseif
+							condition="$vo.o_status eq '6'" /> <elseif
+							condition="$vo.o_status eq '7'" /> </if></td>
+				</tr>
+				</volist>
+			</tbody>
 
-        </table>
-        <input type="hidden" name="base_pos" value="{~echo MODULE_NAME}">
-    </div>
-    <div class="btn">
-    </div>
+		</table>
+		<input type="hidden" name="base_pos" value="{~echo MODULE_NAME}">
+	</div>
+	<div class="btn"></div>
 </form>
 <div class="page">{$page}</div>
 <script language="javascript">

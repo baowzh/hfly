@@ -1,0 +1,90 @@
+<div id="nav" class="mainnav_title">
+	<ul>
+		<if condition="$type eq 0"> <a class="on"
+			href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
+			href="__URL__/show_list?type=1&line_id={$line_id}">报名拼团订单</a> <a
+			href="__URL__/show_list?type=2&line_id={$line_id}">普通订单</a> </if>
+
+		<if condition="$type eq 1"> <a
+			href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
+			href="__URL__/show_list?type=1&line_id={$line_id}" class="on">报名拼团订单</a>
+		<a href="__URL__/show_list?type=2&line_id={$line_id}">普通订单</a> </if>
+
+
+		<if condition="$type eq 2"> <a
+			href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
+			href="__URL__/show_list?type=1&line_id={$line_id}">报名拼团订单</a> <a
+			href="__URL__/show_list?type=2&line_id={$line_id}" class="on">普通订单</a>
+		</if>
+	</ul>
+</div>
+<div class="dogview">
+	<form method="post" target="_blank" action="{:U('order_pay')}">
+		<input type="hidden" name="orderid" value="{$vo.orderid}" />
+		<table>
+			<tr>
+				<td class="names">订单编号</td>
+				<td class="ru">{$vo.tuan_name}</td>
+				<td class="names">成团方式</td>
+				<td style="color: #993300; font-weight: bold" class="ru">{$vo.lcode}</td>
+				<td class="names">发团公司</td>
+				<td class="names">团名</td>
+			</tr>
+			<tr style="color: #993300; font-weight: bold">
+				<td class="names">预定人数</td>
+				<td colspan="5"></td>
+			</tr>
+			<tr>
+				<td class="names">开始日期</td>
+				<td class="ru"></td>
+				<td class="names">行程天数</td>
+				<td class="ru">{$vo.mins}-{$vo.maxs}人</td>
+				<td class="names">线路编号</td>
+				<td class="ru">{$vo.mins}-{$vo.maxs}人</td>
+			</tr>
+			<tr>
+				<td class="names">成人价格</td>
+				<td class="ru">{$vo.name}</td>
+				<td class="names">儿童价格</td>
+				<td class="ru">{$vo.phone}</td>
+				<td class="names">费用增减</td>
+				<td class="ru">{$vo.phone}</td>
+			</tr>
+			<tr>
+				<td class="names">费用总计</td>
+				<td class="ru">{$vo.name}</td>
+				<td class="names">付款流程</td>
+				<td colspan="3">{$vo.phone}</td>
+			</tr>
+			<tr>
+				<td class="names">预定金</td>
+				<td class="ru">{$vo.name}</td>
+				<td class="names">已付金额</td>
+				<td>{$vo.phone}</td>
+				<td colspan="2">立即支付</td>
+			</tr>
+			<tr>
+				<td class="names">游客备注</td>
+				<td colspan="5">{$vo.name}</td>
+			</tr>
+			<tr>
+				<td class="names">客服备注</td>
+				<td colspan="5">{$vo.name}</td>
+			</tr>
+			<tr>
+				<td class="names">人员名单</td>
+				<td colspan="5">{$vo.name}</td>
+			</tr>
+			<tr height="50px">
+				<td class="names">支付方式</td>
+				<td class="ru"><select name="payclass"><option
+							value="0">支付宝(支持网银信用卡)</option></select></td>
+				<td class="names" colspan="2"
+					style="text-align: left; padding-left: 10px;"><input
+					class="sub_bg"
+					style="width: 190px; height: 40px; line-height: 40px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
+					type="submit" value="开始支付"><br />支付成功会收到付款确认短信凭证</td>
+			</tr>
+		</table>
+	</form>
+</div>
