@@ -69,7 +69,7 @@
 	width: 1150px;
 	margin: 0 auto;
 	margin-top: 35px;
-/* 	min-height: 900px; */
+	/* 	min-height: 900px; */
 	min-height: 400px;
 	background: #FFF;
 	margin-bottom: 25px;
@@ -81,8 +81,8 @@
 	float: left;
 	position: relative;
 	margin-right: 10px;
-		margin-bottom: 5px;
-/* 	margin-bottom: 35px; */
+	margin-bottom: 5px;
+	/* 	margin-bottom: 35px; */
 }
 
 .mianconent li .desc {
@@ -1091,7 +1091,7 @@
 	font-size: 16px;
 	font-weight: bold;
 	font-weight: normal;
-	line-height: 30px
+	line-height: 20px
 }
 
 .bao_detail .bao_left li .tui {
@@ -2103,7 +2103,8 @@ td.day:not (.disable ):hover {
 	font-weight: bold;
 	font-size: 36px;
 }
-.travelpointname a{
+
+.travelpointname a {
 	color: #05b5b5;
 	font-weight: bold;
 	font-size: 36px;
@@ -2127,4 +2128,50 @@ td.day:not (.disable ):hover {
 	color: #05b5b5;
 	font-size: 16px;
 	text-align: left;
+}
+
+.orderview {
+	width: 800px;
+	min-height: 255px;
+	background: #FFF;
+	margin: auto auto;
+}
+
+.orderview table {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.orderview table tr {
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #05adae;
+	background: #fff;
+}
+
+.orderview table tr td {
+	text-align: left;
+	padding: 0px;
+	color: #888988;
+	font-size: 14px;
+	border: 1px solid #05adae;
+	font-family: "微软雅黑";
+}
+
+.orderview table .names {
+	width: 75px;
+	background: #cdeff0;
+	border-left: 1px solid #05adae;
+	border-right: 1px solid #05adae;
+	color: #009998;
+	font-size: 14px;
+	padding: 0px
+}
+
+.orderview table .ru {
+	width: 352px;
+	text-align: left;
+	padding-left: 10px;
 }

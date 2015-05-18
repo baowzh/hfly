@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="__ROOT__/style/css/index.css">
 <link rel="stylesheet" href="../Public/assets/css/workless.css">
 <link rel="stylesheet" href="../Public/css/style_index.css">
-<title>旅游系统</title>
+<title>欢迎来到内蒙古汇丰旅行社有限公司</title>
 </head>
 <body>
 
@@ -32,18 +32,20 @@
 			</div>
 		</div>
 		<div class="search">
-			<div class="logo">
-				<img src="../Public/images/logo.jpg">
+			<div class="logo" style="margin-top:0px;height:130px;">
+				<img src="__ROOT__/style/images/logo.jpg" style="height:130px;width:560px;">
 			</div>
 			<div class="dectails" style="width: 230px; margin-top: 58px;">
 				<!-- 				<li class="hotline" style="background:none;width:200px;">&nbsp;</li> -->
 				<li style="padding-right: 0px;">
-				<input type="text"
-					class="shuru" style="width: 120px;" value="请输入手机号"
-					onFocus="if(value==defaultValue){value='';this.style.color='#999'}"
-					onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
-					<input
-					type="button" value="订单查询" class="buts" /></li>
+					<form action="{:U('travel/order_query')}">
+						<input type="text" class="shuru" style="width: 120px;" id="phone" name="phone"
+							value="请输入手机号"
+							onFocus="if(value==defaultValue){value='';this.style.color='#999'}"
+							onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+						<input type="submit" value="订单查询" class="buts" />
+				</li>
+				</form>
 			</div>
 			<div class="dectails">
 				<li class="hotline">400-000-0000&nbsp;</li>

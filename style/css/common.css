@@ -152,14 +152,15 @@ body {
 }
 
 .dectails li {
-/* 	padding-right: 55px; */
+	/* 	padding-right: 55px; */
+	
 }
 
 .dectails .hotline {
 	color: #07b3b2;
 	font-family: "微软雅黑";
 	font-size: 24px;
-	width:360px;
+	width: 360px;
 	font-weight: bold;
 	text-align: right;
 	margin-bottom: 8px;
@@ -291,4 +292,29 @@ body {
 	color: #fff;
 	text-align: center;
 	margin-top: 10px
+}
+
+.mainnav_title {
+	border-bottom: 1px solid #EEEEEE;
+	color: #DDDDDD;
+	height: 40px;
+	line-height: 40px;
+}
+
+.mainnav_title a {
+	background: none repeat scroll 0 0 #EFEFEF;
+	color: #004499;
+	margin: 0 5px;
+	padding: 4px 7px;
+}
+
+.mainnav_title a.on {
+	background: none repeat scroll 0 0 #498CD0;
+	color: #FFFFFF;
+}
+
+.orderlistul {
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
 }

@@ -1352,7 +1352,7 @@ pre code { padding: 0; font-size: inherit; color: inherit; white-space: pre-wrap
 
 .bordered:hover { border-color: #bbb; }
 
-table { max-width: 100%; background-color: transparent; _background: none !important; border-collapse: collapse; border-spacing: 0; font-size: 14px; margin-bottom: 20px; width: 100%; padding: 8px; }
+table { max-width: 100%; background-color: transparent; _background: none !important; border-collapse: collapse; border-spacing: 0; font-size: 14px; margin-top: 20px; width: 100%; padding: 8px; }
 table th { font-weight: bold; }
 table thead th, table thead td { vertical-align: bottom; background: #dbeff9; }
 table th, table td { border-top: 1px solid #dddddd; padding: 8px; }
