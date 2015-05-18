@@ -1,6 +1,7 @@
 <?php
-//require_once ("alipay/alipay.config.php");
-// require_once ("alipay/alipay_submit.class.php");
+require_once ("alipay/alipay.config.php");
+require_once ("alipay/lib/alipay_submit.class.php");
+require_once ("alipay/lib/alipay_notify.class.php");
 class travelAction extends CommonAction {
 	private $type_select;
 	private $topic = array (
@@ -153,9 +154,15 @@ class travelAction extends CommonAction {
 		$_POST ['status'] = 0;
 		$_POST ['orderid'] = time () . rand ( 1000, 9999 );
 		$_POST ['type'] = 1;
+		$order = D ( 'order' );
 		if ($LinePin->create ()) {
+			$LinePin->orderdate = time ();
 			$LinePin->add ();
-			$insert_id = $LinePin->getLastInsID ();
+			$order->$insert_id = $LinePin->getLastInsID ();
+			$Order->orderid = $LinePin->orderid;
+			$Order->addtime = $LinePin->orderdate;
+			$Order->status = 0;
+			$Order->add ();
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
 					"id" => $insert_id 
 			) ), "订单详情", "u" );
@@ -173,6 +180,7 @@ class travelAction extends CommonAction {
 	}
 	public function order_ping_act() {
 		$LinePin = D ( 'LinePin' );
+		$Order = D ( 'Order' );
 		$_POST ['num'] = intval ( $_POST ['people'] ) + intval ( $_POST ['woman'] ) + intval ( $_POST ['chd'] );
 		
 		if (empty ( $_POST ['tuan_name'] )) {
@@ -223,6 +231,10 @@ class travelAction extends CommonAction {
 		if ($LinePin->create ()) {
 			$LinePin->orderdate = time ();
 			$LinePin->add ();
+			$Order->orderid = $LinePin->orderid;
+			$Order->addtime = $LinePin->orderdate;
+			$Order->status = 0;
+			$Order->add ();
 			$insert_id = $LinePin->getLastInsID ();
 			$this->ajaxReturn ( U ( 'order_ping_view', array (
 					"id" => $insert_id 
@@ -606,85 +618,227 @@ EOF;
 		// print_r($list);
 		$this->display ();
 	}
-	
 	public function alipay() {
 		/**
-		 * ************************请求参数*************************
+		 * 获取订单信息并进行支付
 		 */
-		
-		// 支付类型
-		$payment_type = "1";
-		// 必填，不能修改
-		// 服务器异步通知页面路径
-		$notify_url = "http://商户网关地址/create_direct_pay_by_user-PHP-UTF-8/notify_url.php";
-		// 需http://格式的完整路径，不能加?id=123这类自定义参数
-		
-		// 页面跳转同步通知页面路径
-		$return_url = "http://商户网关地址/create_direct_pay_by_user-PHP-UTF-8/return_url.php";
-		// 需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
-		
-		// 商户订单号
-		$out_trade_no = $_POST ['WIDout_trade_no'];
-		// 商户网站订单系统中唯一订单号，必填
-		
-		// 订单名称
-		$subject = $_POST ['WIDsubject'];
-		// 必填
-		
-		// 付款金额
-		$total_fee = $_POST ['WIDtotal_fee'];
-		// 必填
-		
-		// 订单描述
-		
-		$body = $_POST ['WIDbody'];
-		// 默认支付方式
-		$paymethod = "bankPay";
-		// 必填
-		// 默认网银
-		$defaultbank = $_POST ['WIDdefaultbank'];
-		// 必填，银行简码请参考接口技术文档
-		
-		// 商品展示地址
-		$show_url = $_POST ['WIDshow_url'];
-		// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
-		
-		// 防钓鱼时间戳
-		$anti_phishing_key = "";
-		// 若要使用请调用类文件submit中的query_timestamp函数
-		
-		// 客户端的IP地址
-		$exter_invoke_ip = "";
-		// 非局域网的外网IP地址，如：221.0.0.1
-		
-		/**
-		 * *********************************************************
-		 */
-		
-		// 构造要请求的参数数组，无需改动
-		$parameter = array (
-				"service" => "create_direct_pay_by_user",
-				"partner" => trim ( $alipay_config ['partner'] ),
-				"seller_email" => trim ( $alipay_config ['seller_email'] ),
-				"payment_type" => $payment_type,
-				"notify_url" => $notify_url,
-				"return_url" => $return_url,
-				"out_trade_no" => $out_trade_no,
-				"subject" => $subject,
-				"total_fee" => $total_fee,
-				"body" => $body,
-				"paymethod" => $paymethod,
-				"defaultbank" => $defaultbank,
-				"show_url" => $show_url,
-				"anti_phishing_key" => $anti_phishing_key,
-				"exter_invoke_ip" => $exter_invoke_ip,
-				"_input_charset" => trim ( strtolower ( $alipay_config ['input_charset'] ) ) 
-		);
-		
-		// 建立请求
-		$alipaySubmit = new AlipaySubmit ( $alipay_config );
-		$html_text = $alipaySubmit->buildRequestForm ( $parameter, "get", "确认" );
-		echo $html_text;
+		$LinePin = D ( 'LinePin' );
+		$orderid = $_POST ['orderid'];
+		$count = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $orderid . " union select orderid,price,state from jee_line_order where orderid=" . $orderid . "" );
+		if ($count > 0) {
+			$orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $orderid . " union select orderid,price,state from jee_line_order where orderid=" . $orderid . "" );
+			$price = $orderModel [0] ['price'];
+			$state = $orderModel [0] ['state'];
+			if ($state != 0) {
+				$this->error ( "订单状态不正确不能支付！" );
+			} else {
+				$alipaySubmit = new AlipaySubmit ( $alipay_config );
+				// 支付类型
+				$payment_type = "1";
+				// 必填，不能修改
+				// 服务器异步通知页面路径
+				$notify_url = "http://www.hf97667.com/index.php/travel/alipaynotify";
+				// 需http://格式的完整路径，不能加?id=123这类自定义参数
+				
+				// 页面跳转同步通知页面路径
+				$return_url = "http://www.hf97667.com/index.php/travel/alipayreturn"; //
+				                                                                      // 需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
+				                                                                      // 商户订单号 // $out_trade_no = $_POST ['WIDout_trade_no'];
+				$out_trade_no = $orderid;
+				// 商户网站订单系统中唯一订单号，必填
+				
+				// 订单名称
+				$subject = '包团旅行订单';
+				// 必填
+				
+				// 付款金额
+				// $total_fee = $_POST ['WIDtotal_fee'];
+				$total_fee = $price;
+				// 必填
+				
+				// 订单描述
+				
+				$body = '内蒙古汇丰旅行社有限公司包团旅行预定订单';
+				// 默认支付方式
+				$paymodel = $_POST ['paymethod'];
+				if ($paymodel == 'directPay') {
+					$paymethod = "directPay";
+				} else {
+					$paymethod = "bankPay";
+				}
+				// 必填
+				// 默认网银
+				// $defaultbank = $_POST ['WIDdefaultbank'];
+				$defaultbank = $_POST ['pay_bank'];
+				;
+				// 必填，银行简码请参考接口技术文档
+				
+				// 商品展示地址
+				// $show_url = $_POST ['WIDshow_url'];
+				$show_url = "http://www.hf97667.com/";
+				// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
+				
+				// 防钓鱼时间戳
+				$anti_phishing_key = $alipaySubmit->query_timestamp ();
+				// 若要使用请调用类文件submit中的query_timestamp函数
+				
+				// 客户端的IP地址
+				$exter_invoke_ip = "180.86.250.126";
+				// 非局域网的外网IP地址，如：221.0.0.1
+				
+				/**
+				 * *********************************************************
+				 */
+				
+				// 构造要请求的参数数组，无需改动
+				$parameter = array (
+						"service" => "create_direct_pay_by_user",
+						"partner" => trim ( $alipay_config ['partner'] ),
+						"seller_email" => trim ( $alipay_config ['seller_email'] ),
+						"payment_type" => $payment_type,
+						"notify_url" => $notify_url,
+						"return_url" => $return_url,
+						"out_trade_no" => $out_trade_no,
+						"subject" => $subject,
+						"total_fee" => $total_fee,
+						"body" => $body,
+						"paymethod" => $paymethod,
+						"defaultbank" => $defaultbank,
+						"show_url" => $show_url,
+						"anti_phishing_key" => $anti_phishing_key,
+						"exter_invoke_ip" => $exter_invoke_ip,
+						"_input_charset" => trim ( strtolower ( $alipay_config ['input_charset'] ) ) 
+				);
+				
+				// 建立请求
+				
+				$html_text = $alipaySubmit->buildRequestForm ( $parameter, "get", "确认" );
+				echo $html_text;
+			}
+		} else {
+			$this->error ( "没有找到订单信息！" );
+		}
+	}
+	public function alipaynotify() {
+		$alipayNotify = new AlipayNotify ( $alipay_config );
+		$verify_result = $alipayNotify->verifyReturn ();
+		if ($verify_result) { // 验证成功
+		                      // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		                      // 请在这里加上商户的业务逻辑程序代码
+		                      
+			// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+		                      // 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+		                      
+			// 商户订单号
+			
+			$out_trade_no = $_GET ['out_trade_no'];
+			
+			// 支付宝交易号
+			
+			$trade_no = $_GET ['trade_no'];
+			
+			// 交易状态
+			$trade_status = $_GET ['trade_status'];
+			
+			if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
+				// 判断该笔订单是否在商户网站中已经做过处理
+				$orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
+				$state = $orderModel [0] ['state'];
+				if ($state == 0) { // 如果订单状态是未支付则修改为已支付
+					$LinePin = D ( 'LinePin' );
+					$LinePin->where ( array (
+							"orderid" => "'{$out_trade_no}'" 
+					) )->setField ( array (
+							"state" => 1,
+							"trade_no" => "'{$trade_no}'" 
+					) );
+					$LineOrder = D ( 'LineOrder' );
+					$LineOrder->where ( array (
+							"orderid" => "'{$out_trade_no}'" 
+					) )->setField ( array (
+							"state" => 1,
+							"trade_no" => "'{$trade_no}'" 
+					) );
+				}
+				
+				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+				
+				// 如果有做过处理，不执行商户的业务程序
+			} else {
+				echo "trade_status=" . $_GET ['trade_status'];
+			}
+			
+			echo "验证成功<br />";
+			
+			// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+			
+			// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		} else {
+			// 验证失败
+			// 如要调试，请看alipay_notify.php页面的verifyReturn函数
+			echo "验证失败";
+		}
+	}
+	public function alipayreturn() {
+		$alipayNotify = new AlipayNotify ( $alipay_config );
+		$verify_result = $alipayNotify->verifyReturn ();
+		if ($verify_result) { // 验证成功
+		                      // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		                      // 请在这里加上商户的业务逻辑程序代码
+		                      
+			// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+		                      // 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+		                      
+			// 商户订单号
+			
+			$out_trade_no = $_GET ['out_trade_no'];
+			
+			// 支付宝交易号
+			
+			$trade_no = $_GET ['trade_no'];
+			
+			// 交易状态
+			$trade_status = $_GET ['trade_status'];
+			
+			if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
+				// 判断该笔订单是否在商户网站中已经做过处理
+				$orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
+				$state = $orderModel [0] ['state'];
+				if ($state == 0) { // 如果订单状态是未支付则修改为已支付
+					$LinePin = D ( 'LinePin' );
+					$LinePin->where ( array (
+							"orderid" => "'{$out_trade_no}'" 
+					) )->setField ( array (
+							"state" => 1,
+							"trade_no" => "'{$trade_no}'" 
+					) );
+					$LineOrder = D ( 'LineOrder' );
+					$LineOrder->where ( array (
+							"orderid" => "'{$out_trade_no}'" 
+					) )->setField ( array (
+							"state" => 1,
+							"trade_no" => "'{$trade_no}'" 
+					) );
+				}
+				
+				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+				
+				// 如果有做过处理，不执行商户的业务程序
+			} else {
+				echo "trade_status=" . $_GET ['trade_status'];
+			}
+			
+			echo "验证成功<br />";
+			
+			// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+			
+			// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		} else {
+			// 验证失败
+			// 如要调试，请看alipay_notify.php页面的verifyReturn函数
+			echo "验证失败";
+		}
+		$this->display ();
 	}
 }
 
