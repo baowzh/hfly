@@ -213,10 +213,11 @@ function get_starts($num) {
 
 function get_line_img($line_id, $type = 's') {
 	$path = M('line_pic')->where("line_id='$line_id'")->order("istitlepage='1' desc")->getfield('pic_path');
-	if (!in_array($type, array('s', 'm', 'b')))
-		unset($path);
+	//if (!in_array($type, array('s', 'm', 'b')))
+	//	unset($path);
 	//return $path ? __ROOT__ . dirname($path) . "/s_" . basename($path) : "--";
-	return $path ? __ROOT__ . dirname($path) . basename($path) : "--";
+	return $path;
+	// ? __ROOT__ . dirname($path) . basename($path) : "--";
 }
 
 /**

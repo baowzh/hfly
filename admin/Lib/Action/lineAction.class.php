@@ -76,7 +76,7 @@ class lineAction extends CommonAction {
 		$Line = M ( "line" );
 		unset ( $_GET ['_URL_'] );
 		$order = "sort";
-		//! $_GET ['p']
+		// ! $_GET ['p']
 		if ($_GET) {
 			$where ['names'] = array (
 					"LIKE",
@@ -91,26 +91,25 @@ class lineAction extends CommonAction {
 			if ($_GET ['linetype'] != '') {
 				$where ['line_type'] = array (
 						"eq",
-						$_GET ['linetype']
+						$_GET ['linetype'] 
 				);
 			}
 			if ($_GET ['status'] != '') {
 				$where ['status'] = array (
 						"eq",
-						$_GET ['status']
+						$_GET ['status'] 
 				);
 			}
 			if ($_GET ['target_type'] != '') {
 				$where ['target_type'] = array (
 						"eq",
-						$_GET ['target_type']
+						$_GET ['target_type'] 
 				);
 			}
 			
 			if (! empty ( $_GET ['sort'] )) {
 				$order = $_GET ['sort'] . " " . $_GET ['path'];
 			}
-			
 		}
 		$linetype = $linetype->select ();
 		$count = $Line->where ( $where )->count ();
@@ -196,7 +195,6 @@ class lineAction extends CommonAction {
 				} else {
 					$this->redirect ( "show_list" );
 				}
-				
 			} else {
 				echo $Line->getError ();
 			}
@@ -456,15 +454,36 @@ class lineAction extends CommonAction {
 		$this->assign ( "stage_data_html", preg_replace ( "/[\t\r\xc2\xa0]/", "", $this->fetch ( "stage_html" ) ) );
 		$this->display ();
 	}
+	public function month_price_list() {
+		$year = $_GET ['year'];
+		$month = $_GET ['month'];
+		$lineid = $_GET ['line_id'];
+		$line_price = M ( "LinePrice" );
+		$priceList = $line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid )->select ();
+		$this->ajaxReturn ( $priceList );
+		// 通过年月获取制定年月的价钱设置
+	}
 	public function price_update() {
+		$seldays = $_POST ['seldays'];
+		$seldayarray = explode ( ',', $seldays );
+		// print_r($seldayarray[0]);
+		// exit();
+		// $linePrice->update_4 (); // 基本价格
+		// $linePrice->update_3 (); // 星期价格
+		// $linePrice->update_2 (); // 阶段价格
+		// $linePrice->update_1 (); // 指定日期价格
+		// 费用说明
+		// $LineInfo = M ( "LineInfo" );
+		// $LineInfo->where ( "lid=" . $_POST ["line_id"] )->save ( $_POST );
 		$linePrice = D ( 'LinePrice' );
-		$linePrice->update_4 (); // 基本价格
-		$linePrice->update_3 (); // 星期价格
-		$linePrice->update_2 (); // 阶段价格
-		$linePrice->update_1 (); // 指定日期价格
-		                        // 费用说明
-		$LineInfo = M ( "LineInfo" );
-		$LineInfo->where ( "lid=" . $_POST ["line_id"] )->save ( $_POST );
+		foreach ( $seldayarray as $val ) {
+			unset ( $linePrice->id );
+			$linePrice->create ();
+			$linePrice->day = substr ($val, 6, 2 );
+			$linePrice->line_id = $_POST ["line_id"];
+			$linePrice->price_type = 1;
+			$linePrice->add ();
+		}
 		$this->redirect ( "line/show_list" );
 	}
 	
@@ -513,6 +532,7 @@ class lineAction extends CommonAction {
 					$v ["price_children"] 
 			);
 		}
+		$json_arr ['url'] = '';
 		return json_encode ( $json_arr );
 	}
 	public function is_code() {

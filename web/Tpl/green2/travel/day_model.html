@@ -1,48 +1,41 @@
-{~$dining=array(1=>1,2=>2,3=>3)} 
-    <div class="history">
-		<ul>
-			
-            <volist name="view_result" id="vid">
-			<li class="time_title">
-			    <div class="time_title_left">&nbsp;</div>
-			    <div class="time_title_right">{$vid.day_info.title}</div>
-			    <div class="clear"></div>
-			</li>
-			<li class="info_title">
-			  <div class="info_title_left"></div>
-			  <div class="info_title_right">
-				早餐；<in name="dining.1" value="$vid.day_info.dining">
-                            √
-                            <else/>
-                            ×
-                        </in>
-                            午餐：<in name="dining.2" value="$vid.day_info.dining">√
-                                <else/>
-                                ×
-                            </in>
-                            晚餐：<in name="dining.3" value="$vid.day_info.dining">√
-                                <else/>
-                                ×
-                            </in>
-               住宿：{$vid.day_info.stay|default="暂无信息"}
-                            
-			   </div>
-			<div class="clear"></div>
-			</li>
-            
-            <volist name="vid.Section_info" id="sid">
-			<li class="info_title">
-			    <div class="info_title_left"></div>
-			    <div class="info_title_right">第{$key+1}段：{$sid.title}</div>
-			    <div class="clear"></div>
-			</li>
-			<li class="info_title">
-			    <div class="info_title_left"></div>
-			    <div class="info_title_right">{$sid.content}</div>
-			    <div class="clear"></div>
-			</li>
-            </volist>
-            </volist>
+{~$dining=array(1=>1,2=>2,3=>3)}
+<div class="history">
+	<ul>
 
-		</ul>
-	</div>
+		<volist name="view_result" id="vid">
+		<li class="time_title">
+			<div class="time_title_left">&nbsp;</div>
+			<div class="time_title_right">第{$key+1}天&nbsp;{$vid.day_info.title}</div>
+			<div class="clear"></div>
+		</li>
+		<li class="info_title">
+			<div class="info_title_left"></div>
+			<div class="info_title_right">
+				早餐；
+				<in name="dining.1" value="$vid.day_info.dining"> √ <else /> ×
+				</in>
+				午餐：
+				<in name="dining.2" value="$vid.day_info.dining">√ <else /> × </in>
+				晚餐：
+				<in name="dining.3" value="$vid.day_info.dining">√ <else /> × </in>
+				住宿：{$vid.day_info.stay|default="暂无信息"}
+
+			</div>
+			<div class="clear"></div>
+		</li>
+
+		<volist name="vid.Section_info" id="sid">
+<!-- 		<li class="info_title"> -->
+<!-- 			<div class="info_title_left"></div> -->
+<!-- 			<div class="info_title_right">第{$key+1}段：{$sid.title}</div> -->
+<!-- 			<div class="clear"></div> -->
+<!-- 		</li> -->
+		<li class="info_title">
+			<div class="info_title_left"></div>
+			<div class="info_title_right">{$sid.content}</div>
+			<div class="clear"></div>
+		</li>
+		</volist> </volist>
+
+	</ul>
+</div>

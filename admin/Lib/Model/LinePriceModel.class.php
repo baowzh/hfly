@@ -146,6 +146,7 @@ class LinePriceModel extends Model {
     }
 
     public function update_1() {
+    	
         $empty_val = create_function('$var', 'return !($var==""||$var=="0,0,0");');
         $data=array_filter($_POST["day_val"], $empty_val);      
         if ($data) {

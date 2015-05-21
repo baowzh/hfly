@@ -1,5 +1,5 @@
 .agenda_box {
-    width: 496px;
+    width: 596px;
     border: 1px solid #4EABCA;
 }
 
@@ -16,7 +16,7 @@
     height: 29px;
     line-height: 28px;
     text-align: center;
-    width: 448px;
+    width: 548px;
 }
 .agenda_box .agenda_title .title_left{
     background: url("images/calendar_left.gif") no-repeat scroll 0 0 transparent;

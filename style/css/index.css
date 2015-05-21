@@ -385,7 +385,8 @@
 }
 
 .history {
-	background: url(../images/scd.jpg) repeat-y 187px 0;
+	/* 	background: url(../images/scd.jpg) repeat-y 187px 0; */
+	background: url(../images/scd.jpg) repeat-y 45px 0;
 	position: relative;
 	line-height: 200%;
 }
@@ -395,7 +396,8 @@
 }
 
 .history ul li.time_title {
-	background: url(../images/clock.jpg) no-repeat 138px 0;
+	/* 	background: url(../images/clock.jpg) no-repeat 138px 0; */
+	background: url(../images/clock.jpg) no-repeat 5px 0;
 	height: 83px;
 	font-size: 14px;
 	font-weight: bold;
@@ -405,7 +407,8 @@
 
 .history ul li {
 	list-style: none;
-	background: url(../images/cicer.jpg) no-repeat 172px 6px;
+	/* 	background: url(../images/cicer.jpg) no-repeat 172px 6px; */
+	background: url(../images/cicer.jpg) no-repeat 32px 6px;
 	margin-left: 0px;
 	padding-bottom: 20px;
 	zoom: 1;
@@ -420,7 +423,7 @@
 
 .time_title_right {
 	float: left;
-	margin-left: 100px;
+	/* 	margin-left: 100px; */
 	width: 800px;
 	font-size: 18px;
 	color: #221d1c;
@@ -444,7 +447,7 @@
 
 .info_title_right {
 	float: left;
-	margin-left: 80px;
+/* 	margin-left: 80px; */
 	width: 800px;
 	padding-top: 0px;
 	margin-top: 0px;

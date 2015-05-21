@@ -22,6 +22,7 @@ class travelAction extends CommonAction {
 		$this->assign ( "current", $this->type_select );
 	}
 	public function index() {
+		$areaid=( $_GET ['areaid'] );
 		$id = isset ( $_GET ['id'] ) ? intval ( $_GET ['id'] ) : 0; // 获取分页页码
 		$day = $_GET ['day']; // ? intval($_GET['day']) : 1; //获取分页页码
 		$this->assign ( 'id', $id );
@@ -33,6 +34,9 @@ class travelAction extends CommonAction {
 			$this->assign ( 'day', $day );
 			if ($day > 0)
 				$where .= " and trip_days='$day' ";
+		}
+		if($areaid!=null&&$areaid!=''){
+			$where .= " and linebelongto='$areaid' ";
 		}
 		$count = $View->where ( $where )->count ();
 		$p = isset ( $_GET ['p'] ) ? intval ( $_GET ['p'] ) : 1; // 获取分页页码
