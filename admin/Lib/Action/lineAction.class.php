@@ -431,6 +431,9 @@ class lineAction extends CommonAction {
 	public function price_list() {
 		$line_price = M ( "LinePrice" );
 		$line_info = M ( 'LineInfo' );
+		$sel_numrange = $_POST ['sel_numrange'];
+		// echo $sel_numrange;
+		// exit();
 		$id = $_GET ['line_id'] ? intval ( $_GET ['line_id'] ) : 0;
 		
 		// 基本价格
@@ -440,8 +443,13 @@ class lineAction extends CommonAction {
 		// 按阶段
 		$price_stage = $line_price->where ( "price_type=2 and line_id=" . $id )->select ();
 		// 按指定日期
-		$price_day = $line_price->where ( "price_type=1 and line_id=" . $id )->getField ( "price_date,RACKRATE,price_adult,price_children" );
-		$price_day_json = $this->json_price_list ( $price_day );
+		if ($sel_numrange != null) {
+			$price_day = $line_price->where ( "price_type=1 and line_id=" . $id . " and numrange=" . $sel_numrange )->getField ( "price_date,RACKRATE,price_adult,price_children" );
+			$price_day_json = $this->json_price_list ( $price_day );
+		} else {
+			$price_day = $line_price->where ( "price_type=1 and line_id=" . $id )->getField ( "price_date,RACKRATE,price_adult,price_children" );
+			$price_day_json = $this->json_price_list ( $price_day );
+		}
 		// 费用说明
 		$contain = $line_info->where ( "lid=" . $id )->find ();
 		$this->assign ( "price_pt", $price_pt );
@@ -451,6 +459,7 @@ class lineAction extends CommonAction {
 		$this->assign ( "contain", $contain );
 		$this->assign ( "price_day_json", $price_day_json );
 		$this->assign ( "line_id", $id );
+		$this->assign ( "sel_numrange", $sel_numrange );
 		$this->assign ( "stage_data_html", preg_replace ( "/[\t\r\xc2\xa0]/", "", $this->fetch ( "stage_html" ) ) );
 		$this->display ();
 	}
@@ -458,9 +467,34 @@ class lineAction extends CommonAction {
 		$year = $_GET ['year'];
 		$month = $_GET ['month'];
 		$lineid = $_GET ['line_id'];
+		$numrange = $_GET ['numrange1'];
 		$line_price = M ( "LinePrice" );
-		$priceList = $line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid )->select ();
-		$this->ajaxReturn ( $priceList );
+		$priceList = $line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid . " and numrange=" . $numrange . " and  price_type=1 " )->select ();
+		if ($priceList != null) {
+			$this->ajaxReturn ( $priceList );
+		} else {
+			$this->ajaxReturn ( array () );
+		}
+		// 通过年月获取制定年月的价钱设置
+	}
+	public function month_price_del() {
+		$year = $_POST ['year'];
+		$month = $_POST ['month'];
+		$lineid = $_POST ['line_id'];
+		$numrange = $_POST ['numrange'];
+		$seldays = $_POST ['seldays'];
+		$seldayarray = explode ( ',', $seldays );
+		
+		//
+		
+		foreach ( $seldayarray as $val ) {
+			$line_price = M ( "LinePrice" );
+			$day = substr ( $val, 6, 2 );
+			$line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid . " and numrange=" . $numrange . " and  price_type=1 and day=" . $day )->delete();
+			//$linePrice->delete ();
+		}
+		
+		$this->redirect ( "line/price_list" );
 		// 通过年月获取制定年月的价钱设置
 	}
 	public function price_update() {
@@ -479,12 +513,13 @@ class lineAction extends CommonAction {
 		foreach ( $seldayarray as $val ) {
 			unset ( $linePrice->id );
 			$linePrice->create ();
-			$linePrice->day = substr ($val, 6, 2 );
+			$linePrice->price_date = strtotime($val);
+			$linePrice->day = substr ( $val, 6, 2 );
 			$linePrice->line_id = $_POST ["line_id"];
 			$linePrice->price_type = 1;
 			$linePrice->add ();
 		}
-		$this->redirect ( "line/show_list" );
+		$this->redirect ( "line/price_list" );
 	}
 	
 	// 线路订单

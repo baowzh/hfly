@@ -17,7 +17,7 @@
 	var Public = '../Public'
 	//var price={$price_day_json};
 </script>
-价格优先级说明：指定日期价格=>指定阶段价格=>指定星期价格=>基本价格
+<!-- 价格优先级说明：指定日期价格=>指定阶段价格=>指定星期价格=>基本价格 -->
 <form action="{:U('price_update')}" method="post" id="priceform">
 	<input name="line_id" id="line_id" type="hidden" value="{$line_id}" />
 	<ul class="lineNav">
@@ -88,15 +88,31 @@
 					<tr>
 						<td colspan="1">
 							<div class="calendartool">
+
 								<p>
+									<!--  
 									<a class="pl_set js_change_set" title="单日设置" data-change="批量设置"
 										href="javascript:void(0)">单日设置</a>
+									-->
+									<select id="sel_numrange" name="sel_numrange">
+										<option value="1">2-3人</option>
+										<option value="2">4-6人</option>
+										<option value="3">7-9人</option>
+										<option value="4">10-12人</option>
+										<option value="5">13人以上</option>
+									</select> <input name="lineid" id="lineid" type="hidden"
+										value="{$line_id}" /> </select> <input name="_sel_numrange"
+										id="_sel_numrange" type="hidden" value="{$sel_numrange}" />
 								</p>
 								<ul>
+<!-- 									<li><input type="button" value="切换人数规模" -->
+<!-- 										onclick="javascript:querymonthprice();"></li> -->
+									<!--  
 									<li><a class="up js_online" title="上线"
 										href="javascript:void(0)">上线</a></li>
 									<li><a class="down js_offline" title="下线"
 										href="javascript:void(0)">下线</a></li>
+										-->
 								</ul>
 							</div>
 						</td>
@@ -157,6 +173,9 @@
 												style="display: none;"><input type="checkbox"></span>
 										</h4> <textarea data-val="maxlength:500" data-valmsg="起价说明"
 											name="price_desc" id="price_desc" class="gray_textarea"></textarea></li>
+<!-- 									<li> -->
+									<input type="button" onclick="javascript:deleteprice();" value="删除">
+<!-- 									</li> -->
 									<input id="js_detail_date" name="dateString" type="hidden"
 										value="">
 									<input id="js_detail_pId" name="pId" type="hidden"
@@ -223,6 +242,10 @@
 			$('#PriceForm').hide();
 			$(".linePopPrice").hide();
 		});
+		if($('#_sel_numrange').val()!=null){
+			$('#sel_numrange').val($('#_sel_numrange').val());
+		}
+		
 
 	});
 	var seldayes = new Array();
@@ -233,5 +256,18 @@
 		}
 		$('#seldays').val(seldayids);
 		document.forms[0].submit();
-	}
+	};
+	var querymonthprice=function(){
+		document.forms[0].action='{:U('price_list')}';
+		document.forms[0].submit();
+	};
+	var deleteprice=function(){
+		document.forms[0].action='{:U('month_price_del')}';
+		var seldayids='';
+		for(day in seldayes){
+			seldayids=seldayids+seldayes[day]+',';
+		}
+		$('#seldays').val(seldayids);
+		document.forms[0].submit();
+	} 
 </script>

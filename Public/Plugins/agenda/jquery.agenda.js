@@ -75,8 +75,9 @@
 						var max_day = new Date(year, month, 0).getDate();
 						var one_day = new Date(year, month - 1, 1).getDay();
 						var first_day = 0;
-						var table_str = '<tbody data-month="' + data_month
-								+ '"><tr>';
+//						var table_str = '<tbody data-month="' + data_month
+//								+ '"><tr>';
+						var table_str = '<tbody><tr>';
 						var key = "";
 						while (first_day < one_day) {
 							table_str += '<td class="not_day"><span></span></td>';
@@ -85,21 +86,22 @@
 						var day = 0;
 						// 从后台获取这个月的价钱列表;
 						var pricelist = '';
+						var tempnumrange = $('#sel_numrange').val();
 						var reult = $.ajax({
 							url : options.data.url,
 							async : false,
-							// dataType: 'json',
-							// type: 'post',
 							data : {
+								numrange1 : tempnumrange,
 								year : year,
 								month : month,
 								line_id : $('#line_id').val()
 							},
 							success : function(result) {
-								// alert(result);
 								pricelist = result;
-								
 
+							},
+							error : function(errorobj) {
+								pricelist = null;
 							}
 						});
 						//
@@ -113,25 +115,84 @@
 							var pricehtml = '';
 							if (pricelist != null) {
 								for ( var dataprice in pricelist) {
-									if (dataprice.day == i) { // 如果有价钱则吸入表格中
+									if (pricelist[dataprice].day == i) { // 如果有价钱则吸入表格中
 										// 生成一个价格信息div
 										var uldiv = $('<div></div>');
-										var ulbox = $('<ul></ul>');
-										ulbox.append($('<li><li>').text(
-												'¥' + dataprice.price_adult));
+										var ulbox = $('<ul>');
 										ulbox
-												.append($('<li><li>')
+												.append($('<li>')
 														.text(
 																'¥'
-																		+ dataprice.price_children));
+																		+ pricelist[dataprice].price_adult));
 										ulbox
-												.append($('<li><li>')
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_price_adult')
+														.val(
+																pricelist[dataprice].price_adult));
+										ulbox
+												.append($('<li>')
 														.text(
-																dataprice.orderminnum
-																		+ '/'
-																		+ dataprice.ordermaxnum));
+																'¥'
+																		+ pricelist[dataprice].price_children));
+										ulbox
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_price_children')
+														.val(
+																pricelist[dataprice].price_children));
+
+										ulbox
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_room_type')
+														.val(
+																pricelist[dataprice].room_type));
+
+										ulbox.append($('<input>').attr('type',
+												'hidden').attr('id',
+												'day' + key + '_dfc').val(
+												pricelist[dataprice].dfc));
+
+										ulbox.append($('<input>').attr('type',
+												'hidden').attr('id',
+												'day' + key + '_numrange').val(
+												pricelist[dataprice].numrange));
+
+										var persontext = '';
+										if (pricelist[dataprice].numrange == 1) {
+											persontext = '2-3人';
+										} else if (pricelist[dataprice].numrange == 2) {
+											persontext = '4-6人';
+										} else if (pricelist[dataprice].numrange == 3) {
+											persontext = '7-9人';
+										} else if (pricelist[dataprice].numrange == 4) {
+											persontext = '10-12人';
+										} else {
+											persontext = '13人';
+										}
+										ulbox
+												.append($('<li>').text(
+														persontext));
+										ulbox.append($('<input>').attr('type',
+												'hidden').attr('id',
+												'day' + key + '_numrage').val(
+												pricelist[dataprice].numrange));
 										uldiv.append(ulbox);
 										pricehtml = uldiv.html();
+										break;
 									}
 								}
 							}
@@ -152,6 +213,7 @@
 						table_str += "<tr></tbody>";
 
 						var return_obj = $(table_str)
+						obj.find("table.table_date").empty();
 						obj.find("table.table_date").append(return_obj);
 						return return_obj;
 					}
@@ -189,6 +251,7 @@
 							obj.find(".agenda_y").text(y);
 							obj.find(".agenda_m").text(parseInt(m));
 						}
+						initevent();
 					}
 					var next_month = function() {
 						var y = parseInt(obj.find(".agenda_y").text());
@@ -204,11 +267,12 @@
 							mext_month_obj = create_month(y, m);
 						if (mext_month_obj !== false) {
 							// create_month(y, m);
-							alert_box.hide();
+							//alert_box.hide();
 							mext_month_obj.show().siblings("tbody").hide();
 							obj.find(".agenda_y").text(y);
 							obj.find(".agenda_m").text(parseInt(m));
 						}
+						initevent();
 					}
 
 					// 获取数据值
@@ -299,114 +363,210 @@
 						$(this).hide();
 						e.stopPropagation();
 					})
-					//
-					$(".table_date").find("td").unbind("click").bind(
-							"click",
-							function() {
-								var i = $(this).find(".js_checkbox");
-								if (i.length > 0) {
-									var sele = i.find(":checkbox").attr(
-											"checked");
-									i.find(":checkbox").attr("checked", !sele);
-									i.find(":checkbox").trigger("change");
-									if (!sele) {
-										$(this).addClass("yellow")
-									} else {
-										$(this).removeClass("yellow")
+					var initevent = function() {
+						$(".table_date").find("td").unbind("click").bind(
+								"click",
+								function() {
+									var i = $(this).find(".js_checkbox");
+									if (i.length > 0) {
+										var sele = i.find(":checkbox").attr(
+												"checked");
+										i.find(":checkbox").attr("checked",
+												!sele);
+										i.find(":checkbox").trigger("change");
+										if (!sele) {
+											$(this).addClass("yellow")
+										} else {
+											$(this).removeClass("yellow")
+										}
 									}
-								}
 
-							});
+								});
+						//
+						// 给复选框添加选择事件
+						for (indexi = 0; indexi <= 6; indexi++) {
+							$(".table_date")
+									.find(".js_checkbox_checkrows_" + indexi)
+									.find(":checkbox")
+									.change(
+											function() {
+												var issel = $(this).prop(
+														"checked");
+												var inputname = 'day_val[' + t
+														+ ']';
+												var t = $(this).data("id");
+												if (issel) {// 被选中则给hidden字段添加值
+													$(
+															'input[name=\''
+																	+ inputname
+																	+ '\']')
+															.val(t);
+													var exists = false;
+													for (selday in seldayes) {
+														if (seldayes[selday] == t) {
+															exists = true;
+														}
+													}
+													if (!exists) {
+														seldayes.push(t);
+													}
+													// 如果有相应的设置值
+													var _price_adult = $(
+															'#day'
+																	+ t
+																	+ '_price_adult')
+															.val();
+													var _price_children = $(
+															'#day'
+																	+ t
+																	+ '_price_children')
+															.val();
+													var _numrange = $(
+															'#day'
+																	+ t
+																	+ '_numrange')
+															.val();
+													//
+													var _dfc = $(
+															'#day' + t + '_dfc')
+															.val();
+													//
+													var _room_type = $(
+															'#day'
+																	+ t
+																	+ '_room_type')
+															.val();
+													//
 
-					// 给复选框添加选择事件
-					for (indexi = 0; indexi <= 6; indexi++) {
-						$(".table_date").find(
-								".js_checkbox_checkrows_" + indexi).find(
-								":checkbox").change(function() {
-							var issel = $(this).prop("checked");
-							var inputname = 'day_val[' + t + ']';
-							var t = $(this).data("id");
-							if (issel) {// 被选中则给hidden字段添加值								
-								$('input[name=\'' + inputname + '\']').val(t);
-								var exists = false;
-								for (selday in seldayes) {
-									if (seldayes[selday] == t) {
-										exists = true;
-									}
-								}
-								if (!exists) {
-									seldayes.push(t);
-								}
+													if (_price_adult != null) {
+														$('#price_adult').val(
+																_price_adult);
+													}
+													if (_price_children != null) {
+														$('#price_children')
+																.val(
+																		_price_children);
+													}
+													if (_numrange != null) {
+														$('#numrange').val(
+																_numrange);
+													}
+													//
+													if (_dfc != null) {
+														$('#dfc').val(_dfc);
+													}
+													//
+													if (_room_type != null) {
+														$('#room_type').val(
+																_room_type);
+													}
 
-							} else { // 去掉hidden字段的值
-								$('input[name=\'' + inputname + '\']').val('');
-								var exists = false;
-								var dayindex = 0;
-								for (selday in seldayes) {
-									if (seldayes[selday] == t) {
-										exists = true;
-										break;
-										dayindex++;
-									}
-								}
-								if (exists) {
-									seldayes.splice(selday, 1);
-								}
-							}
+												} else { // 去掉hidden字段的值
+													$(
+															'input[name=\''
+																	+ inputname
+																	+ '\']')
+															.val('');
+													var exists = false;
+													var dayindex = 0;
+													for (selday in seldayes) {
+														if (seldayes[selday] == t) {
+															exists = true;
+															break;
+															dayindex++;
+														}
+													}
+													if (exists) {
+														seldayes.splice(selday,
+																1);
+													}
+
+													$('#price_adult').val('');
+													$('#price_children')
+															.val('');
+													$('#numrange').val('');
+													$('#dfc').val('');
+													$('#room_type').val('');
+												}
+											});
+						}
+
+						// 给复选框添加选择事件
+
+						$(".js_change_set").unbind().bind("click", function() {
+							var t = $(this);
+							var n = t.data("change");
+							var r = t.text();
+							t.data("change", r);
+							t.text(n);
+							t.attr("title", n);
+							var i = $(".table_date").find(".js_checkbox");
+							// i.find(":checkbox").attr("checked", false);
+							i.find(":checkbox").trigger("change");
+							/*
+							 * if (!e.opts.isMulti) { i.show(); e.opts.isMulti =
+							 * true } else { i.hide(); e.opts.isMulti = false }
+							 * $(e).trigger("q-show-detail"); e._check()
+							 */
 						});
-					}
 
-					// 给复选框添加选择事件
-
-					$(".js_change_set").unbind().bind("click", function() {
-						var t = $(this);
-						var n = t.data("change");
-						var r = t.text();
-						t.data("change", r);
-						t.text(n);
-						t.attr("title", n);
-						var i = $(".table_date").find(".js_checkbox");
-						//i.find(":checkbox").attr("checked", false);
-						i.find(":checkbox").trigger("change");
-						/*
-						 * if (!e.opts.isMulti) { i.show(); e.opts.isMulti =
-						 * true } else { i.hide(); e.opts.isMulti = false }
-						 * $(e).trigger("q-show-detail"); e._check()
-						 */
-					});
-					$(".js_checkbox_checkrows").each(
-							function() {
-								var t = $(this).data("idx");
-								$(this).find(":checkbox").change(
+						$(".js_checkbox_checkrows")
+								.each(
 										function() {
-											var n = $(this).prop("checked");
-											$(".day").find(
-													".js_checkbox_checkrows_"
-															+ t).find(
-													":checkbox").prop(
-													"checked", n);
-											$(".day").find(
-													".js_checkbox_checkrows_"
-															+ t).find(
-													":checkbox").trigger(
-													"change");
-											if (n) {
-												$(".day").find(
-														".js_checkbox_checkrows_"
-																+ t).parents(
-														"td")
-														.addClass("yellow")
-											} else {
-												$(".day").find(
-														".js_checkbox_checkrows_"
-																+ t).parents(
-														"td").removeClass(
-														"yellow")
-											}
+											var t = $(this).data("idx");
+											$(this)
+													.find(":checkbox")
+													.change(
+															function() {
+																var n = $(this)
+																		.prop(
+																				"checked");
+																$(".day")
+																		.find(
+																				".js_checkbox_checkrows_"
+																						+ t)
+																		.find(
+																				":checkbox")
+																		.prop(
+																				"checked",
+																				n);
+																$(".day")
+																		.find(
+																				".js_checkbox_checkrows_"
+																						+ t)
+																		.find(
+																				":checkbox")
+																		.trigger(
+																				"change");
+																if (n) {
+																	$(".day")
+																			.find(
+																					".js_checkbox_checkrows_"
+																							+ t)
+																			.parents(
+																					"td")
+																			.addClass(
+																					"yellow")
+																} else {
+																	$(".day")
+																			.find(
+																					".js_checkbox_checkrows_"
+																							+ t)
+																			.parents(
+																					"td")
+																			.removeClass(
+																					"yellow")
+																}
 
-											// $(e).trigger("q-show-detail")
-										})
-							});
+																// $(e).trigger("q-show-detail")
+															})
+										});
+
+					}
+					initevent();
+
+					// 初始化事件
+
 				}
 			});
 })(jQuery)
