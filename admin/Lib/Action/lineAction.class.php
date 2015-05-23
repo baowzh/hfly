@@ -190,7 +190,7 @@ class lineAction extends CommonAction {
 				$submitandsetprice = $_POST ['submitandnext'];
 				if ($submitandsetprice == 1) {
 					$this->redirect ( "price_list", array (
-							'line_id' => $insert_id 
+							'line_id' =>  $_POST ["id"] 
 					), 2, "保存成功，请继续维护报价信息。" );
 				} else {
 					$this->redirect ( "show_list" );
@@ -468,8 +468,14 @@ class lineAction extends CommonAction {
 		$month = $_GET ['month'];
 		$lineid = $_GET ['line_id'];
 		$numrange = $_GET ['numrange1'];
+		$price_type = 1;
+		if ($numrange == 0) {
+			$price_type = 2;
+		} else {
+			$price_type = 1;
+		}
 		$line_price = M ( "LinePrice" );
-		$priceList = $line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid . " and numrange=" . $numrange . " and  price_type=1 " )->select ();
+		$priceList = $line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid . " and numrange=" . $numrange . " and  price_type=" . $price_type )->select ();
 		if ($priceList != null) {
 			$this->ajaxReturn ( $priceList );
 		} else {
@@ -490,11 +496,12 @@ class lineAction extends CommonAction {
 		foreach ( $seldayarray as $val ) {
 			$line_price = M ( "LinePrice" );
 			$day = substr ( $val, 6, 2 );
-			$line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid . " and numrange=" . $numrange . " and  price_type=1 and day=" . $day )->delete();
-			//$linePrice->delete ();
+			$line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid . " and numrange=" . $numrange . " and  price_type=1 and day=" . $day )->delete ();
+			// $linePrice->delete ();
 		}
 		
-		$this->redirect ( "line/price_list" );
+		//$this->redirect ( "line/price_list" );
+		$this->redirect ( "line/price_list",array('line_id'=>$lineid), 1,'页面跳转中~' );
 		// 通过年月获取制定年月的价钱设置
 	}
 	public function price_update() {
@@ -513,13 +520,21 @@ class lineAction extends CommonAction {
 		foreach ( $seldayarray as $val ) {
 			unset ( $linePrice->id );
 			$linePrice->create ();
-			$linePrice->price_date = strtotime($val);
+			if ($val == 0) {
+				continue;
+			}
+			if ($linePrice->numrange == 0) { // numrange
+				$linePrice->price_type = 2;
+			} else {
+				$linePrice->price_type = 1;
+			}
+			$linePrice->price_date = strtotime ( $val );
 			$linePrice->day = substr ( $val, 6, 2 );
 			$linePrice->line_id = $_POST ["line_id"];
-			$linePrice->price_type = 1;
+			
 			$linePrice->add ();
 		}
-		$this->redirect ( "line/price_list" );
+		$this->redirect ( "line/price_list",array('line_id'=>$_POST ["line_id"]), 1,'页面跳转中~' );
 	}
 	
 	// 线路订单

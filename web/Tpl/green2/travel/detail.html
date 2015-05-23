@@ -1,6 +1,7 @@
 <script type="text/javascript" src="../Public/js/jquery.xl_calendar.js"></script>
 <script type="text/javascript" src="../Public/js/travel.js"></script>
-<script type="text/javascript" src="__ROOT__/style/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"
+	src="__ROOT__/style/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
     $(function() {
         var url = "{:U('consult',array('id'=>$line_base['id']))}";
@@ -20,103 +21,206 @@
         });
 		
     });
+    //提交订单地址 
+    var submitorderurl='{:U('order_ding',array('id'=>$line_base['id']))}' ;
+    //提交订单 
+    var selyear='';
+    var selmonth='';
+    var selday='';
+    var submitorder=function(year,month,day,index){
+    	// 回传预订时间和人数规模 
+    	submitorderurl=submitorderurl+'/year/'+year+'/month/'+month+'/day/'+day+'/numrange/'+index;
+    	showTipsWindown('发起订单',submitorderurl);
+    };
+    var currentdate='';
+    var currentnumrange=1;
+    var onDateChange=function(){
+    	setMoney();
+    };
+    var onPNumChange=function(){
+    	setMoney();
+    };
+    var onCNumChange=function(){
+    	setMoney();
+    };
+    // 获取总人数和具体旅行日期进行金额计算 
+    /*
+    var setMoney=function(){
+    	var ends=$('#ends').val();
+    	var pnumber=$('#pnumber').val();
+    	var cnumber=$('#cnumber').val();
+    	var numrange=1;
+    	if(pnumber==1){// 使用标准价钱
+    		numrange=0;
+    	}else if(pnumber>=2 and pnumber<=3){
+    		numrange=1;
+    	}
+       else if(pnumber>=4 and pnumber<=6){
+	    numrange=2;
+    	}
+       else if(pnumber>=7 and pnumber<=9){
+     	numrange=3;
+       }
+       else if(pnumber>=10 and pnumber<=12){
+	    numrange=4;
+       }
+       else if(pnumber>=13){
+	     numrange=5;
+       }
+    	alert(numrange);
+       var datePriceList=jQuery.parseJSON($("#travel_price_list0").val());	
+    	
+    }
+    */
 </script>
 <div class="contents_nei">
-      <div class="topcont">
-     <div class="cont_title">
-       <h1>{$line_base.names}</h1>
-       <div class="cont_nav">
-         <a href="">呼和浩特旅游</a> 
-         <a href="">包团自由行</a> 
-         <a href="">3日游</a>|
-         <a href="">关注（8429）</a>|
-         <a href="">喜欢（6666）</a>|
-         <a href="">游客咨询与互动（4）</a>|
-         <a href="">查看人数与价格 </a>|
-         <a href="">查看费用包含 </a>|
-         <a href="">查看或发起拼团 </a>
-       </div>
-      </div>
-      
-      <div>
-         <img alt="" width="1200" height="570" src="__ROOT__/style/images/cont.jpg"  >
-      </div>
-    </div>  
-      <div class="cont_sumit">
-          <h4>&nbsp;</h4>
-         
-          <div>
-<table width="100%" cellpadding="0" cellspacing="1" bgcolor="dadada"  style="padding:0px; border:1px solid #42c7c7"> 
-  <tbody><tr bgcolor="#cef0f1" height="50">  
-    <td width="80" align="center">线路编号</td> 
-    <td bgcolor="#FFFFFF" width="180" style="color:#fe3d00; font-weight:bold">{$line_base.code}</td> 
-    <td width="80" align="center">出发地点</td> 
-    <td bgcolor="#FFFFFF" width="180" style="color:#585556">{$start_city_belong.names}</td> 
-    <td width="80" align="center">成团方式</td> 
-    <td bgcolor="#FFFFFF" width="180" style="color:#585556">{$line_base.ly_type}</td> 
-    <td align="center">发团公司</td> 
-    <td bgcolor="#FFFFFF" style="color:#585556">{$line_base.compnay}</td> 
-  </tr>
-  <tr bgcolor="#cef0f1" height="50">  
-    <td align="center" width="80">合同下载</td> 
-    <td bgcolor="#FFFFFF" width="180" style="color:#585556">下单后(无须支付)自动发送</td> 
-    <td align="center" width="80">合作拼团</td> 
-    <td bgcolor="#FFFFFF" width="180"><a href="#plist.html" style="cursor:pointer; color:#585556">查看/发起  (已有<span id="pings">0</span>个拼团)</a></td> 
-    <td align="center" width="80">优惠政策</td> 
-    <td bgcolor="#FFFFFF" width="180"><a style="cursor:pointer;color:#585556" onclick="showTipsWindown('游记返现规则','ajaxs','/ajax/article_ajax.do?id=381',650,350);" );"="">游记返现</a> <a style="cursor:pointer" onclick="showTipsWindown('老客户优惠规则','ajaxs','/ajax/article_ajax.do?id=382',650,350);" );"="">老客户优惠</a> </td> 
-    <td align="center">支付方式</td> 
-    <td bgcolor="#FFFFFF" style="color:#585556">支付宝、银行柜台、ATM转账</td> 
-  </tr>
-  <tr bgcolor="#cef0f1" height="50">  
-    <td align="center" width="80">服务流程</td> 
-    <td bgcolor="#FFFFFF" colspan="5" width="700"><img src="__ROOT__/style/images/ht.jpg" width="723" height="67" alt="服务流程"></td>
-    <td colspan="2" rowspan="4" bgcolor="#FFFFFF" align="center"><img src="__ROOT__/style/images/services_img.gif" width="250" height="240" alt="客服微信：xingye_cc，客服电话：400 627 1861"></td> 
-  </tr>
-  <tr bgcolor="#cef0f1" height="50">  
-    <td align="center" width="80">行程预览</td> 
-    <td bgcolor="#FFFFFF" colspan="5" width="700" style="color:#585556">{$line_base.ps}</td> 
-    </tr>   
-  <tr bgcolor="#cef0f1" height="50">  
-    <td align="center" width="80">特别告知</td> 
-    <td bgcolor="#FFFFFF" colspan="5" width="700">
-	<img src="__ROOT__/style/images/chose.jpg" width="621" height="286" alt="VIP">
-	<br>
-	
-</td> 
-    </tr>    
-</tbody></table>
-</div>
+	<div class="topcont">
+		<div class="cont_title">
+			<h1>{$line_base.names}</h1>
+			<div class="cont_nav">
+				<a href="">呼和浩特旅游</a> <a href="">包团自由行</a> <a href="">3日游</a>| <a
+					href="">关注（8429）</a>| <a href="">喜欢（6666）</a>| <a href="">游客咨询与互动（4）</a>|
+				<a href="">查看人数与价格 </a>| <a href="">查看费用包含 </a>| <a href="">查看或发起拼团
+				</a>
+			</div>
+		</div>
 
-      </div>
-      <if condition="$travel_price_list neq ''">
-      <div class="boat">
-      <div id="pricetitle" style="margin:10px 0px 0px 0px;">
-              <ul style="padding:0; margin:0;">
-                <li><a id="bbc_btn_0" style="cursor:pointer" onclick="tabit(this,5)" class="postion">2-3人包团</a></li>
-                <li><a id="bbc_btn_1" style="cursor:pointer" onclick="tabit(this,5)">4-6人包团</a></li>
-                <li><a id="bbc_btn_2" style="cursor:pointer" onclick="tabit(this,5)">7-9人包团</a></li>
-                <li><a id="bbc_btn_3" style="cursor:pointer" onclick="tabit(this,5)">10-12人包团</a></li>
-                <li><a id="bbc_btn_4" style="cursor:pointer" onclick="tabit(this,5)">13人及以上</a></li>
-              </ul>
-            </div>
-            <div class="pricecontent" style="margin-left:0px;width:100%;">
-               <div id="bbc_div_0" style="display: block;position: relative">
-                  <input tabindex="1" type="text" name="go_time" id="go_time" style="display:none" />
-                  <textarea id="travel_price_list" style="display: none;">{$travel_price_list}</textarea>
-                  <div tabindex="2" class="the_calendar"></div>
-                  <span style="display:none"><span id="price_type">周末价</span></span>
-                  <span class="scroll_REF" style="height:0;">&nbsp;</span>
-               </div>
-               <div id="bbc_div_1" style=" display:none;  border-top: 1px #05b5b5 solid;">如果您的人数大于4人，那么需要单独报价，请致电400-627-1861或加微信xingye_cc获取(要求越详细报价越精准)</div>
-               <div id="bbc_div_2" style=" display:none;  border-top: 1px #05b5b5 solid;">如果您的人数大于7人，那么需要单独报价，请致电400-627-1861或加微信xingye_cc获取(要求越详细报价越精准)</div>
-               <div id="bbc_div_3" style=" display:none;  border-top: 1px #05b5b5 solid;">如果您的人数大于10人，那么需要单独报价，请致电400-627-1861或加微信xingye_cc获取(要求越详细报价越精准)</div>
-               <div id="bbc_div_4" style=" display:none;  border-top: 1px #05b5b5 solid;">如果您的人数大于13人，那么需要单独报价，请致电400-627-1861或加微信xingye_cc获取(要求越详细报价越精准)</div>
-            </div>
-       
-      </div>
-      </if>
-      
-      <div class="pins"> 
+		<div>
+			<img alt="" width="1200" height="570"
+				src="__ROOT__/style/images/cont.jpg">
+		</div>
+	</div>
+	<div class="cont_sumit">
+		<h4>&nbsp;</h4>
+
+		<div>
+			<table width="100%" cellpadding="0" cellspacing="1" bgcolor="dadada"
+				style="padding: 0px; border: 1px solid #42c7c7">
+				<tbody>
+					<tr bgcolor="#cef0f1" height="50">
+						<td width="80" align="center">线路编号</td>
+						<td bgcolor="#FFFFFF" width="180"
+							style="color: #fe3d00; font-weight: bold">{$line_base.code}</td>
+						<td width="80" align="center">出发地点</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">{$start_city_belong.names}</td>
+						<td width="80" align="center">成团方式</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">{$line_base.ly_type}</td>
+						<td align="center">发团公司</td>
+						<td bgcolor="#FFFFFF" style="color: #585556">{$line_base.compnay}</td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="50">
+						<td align="center" width="80">合同下载</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">下单后(无须支付)自动发送</td>
+						<td align="center" width="80">合作拼团</td>
+						<td bgcolor="#FFFFFF" width="180"><a href="#plist.html"
+							style="cursor: pointer; color: #585556">查看/发起 (已有<span
+								id="pings">0</span>个拼团)
+						</a></td>
+						<td align="center" width="80">优惠政策</td>
+						<td bgcolor="#FFFFFF" width="180"><a
+							style="cursor: pointer; color: #585556"
+							onclick="showTipsWindown('游记返现规则','ajaxs','/ajax/article_ajax.do?id=381',650,350);");"="">游记返现</a>
+							<a style="cursor: pointer"
+							onclick="showTipsWindown('老客户优惠规则','ajaxs','/ajax/article_ajax.do?id=382',650,350);");"="">老客户优惠</a>
+						</td>
+						<td align="center">支付方式</td>
+						<td bgcolor="#FFFFFF" style="color: #585556">支付宝、银行柜台、ATM转账</td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="50">
+						<td align="center" width="80">服务流程</td>
+						<td bgcolor="#FFFFFF" colspan="5" width="700"><img
+							src="__ROOT__/style/images/ht.jpg" width="723" height="67"
+							alt="服务流程"></td>
+						<td colspan="2" rowspan="4" bgcolor="#FFFFFF" align="center"><img
+							src="__ROOT__/style/images/services_img.gif" width="250"
+							height="240" alt="客服微信：xingye_cc，客服电话：400 627 1861"></td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="50">
+						<td align="center" width="80">行程预览</td>
+						<td bgcolor="#FFFFFF" colspan="5" width="700"
+							style="color: #585556">{$line_base.ps}</td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="50">
+						<td align="center" width="80">特别告知</td>
+						<td bgcolor="#FFFFFF" colspan="5" width="700"><img
+							src="__ROOT__/style/images/chose.jpg" width="621" height="286"
+							alt="VIP"> <br></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<if condition="$travel_price_list neq ''">
+	<div class="boat">
+		<if condition="$line_type neq '3'">
+		<div id="pricetitle" style="margin: 10px 0px 0px 0px;">
+			<ul style="padding: 0; margin: 0;">
+				<li><a id="bbc_btn_0" style="cursor: pointer"
+					onclick="tabit(this,5)" class="postion">2-3人包团</a></li>
+				<li><a id="bbc_btn_1" style="cursor: pointer"
+					onclick="tabit(this,5)">4-6人包团</a></li>
+				<li><a id="bbc_btn_2" style="cursor: pointer"
+					onclick="tabit(this,5)">7-9人包团</a></li>
+				<li><a id="bbc_btn_3" style="cursor: pointer"
+					onclick="tabit(this,5)">10-12人包团</a></li>
+				<li><a id="bbc_btn_4" style="cursor: pointer"
+					onclick="tabit(this,5)">13人及以上</a></li>
+			</ul>
+		</div>
+		</if>
+		<div class="pricecontent" style="margin-left: 0px; width: 100%;">
+			<div id="bbc_div_0" style="display: block; position: relative">
+				<input tabindex="1" type="text" name="go_time0" id="go_time0"
+					style="display: none" />
+				<textarea id="travel_price_list0" style="display: none;">{$travel_price_list}</textarea>
+				<div tabindex="2" class="the_calendar" id="the_calendar0"></div>
+				<span style="display: none"><span id="price_type">周末价</span></span>
+				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+			</div>
+			<div id="bbc_div_1" style="display: none; position: relative;">
+				<input tabindex="2" type="text" name="go_time1" id="go_time1"
+					style="display: none" />
+				<textarea id="travel_price_list1" style="display: none;">{$travel_price_list}</textarea>
+				<div tabindex="2" class="the_calendar" id="the_calendar1"></div>
+				<span style="display: none"><span id="price_type">周末价</span></span>
+				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+			</div>
+			<div id="bbc_div_2" style="display: none; position: relative;">
+				<input tabindex="3" type="text" name="go_time2" id="go_time2"
+					style="display: none" />
+				<textarea id="travel_price_list2" style="display: none;">{$travel_price_list}</textarea>
+				<div tabindex="2" class="the_calendar" id="the_calendar2"></div>
+				<span style="display: none"><span id="price_type">周末价</span></span>
+				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+
+			</div>
+			<div id="bbc_div_3"
+				style="display: none; border-top: 1px #05b5b5 solid;">
+
+				<input tabindex="2" type="text" name="go_time3" id="go_time3"
+					style="display: none" />
+				<textarea id="travel_price_list3" style="display: none;">{$travel_price_list}</textarea>
+				<div tabindex="2" class="the_calendar" id="the_calendar3"></div>
+				<span style="display: none"><span id="price_type">周末价</span></span>
+				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+			</div>
+			<div id="bbc_div_4"
+				style="display: none; border-top: 1px #05b5b5 solid;">
+				<input tabindex="2" type="text" name="go_time4" id="go_time4"
+					style="display: none" />
+				<textarea id="travel_price_list4" style="display: none;">{$travel_price_list}</textarea>
+				<div tabindex="2" class="the_calendar" id="the_calendar4"></div>
+				<span style="display: none"><span id="price_type">周末价</span></span>
+				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+			</div>
+		</div>
+	</div>
+	</if>
+	<input type="hidden" name="selyear" id="selyear" /> <input
+		type="hidden" name="month" id="selmonth" /> <input type="hidden"
+		name="selday" id="selday" />
+	<div class="pins">
+		<!--  
       <div id="trip_title" style="width:100%; margin-left:0px;margin-right:0px;margin-bottom:0px;">
 	     <ul style="padding:0; margin:0;">
 		    <li><a id="bbs_btn_0" style="cursor:pointer" onclick="tabit(this,2)" class="postion">拼团自由行</a></li>
@@ -159,6 +263,7 @@
                 </table> 
             </div>
        </div>
+      
        <div id="bbs_div_1" style="display:none;">
               <div class="ptripdiv">
               <table width="100%" cellpadding="0" cellspacing="0" align="center" class="ptrip"> 
@@ -211,61 +316,60 @@
         </empty>
          
       </div>
-      
-      <div class="detail_road">
-         <h4>&nbsp;</h4>
-         <div class="line_my_content">
-           <if condition="$view_method eq 2">
-            <div class="feature">{$lineinfo.General}</div>
-            <else/>
-            <include file="travel:day_model" />
-          </if>
-         </div>
-         <h2>费用包含</h2>
-         <div class="feature">{$lineinfo.contain}</div>
-         <h2>费用不包含</h2>
-         <div class="feature">{$lineinfo.notcontain}</div>
-         <h2>自费项目</h2>
-         <div class="feature">{$lineinfo.selfpay}</div>
-         <h2>预订须知</h2>
-         <div class="feature"> {$lineinfo.order_info} </div>
-         <h2>温馨提示</h2>
-         <div class="feature"> {$lineinfo.tip}</div>
-      </div>
-      
-      <div class="hudong">
-        <h4>&nbsp;</h4>
-        <div class="sumitss">
-            <form action="{:U('consult',array('id'=>$line_base['id']))}" ajax="true" class="check-form" method="post" id="consult">
-                   <textarea name="question1" id="textarea" datatype="*5-255" cols="55" rows="5" class="textarea" tip="请输入文本" nullmsg="请输入文本"></textarea>
-                  <input name="consult_submit" type="submit" value="提交咨询" class="btn warning active"></td>
-            </form>
-        </div>
-        <div class="dialog"  id="lists_que">
-          <empty name="lists_que">
-                <span class="down" style="text-align:center">该产品暂无咨询信息！ </span>
-          <else/>
-                <span class="down">&nbsp;</span>
-               <volist name="lists_que" id="que">
-                   <div class="dialog_left">
-                        <div class="toux"><img height="45" src="__ROOT__/style/images/niu.jpg" ></div>
-                        <div class="dia_cont">{$que.question1}</div>
-                        <div class="clear"></div>
-                   </div>
-                   <if condition="$que['answer'] neq ''">
-                   <div class="dialog_right">
-                       <div class="toux"><img height="45" src="__ROOT__/style/images/touxi.jpg" ></div>
-                       <div class="dia_cont">{$que.answer|default="请等待回复"}</div>
-                       <div class="clear"></div>
-                   </div>
-                   </if>
-                </volist>
-            </empty>
-          
-        </div>
-        <div class="clear"></div>
-    </div>
-  </div>
-  
+       -->
+		<div class="detail_road">
+			<h4>&nbsp;</h4>
+			<div class="line_my_content">
+				<if condition="$view_method eq 2">
+				<div class="feature">{$lineinfo.General}</div>
+				<else /> <include file="travel:day_model" /> </if>
+			</div>
+			<h2>费用包含</h2>
+			<div class="feature">{$lineinfo.contain}</div>
+			<h2>费用不包含</h2>
+			<div class="feature">{$lineinfo.notcontain}</div>
+			<h2>自费项目</h2>
+			<div class="feature">{$lineinfo.selfpay}</div>
+			<h2>预订须知</h2>
+			<div class="feature">{$lineinfo.order_info}</div>
+			<h2>温馨提示</h2>
+			<div class="feature">{$lineinfo.tip}</div>
+		</div>
 
+		<div class="hudong">
+			<h4>&nbsp;</h4>
+			<div class="sumitss">
+				<form action="{:U('consult',array('id'=>$line_base['id']))}"
+					ajax="true" class="check-form" method="post" id="consult">
+					<textarea name="question1" id="textarea" datatype="*5-255"
+						cols="55" rows="5" class="textarea" tip="请输入文本" nullmsg="请输入文本"></textarea>
+					<input name="consult_submit" type="submit" value="提交咨询"
+						class="btn warning active">
+					</td>
+				</form>
+			</div>
+			<div class="dialog" id="lists_que">
+				<empty name="lists_que"> <span class="down"
+					style="text-align: center">该产品暂无咨询信息！ </span> <else /> <span
+					class="down">&nbsp;</span> <volist name="lists_que" id="que">
+				<div class="dialog_left">
+					<div class="toux">
+						<img height="45" src="__ROOT__/style/images/niu.jpg">
+					</div>
+					<div class="dia_cont">{$que.question1}</div>
+					<div class="clear"></div>
+				</div>
+				<if condition="$que['answer'] neq ''">
+				<div class="dialog_right">
+					<div class="toux">
+						<img height="45" src="__ROOT__/style/images/touxi.jpg">
+					</div>
+					<div class="dia_cont">{$que.answer|default="请等待回复"}</div>
+					<div class="clear"></div>
+				</div>
+				</if> </volist> </empty>
 
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>

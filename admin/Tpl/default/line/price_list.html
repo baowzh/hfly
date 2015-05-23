@@ -95,6 +95,7 @@
 										href="javascript:void(0)">单日设置</a>
 									-->
 									<select id="sel_numrange" name="sel_numrange">
+										<option value="0">不区分</option>
 										<option value="1">2-3人</option>
 										<option value="2">4-6人</option>
 										<option value="3">7-9人</option>
@@ -105,8 +106,8 @@
 										id="_sel_numrange" type="hidden" value="{$sel_numrange}" />
 								</p>
 								<ul>
-<!-- 									<li><input type="button" value="切换人数规模" -->
-<!-- 										onclick="javascript:querymonthprice();"></li> -->
+									<!-- 									<li><input type="button" value="切换人数规模" -->
+									<!-- 										onclick="javascript:querymonthprice();"></li> -->
 									<!--  
 									<li><a class="up js_online" title="上线"
 										href="javascript:void(0)">上线</a></li>
@@ -123,14 +124,15 @@
 						<td>
 							<div id="noMixsale" class="calendar_option">
 								<ul>
-									<!--  
+
 									<li><em><span class="red">*</span>市场价:</em><input
 										type="text" placeholder="" data-valmsg="市场价"
-										data-val="required,int" id="market_price" name="market_price"
+										data-val="required,int" id="RACKRATE" name="RACKRATE"
 										class="gray_input yellow_input"> 元/人<span
 										class="check_box js_checkbox_detail hide"
-										style="display: none;"><input type="checkbox"></span></li>
-										-->
+										style="display: none;"><input type="checkbox"></span>
+										</li>
+
 									<li><em><span class="red">*</span>成人价:</em><input
 										type="text" data-valmsg="成人价" data-val="required,int"
 										placeholder=" " id="price_adult" name="price_adult"
@@ -160,7 +162,9 @@
 										class="check_box js_checkbox_detail_select hide"
 										style="display: none;"><input type="checkbox"></span></li>
 									<li><em>人数规模:</em> <select name="numrange" id="numrange"
-										class="gray_select"><option value="1">2-3人</option>
+										class="gray_select">
+											<option value="0">不区分</option>
+											<option value="1">2-3人</option>
 											<option value="2" selected="">4-6人</option>
 											<option value="3">7-9人</option>
 											<option value="4">10-12人</option>
@@ -173,9 +177,10 @@
 												style="display: none;"><input type="checkbox"></span>
 										</h4> <textarea data-val="maxlength:500" data-valmsg="起价说明"
 											name="price_desc" id="price_desc" class="gray_textarea"></textarea></li>
-<!-- 									<li> -->
-									<input type="button" onclick="javascript:deleteprice();" value="删除">
-<!-- 									</li> -->
+									<!-- 									<li> -->
+									<input type="button" onclick="javascript:deleteprice();"
+										value="删除">
+									<!-- 									</li> -->
 									<input id="js_detail_date" name="dateString" type="hidden"
 										value="">
 									<input id="js_detail_pId" name="pId" type="hidden"

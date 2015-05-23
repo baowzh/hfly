@@ -1,97 +1,116 @@
 <div class="link_2">
-     <div class="link_title">
-        <h3 id="link_tit"></h3>
-        <span><a class="close"  onclick="showclose()" style="cursor:pointer" >&nbsp;</a></span>
-     </div>
-     <form onsubmit="return ajaxPost(this,'{:U('order_ding_act')}')">
-       <input type="hidden" value="{$line_base.code}"   name="lcode">
-       <input type="hidden" value="{$line_base.id}"     name="lid">
-       <input type="hidden" value="{$line_base.front_money}" name="front_money">
-       <table >
-           <tr>
-               <td class="names" >路线编号</td>
-               <td  class="ttleft" >{$line_base.code}</td>
-               <td class="names">成团方式</td>
-               <td class="wlef">拼团（最少{$tao.place}人）</td>
-               <td class="names">发团公司</td>
-               <td class="wlef">{$line_base.compnay}</td>
-           </tr>
-           <tr>
-               <td class="names" style="color:#f85c23; font-weight:bold" >旅行日期</td>
-               <td class="ru">
-                  <input name="ends" type="text" id="ends" style="width:145px;" class="Wdate" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'%y-%M-%d'});" valid="required" errmsg="请选择预定日期" readonly="">
-               </td>
-               <td class="names" style="color:#f85c23; font-weight:bold" >成人单价</td>
-               <td class="wlef">
-                   <b >{$tao.man_price}</b>元
-               </td>
-               <td class="names" style="color:#f85c23; font-weight:bold">儿童单价</td>
-               <td class="wlef">
-                  <b >{$tao.er_price}</b>元
-                </td>
-           </tr>
-           <tr>
-               <td class="names" style="color:#f85c23; font-weight:bold">预定人数</td>
-               <td><select name="pnumber" id="pnumber" onchange="mymoney();"><option value="1">1位成人</option><option value="2">2位成人</option><option value="3">3位成人</option><option value="4">4位成人</option><option value="5">5位成人</option><option value="6">6位成人</option><option value="7">7位成人</option><option value="8">8位成人</option><option value="9">9位成人</option><option value="10">10位成人</option><option value="11">11位成人</option><option value="12">12位成人</option><option value="13">13位成人</option><option value="14">14位成人</option><option value="15">15位成人</option><option value="16">16位成人</option><option value="17">17位成人</option><option value="18">18位成人</option><option value="19">19位成人</option><option value="20">20位成人</option></select>
-		           <select name="cnumber" id="cnumber" onchange="mymoney();"><option value="0">0位儿童</option><option value="1">1位儿童</option><option value="2">2位儿童</option><option value="3">3位儿童</option><option value="4">4位儿童</option><option value="5">5位儿童</option><option value="6">6位儿童</option><option value="7">7位儿童</option><option value="8">8位儿童</option><option value="9">9位儿童</option><option value="10">10位儿童</option></select>
-        </td>
-               <td class="names" style="color:#f85c23; font-weight:bold" >成人预付</td>
-               <td class="wlef">
-                  <b >{$tao.man_price_yufu}</b>元
-               </td>
-               <td class="names" style="color:#f85c23; font-weight:bold" >儿童预付</td>
-               <td class="wlef">
-                  <b >{$tao.er_price_yufu}</b>元
-               </td>
-           </tr>
-           <tr>
-              <td class="names" style="color:#f85c23; font-weight:bold">预定支付</td>
-              <td style="text-align:left; padding-left:10px"><b style="color:#f85c23; font-weight:bold; font-size:20px">980</b>元</td>
-              <td class="names" style="color:#f85c23; font-weight:bold">抵达后支付</td>
-              <td class="wlef">
-                   <b >1000</b>元
-              </td>
-              <td  class="names" style="color:#f85c23; font-weight:bold">费用总计</td>
-              <td class="wlef"><b >1000</b>元</td>
-           </tr>
-           
-           <tr>
-              <td class="names">联系人</td>
-              <td style="text-align:left; padding-left:10px"><input type="text" name="name" style=" width:145px;"></td>
-              <td class="names">手机</td>
-              <td colspan="3" style="text-align:left">
-                   <input type="text" name="phone" value=""  style="margin-left:8px; width:145px; float:left">
-                   <span style=" margin-top:10px">（接收订单通知，付款凭证，出团通知等）</span>
-              </td>
-           </tr>
-           <tr>
-              <td class="names">备用手机</td>
-              <td style="text-align:left; padding-left:10px"><input type="text" name="phones"  style=" width:145px;"></td>
-              <td class="names">Email</td>
-              <td colspan="3" style="text-align:left">
-                   <input type="text" name="email" style="margin-left:8px; width:145px; float:left">
-                   <span style=" margin-top:10px">（接收Email报名通知）</span>
-              </td>
-           </tr>
-           <tr>
-              <td class="names">备注说明</td>
-              <td colspan="5"><textarea name="desc" style=" width:705px; height:70px; margin-top:5px; border:1px solid #05adae; "></textarea>
-              <p>如：请把航班车次以及其他信息，以及客服留给您承诺的信息写入</p> 
-              </td>
-           </tr>
-           <tr>
-              <td class="names">客服编号</td>
-              <td colspan="5">
-                 <select style=" width:150px;">
-                     <option>我没联系过客服</option>
-                  </select>
-                   <span class="queren">下一步生成订单，自动生成合同</span>
-                    <input type="submit" value="提交订单" class="sumbit"  >
-              </td>
-           
-           
-           </tr>
-     
-     </table>
-     </form>
-  </div>
+	<div class="link_title">
+		<h3 id="link_tit"></h3>
+		<span><a class="close" onclick="showclose()"
+			style="cursor: pointer">&nbsp;</a></span>
+	</div>
+	<form onsubmit="return ajaxPost(this,'{:U('order_ding_act')}')">
+		<input type="hidden" value="{$line_base.code}" name="lcode"> <input
+			type="hidden" value="{$line_base.id}" name="lid"> <input
+			type="hidden" value="{$line_base.front_money}" name="front_money">
+		<table>
+			<tr>
+				<td class="names">路线编号</td>
+				<td class="ttleft">{$line_base.code}</td>
+				<td class="names">成团方式</td>
+				<td class="wlef">拼团（最少{$tao.place}人）</td>
+				<td class="names">发团公司</td>
+				<td class="wlef">{$line_base.compnay}</td>
+			</tr>
+			<tr>
+				<td class="names" style="color: #f85c23; font-weight: bold">旅行日期</td>
+				<td class="ru"><input name="ends" type="text" id="ends"
+					style="width: 145px;" class="Wdate" onchange="onDateChange();"
+					onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'%y-%M-%d'});"
+					valid="required" errmsg="请选择预定日期" readonly=""></td>
+				<td class="names" style="color: #f85c23; font-weight: bold">成人单价</td>
+				<td class="wlef"><b id="crdj">{$price_day.price_adult}</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">儿童单价</td>
+				<td class="wlef"><b id="etdj">{$price_day.price_children}</b>元
+				</td>
+			</tr>
+			<tr>
+				<td class="names" style="color: #f85c23; font-weight: bold">预定人数</td>
+				<td><select name="pnumber" id="pnumber"
+					onchange="onPNumChange();"><option value="1">1位成人</option>
+						<option value="2">2位成人</option>
+						<option value="3">3位成人</option>
+						<option value="4">4位成人</option>
+						<option value="5">5位成人</option>
+						<option value="6">6位成人</option>
+						<option value="7">7位成人</option>
+						<option value="8">8位成人</option>
+						<option value="9">9位成人</option>
+						<option value="10">10位成人</option>
+						<option value="11">11位成人</option>
+						<option value="12">12位成人</option>
+						<option value="13">13位成人</option>
+						<option value="14">14位成人</option>
+						<option value="15">15位成人</option>
+						<option value="16">16位成人</option>
+						<option value="17">17位成人</option>
+						<option value="18">18位成人</option>
+						<option value="19">19位成人</option>
+						<option value="20">20位成人</option></select> <select name="cnumber"
+					id="cnumber" onchange="onCNumChange();"><option value="0">0位儿童</option>
+						<option value="1">1位儿童</option>
+						<option value="2">2位儿童</option>
+						<option value="3">3位儿童</option>
+						<option value="4">4位儿童</option>
+						<option value="5">5位儿童</option>
+						<option value="6">6位儿童</option>
+						<option value="7">7位儿童</option>
+						<option value="8">8位儿童</option>
+						<option value="9">9位儿童</option>
+						<option value="10">10位儿童</option></select></td>
+				<td class="names" style="color: #f85c23; font-weight: bold">成人预付</td>
+				<td class="wlef"><b id="cryf">{$price_day.cryf}</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">儿童预付</td>
+				<td class="wlef"><b id="etyf">{$price_day.etyf}</b>元</td>
+			</tr>
+			<tr>
+				<td class="names" style="color: #f85c23; font-weight: bold">预定支付</td>
+				<td style="text-align: left; padding-left: 10px"><b
+					style="color: #f85c23; font-weight: bold; font-size: 20px"
+					id="ydzf">{$price_day.ydzf}</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">抵达后支付</td>
+				<td class="wlef"><b id="ddhzf">{$price_day.ddhzf}</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">费用总计</td>
+				<td class="wlef"><b id="zfy">{$price_day.price_adult}</b>元</td>
+			</tr>
+
+			<tr>
+				<td class="names">联系人</td>
+				<td style="text-align: left; padding-left: 10px"><input
+					type="text" name="name" style="width: 145px;"></td>
+				<td class="names">手机</td>
+				<td colspan="3" style="text-align: left"><input type="text"
+					name="phone" value=""
+					style="margin-left: 8px; width: 145px; float: left"> <span
+					style="margin-top: 10px">（接收订单通知，付款凭证，出团通知等）</span></td>
+			</tr>
+			<tr>
+				<td class="names">备用手机</td>
+				<td style="text-align: left; padding-left: 10px"><input
+					type="text" name="phones" style="width: 145px;"></td>
+				<td class="names">Email</td>
+				<td colspan="3" style="text-align: left"><input type="text"
+					name="email" style="margin-left: 8px; width: 145px; float: left">
+					<span style="margin-top: 10px">（接收Email报名通知）</span></td>
+			</tr>
+			<tr>
+				<td class="names">备注说明</td>
+				<td colspan="5"><textarea name="desc"
+						style="width: 705px; height: 70px; margin-top: 5px; border: 1px solid #05adae;"></textarea>
+					<p>如：请把航班车次以及其他信息，以及客服留给您承诺的信息写入</p></td>
+			</tr>
+			<tr>
+				<td class="names">客服编号</td>
+				<td colspan="5"><select style="width: 150px;">
+						<option>我没联系过客服</option>
+				</select> <span class="queren">下一步生成订单，自动生成合同</span> <input type="submit"
+					value="提交订单" class="sumbit"></td>
+			</tr>
+		</table>
+	</form>
+</div>

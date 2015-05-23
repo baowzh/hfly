@@ -3,14 +3,16 @@
         xl_calendar: function (option) {
             var now_date = new Date();
             var defaults = {
-                container: ".the_calendar",
+                container: "",
                 price_type: "#price_type",
                 price_rackrate: ".price_rackrate",
                 price_adult: ".price_adult",
                 price_children: ".price_children",
                 data: "",
+                index:'',
                 select_callback: function () {
                 },
+                serverurl:"",
                 date_section: 6
             }
             var options = $.extend(defaults, option);
@@ -26,8 +28,7 @@
             options.min_date = year.toString() + month.toString();
             max_month = max_month < 10 ? "0" + max_month.toString() : max_month;
             options.max_date = max_year.toString() + max_month.toString();
-
-
+           // options.container=options.container+options.data.index;
             var header = '<table>' +
                 '<tr class="the_calendar_on"><td class="the_calendar_icon"><b></b></td>' +
                 '<td class="the_calendar_month"><span class="the_calendar_font"> <i class="year"></i> 年 <i class="month"></i> 月</span></td>' +
@@ -36,7 +37,7 @@
                header += '<div class="the_calendar_center"><span class="the_calendar_weekend">周日</span><span class="the_calendar_day" style="border-left:0px;">周一</span><span class="the_calendar_day">周二</span><span class="the_calendar_day">周三</span><span class="the_calendar_day" style="width:168px;">周四</span><span class="the_calendar_day" style="width:168px;">周五</span><span class="the_calendar_weekend" style="width:168px;">周六</span></div><div class="the_calendar_down"><table width="407" border="1" class="calendar_list"></table></div>';
 
             var write_data = function (data) {
-                var table = $(".the_calendar table.calendar_list");
+                var table = $(""+options.container+" table.calendar_list");
                 var data_detail = {}
                 if (data[4]) {
                     data_detail = {"data-type": 4, "rackrate": data[4]["RACKRATE"], "price_adult": data[4]["price_adult"], "price_children": data[4]["price_children"]}
@@ -74,17 +75,20 @@
                     }
                 }
                 if (data[1]) {
-                    var data_month = parseInt(table.attr("data-month"));
-                    var matchs = {};
-                    for (i_1 in data[1]) {
-                        matchs = i_1.match(/(\d{6})(\d{2})/);
-                        if (parseInt(matchs[1]) > data_month || parseInt(matchs[3]) < data_month) {
-                            continue;
-                        }
-                        data_detail = {"data-type": 1, "rackrate": data[1][i_1]["RACKRATE"], "price_adult": data[1][i_1]["price_adult"], "price_children": data[1][i_1]["price_children"]}
-                        table.find("td.day[data-day='" + i_1 + "'] span.price").html("￥" + parseFloat(data[1][i_1]["price_adult"]))
-                            .removeClass("date_price4 date_price3 date_price2").addClass("date_price1").attr(data_detail);
-                    }
+                	if(data[1][options.index]){
+                		var data_month = parseInt(table.attr("data-month"));
+                        var matchs = {};
+                        for (i_1 in data[1][options.index]) {
+                            matchs = i_1.match(/(\d{6})(\d{2})/);
+                            if (parseInt(matchs[1]) > data_month || parseInt(matchs[3]) < data_month) {
+                                continue;
+                            }
+                            data_detail = {"data-type": 1, "rackrate": data[1][options.index][i_1]["RACKRATE"], "price_adult": data[1][options.index][i_1]["price_adult"], "price_children": data[1][options.index][i_1]["price_children"]}
+                            table.find("td.day[data-day='" + i_1 + "'] span.price").html("￥" + parseFloat(data[1][options.index][i_1]["price_adult"]))
+                                .removeClass("date_price4 date_price3 date_price2").addClass("date_price1").attr(data_detail);
+                        }	
+                	}
+                    
                 }
                 table.find("td.day.disable span.price").empty();
 
@@ -140,10 +144,10 @@
                 var pr_month = y.toString() + m;
                 var mon_obj=create_month(y, m);
                 if(mon_obj!==false){
-                    $(".the_calendar table.calendar_list").html(mon_obj).attr("data-month", pr_month);
+                    $("#the_calendar"+options.index+" table.calendar_list").html(mon_obj).attr("data-month", pr_month);
                     write_data(options.data);
                 }
-
+                $(""+options.container+" table.calendar_list td.day").bind("click", td_click);
             }
             var next_month = function () {
                 var y = $(options.container).find("i.year").html();
@@ -155,9 +159,10 @@
                 var next_month = y.toString() + m;
                 var mon_obj=create_month(y, m);
                 if(mon_obj!==false){
-                    $(".the_calendar table.calendar_list").html(mon_obj).attr("data-month", next_month);
+                    $("#the_calendar"+options.index+" table.calendar_list").html(mon_obj).attr("data-month", next_month);
                     write_data(options.data);
                 }
+                $(""+options.container+" table.calendar_list td.day").bind("click", td_click);
             }
             var td_click = function () {
                 var day = $(this).attr("data-day").match(/(\d{4})(\d{2})(\d{2})/);
@@ -171,12 +176,12 @@
                     price_adult = parseFloat(now_detail.attr("price_adult")),
                     price_rackrate = parseFloat(now_detail.attr("rackrate")),
                     price_children = parseFloat(now_detail.attr("price_children"));
-                if (!price_adult || !price_type || !price_rackrate || !price_children) {
-                    atr_alert("对不起，此日期不是团期！");
+                if (!price_adult || !price_type  || !price_children) {
+                   // atr_alert("对不起，此日期不是团期！");
                     return false;
                 }
                 $($this).val(day[1] + "-" + day[2] + "-" + day[3]);
-
+                submitorder(day[1],day[2],day[3],options.index);
                 $(options.price_type).html(price_type);
                 $(options.price_adult).html(price_adult);
                 $(options.price_rackrate).html(price_rackrate);
@@ -214,13 +219,14 @@
                     now_day = options.now_day;
                     $(this).val(y.toString() + "-" + m + "-" + day);
                 }
-                $(".the_calendar table.calendar_list").html(create_months).attr("data-month", now_month);
+                $(""+options.container+" table.calendar_list").html(create_months).attr("data-month", now_month);
                 write_data(options.data);
+               // var selector='#the_calendar'+$(this).prop('tabindex')
                 $(".the_calendar .the_calendar_icon b").bind("click", prew_month);
                 $(".the_calendar .the_calendar_icon2 b").bind("click", next_month);
-                $("table.calendar_list td.day").live("click", td_click);
-                if (parseInt(now_day) < parseInt(options.now_day))now_day = options.now_day;
-                $("[data-day='" + now_day + "']").trigger("click");
+                $(""+options.container+" table.calendar_list td.day").bind("click", td_click);
+                //if (parseInt(now_day) < parseInt(options.now_day))now_day = options.now_day;
+               // $("[data-day='" + now_day + "']").trigger("click");
             }
 
             var $this = this;

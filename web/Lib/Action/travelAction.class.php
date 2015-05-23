@@ -22,7 +22,7 @@ class travelAction extends CommonAction {
 		$this->assign ( "current", $this->type_select );
 	}
 	public function index() {
-		$areaid=( $_GET ['areaid'] );
+		$areaid = ($_GET ['areaid']);
 		$id = isset ( $_GET ['id'] ) ? intval ( $_GET ['id'] ) : 0; // 获取分页页码
 		$day = $_GET ['day']; // ? intval($_GET['day']) : 1; //获取分页页码
 		$this->assign ( 'id', $id );
@@ -35,7 +35,7 @@ class travelAction extends CommonAction {
 			if ($day > 0)
 				$where .= " and trip_days='$day' ";
 		}
-		if($areaid!=null&&$areaid!=''){
+		if ($areaid != null && $areaid != '') {
 			$where .= " and linebelongto='$areaid' ";
 		}
 		$count = $View->where ( $where )->count ();
@@ -117,22 +117,69 @@ class travelAction extends CommonAction {
 		}
 	}
 	public function order_ding() {
-		layout ( false ); // 临时关闭当前模板的布局功能
-		$id = $_GET ["id"] ? intval ( $_GET ["id"] ) : 0;
-		$LineTao = M ( "LineTao" );
-		$tao = $LineTao->find ( $id );
-		$this->assign ( "tao", $tao ); // 基本信息
-		
+		/*
+		 * layout ( false ); // 临时关闭当前模板的布局功能
+		 * $id = $_GET ["id"] ? intval ( $_GET ["id"] ) : 0;
+		 * $LineTao = M ( "LineTao" );
+		 * $tao = $LineTao->find ( $id );
+		 * $this->assign ( "tao", $tao ); // 基本信息
+		 */
+		$lineid = $_GET ['id'];
+		$year = $_GET ['year'];
+		$month = $_GET ['month'];
+		$day = $_GET ['day'];
+		$index = $_GET ['index'];
+		$numrange = $_GET ['numrange'];
+		$numrange = $numrange + 1;
 		$line = M ( "line" );
-		$line_base = $line->find ( $tao ["line_id"] );
+		$line_base = $line->find ( $lineid );
 		$this->assign ( "line_base", $line_base ); // 基本信息
-		
+		                                           // 获取 价钱设置
+		                                           // 取 2-3人 4-6人7-9人10-12人 13人以上设置
+		$line_price = M ( "LinePrice" );
+		$price_type = 1;
+		$price_day_tmp1 = null;
+		$price_day_tmp2 = null;
+		$price_day_tmp3 = null;
+		$price_day_tmp4 = null;
+		$price_day_tmp5 = null;
+		$price_day = null;
+		if ($line_base [line_type] != 3) {
+			$price_day = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=" . $numrange . " and year=" . $year . " and month=" . $month . " and day=" . $day )->find ();
+			$price_day_tmp1 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=1" )->select ();
+			$price_day_tmp2 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=2" )->select ();
+			$price_day_tmp3 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=3" )->select ();
+			$price_day_tmp4 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=4" )->select ();
+			$price_day_tmp5 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=5" )->select ();
+		} else {
+			$price_day = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=" . $numrange . " and year=" . $year . " and month=" . $month . " and day=" . $day )->find ();
+			$price_day_tmp1 = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=0" )->select ();
+			$price_day_tmp2 = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=0" )->select ();
+			$price_day_tmp3 = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=0" )->select ();
+			$price_day_tmp4 = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=0" )->select ();
+			$price_day_tmp5 = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=0" )->select ();
+		}
+		$travel_price_list = array (
+				5 => $price_day_tmp5,
+				4 => $price_day_tmp4,
+				3 => $price_day_tmp3,
+				2 => $price_day_tmp2,
+				1 => $price_day_tmp1 
+		);
+		$this->assign ( "line_type", $line_type [line_type] );
+		$this->assign ( "travel_price_list", json_encode ( $travel_price_list ) );
+		$price_day [cryf] = $price_day [price_adult] * 0.3;
+		$price_day [etyf] = 0;
+		$price_day [ydzf] = $price_day [price_adult] * 0.3;
+		$price_day [ddhzf] = $price_day [price_adult] * 0.7;
+		$this->assign ( "price_day", $price_day );
+		// print_r($price_day);
+		// exit();
 		$this->display ();
 	}
 	public function order_ding_act() {
-		$LinePin = D ( 'LinePin' );
+		$LineOrder = D ( 'LineOrder' );
 		$_POST ['num'] = intval ( $_POST ['people'] ) + intval ( $_POST ['woman'] ) + intval ( $_POST ['chd'] );
-		
 		if (empty ( $_POST ['name'] )) {
 			$this->ajaxReturn ( "", "联系人不能为空", "n" );
 			exit ();
@@ -153,20 +200,64 @@ class travelAction extends CommonAction {
 			$this->ajaxReturn ( "", "备注说明不能为空", "n" );
 			exit ();
 		}
-		
-		$_POST ['price'] = $_POST ['num'] * $_POST ['cmoney'];
+		// 获取用户选择日期和人数规模从后台取得线路价钱
+		$id = $_POST ['lid'];
+		$ends = $_POST ['ends'];
+		$year = substr ( $ends, 0, 4 );
+		$month = substr ( $ends, 5, 2 );
+		$day = substr ( $ends, 8, 2 );
+		$pnumber = $_POST ['pnumber'];
+		$cnumber = $_POST ['cnumber'];
+		$numrange = 1;
+		if ($pnumber == 1) {
+			$numrange = 0;
+		} else if ($pnumber >= 2 and $pnumber <= 3) {
+			$numrange = 1;
+		} else if ($pnumber >= 4 and $pnumber <= 6) {
+			$numrange = 2;
+		} else if ($pnumber >= 7 and $pnumber <= 9) {
+			$numrange = 3;
+		} else if ($pnumber >= 10 and $pnumber <= 12) {
+			$numrange = 4;
+		} else if ($pnumber >= 13) {
+			$numrange = 5;
+		}
+		$line = M ( "line" );
+		$line_base = $line->find ( $id );
+		$price_type = 1;
+		if ($line_base ['line_type'] != 3) {
+			$price_type = 1;
+		} else {
+			$price_type = 2;
+			$numrange = 0;
+		}
+		$line_price = M ( "LinePrice" );
+		$price_day = $line_price->where ( "price_type=" . $price_type . " and line_id=" . $id . " and numrange=" . $numrange . " and year=" . $year . " and month=" . $month . " and day=" . $day )->find ();
+		$price = $price_day ['price_adult'] * $pnumber + $price_day ['price_children'] * $cnumber;
+		$remoney = $price_day ['price_adult'] * $pnumber * 0.3 + $price_day ['price_children'] * $cnumber * 0.3;
+		$pmoney = $price_day ['price_adult'];
+		$premoney = $price_day ['price_adult'] * 0.3;
+		$cmoney = $price_day ['price_children'];
+		$cremoney = $price_day ['price_children'] * 0.3;
+		$lcode = $line_base ['code'];
+		$startdate = $ends;
 		$_POST ['status'] = 0;
 		$_POST ['orderid'] = time () . rand ( 1000, 9999 );
 		$_POST ['type'] = 1;
 		$order = D ( 'order' );
-		if ($LinePin->create ()) {
-			$LinePin->orderdate = time ();
-			$LinePin->add ();
-			$order->$insert_id = $LinePin->getLastInsID ();
-			$Order->orderid = $LinePin->orderid;
-			$Order->addtime = $LinePin->orderdate;
-			$Order->status = 0;
-			$Order->add ();
+		if ($LineOrder->create ()) {
+			$LineOrder->orderdate = time ();
+			$LineOrder->startdate = $_POST ['ends'];
+			$LineOrder->price = $price;
+			$LineOrder->remoney = $remoney;
+			$LineOrder->pmoney = $pmoney;
+			$LineOrder->premoney = $premoney;
+			$LineOrder->cmoney = $cmoney;
+			$LineOrder->cremoney = $cremoney;
+			$LineOrder->lcode = $lcode;
+			$LineOrder->startdate = $startdate;
+			$LineOrder->add ();
+			$insert_id = $LineOrder->getLastInsID ();
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
 					"id" => $insert_id 
 			) ), "订单详情", "u" );
@@ -256,6 +347,22 @@ class travelAction extends CommonAction {
 		$this->assign ( "vo", $vo ); // 基本信息
 		$this->display ();
 	}
+	public function order_ding_view() {
+		layout ( false ); // 临时关闭当前模板的布局功能
+		                  // 获取订单id
+		                  // 获取线路id
+		$LineOrder = D ( 'LineOrder' );
+		$id = $_GET ["id"] ? intval ( $_GET ["id"] ) : 0;
+		$vo = $LineOrder->find ( $id );
+		$lineid = $vo ['lid'];
+		$Line = D ( 'Line' );
+		$lineInfo = $Line->find ( array (
+				'id' => $lineid 
+		) );
+		$this->assign ( "vo", $vo ); // 基本信息
+		$this->assign ( "lineInfo", $lineInfo );
+		$this->display ();
+	}
 	public function order_success() {
 		$table_line_order = M ( 'line_order' )->getTableName () . " line_order";
 		$table_line = M ( 'line' )->getTableName () . " line";
@@ -291,35 +398,16 @@ class travelAction extends CommonAction {
 		}
 		$user = M ( 'user' );
 		$order_id = $_POST ['orderid'];
-		$table_line_order = M ( 'LinePin' )->getTableName () . " Line_Pin";
-		$list = M ()->table ( $table_line_order )->where ( "orderid='$order_id'" )->find ();
-		$should_amount = $list ['price'];
-		$name = $list ['name'];
-		$phone = $list ['phone'];
+		$orderinfo = D ( 'LineOrder' )->find ( array (
+				'orderid' => $order_id 
+		) );
+		$should_amount = $orderinfo ['remoney'];
+		$name = $orderinfo ['name'];
+		$phone = $orderinfo ['phone'];
 		$this->assign ( "price", $should_amount );
 		$this->assign ( "name", $name );
 		$this->assign ( "phone", $phone );
 		$this->assign ( "orderid", $order_id );
-		
-		// $earnest = _get_front_money($list['line_id'], $should_amount);
-		/*
-		 * if ($_POST['psw_on']) {
-		 * $uinfo = $user->where("id ='$id' AND password='" . md5($_POST['password']) . "'")->find();
-		 * if ($uinfo) {
-		 * if ($usinfo['amount'] >= $earnest) {
-		 * $user->where("id ='$id'")->setDec('money', $earnest);
-		 * } else {
-		 * $surplus = $earnest - $usinfo['amount'];
-		 * $user->where("id ='$id'")->setDec('money', $usinfo['amount']);
-		 * }
-		 * //剩余未付金额 $surplus
-		 * } else {
-		 * $this->error("密码输入错误!");
-		 * }
-		 * } else {
-		 *
-		 * }
-		 */
 		$this->display ();
 	}
 	/**
@@ -394,10 +482,10 @@ class travelAction extends CommonAction {
 			$this->travel_que ( $id );
 			
 			// 拼团列表
-			$this->ping_list ( $id );
+			// $this->ping_list ( $id );
 			
 			// 拼团列表
-			$this->zutuan_list ( $id );
+			// $this->zutuan_list ( $id );
 		}
 		
 		$this->assign ( "keep_status", $keep );
@@ -440,24 +528,81 @@ class travelAction extends CommonAction {
 					"price_children" => $tmp ["price_adult"] 
 			);
 		}
+		$line = M ( 'Line' );
+		$line_type = $line->where ( "id=" . $id )->field ( "line_type" )->find ();
+		$price_type = 1;
+		$price_day_tmp1 = null;
+		$price_day_tmp2 = null;
+		$price_day_tmp3 = null;
+		$price_day_tmp4 = null;
+		$price_day_tmp5 = null;
+		if ($line_type [line_type] != 3) {
+			$price_day_tmp1 = $line_price->where ( "price_type=1 and line_id=$id and numrange=1" )->select ();
+			$price_day_tmp2 = $line_price->where ( "price_type=1 and line_id=$id and numrange=2" )->select ();
+			$price_day_tmp3 = $line_price->where ( "price_type=1 and line_id=$id and numrange=3" )->select ();
+			$price_day_tmp4 = $line_price->where ( "price_type=1 and line_id=$id and numrange=4" )->select ();
+			$price_day_tmp5 = $line_price->where ( "price_type=1 and line_id=$id and numrange=5" )->select ();
+		} else {
+			$price_day_tmp1 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
+			$price_day_tmp2 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
+			$price_day_tmp3 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
+			$price_day_tmp4 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
+			$price_day_tmp5 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
+		}
 		// 按指定日期
-		$price_day_tmp = $line_price->where ( "price_type=1 and line_id=$id" )->select ();
-		foreach ( $price_day_tmp as $tmp ) {
+		foreach ( $price_day_tmp1 as $tmp ) {
 			$key = date ( "Ymd", $tmp ["price_date"] );
-			$price_day [$key] = array (
+			$price_day1 [$key] = array (
 					"RACKRATE" => $tmp ["RACKRATE"],
 					"price_adult" => $tmp ["price_adult"],
 					"price_children" => $tmp ["price_adult"] 
 			);
 		}
-		
+		foreach ( $price_day_tmp2 as $tmp ) {
+			$key = date ( "Ymd", $tmp ["price_date"] );
+			$price_day2 [$key] = array (
+					"RACKRATE" => $tmp ["RACKRATE"],
+					"price_adult" => $tmp ["price_adult"],
+					"price_children" => $tmp ["price_adult"] 
+			);
+		}
+		foreach ( $price_day_tmp3 as $tmp ) {
+			$key = date ( "Ymd", $tmp ["price_date"] );
+			$price_day3 [$key] = array (
+					"RACKRATE" => $tmp ["RACKRATE"],
+					"price_adult" => $tmp ["price_adult"],
+					"price_children" => $tmp ["price_adult"] 
+			);
+		}
+		foreach ( $price_day_tmp4 as $tmp ) {
+			$key = date ( "Ymd", $tmp ["price_date"] );
+			$price_day4 [$key] = array (
+					"RACKRATE" => $tmp ["RACKRATE"],
+					"price_adult" => $tmp ["price_adult"],
+					"price_children" => $tmp ["price_adult"] 
+			);
+		}
+		foreach ( $price_day_tmp5 as $tmp ) {
+			$key = date ( "Ymd", $tmp ["price_date"] );
+			$price_day5 [$key] = array (
+					"RACKRATE" => $tmp ["RACKRATE"],
+					"price_adult" => $tmp ["price_adult"],
+					"price_children" => $tmp ["price_adult"] 
+			);
+		}
 		$travel_price_list = array (
 				4 => $price_pt,
 				3 => $price_date,
 				2 => $price_stage,
-				1 => $price_day 
+				1 => $price_day = array (
+						4 => $price_day5,
+						3 => $price_day4,
+						2 => $price_day3,
+						1 => $price_day2,
+						0 => $price_day1 
+				) 
 		);
-		
+		$this->assign ( "line_type", $line_type [line_type] );
 		$this->assign ( "travel_price_list", json_encode ( $travel_price_list ) );
 	}
 	
@@ -626,17 +771,30 @@ EOF;
 		/**
 		 * 获取订单信息并进行支付
 		 */
-		$LinePin = D ( 'LinePin' );
+		// $LinePin = D ( 'LinePin' );
 		$orderid = $_POST ['orderid'];
-		$count = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $orderid . " union select orderid,price,state from jee_line_order where orderid=" . $orderid . "" );
-		if ($count > 0) {
-			$orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $orderid . " union select orderid,price,state from jee_line_order where orderid=" . $orderid . "" );
-			$price = $orderModel [0] ['price'];
-			$state = $orderModel [0] ['state'];
+		// $count = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $orderid . " union select orderid,price,state from jee_line_order where orderid=" . $orderid . "" );
+		$LineOrder = D ( 'LineOrder' );
+		$orderInfo = $LineOrder->where ( array (
+				'orderid' => $orderid 
+		) )->find ();
+		if ($orderInfo != null) {
+			// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $orderid . " union select orderid,price,state from jee_line_order where orderid=" . $orderid . "" );
+			$price = $orderInfo ['remoney'];
+			$state = $orderInfo ['state'];
 			if ($state != 0) {
 				$this->error ( "订单状态不正确不能支付！" );
 			} else {
-				$alipaySubmit = new AlipaySubmit ( $alipay_config );
+				$alipaySubmit = new AlipaySubmit ( array (
+						'partner' => '2088911378604746',
+						'seller_email' => '2088911378604746',
+						'key' => 'u5ak2wi6qtt1jg0qdjb68n0dm7l1hgur',
+						'sign_type' => strtoupper ( 'MD5' ),
+						'input_charset' => strtolower ( 'gbk' ),
+						'cacert' => getcwd () . '\\alipay\\cacert.pem',
+						'transport' => 'http' 
+				)
+				 );
 				// 支付类型
 				$payment_type = "1";
 				// 必填，不能修改
@@ -689,7 +847,8 @@ EOF;
 				// 客户端的IP地址
 				$exter_invoke_ip = "180.86.250.126";
 				// 非局域网的外网IP地址，如：221.0.0.1
-				
+				// echo $alipay_config ['partner'];
+				// exit();
 				/**
 				 * *********************************************************
 				 */
@@ -697,8 +856,10 @@ EOF;
 				// 构造要请求的参数数组，无需改动
 				$parameter = array (
 						"service" => "create_direct_pay_by_user",
-						"partner" => trim ( $alipay_config ['partner'] ),
-						"seller_email" => trim ( $alipay_config ['seller_email'] ),
+						// "partner" => trim ( $alipay_config ['partner'] ),
+						"partner" => trim ( '2088911378604746' ),
+						// "seller_email" => trim ( $alipay_config ['seller_email'] ),3094372894@qq.com
+						"seller_email" => trim ( '3094372894@qq.com' ),
 						"payment_type" => $payment_type,
 						"notify_url" => $notify_url,
 						"return_url" => $return_url,
@@ -711,7 +872,7 @@ EOF;
 						"show_url" => $show_url,
 						"anti_phishing_key" => $anti_phishing_key,
 						"exter_invoke_ip" => $exter_invoke_ip,
-						"_input_charset" => trim ( strtolower ( $alipay_config ['input_charset'] ) ) 
+						"_input_charset" => trim ( strtolower ( 'utf-8' ) ) 
 				);
 				
 				// 建立请求
@@ -746,22 +907,25 @@ EOF;
 			
 			if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
 				// 判断该笔订单是否在商户网站中已经做过处理
-				$orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
-				$state = $orderModel [0] ['state'];
+				// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
+				$orderInfo = $LineOrder->where ( array (
+						'orderid' => $out_trade_no
+				) )->find ();
+				$state = $orderInfo ['state'];
 				if ($state == 0) { // 如果订单状态是未支付则修改为已支付
 					$LinePin = D ( 'LinePin' );
 					$LinePin->where ( array (
-							"orderid" => "'{$out_trade_no}'" 
+							'orderid' => $out_trade_no
 					) )->setField ( array (
-							"state" => 1,
-							"trade_no" => "'{$trade_no}'" 
+							'state' => 1,
+							'trade_no' => $trade_no
 					) );
 					$LineOrder = D ( 'LineOrder' );
 					$LineOrder->where ( array (
-							"orderid" => "'{$out_trade_no}'" 
+							'orderid' => $out_trade_no
 					) )->setField ( array (
-							"state" => 1,
-							"trade_no" => "'{$trade_no}'" 
+							'state' => 1,
+							'trade_no' => $trade_no
 					) );
 				}
 				
@@ -806,30 +970,35 @@ EOF;
 			
 			if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
 				// 判断该笔订单是否在商户网站中已经做过处理
-				$orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
-				$state = $orderModel [0] ['state'];
+				// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
+				$orderInfo = $LineOrder->where ( array (
+						'orderid' => $out_trade_no 
+				) )->find ();
+				$state = $orderInfo ['state'];
 				if ($state == 0) { // 如果订单状态是未支付则修改为已支付
 					$LinePin = D ( 'LinePin' );
 					$LinePin->where ( array (
-							"orderid" => "'{$out_trade_no}'" 
+							'orderid' => $out_trade_no 
 					) )->setField ( array (
-							"state" => 1,
-							"trade_no" => "'{$trade_no}'" 
+							'state' => 1,
+							'trade_no' => $trade_no 
 					) );
 					$LineOrder = D ( 'LineOrder' );
 					$LineOrder->where ( array (
-							"orderid" => "'{$out_trade_no}'" 
+							'orderid' => $out_trade_no 
 					) )->setField ( array (
-							"state" => 1,
-							"trade_no" => "'{$trade_no}'" 
+							'state' => 1,
+							'trade_no' => $trade_no 
 					) );
 				}
 				
 				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				
 				// 如果有做过处理，不执行商户的业务程序
+				$this->assign ( "mess", '支付成功!' );
 			} else {
 				echo "trade_status=" . $_GET ['trade_status'];
+				$this->assign ( "mess", '此订单已经字符过!' );
 			}
 			
 			echo "验证成功<br />";
