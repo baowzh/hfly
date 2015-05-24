@@ -8,7 +8,9 @@
 			</a>
 				<div
 					style="width: 170px; height: 22px; position: absolute; bottom: 0px; background-color: #eee; text-align: right; opacity: 0.6; color: #00acac;">
-					<div style="width: 70px; height: 22px; float: right;"><a  style="color: #00acac;" href="__ROOT__/index.php?areaid=0471">呼和浩特&nbsp;</a></div>
+					<div style="width: 70px; height: 22px; float: right;">
+						<a style="color: #00acac;" href="__ROOT__/index.php?areaid=0471">呼和浩特&nbsp;</a>
+					</div>
 					<div class="icon">
 						<img src="style/images/ding.png"
 							style="width: 21px; height: 24px; float: right">
@@ -20,7 +22,9 @@
 			</a>
 				<div
 					style="width: 170px; height: 22px; position: absolute; bottom: 0px; background-color: #eee; text-align: right; opacity: 0.6; color: #00acac;">
-					<div style="width: 70px; height: 22px; float: right;"><a  style="color: #00acac;" href="__ROOT__/index.php?areaid=0470">呼伦贝尔</a></div>
+					<div style="width: 70px; height: 22px; float: right;">
+						<a style="color: #00acac;" href="__ROOT__/index.php?areaid=0470">呼伦贝尔</a>
+					</div>
 					<div class="icon">
 						<img src="style/images/ding.png"
 							style="width: 21px; height: 24px; float: right">
@@ -34,7 +38,9 @@
 					style="width: 170px; height: 22px; position: absolute; bottom: 0px; background-color: #eee; text-align: right; opacity: 0.6; color: #00acac;">
 
 
-					<div style="width: 70px; height: 22px; float: right;"><a  style="color: #00acac;" href="__ROOT__/index.php?areaid=0479">锡林郭勒盟</a></div>
+					<div style="width: 70px; height: 22px; float: right;">
+						<a style="color: #00acac;" href="__ROOT__/index.php?areaid=0479">锡林郭勒盟</a>
+					</div>
 					<div class="icon">
 						<img src="style/images/ding.png"
 							style="width: 21px; height: 24px; float: right">
@@ -46,7 +52,9 @@
 			</a>
 				<div
 					style="width: 170px; height: 22px; position: absolute; bottom: 0px; background-color: #eee; text-align: right; opacity: 0.6; color: #00acac;">
-					<div style="width: 70px; height: 22px; float: right;"><a  style="color: #00acac;" href="__ROOT__/index.php?areaid=0483">阿拉善盟</a></div>
+					<div style="width: 70px; height: 22px; float: right;">
+						<a style="color: #00acac;" href="__ROOT__/index.php?areaid=0483">阿拉善盟</a>
+					</div>
 					<div class="icon">
 						<img src="style/images/ding.png"
 							style="width: 21px; height: 24px; float: right">
@@ -65,11 +73,11 @@
 				<img alt="" width="80" height="32" src="style/images/hotlines.jpg">
 				<p>400-000-0000</p>
 			</div>
-<!-- 			<div class="zixun"> -->
-<!-- 				<input type="button" value="马上咨询" onclick="$('.tanchu1').hide()"> -->
-<!-- 				<input type="button" value="稍后咨询" -->
-<!-- 					onclick="javascript:latercounsel();"> -->
-<!-- 			</div> -->
+			<!-- 			<div class="zixun"> -->
+			<!-- 				<input type="button" value="马上咨询" onclick="$('.tanchu1').hide()"> -->
+			<!-- 				<input type="button" value="稍后咨询" -->
+			<!-- 					onclick="javascript:latercounsel();"> -->
+			<!-- 			</div> -->
 		</div>
 	</div>
 </div>
@@ -94,75 +102,125 @@
 			<div class="sort-list">
 				<ul>
 
+					<li class="bgs_2"><a
+						href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}"
+						class="sort-list-2" target="_blank"><span>常规团<em>后付费行程</em> </span></a>
+						<ul>
+							<li><a
+								href="{:U('travel/index',array('id'=>3,'day'=>1,'areaid'=>$areaid))}"
+								target="_blank">一日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>3,'day'=>2,'areaid'=>$areaid))}"
+								target="_blank">二日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>3,'day'=>3,'areaid'=>$areaid))}"
+								target="_blank">三日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>3,'day'=>4,'areaid'=>$areaid))}"
+								target="_blank">四日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>3,'day'=>5,'areaid'=>$areaid))}"
+								target="_blank">五日游</a></li>
+						</ul></li>
 					<li class="bgs_1"><a
 						href="{:U('travel/index',array('id'=>1,'areaid'=>$areaid))}"
-						class="sort-list-1"><span>包团自由行 <em>后付费行程</em>
+						class="sort-list-1" target="_blank"><span>包团自由行 <em>后付费行程</em>
 						</span> </a>
-						<ul>				
-							<li><a href="{:U('travel/index',array('id'=>1,'day'=>1,'areaid'=>$areaid))}">一日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>1,'day'=>2,'areaid'=>$areaid))}">二日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>1,'day'=>3,'areaid'=>$areaid))}">三日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>1,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>1,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
+						<ul>
+							<li><a
+								href="{:U('travel/index',array('id'=>1,'day'=>1,'areaid'=>$areaid))}"
+								target="_blank">一日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>1,'day'=>2,'areaid'=>$areaid))}"
+								target="_blank">二日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>1,'day'=>3,'areaid'=>$areaid))}"
+								target="_blank">三日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>1,'day'=>4,'areaid'=>$areaid))}"
+								target="_blank">四日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>1,'day'=>5,'areaid'=>$areaid))}"
+								target="_blank">五日游</a></li>
 						</ul></li>
-					<li class="bgs_2"><a
+					<li class="bgs_3"><a
 						href="{:U('travel/index',array('id'=>2,'areaid'=>$areaid))}"
-						class="sort-list-2"><span>纯玩团 <em>后付费行程</em>
+						class="sort-list-2" target="_blank"><span>纯玩团 <em>后付费行程</em>
 						</span></a>
 						<ul>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>1,'areaid'=>$areaid))}">一日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>2,'areaid'=>$areaid))}">二日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>3,'areaid'=>$areaid))}">三日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>2,'day'=>1,'areaid'=>$areaid))}"
+								target="_blank">一日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>2,'day'=>2,'areaid'=>$areaid))}"
+								target="_blank">二日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>2,'day'=>3,'areaid'=>$areaid))}"
+								target="_blank">三日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>2,'day'=>4,'areaid'=>$areaid))}"
+								target="_blank">四日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>2,'day'=>5,'areaid'=>$areaid))}"
+								target="_blank">五日游</a></li>
 						</ul></li>
 
-					<li class="bgs_2"><a
-						href="{:U('travel/index',array('id'=>2,'areaid'=>$areaid))}"
-						class="sort-list-2"><span>常规团 </span></a>
-						<ul>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>1,'areaid'=>$areaid))}">一日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>2,'areaid'=>$areaid))}">二日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>3,'areaid'=>$areaid))}">三日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>2,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
-						</ul></li>
 
+					<!--  
 					<li class="bgs_3"><a
 						href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}"
-						class="sort-list-3"><span>会议策划</span></a>
+						class="sort-list-3" target="_blank"><span>会议策划</span></a>
 						<ul>
-							<li><a href="{:U('travel/index',array('id'=>3,'day'=>1,'areaid'=>$areaid))}">一日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>3,'day'=>2,'areaid'=>$areaid))}">二日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>3,'day'=>3,'areaid'=>$areaid))}">三日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>3,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>3,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>3,'day'=>1,'areaid'=>$areaid))}" target="_blank">一日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>3,'day'=>2,'areaid'=>$areaid))}" target="_blank">二日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>3,'day'=>3,'areaid'=>$areaid))}" target="_blank">三日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>3,'day'=>4,'areaid'=>$areaid))}" target="_blank">四日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>3,'day'=>5,'areaid'=>$areaid))}" target="_blank">五日游</a></li>
 						</ul></li>
+						-->
 					<li class="bgs_4"><a
 						href="{:U('travel/index',array('id'=>4,'areaid'=>$areaid))}"
-						class="sort-list-4"><span>团体策划</span></a>
+						class="sort-list-4" target="_blank"><span>团体策划</span></a>
 						<ul>
-							<li><a href="{:U('travel/index',array('id'=>4,'day'=>1,'areaid'=>$areaid))}">一日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>4,'day'=>2,'areaid'=>$areaid))}">二日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>4,'day'=>3,'areaid'=>$areaid))}">三日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>4,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>4,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>4,'day'=>1,'areaid'=>$areaid))}"
+								target="_blank">一日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>4,'day'=>2,'areaid'=>$areaid))}"
+								target="_blank">二日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>4,'day'=>3,'areaid'=>$areaid))}"
+								target="_blank">三日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>4,'day'=>4,'areaid'=>$areaid))}"
+								target="_blank">四日游</a></li>
+							<li><a
+								href="{:U('travel/index',array('id'=>4,'day'=>5,'areaid'=>$areaid))}"
+								target="_blank">五日游</a></li>
 						</ul></li>
 					<li class="bgs_5"><a
 						href="{:U('travel/index',array('id'=>5,'areaid'=>$areaid))}"
-						class="sort-list-5"><span>自驾游</span></a>
+						class="sort-list-5" target="_blank"><span>自驾游</span></a>
 						<ul>
-							<li><a href="{:U('travel/index',array('id'=>5,'day'=>1))}">一日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>5,'day'=>2))}">二日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>5,'day'=>3))}">三日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>5,'day'=>4))}">四日游</a></li>
-							<li><a href="{:U('travel/index',array('id'=>5,'day'=>5))}">五日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>5,'day'=>1))}"
+								target="_blank">一日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>5,'day'=>2))}"
+								target="_blank">二日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>5,'day'=>3))}"
+								target="_blank">三日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>5,'day'=>4))}"
+								target="_blank">四日游</a></li>
+							<li><a href="{:U('travel/index',array('id'=>5,'day'=>5))}"
+								target="_blank">五日游</a></li>
 						</ul></li>
 					<li class="bgs_6"><a href="{:U('viewpoint/index')}"
-						class="sort-list-6"><span>旅游点</span></a></li>
+						class="sort-list-6"><span>旅游景点</span></a></li>
 					<li class="bgs_7"><a
 						href="{:U('article/detail',array('detail'=>7))}"
 						class="sort-list-7"><span>旅游攻略</span></a></li>
+					<li class="bgs_8"><a
+						href="{:U('article/detail',array('detail'=>7))}"
+						class="sort-list-7"><span>游记</span></a></li>
 
 				</ul>
 			</div>
@@ -222,8 +280,8 @@
 	</div>
 	<div class="boxs">
 		<if condition="count($lmwyi)!=0"> <volist name="lmwyi" id="vo">
-		<a href="{$vo.source_url}"><img alt="" width="200" height="145"
-			src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<a href="{$vo.source_url}" target="_blank"><img alt="" width="200"
+			height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
 		<if condition="count($lmwyi)==0"> <a href=""><img alt=""
 			width="200" height="145" src="style/images/jing.jpg" /></a> </if>
 
@@ -234,8 +292,8 @@
 	</div>
 	<div class="boxs">
 		<if condition="count($cynmgi)!=0"> <volist name="cynmgi" id="vo">
-		<a href="{$vo.source_url}"><img alt="" width="200" height="145"
-			src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<a href="{$vo.source_url}" target="_blank"><img alt="" width="200"
+			height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
 		<if condition="count($cynmgi)==0"> <a href=""><img alt=""
 			width="200" height="145" src="style/images/thr.jpg" /></a> </if>
 	</div>
@@ -245,16 +303,16 @@
 	</div>
 	<div class="boxs">
 		<if condition="count($swdxyyi)!=0"> <volist name="swdxyyi"
-			id="vo"> <a href="{$vo.source_url}"><img alt=""
-			width="200" height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+			id="vo"> <a href="{$vo.source_url}" target="_blank"><img
+			alt="" width="200" height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
 		<if condition="count($swdxyyi)==0"> <a href=""><img alt=""
 			width="200" height="145" src="style/images/fives.jpg" /></a> </if>
 
 	</div>
 	<div class="boxs">
 		<if condition="count($mzfqi)!=0"> <volist name="mzfqi" id="vo">
-		<a href="{$vo.source_url}"><img alt="" width="200" height="145"
-			src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<a href="{$vo.source_url}" target="_blank"><img alt="" width="200"
+			height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
 		<if condition="count($mzfqi)==0"> <a href=""><img alt=""
 			width="200" height="145" src="style/images/jing2.jpg" /></a> </if>
 
@@ -265,8 +323,8 @@
 	</div>
 	<div class="boxs">
 		<if condition="count($cygjmhnmi)!=0"> <volist name="cygjmhnmi"
-			id="vo"> <a href="{$vo.source_url}"><img alt=""
-			width="200" height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+			id="vo"> <a href="{$vo.source_url}" target="_blank"><img
+			alt="" width="200" height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
 		<if condition="count($cygjmhnmi)==0"> <a href=""><img alt=""
 			width="200" height="145" src="style/images/six.jpg" /></a> </if>
 
@@ -277,8 +335,8 @@
 	</div>
 	<div class="boxs">
 		<if condition="count($wmlxi)!=0"> <volist name="wmlxi" id="vo">
-		<a href="{$vo.source_url}"><img alt="" width="200" height="145"
-			src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
+		<a href="{$vo.source_url}" target="_blank"><img alt="" width="200"
+			height="145" src="__ROOT__/{$vo.pic}" /></a> </volist> </if>
 		<if condition="count($wmlxi)==0"> <a href=""><img alt=""
 			width="200" height="145" src="style/images/six.jpg" /></a> </if>
 	</div>
@@ -293,7 +351,8 @@
 	<div class="travel">
 		<div class="line_left">
 			<div class="travelpointname">
-				<a href="{:U('travel/index',array('id'=>1,'areaid'=>$areaid))}">包团自由行</a>
+				<a href="{:U('travel/index',array('id'=>1,'areaid'=>$areaid))}"
+					target="_blank">包团自由行</a>
 			</div>
 			<div style="float: left; margin-left: 10px;" class="travelpoint">
 				<div class="recommendedch">路线推荐</div>
@@ -301,13 +360,24 @@
 			</div>
 		</div>
 		<div class="line_center">
-		     <li class="curtent"><a href="{:U('travel/index',array('id'=>1,'areaid'=>$areaid))}">全部</a></li>
+			<li class="curtent"><a
+				href="{:U('travel/index',array('id'=>1,'areaid'=>$areaid))}"
+				target="_blank">全部</a></li>
 			<li><a
-				href="{:U('travel/index',array('id'=>1,'day'=>1,'areaid'=>$areaid))}">一日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>1,'day'=>2,'areaid'=>$areaid))}">二日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>1,'day'=>3,'areaid'=>$areaid))}">三日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>1,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>1,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
+				href="{:U('travel/index',array('id'=>1,'day'=>1,'areaid'=>$areaid))}"
+				target="_blank">一日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>1,'day'=>2,'areaid'=>$areaid))}"
+				target="_blank">二日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>1,'day'=>3,'areaid'=>$areaid))}"
+				target="_blank">三日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>1,'day'=>4,'areaid'=>$areaid))}"
+				target="_blank">四日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>1,'day'=>5,'areaid'=>$areaid))}"
+				target="_blank">五日游</a></li>
 		</div>
 		<div class="line_right">
 			<a href="">更多推存</a>
@@ -364,7 +434,8 @@
 	<div class="travel">
 		<div class="line_left">
 			<div class="travelpointname">
-				<a href="{:U('travel/index',array('id'=>2,'areaid'=>$areaid))}">纯团玩</a>
+				<a href="{:U('travel/index',array('id'=>2,'areaid'=>$areaid))}"
+					target="_blank">纯玩团</a>
 			</div>
 			<div style="float: left; margin-left: 10px;" class="travelpoint">
 				<div class="recommendedch">路线推荐</div>
@@ -372,14 +443,25 @@
 			</div>
 		</div>
 		<div class="line_center">
-		    <li class="curtent"><a href="{:U('travel/index',array('id'=>2,'areaid'=>$areaid))}">全部</a></li>
+			<li class="curtent"><a
+				href="{:U('travel/index',array('id'=>2,'areaid'=>$areaid))}"
+				target="_blank">全部</a></li>
 			<li>
 			<li><a
-				href="{:U('travel/index',array('id'=>2,'day'=>1,'areaid'=>$areaid))}">一日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>2,'day'=>2,'areaid'=>$areaid))}">二日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>2,'day'=>3,'areaid'=>$areaid))}">三日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>2,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>2,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
+				href="{:U('travel/index',array('id'=>2,'day'=>1,'areaid'=>$areaid))}"
+				target="_blank">一日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>2,'day'=>2,'areaid'=>$areaid))}"
+				target="_blank">二日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>2,'day'=>3,'areaid'=>$areaid))}"
+				target="_blank">三日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>2,'day'=>4,'areaid'=>$areaid))}"
+				target="_blank">四日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>2,'day'=>5,'areaid'=>$areaid))}"
+				target="_blank">五日游</a></li>
 		</div>
 		<div class="line_right">
 			<a href="">更多推存</a>
@@ -390,9 +472,9 @@
 		<div class="bao_left">
 
 			<volist name="Line2" id="vo">
-			<li><a href="{:U('travel/detail',array('id'=>$vo['id']))}"><img
-					alt="" width="421" height="315" src="{$vo.id|get_line_img}">
-			</a>
+			<li><a href="{:U('travel/detail',array('id'=>$vo['id']))}"
+				target="_blank"><img alt="" width="421" height="315"
+					src="{$vo.id|get_line_img}"> </a>
 				<div class="desc">
 					<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
 						class="adds">{$vo.city_id|_get_city}</span>
@@ -436,7 +518,8 @@
 	<div class="travel">
 		<div class="line_left">
 			<div class="travelpointname">
-				<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">常规团</a>
+				<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}"
+					target="_blank">常规团</a>
 			</div>
 			<div style="float: left; margin-left: 10px;" class="travelpoint">
 				<div class="recommendedch">路线推荐</div>
@@ -444,14 +527,25 @@
 			</div>
 		</div>
 		<div class="line_center">
-		<li class="curtent"><a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">全部</a></li>
+			<li class="curtent"><a
+				href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}"
+				target="_blank">全部</a></li>
 			<li>
-			<li ><a
-				href="{:U('travel/index',array('id'=>3,'day'=>1,'areaid'=>$areaid))}">一日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>3,'day'=>2,'areaid'=>$areaid))}">二日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>3,'day'=>3,'areaid'=>$areaid))}">三日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>3,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>3,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>3,'day'=>1,'areaid'=>$areaid))}"
+				target="_blank">一日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>3,'day'=>2,'areaid'=>$areaid))}"
+				target="_blank">二日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>3,'day'=>3,'areaid'=>$areaid))}"
+				target="_blank">三日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>3,'day'=>4,'areaid'=>$areaid))}"
+				target="_blank">四日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>3,'day'=>5,'areaid'=>$areaid))}"
+				target="_blank">五日游</a></li>
 		</div>
 		<div class="line_right">
 			<a href="">更多推存</a>
@@ -462,8 +556,9 @@
 		<div class="bao_left">
 
 			<volist name="Line3" id="vo">
-			<li><a href="{:U('travel/detail',array('id'=>$vo['id']))}">
-					<img alt="" width="421" height="315" src="{$vo.id|get_line_img}">
+			<li><a href="{:U('travel/detail',array('id'=>$vo['id']))}"
+				target="_blank"> <img alt="" width="421" height="315"
+					src="{$vo.id|get_line_img}">
 					<div class="desc">
 						<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
 							class="adds">{$vo.city_id|_get_city}</span>
@@ -508,7 +603,8 @@
 	<div class="travel">
 		<div class="line_left">
 			<div class="travelpointname">
-				<a href="{:U('travel/index',array('id'=>4,'areaid'=>$areaid))}">团体策划</a>
+				<a href="{:U('travel/index',array('id'=>4,'areaid'=>$areaid))}"
+					target="_blank">团体策划</a>
 			</div>
 			<div style="float: left; margin-left: 10px;" class="travelpoint">
 				<div class="recommendedch">路线推荐</div>
@@ -516,14 +612,25 @@
 			</div>
 		</div>
 		<div class="line_center">
-		     <li class="curtent"><a href="{:U('travel/index',array('id'=>4,'areaid'=>$areaid))}">全部</a></li>
+			<li class="curtent"><a
+				href="{:U('travel/index',array('id'=>4,'areaid'=>$areaid))}"
+				target="_blank">全部</a></li>
 			<li>
-			<li ><a
-				href="{:U('travel/index',array('id'=>4,'day'=>1,'areaid'=>$areaid))}">一日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>4,'day'=>2,'areaid'=>$areaid))}">二日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>4,'day'=>3,'areaid'=>$areaid))}">三日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>4,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
-			<li><a href="{:U('travel/index',array('id'=>4,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>4,'day'=>1,'areaid'=>$areaid))}"
+				target="_blank">一日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>4,'day'=>2,'areaid'=>$areaid))}"
+				target="_blank">二日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>4,'day'=>3,'areaid'=>$areaid))}"
+				target="_blank">三日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>4,'day'=>4,'areaid'=>$areaid))}"
+				target="_blank">四日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>4,'day'=>5,'areaid'=>$areaid))}"
+				target="_blank">五日游</a></li>
 		</div>
 		<div class="line_right">
 			<a href="">更多推存</a>
@@ -534,8 +641,9 @@
 		<div class="bao_left">
 
 			<volist name="Line4" id="vo">
-			<li><a href="{:U('travel/detail',array('id'=>$vo['id']))}">
-					<img alt="" width="421" height="315" src="{$vo.id|get_line_img}">
+			<li><a href="{:U('travel/detail',array('id'=>$vo['id']))}"
+				target="_blank"> <img alt="" width="421" height="315"
+					src="{$vo.id|get_line_img}">
 					<div class="desc">
 						<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
 							class="adds">{$vo.city_id|_get_city}</span>

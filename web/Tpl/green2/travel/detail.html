@@ -141,7 +141,7 @@
 							style="color: #585556">{$line_base.ps}</td>
 					</tr>
 					<tr bgcolor="#cef0f1" height="50">
-						<td align="center" width="80">特别告知</td>
+						<td align="center" width="80">产品特色</td>
 						<td bgcolor="#FFFFFF" colspan="5" width="700"><img
 							src="__ROOT__/style/images/chose.jpg" width="621" height="286"
 							alt="VIP"> <br></td>
@@ -215,7 +215,12 @@
 			</div>
 		</div>
 	</div>
-	</if>
+	<if condition="$lineinfo.special_info neq ''">
+	<div class="detail_road" style="min-height:300px;">
+		<h2>特别告知</h2>
+		<div class="feature">{$lineinfo.special_info}</div>
+	</div>
+	</if> </if>
 	<input type="hidden" name="selyear" id="selyear" /> <input
 		type="hidden" name="month" id="selmonth" /> <input type="hidden"
 		name="selday" id="selday" />

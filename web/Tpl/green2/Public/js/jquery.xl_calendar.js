@@ -104,7 +104,6 @@
                 $(options.container).find("i.month").html(parseInt(month));
                 var max_day = new Date(year, month, 0).getDate();
                 var one_day = new Date(year, month - 1, 1).getDay();
-
                 var first_day = 0;
                 var table_str = '<tbody data-month="' + data_month + '"><tr>';
                 var key = "";
@@ -222,8 +221,8 @@
                 $(""+options.container+" table.calendar_list").html(create_months).attr("data-month", now_month);
                 write_data(options.data);
                // var selector='#the_calendar'+$(this).prop('tabindex')
-                $(".the_calendar .the_calendar_icon b").bind("click", prew_month);
-                $(".the_calendar .the_calendar_icon2 b").bind("click", next_month);
+                $(""+options.container+" .the_calendar_icon b").bind("click", prew_month);
+                $(""+options.container+" .the_calendar_icon2 b").bind("click", next_month);
                 $(""+options.container+" table.calendar_list td.day").bind("click", td_click);
                 //if (parseInt(now_day) < parseInt(options.now_day))now_day = options.now_day;
                // $("[data-day='" + now_day + "']").trigger("click");

@@ -75,8 +75,8 @@
 						var max_day = new Date(year, month, 0).getDate();
 						var one_day = new Date(year, month - 1, 1).getDay();
 						var first_day = 0;
-//						var table_str = '<tbody data-month="' + data_month
-//								+ '"><tr>';
+						// var table_str = '<tbody data-month="' + data_month
+						// + '"><tr>';
 						var table_str = '<tbody><tr>';
 						var key = "";
 						while (first_day < one_day) {
@@ -134,6 +134,45 @@
 																		+ '_price_adult')
 														.val(
 																pricelist[dataprice].price_adult));
+
+										//
+										ulbox
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_price_adultpre')
+														.val(
+																pricelist[dataprice].price_adultpre));
+										//
+
+										//
+										ulbox
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_price_adultec')
+														.val(
+																pricelist[dataprice].price_adultec));
+										//
+										//
+										ulbox
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_price_adultyk')
+														.val(
+																pricelist[dataprice].price_adultyk));
+										//
+
 										ulbox
 												.append($('<li>')
 														.text(
@@ -149,6 +188,44 @@
 																		+ '_price_children')
 														.val(
 																pricelist[dataprice].price_children));
+										//
+										ulbox
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_price_childrenpre')
+														.val(
+																pricelist[dataprice].price_childrenpre));
+										//
+
+										//
+										ulbox
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_price_childrenec')
+														.val(
+																pricelist[dataprice].price_childrenec));
+										//
+
+										//
+										ulbox
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_price_childrenyk')
+														.val(
+																pricelist[dataprice].price_childrenyk));
+										//
 
 										ulbox
 												.append($('<input>')
@@ -213,7 +290,7 @@
 						table_str += "<tr></tbody>";
 
 						var return_obj = $(table_str)
-						obj.find("table.table_date").empty();
+						// obj.find("table.table_date").empty();
 						obj.find("table.table_date").append(return_obj);
 						return return_obj;
 					}
@@ -267,7 +344,7 @@
 							mext_month_obj = create_month(y, m);
 						if (mext_month_obj !== false) {
 							// create_month(y, m);
-							//alert_box.hide();
+							// alert_box.hide();
 							mext_month_obj.show().siblings("tbody").hide();
 							obj.find(".agenda_y").text(y);
 							obj.find(".agenda_m").text(parseInt(m));
@@ -416,11 +493,45 @@
 																	+ t
 																	+ '_price_adult')
 															.val();
+
+													var _price_adultpre = $(
+															'#day'
+																	+ t
+																	+ '_price_adultpre')
+															.val();
+													var _price_adultec = $(
+															'#day'
+																	+ t
+																	+ '_price_adultec')
+															.val();
+													var _price_adultyk = $(
+															'#day'
+																	+ t
+																	+ '_price_adultyk')
+															.val();
+
 													var _price_children = $(
 															'#day'
 																	+ t
 																	+ '_price_children')
 															.val();
+
+													var _price_childrenpre = $(
+															'#day'
+																	+ t
+																	+ '_price_childrenpre')
+															.val();
+													var _price_childrenec = $(
+															'#day'
+																	+ t
+																	+ '_price_childrenec')
+															.val();
+													var _price_childrenyk = $(
+															'#day'
+																	+ t
+																	+ '_price_childrenyk')
+															.val();
+
 													var _numrange = $(
 															'#day'
 																	+ t
@@ -442,11 +553,43 @@
 														$('#price_adult').val(
 																_price_adult);
 													}
+													if (_price_adultpre != null) {
+														$('#price_adultpre')
+																.val(
+																		_price_adultpre);
+													}
+													if (_price_adultec != null) {
+														$('#price_adultec')
+																.val(
+																		_price_adultec);
+													}
+													if (_price_adultyk != null) {
+														$('#price_adultyk')
+																.val(
+																		_price_adultyk);
+													}
+
 													if (_price_children != null) {
 														$('#price_children')
 																.val(
 																		_price_children);
 													}
+													if (_price_childrenpre != null) {
+														$('#price_childrenpre')
+																.val(
+																		_price_childrenpre);
+													}
+													if (_price_childrenec != null) {
+														$('#price_childrenec')
+																.val(
+																		_price_childrenec);
+													}
+													if (_price_childrenyk != null) {
+														$('#price_childrenyk')
+																.val(
+																		_price_childrenyk);
+													}
+
 													if (_numrange != null) {
 														$('#numrange').val(
 																_numrange);
@@ -482,8 +625,18 @@
 													}
 
 													$('#price_adult').val('');
+													$('#price_adultpre')
+															.val('');
+													$('#price_adultec').val('');
+													$('#price_adultyk').val('');
 													$('#price_children')
 															.val('');
+													$('#price_childrenpre')
+															.val('');
+													$('#price_childrenec').val(
+															'');
+													$('#price_childrenyk').val(
+															'');
 													$('#numrange').val('');
 													$('#dfc').val('');
 													$('#room_type').val('');

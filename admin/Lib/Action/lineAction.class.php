@@ -190,7 +190,7 @@ class lineAction extends CommonAction {
 				$submitandsetprice = $_POST ['submitandnext'];
 				if ($submitandsetprice == 1) {
 					$this->redirect ( "price_list", array (
-							'line_id' =>  $_POST ["id"] 
+							'line_id' => $_POST ["id"] 
 					), 2, "保存成功，请继续维护报价信息。" );
 				} else {
 					$this->redirect ( "show_list" );
@@ -427,11 +427,21 @@ class lineAction extends CommonAction {
 		exit ();
 	}
 	
+	public function query_price(){
+		$sel_numrange = $_POST ['sel_numrange'];
+		// echo $sel_numrange;
+		// exit();
+		$id = $_POST ['line_id'] ? intval ( $_GET ['line_id'] ) : 0;
+		$this->redirect ( "line/price_list", array (
+				'line_id' => $id,'sel_numrange'=>$sel_numrange
+		), 1, '页面跳转中~' );
+	}
+	
 	// 线路价格列表
 	public function price_list() {
 		$line_price = M ( "LinePrice" );
 		$line_info = M ( 'LineInfo' );
-		$sel_numrange = $_POST ['sel_numrange'];
+		$sel_numrange = $_GET ['sel_numrange'];
 		// echo $sel_numrange;
 		// exit();
 		$id = $_GET ['line_id'] ? intval ( $_GET ['line_id'] ) : 0;
@@ -500,13 +510,17 @@ class lineAction extends CommonAction {
 			// $linePrice->delete ();
 		}
 		
-		//$this->redirect ( "line/price_list" );
-		$this->redirect ( "line/price_list",array('line_id'=>$lineid), 1,'页面跳转中~' );
+		// $this->redirect ( "line/price_list" );
+		$this->redirect ( "line/price_list", array (
+				'line_id' => $lineid 
+		), 1, '页面跳转中~' );
 		// 通过年月获取制定年月的价钱设置
 	}
 	public function price_update() {
 		$seldays = $_POST ['seldays'];
 		$seldayarray = explode ( ',', $seldays );
+		//print_r ( $seldayarray );
+		//exit ();
 		// print_r($seldayarray[0]);
 		// exit();
 		// $linePrice->update_4 (); // 基本价格
@@ -514,8 +528,6 @@ class lineAction extends CommonAction {
 		// $linePrice->update_2 (); // 阶段价格
 		// $linePrice->update_1 (); // 指定日期价格
 		// 费用说明
-		// $LineInfo = M ( "LineInfo" );
-		// $LineInfo->where ( "lid=" . $_POST ["line_id"] )->save ( $_POST );
 		$linePrice = D ( 'LinePrice' );
 		foreach ( $seldayarray as $val ) {
 			unset ( $linePrice->id );
@@ -531,10 +543,27 @@ class lineAction extends CommonAction {
 			$linePrice->price_date = strtotime ( $val );
 			$linePrice->day = substr ( $val, 6, 2 );
 			$linePrice->line_id = $_POST ["line_id"];
+			/*
+			$linePrice1 = D ( 'LinePrice' );
 			
+			$oldprice = $linePrice1->where ( array (
+					'line_id' => $_POST ["line_id"],
+					'year' => $_POST ["year"],
+					'month' => $_POST ["month"],
+					day => substr ( $val, 6, 2 ),
+					'numrange' => numrange 
+			) )->find ();
+			print_r($oldprice);
+			exit();
+			if ($oldprice != null) {*/
 			$linePrice->add ();
+			//}
 		}
-		$this->redirect ( "line/price_list",array('line_id'=>$_POST ["line_id"]), 1,'页面跳转中~' );
+		$LineInfo = M ( "LineInfo" );
+		$LineInfo->where ( "lid=" . $_POST ["line_id"] )->save ( $_POST );
+		$this->redirect ( "line/price_list", array (
+				'line_id' => $_POST ["line_id"] 
+		), 1, '页面跳转中~' );
 	}
 	
 	// 线路订单

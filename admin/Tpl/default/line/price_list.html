@@ -106,8 +106,8 @@
 										id="_sel_numrange" type="hidden" value="{$sel_numrange}" />
 								</p>
 								<ul>
-									<!-- 									<li><input type="button" value="切换人数规模" -->
-									<!-- 										onclick="javascript:querymonthprice();"></li> -->
+									<li><input type="button" value="查询"
+										onclick="javascript:querymonthprice();"></li>
 									<!--  
 									<li><a class="up js_online" title="上线"
 										href="javascript:void(0)">上线</a></li>
@@ -125,27 +125,85 @@
 							<div id="noMixsale" class="calendar_option">
 								<ul>
 
-									<li><em><span class="red">*</span>市场价:</em><input
-										type="text" placeholder="" data-valmsg="市场价"
-										data-val="required,int" id="RACKRATE" name="RACKRATE"
-										class="gray_input yellow_input"> 元/人<span
-										class="check_box js_checkbox_detail hide"
-										style="display: none;"><input type="checkbox"></span>
-										</li>
+									<!-- 									<li><em><span class="red">*</span>市场价:</em><input -->
+									<!-- 										type="text" placeholder="" data-valmsg="市场价" -->
+									<!-- 										data-val="required,int" id="RACKRATE" name="RACKRATE" -->
+									<!-- 										class="gray_input yellow_input"> 元/人<span -->
+									<!-- 										class="check_box js_checkbox_detail hide" -->
+									<!-- 										style="display: none;"><input type="checkbox"></span> -->
+									<!-- 									</li> -->
 
-									<li><em><span class="red">*</span>成人价:</em><input
-										type="text" data-valmsg="成人价" data-val="required,int"
-										placeholder=" " id="price_adult" name="price_adult"
-										class="gray_input yellow_input"
-										style="color: rgb(0, 105, 202);"> 元/人<span
-										class="check_box js_checkbox_detail hide"
-										style="display: none;"><input type="checkbox"></span></li>
-									<li><em><span class="red">*</span>儿童价:</em><input
-										type="text" placeholder="" data-valmsg="儿童价"
-										data-val="required,int" id="price_children"
-										name="price_children" class="gray_input yellow_input">
-										元/人<span class="check_box js_checkbox_detail hide"
-										style="display: none;"><input type="checkbox"></span></li>
+									<li>
+										<table>
+											<tr>
+												<td><em><span class="red">*</span>成人价:</em><input
+													type="text" data-valmsg="成人价" data-val="required,int"
+													placeholder=" " id="price_adult" name="price_adult"
+													class="gray_input yellow_input"
+													style="color: rgb(0, 105, 202);"> 元/人<span
+													class="check_box js_checkbox_detail hide"
+													style="display: none;"><input type="checkbox"></span></td>
+												<td><em><span class="red">*</span>预付:</em><input
+													type="text" data-valmsg="成人价预付" data-val="required,int"
+													placeholder=" " id="price_adultpre" name="price_adultpre"
+													class="gray_input yellow_input"
+													style="color: rgb(0, 105, 202);"> 元/人<span
+													class="check_box js_checkbox_detail hide"
+													style="display: none;"><input type="checkbox"></span></td>
+												<td><em><span class="red">*</span>二次付款:</em><input
+													type="text" data-valmsg="成人价" data-val="required,int"
+													placeholder=" " id="price_adultec" name="price_adultec"
+													class="gray_input yellow_input"
+													style="color: rgb(0, 105, 202);"> 元/人<span
+													class="check_box js_checkbox_detail hide"
+													style="display: none;"><input type="checkbox"></span></td>
+												<td><em><span class="red">*</span>余款:</em><input
+													type="text" data-valmsg="成人价" data-val="required,int"
+													placeholder=" " id="price_adultyk" name="price_adultyk"
+													class="gray_input yellow_input"
+													style="color: rgb(0, 105, 202);"> 元/人<span
+													class="check_box js_checkbox_detail hide"
+													style="display: none;"><input type="checkbox"></span></td>
+											</tr>
+										</table>
+
+									</li>
+									<li>
+										<table>
+											<tr>
+												<td><em><span class="red">*</span>儿童价:</em><input
+													type="text" placeholder="" data-valmsg="儿童价"
+													data-val="required,int" id="price_children"
+													name="price_children" class="gray_input yellow_input">
+													元/人<span class="check_box js_checkbox_detail hide"
+													style="display: none;"><input type="checkbox"></span>
+												</td>
+												<td><em><span class="red">*</span>预付:</em><input
+													type="text" data-valmsg="儿童价预付" data-val="required,int"
+													placeholder=" " id="price_childrenpre"
+													name="price_childrenpre" class="gray_input yellow_input"
+													style="color: rgb(0, 105, 202);"> 元/人<span
+													class="check_box js_checkbox_detail hide"
+													style="display: none;"><input type="checkbox"></span></td>
+												<td><em><span class="red">*</span>二次付款:</em><input
+													type="text" data-valmsg="成人价" data-val="required,int"
+													placeholder=" " id="price_childrenec"
+													name="price_childrenec" class="gray_input yellow_input"
+													style="color: rgb(0, 105, 202);"> 元/人<span
+													class="check_box js_checkbox_detail hide"
+													style="display: none;"><input type="checkbox"></span></td>
+												<td><em><span class="red">*</span>余款:</em><input
+													type="text" data-valmsg="成人价" data-val="required,int"
+													placeholder=" " id="price_childrenyk"
+													name="price_childrenyk" class="gray_input yellow_input"
+													style="color: rgb(0, 105, 202);"> 元/人<span
+													class="check_box js_checkbox_detail hide"
+													style="display: none;"><input type="checkbox"></span></td>
+											</tr>
+										</table>
+
+
+									</li>
 
 									<li><em>单房差:</em><input type="text" placeholder=""
 										data-valmsg="单房差" data-val="int" name="dfc" id="dfc"
@@ -260,10 +318,31 @@
 			seldayids=seldayids+seldayes[day]+',';
 		}
 		$('#seldays').val(seldayids);
+		var price_adult=$('#price_adult').val();
+		if(price_adult==null||price_adult==''){
+			alert('请填写成人价钱');
+			return;
+		}
+		var price_adultpre=$('#price_adultpre').val();
+		if(price_adultpre==null||price_adultpre==''){
+			alert('请填写成人预付款');
+			return;
+		}
+		var price_children=$('#price_children').val();
+		if(price_children==null||price_children==''){
+			alert('请填写儿童价钱');
+			return;
+		}
+		var price_adultpre=$('#price_childrenpre').val();
+		if(price_adultpre==null||price_adultpre==''){
+			alert('请填写儿童预付款');
+			return;
+		}
 		document.forms[0].submit();
 	};
 	var querymonthprice=function(){
-		document.forms[0].action='{:U('price_list')}';
+		//document.forms[0].method='get';
+		document.forms[0].action='{:U('query_price')}';
 		document.forms[0].submit();
 	};
 	var deleteprice=function(){

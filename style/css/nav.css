@@ -75,9 +75,18 @@ a {
 	float: right
 }
 
-s
-
-
+.sort .sort-list .bgs_3 span em {
+	font-style: normal;
+	font-size: 7px;
+	margin-right: 2px;
+	float: right
+}
+.sort .sort-list .bgs_4 span em {
+	font-style: normal;
+	font-size: 7px;
+	margin-right: 2px;
+	float: right
+}
 
 .sort {
 	width: 222px;

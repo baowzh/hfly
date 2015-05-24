@@ -35,6 +35,9 @@ class travelAction extends CommonAction {
 			if ($day > 0)
 				$where .= " and trip_days='$day' ";
 		}
+		if(day ==0){
+			$this->assign ( 'day', $day );
+		}
 		if ($areaid != null && $areaid != '') {
 			$where .= " and linebelongto='$areaid' ";
 		}
@@ -46,7 +49,8 @@ class travelAction extends CommonAction {
 		$list = $View->where ( $where )->order ( 'sort,id desc' )->limit ( $Page->firstRow . "," . $Page->listRows )->select ();
 		$this->assign ( 'list', $list );
 		$this->assign ( "page", $show );
-		
+		$this->assign ( "id", $id );
+		$this->assign ( "areaid", $areaid );
 		$this->display ();
 	}
 	public function init_function() {
@@ -753,16 +757,16 @@ EOF;
 		$lineOrder = M ( 'linePin' );
 		$Line = M ( 'Line' );
 		// 1.获取发起的拼团订单
-		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type' )->where ( $lineOrder->getTableName () . ".phone=$phone" . " and type=0" )->order ( "id desc" )->select ();
-		$this->assign ( "pinglist", $list );
+		// $list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type' )->where ( $lineOrder->getTableName () . ".phone=$phone" . " and type=0" )->order ( "id desc" )->select ();
+		// $this->assign ( "pinglist", $list );
 		// 2.报名团订单
 		// print_r($list);
-		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type' )->where ( $lineOrder->getTableName () . ".phone=$phone" . " and type=1" )->order ( "id desc" )->select ();
-		$this->assign ( "dinglist", $list );
+		// $list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type' )->where ( $lineOrder->getTableName () . ".phone=$phone" . " and type=1" )->order ( "id desc" )->select ();
+		// $this->assign ( "dinglist", $list );
 		// print_r($list);
 		// 3.普通订单
 		$lineOrder = M ( 'lineOrder' );
-		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type' )->where ( "phone=$phone" )->order ( "id desc" )->select ();
+		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,' . $lineOrder->getTableName () . '.price-remoney restmoney,line.names,line.line_type' )->where ( "phone=$phone" )->order ( "id desc" )->select ();
 		$this->assign ( "orderlist", $list );
 		// print_r($list);
 		$this->display ();
@@ -783,18 +787,17 @@ EOF;
 			$price = $orderInfo ['remoney'];
 			$state = $orderInfo ['state'];
 			if ($state != 0) {
-				$this->error ( "订单状态不正确不能支付！" );
+				$this->error ( "此订单已经支付，不能重复支付！" );
 			} else {
 				$alipaySubmit = new AlipaySubmit ( array (
 						'partner' => '2088911378604746',
-						'seller_email' => '2088911378604746',
+						'seller_email' => '3094372894@qq.com',
 						'key' => 'u5ak2wi6qtt1jg0qdjb68n0dm7l1hgur',
 						'sign_type' => strtoupper ( 'MD5' ),
 						'input_charset' => strtolower ( 'gbk' ),
 						'cacert' => getcwd () . '\\alipay\\cacert.pem',
 						'transport' => 'http' 
-				)
-				 );
+				) );
 				// 支付类型
 				$payment_type = "1";
 				// 必填，不能修改
@@ -885,9 +888,17 @@ EOF;
 		}
 	}
 	public function alipaynotify() {
-		$alipayNotify = new AlipayNotify ( $alipay_config );
-		$verify_result = $alipayNotify->verifyReturn ();
-		if ($verify_result) { // 验证成功
+		$alipayNotify = new AlipayNotify ( array (
+				'partner' => '2088911378604746',
+				'seller_email' => '3094372894@qq.com',
+				'key' => 'u5ak2wi6qtt1jg0qdjb68n0dm7l1hgur',
+				'sign_type' => strtoupper ( 'MD5' ),
+				'input_charset' => strtolower ( 'gbk' ),
+				'cacert' => getcwd () . '\\alipay\\cacert.pem',
+				'transport' => 'http' 
+		) );
+		//$verify_result = $alipayNotify->verifyReturn ();
+		//if ($verify_result) { // 验证成功
 		                      // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		                      // 请在这里加上商户的业务逻辑程序代码
 		                      
@@ -908,69 +919,7 @@ EOF;
 			if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
 				// 判断该笔订单是否在商户网站中已经做过处理
 				// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
-				$orderInfo = $LineOrder->where ( array (
-						'orderid' => $out_trade_no
-				) )->find ();
-				$state = $orderInfo ['state'];
-				if ($state == 0) { // 如果订单状态是未支付则修改为已支付
-					$LinePin = D ( 'LinePin' );
-					$LinePin->where ( array (
-							'orderid' => $out_trade_no
-					) )->setField ( array (
-							'state' => 1,
-							'trade_no' => $trade_no
-					) );
-					$LineOrder = D ( 'LineOrder' );
-					$LineOrder->where ( array (
-							'orderid' => $out_trade_no
-					) )->setField ( array (
-							'state' => 1,
-							'trade_no' => $trade_no
-					) );
-				}
-				
-				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-				
-				// 如果有做过处理，不执行商户的业务程序
-			} else {
-				echo "trade_status=" . $_GET ['trade_status'];
-			}
-			
-			echo "验证成功<br />";
-			
-			// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-			
-			// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		} else {
-			// 验证失败
-			// 如要调试，请看alipay_notify.php页面的verifyReturn函数
-			echo "验证失败";
-		}
-	}
-	public function alipayreturn() {
-		$alipayNotify = new AlipayNotify ( $alipay_config );
-		$verify_result = $alipayNotify->verifyReturn ();
-		if ($verify_result) { // 验证成功
-		                      // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		                      // 请在这里加上商户的业务逻辑程序代码
-		                      
-			// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-		                      // 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
-		                      
-			// 商户订单号
-			
-			$out_trade_no = $_GET ['out_trade_no'];
-			
-			// 支付宝交易号
-			
-			$trade_no = $_GET ['trade_no'];
-			
-			// 交易状态
-			$trade_status = $_GET ['trade_status'];
-			
-			if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
-				// 判断该笔订单是否在商户网站中已经做过处理
-				// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
+				$LineOrder = D ( 'LineOrder' );
 				$orderInfo = $LineOrder->where ( array (
 						'orderid' => $out_trade_no 
 				) )->find ();
@@ -995,10 +944,8 @@ EOF;
 				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				
 				// 如果有做过处理，不执行商户的业务程序
-				$this->assign ( "mess", '支付成功!' );
 			} else {
 				echo "trade_status=" . $_GET ['trade_status'];
-				$this->assign ( "mess", '此订单已经字符过!' );
 			}
 			
 			echo "验证成功<br />";
@@ -1006,11 +953,89 @@ EOF;
 			// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 			
 			// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		} else {
+		//} else {
 			// 验证失败
 			// 如要调试，请看alipay_notify.php页面的verifyReturn函数
-			echo "验证失败";
-		}
+			//echo "验证失败";
+		//}
+	}
+	public function alipayreturn() {
+		$alipayNotify = new AlipayNotify (array (
+				'partner' => '2088911378604746',
+				'seller_email' => '3094372894@qq.com',
+				'key' => 'u5ak2wi6qtt1jg0qdjb68n0dm7l1hgur',
+				'sign_type' => strtoupper ( 'MD5' ),
+				'input_charset' => strtolower ( 'gbk' ),
+				'cacert' => getcwd () . '\\alipay\\cacert.pem',
+				'transport' => 'http' 
+		) );
+		$verify_result = $alipayNotify->verifyReturn ();
+		//echo print_r($verify_result);
+	//	exit();
+		//if ($verify_result==1) { // 验证成功
+		                      // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		                      // 请在这里加上商户的业务逻辑程序代码
+		                      
+			// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+		                      // 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+		                      
+			// 商户订单号
+			
+			$out_trade_no = $_GET ['out_trade_no'];
+			
+			// 支付宝交易号
+			
+			$trade_no = $_GET ['trade_no'];
+			
+			// 交易状态
+			$trade_status = $_GET ['trade_status'];
+			//echo $_GET ['trade_status'];
+			//exit();
+			
+			if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
+				// 判断该笔订单是否在商户网站中已经做过处理
+				// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
+			    $LineOrder = D ( 'LineOrder' );
+				$orderInfo = $LineOrder->where ( array (
+						'orderid' => $out_trade_no 
+				) )->find ();
+				$state = $orderInfo ['state'];
+				if ($state == 0) { // 如果订单状态是未支付则修改为已支付
+					$LinePin = D ( 'LinePin' );
+					$LinePin->where ( array (
+							'orderid' => $out_trade_no 
+					) )->setField ( array (
+							'state' => 1,
+							'trade_no' => $trade_no 
+					) );
+				
+					$LineOrder->where ( array (
+							'orderid' => $out_trade_no 
+					) )->setField ( array (
+							'state' => 1,
+							'trade_no' => $trade_no 
+					) );
+				}
+				
+				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+				
+				// 如果有做过处理，不执行商户的业务程序
+				$this->assign ( "mess", '支付成功!' );
+			} else {
+				echo "trade_status=" . $_GET ['trade_status'];
+				$this->assign ( "mess", '此订单已经支付过!' );
+			}
+			
+			//echo "验证成功<br />";
+			
+			// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+			
+			// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//} else {
+			// 验证失败
+			// 如要调试，请看alipay_notify.php页面的verifyReturn函数
+			//echo "验证失败";
+		//}
 		$this->display ();
 	}
 }
