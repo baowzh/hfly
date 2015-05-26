@@ -106,6 +106,12 @@ class lineAction extends CommonAction {
 						$_GET ['target_type'] 
 				);
 			}
+			if ($_GET ['code'] != '') {
+				$where ['code'] = array (
+						"eq",
+						$_GET ['code'] 
+				);
+			}
 			
 			if (! empty ( $_GET ['sort'] )) {
 				$order = $_GET ['sort'] . " " . $_GET ['path'];
@@ -426,12 +432,12 @@ class lineAction extends CommonAction {
 		echo 1;
 		exit ();
 	}
-	
-	public function query_price(){
+	public function query_price() {
 		$sel_numrange = $_POST ['sel_numrange'];
 		$id = $_POST ['line_id'] ? intval ( $_POST ['line_id'] ) : 0;
 		$this->redirect ( "line/price_list", array (
-				'line_id' => $id,'sel_numrange'=>$sel_numrange
+				'line_id' => $id,
+				'sel_numrange' => $sel_numrange 
 		), 1, '页面跳转中~' );
 	}
 	
@@ -501,11 +507,13 @@ class lineAction extends CommonAction {
 		foreach ( $seldayarray as $val ) {
 			$line_price = M ( "LinePrice" );
 			$day = substr ( $val, 6, 2 );
-			$line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid . " and numrange=" . $numrange . " and  price_type=1 and day=" . $day )->delete ();
+			$price_type = 1;
+			if ($numrange == 0) {
+				$price_type = 2;
+			}
+			$line_price->where ( "year=" . $year . " and month='" . $month . "' and line_id=" . $lineid . " and numrange=" . $numrange . " and  price_type=" . $price_type . " and day=" . $day )->delete ();
 			// $linePrice->delete ();
 		}
-		
-		// $this->redirect ( "line/price_list" );
 		$this->redirect ( "line/price_list", array (
 				'line_id' => $lineid 
 		), 1, '页面跳转中~' );
@@ -514,15 +522,6 @@ class lineAction extends CommonAction {
 	public function price_update() {
 		$seldays = $_POST ['seldays'];
 		$seldayarray = explode ( ',', $seldays );
-		//print_r ( $seldayarray );
-		//exit ();
-		// print_r($seldayarray[0]);
-		// exit();
-		// $linePrice->update_4 (); // 基本价格
-		// $linePrice->update_3 (); // 星期价格
-		// $linePrice->update_2 (); // 阶段价格
-		// $linePrice->update_1 (); // 指定日期价格
-		// 费用说明
 		$linePrice = D ( 'LinePrice' );
 		foreach ( $seldayarray as $val ) {
 			unset ( $linePrice->id );
@@ -537,27 +536,16 @@ class lineAction extends CommonAction {
 			}
 			$linePrice->price_date = strtotime ( $val );
 			$linePrice->day = substr ( $val, 6, 2 );
-			if(strlen($linePrice->day)<2){
-				$linePrice->day='0'.$linePrice->day;
-			}
-			echo $linePrice->day;
-			//exit();
 			$linePrice->line_id = $_POST ["line_id"];
-			/*
 			$linePrice1 = D ( 'LinePrice' );
+			$oldprice = $linePrice1->where ( "line_id=" . $_POST ["line_id"] . " and year=" . $_POST ["year"] . " and month=" . $_POST ['month'] . " and day=" . substr ( $val, 6, 2 ) . " and numrange=" . $linePrice->numrange . " and price_type=" . $linePrice->price_type )->find ();
+			//print_r ( $oldprice );
+			if ($oldprice != null) {
+				$linePrice->save ();
+			}else{
+				$linePrice->add ();
+			}
 			
-			$oldprice = $linePrice1->where ( array (
-					'line_id' => $_POST ["line_id"],
-					'year' => $_POST ["year"],
-					'month' => $_POST ["month"],
-					day => substr ( $val, 6, 2 ),
-					'numrange' => numrange 
-			) )->find ();
-			print_r($oldprice);
-			exit();
-			if ($oldprice != null) {*/
-			$linePrice->add ();
-			//}
 		}
 		$LineInfo = M ( "LineInfo" );
 		$LineInfo->where ( "lid=" . $_POST ["line_id"] )->save ( $_POST );

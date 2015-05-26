@@ -39,8 +39,8 @@
 							+ ' <label class="agenda_d"></label>日</span><label class="title_right">'
 							+ '</label></div>';
 					var obj_table = '<table class="table_date" cellspacing="0" cellpadding="0" border="0">'
-							+ '<thead><tr class="week"><td class="td_holiday"><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周日</span><span data-idx="0" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox"></span></div></td><td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周一</span><span data-idx="1" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox"></span></div></td><td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周二</span><span data-idx="2" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox"></span></div></td>'
-							+ '<td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周三</span><span data-idx="3" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox"></span></div></td><td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周四</span><span data-idx="4" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox"></span></div></td><td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周五</span><span data-idx="5" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox"></span></div></td><td class="td_holiday"><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周六</span><span data-idx="6" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox"></span></div></td></tr></thead>'
+							+ '<thead><tr class="week"><td class="td_holiday"><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周日</span><span data-idx="0" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox" id="0"></span></div></td><td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周一</span><span data-idx="1" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox" id="1"></span></div></td><td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周二</span><span data-idx="2" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox" id="2"></span></div></td>'
+							+ '<td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周三</span><span data-idx="3" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox" id="3"></span></div></td><td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周四</span><span data-idx="4" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox" id="4"></span></div></td><td><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周五</span><span data-idx="5" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox" id="5"></span></div></td><td class="td_holiday"><div class="box" style="width: 72px;height: 45px; position: relative;"><span class="week" style="position: absolute;top: 15px;left: 17px;">周六</span><span data-idx="6" class="js_checkbox_checkrows select_box js_checkbox hide" style="display: inline;position: absolute;right: 6px;top: 16px;"><input type="checkbox" id="6"></span></div></td></tr></thead>'
 							+ '</table>';
 					obj.append(obj_title).append(obj_table);
 
@@ -249,7 +249,10 @@
 												pricelist[dataprice].numrange));
 
 										var persontext = '';
-										if (pricelist[dataprice].numrange == 1) {
+										if (pricelist[dataprice].numrange == 6) {
+											persontext = '1人';
+										} 
+										else if (pricelist[dataprice].numrange == 1) {
 											persontext = '2-3人';
 										} else if (pricelist[dataprice].numrange == 2) {
 											persontext = '4-6人';
@@ -291,7 +294,8 @@
 
 						var return_obj = $(table_str)
 						// obj.find("table.table_date").empty();
-						obj.find("table.table_date").append(return_obj);
+						obj.find("table.table_date ").append(return_obj);
+						seldayes = new Array();
 						return return_obj;
 					}
 
@@ -324,7 +328,7 @@
 						if (pr_month_obj !== false) {
 							// create_month(y, m);
 							alert_box.hide();
-							pr_month_obj.show().siblings("tbody").hide();
+							pr_month_obj.show().siblings("tbody").empty();
 							obj.find(".agenda_y").text(y);
 							obj.find(".agenda_m").text(parseInt(m));
 						}
@@ -345,7 +349,7 @@
 						if (mext_month_obj !== false) {
 							// create_month(y, m);
 							// alert_box.hide();
-							mext_month_obj.show().siblings("tbody").hide();
+							mext_month_obj.show().siblings("tbody").empty();
 							obj.find(".agenda_y").text(y);
 							obj.find(".agenda_m").text(parseInt(m));
 						}
@@ -428,7 +432,7 @@
 								+ now_month + "']");
 						if (now_month_obj.length == 0)
 							now_month_obj = create_month(y, m);
-						now_month_obj.show().siblings("tbody").hide();
+						now_month_obj.show().siblings("tbody").empty();
 					}
 					init.call(obj);
 					obj.find(".title_left").bind("click", prew_month);
@@ -446,9 +450,12 @@
 								function() {
 									var i = $(this).find(".js_checkbox");
 									if (i.length > 0) {
-										var sele = i.find(":checkbox").attr(
+										var sele = i.find(":checkbox").prop(
 												"checked");
-										i.find(":checkbox").attr("checked",
+										if(sele==undefined){
+											return ;
+										}
+										i.find(":checkbox").prop("checked",
 												!sele);
 										i.find(":checkbox").trigger("change");
 										if (!sele) {
@@ -462,16 +469,16 @@
 						//
 						// 给复选框添加选择事件
 						for (indexi = 0; indexi <= 6; indexi++) {
-							$(".table_date")
-									.find(".js_checkbox_checkrows_" + indexi)
+							//$(".table_date")
+									$(".js_checkbox_checkrows_" + indexi)
 									.find(":checkbox")
 									.change(
 											function() {
 												var issel = $(this).prop(
 														"checked");
+												var t = $(this).data("id");
 												var inputname = 'day_val[' + t
 														+ ']';
-												var t = $(this).data("id");
 												if (issel) {// 被选中则给hidden字段添加值
 													$(
 															'input[name=\''
@@ -674,19 +681,20 @@
 																var n = $(this)
 																		.prop(
 																				"checked");
-																$(".day")
-																		.find(
-																				".js_checkbox_checkrows_"
-																						+ t)
+																var nwei = $(
+																		this)
+																		.prop(
+																				"id");
+																var selector=".js_checkbox_checkrows_"
+																	+ nwei;
+																
+																$(selector)
 																		.find(
 																				":checkbox")
 																		.prop(
 																				"checked",
 																				n);
-																$(".day")
-																		.find(
-																				".js_checkbox_checkrows_"
-																						+ t)
+																$(selector)
 																		.find(
 																				":checkbox")
 																		.trigger(
@@ -695,7 +703,7 @@
 																	$(".day")
 																			.find(
 																					".js_checkbox_checkrows_"
-																							+ t)
+																							+ nwei)
 																			.parents(
 																					"td")
 																			.addClass(
@@ -704,7 +712,7 @@
 																	$(".day")
 																			.find(
 																					".js_checkbox_checkrows_"
-																							+ t)
+																							+ nwei)
 																			.parents(
 																					"td")
 																			.removeClass(
@@ -722,4 +730,20 @@
 
 				}
 			});
-})(jQuery)
+})(jQuery);
+
+var seldates = function() {
+	seldayes = new Array();
+		$('.yellow').find(
+				":checkbox").each(function(obj1, obj2) {
+			var n = $(obj2).prop("checked");
+			if (n) {
+				//alert($(obj2).css('display'));
+				if($(obj2).data("id")!=undefined){
+					seldayes.push($(obj2).data("id"));
+				}
+				//alert($(obj2).data("id"));
+			}
+		});
+		return seldayes;
+};

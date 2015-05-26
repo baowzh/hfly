@@ -104,13 +104,14 @@
     -->
     <tr>
 			<th><em>线路归属地区</em>：</th>
-			<td style="line-height: normal"><select id="linebelongto"
+			<td style="line-height: normal">
+			<select id="linebelongto"
 				name="linebelongto">
 					<option value="">请选择</option>
-					<option value="0471">呼和浩特</option>
-					<option value="0470">呼伦贝尔</option>
-					<option value="0479">锡林郭勒盟</option>
-					<option value="0483">阿拉善盟</option>
+					<option value="0471" <if condition="$line_list.linebelongto eq '0471'"> selected="selected" </if>>呼和浩特</option>
+					<option value="0470" <if condition="$line_list.linebelongto eq '0470'"> selected="selected" </if>>呼伦贝尔</option>
+					<option value="0479" <if condition="$line_list.linebelongto eq '0479'"> selected="selected" </if>>锡林郭勒盟</option>
+					<option value="0483" <if condition="$line_list.linebelongto eq '0483'"> selected="selected" </if>>阿拉善盟</option>
 			</select></td>
 		</tr>
     <tr>

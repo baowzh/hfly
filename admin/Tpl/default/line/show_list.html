@@ -18,6 +18,9 @@ $(function(){
 			<td class="search">名称: <input id="title" type="text"
 				class="input-text" name="names" value="{$get.names}" />
 			</td>
+			<td class="search">编码: <input id="code" type="text"
+				class="input-text" name="code" value="{$get.code}" />
+			</td>
 			<td class="search">地区: <select name="areaid" id="areaid"
 				class="input-text">
 					<option value=""<if condition="$get.areaid eq null">selected="true"
@@ -105,7 +108,8 @@ $(function(){
 							condition="$vo.line_type eq 2" />纯玩团<elseif
 							condition="$vo.line_type eq 3" />常规团<elseif
 							condition="$vo.line_type eq 4" />团队策划</if></td>
-					<td><input type="text" name="sort[{$vo.id}]"
+					<td>
+					 <input type="text" name="sort[{$vo.id}]"
 						id="sort_{$vo.id}" value="{$vo.sort}" style="width: 40px;" /></td>
 					<td><if condition="$vo['status'] eq 1"> 下线 </if> <if
 							condition="$vo['status'] eq 0"> 上线 </if></td>
