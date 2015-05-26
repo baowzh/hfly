@@ -16,7 +16,7 @@ return array(
     "affix" => array(//附件设置
         "extend" => "doc,docx,xls,ppt,wps,zip,rar,txt,jpg,jpeg,gif,bmp,swf,png", //允许上传的后缀
         "minsize" => "1", //最小上传的大小，单位k,0表示无限制
-        "maxsize" => "5120", //最大上传的大小，单位k，0表示无限制
+        "maxsize" => "8192", //最大上传的大小，单位k，0表示无限制
         "get_load" => "1", //是否允许下载附件
     ),
     "filter" => array(//过滤设置

@@ -96,6 +96,7 @@
 									-->
 									<select id="sel_numrange" name="sel_numrange">
 										<option value="0">不区分</option>
+										<option value="6">1人</option>
 										<option value="1">2-3人</option>
 										<option value="2">4-6人</option>
 										<option value="3">7-9人</option>
@@ -222,6 +223,7 @@
 									<li><em>人数规模:</em> <select name="numrange" id="numrange"
 										class="gray_select">
 											<option value="0">不区分</option>
+											<option value="6">1人</option>
 											<option value="1">2-3人</option>
 											<option value="2" selected="">4-6人</option>
 											<option value="3">7-9人</option>
@@ -314,10 +316,14 @@
 	var seldayes = new Array();
 	var submitform=function(){
 		var seldayids='';
-		for(day in seldayes){
-			seldayids=seldayids+seldayes[day]+',';
+		var dates=seldates();
+		for(day in dates){
+		  seldayids=seldayids+dates[day]+',';
 		}
 		$('#seldays').val(seldayids);
+		//alert(seldayids);
+		//return ;
+		/*
 		var price_adult=$('#price_adult').val();
 		if(price_adult==null||price_adult==''){
 			alert('请填写成人价钱');
@@ -337,7 +343,7 @@
 		if(price_adultpre==null||price_adultpre==''){
 			alert('请填写儿童预付款');
 			return;
-		}
+		}*/
 		document.forms[0].submit();
 	};
 	var querymonthprice=function(){

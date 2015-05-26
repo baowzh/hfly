@@ -21,7 +21,9 @@
                         "divId": "img1"
                     },
                     success: function (data, info) {
+                    	//alert(data[0].path);
 						$("#photo_1").val(data[0].path);
+						$('#currentimg').prop('src','__ROOT__'+data[0].path);
 						art.dialog.alert(info);
                     }
                 });
@@ -77,7 +79,7 @@ function formcheck()
           <th>现用图片：</th>
           <td colspan="2">
             <neq name="objViewpoint.pic" value="">
-              <img src="__ROOT__{$objViewpoint.pic}" style="max-width:580px;min-width:420px" />
+              <img src="__ROOT__{$objViewpoint.pic}" style="max-width:580px;min-width:420px" id="currentimg" />
             </neq>
           </td>
         </tr>

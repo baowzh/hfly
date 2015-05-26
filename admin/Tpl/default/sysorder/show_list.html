@@ -1,0 +1,95 @@
+<div id="nav" class="mainnav_title">
+	<ul>
+		<a class="on" href="{:U('show_list')}/t/{$types}">自定义订单</a> |
+		<a href="javascript:;"
+			onclick="art.dialog.open('{:U('sysorder/add')}',{title:'添加订单 ',width:560,height:300,window:'top',lock:'true'});">添加</a>
+	</ul>
+</div>
+<form action="{:U('show_list')}" method="get" id="myform">
+	<table class="search_table table_form" width="100%">
+		<tr>
+			<td class="search">开始时间: <input name="start_time" type="text"
+				id="start_time" value='' class="input-text calender" /> &nbsp;
+				结束时间:<input name="end_time" type="text" id="end_time" value=''
+				class="input-text calender" /> &nbsp;<input type="submit"
+				name="submit" value="查询" class="button" />
+			</td>
+			<td></td>
+		</tr>
+	</table>
+</form>
+<form name="myform" id="myform" action="" method="post">
+	<div class="table-list">
+		<table cellspacing="0" cellpadding="0" width="100%">
+			<thead>
+				<tr>
+					<th width="135"><a href="javascript:void(0);"
+						onclick="sel_all();">全选</a></th>
+					<th width="150">名称</th>
+					<th width="50">成人人数</th>
+					<th width="50">儿童人数</th>
+					<th width="120">线路编号</th>
+					<th width="140">订单日期</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<volist name="list" id="vo">
+				<tr class="ulbc" id="tr_{$vo.id}">
+					<td style="text-align: center;"><input type="checkbox"
+						class="sel" id="sel_{$vo.id}" value="{$vo.id}"
+						name="items_{$vo.id}" /></td>
+					<td style="text-align: center;">{$vo.names}</td>
+					<td align="center">{$vo.pcount}</td>
+					<td align="center">{$vo.ccount}</td>
+					<td align="center">{$vo.lcode}</td>
+					<td align="center">{$vo.orderdate}</td>
+					<td align="center"><a href="#"
+						onclick="javascript:if(confirm( '确定要删除该条记录吗？ '))ajax_del({$vo.id});">删除</a>
+					</td>
+				</tr>
+				</volist>
+			</tbody>
+		</table>
+	</div>
+	<div class="btn">
+		<input type="submit" class="button" name="dosubmit" value="删除"
+			onclick="myform.action='{:U('deleteall')}';" />
+	</div>
+</form>
+<script language="javascript">    
+    function ajax_del(id){
+        var url = "{:U(ajax_del)}?id="+id;
+        $.ajax({
+            url: url,
+            type: "POST",
+            complete :function(){
+            }, 
+            dataType: 'json', 
+            error: function() { alert('Ajax request error');},
+            success: function(result){
+                if(result==1){
+					art.dialog({
+						title: '删除提示',
+						content: '删除成功',
+						ok:function(){location.reload();},
+					});
+					//$("#tr_"+id).remove();
+					
+                    
+                }
+            }
+        }); 
+    }
+	
+	function sel_all(){
+        $('input.sel').each(function(index){
+            if($(this).attr('checked')){
+                $(this).removeAttr('checked');
+            }else{
+                $(this).attr('checked', 'checked');
+            }
+        });
+    }
+</script>
+<div class="page">{$page}</div>

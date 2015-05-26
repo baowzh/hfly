@@ -80,9 +80,9 @@
                         var matchs = {};
                         for (i_1 in data[1][options.index]) {
                             matchs = i_1.match(/(\d{6})(\d{2})/);
-                            if (parseInt(matchs[1]) > data_month || parseInt(matchs[3]) < data_month) {
-                                continue;
-                            }
+                            //if (parseInt(matchs[1]) > data_month || parseInt(matchs[3]) < data_month) {
+                               // continue;
+                           // }
                             data_detail = {"data-type": 1, "rackrate": data[1][options.index][i_1]["RACKRATE"], "price_adult": data[1][options.index][i_1]["price_adult"], "price_children": data[1][options.index][i_1]["price_children"]}
                             table.find("td.day[data-day='" + i_1 + "'] span.price").html("￥" + parseFloat(data[1][options.index][i_1]["price_adult"]))
                                 .removeClass("date_price4 date_price3 date_price2").addClass("date_price1").attr(data_detail);

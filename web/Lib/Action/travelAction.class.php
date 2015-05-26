@@ -35,7 +35,7 @@ class travelAction extends CommonAction {
 			if ($day > 0)
 				$where .= " and trip_days='$day' ";
 		}
-		if(day ==0){
+		if (day == 0) {
 			$this->assign ( 'day', $day );
 		}
 		if ($areaid != null && $areaid != '') {
@@ -172,11 +172,17 @@ class travelAction extends CommonAction {
 		);
 		$this->assign ( "line_type", $line_type [line_type] );
 		$this->assign ( "travel_price_list", json_encode ( $travel_price_list ) );
-		$price_day [cryf] = $price_day [price_adult] * 0.3;
+		$price_day [cryf] = $price_day [price_adultpre];
 		$price_day [etyf] = 0;
-		$price_day [ydzf] = $price_day [price_adult] * 0.3;
-		$price_day [ddhzf] = $price_day [price_adult] * 0.7;
+		$price_day [ydzf] = $price_day [price_adultpre];
+		if ($price_day [price_adultec] != null) {
+			$price_day [ddhzf] = $price_day [price_adultec];
+		} else {
+			$price_day [ddhzf] = $price_day [price_adult] - $price_day [price_adultpre];
+		}
+		
 		$this->assign ( "price_day", $price_day );
+		$this->assign ( "tripday", $year . '-' . $month . '-' . $day );
 		// print_r($price_day);
 		// exit();
 		$this->display ();
@@ -237,12 +243,15 @@ class travelAction extends CommonAction {
 		}
 		$line_price = M ( "LinePrice" );
 		$price_day = $line_price->where ( "price_type=" . $price_type . " and line_id=" . $id . " and numrange=" . $numrange . " and year=" . $year . " and month=" . $month . " and day=" . $day )->find ();
+		if($price_day==null){
+			$this->ajaxReturn ( "", "订单提交失败".$year.'-'.$month.'-'.$day.'没有报价设置，请拨打热线电话咨询。', "n" );
+		}
 		$price = $price_day ['price_adult'] * $pnumber + $price_day ['price_children'] * $cnumber;
-		$remoney = $price_day ['price_adult'] * $pnumber * 0.3 + $price_day ['price_children'] * $cnumber * 0.3;
+		$remoney = $price_day ['price_adultpre'] * $pnumber  + $price_day ['price_childrenpre'] * $cnumber ;
 		$pmoney = $price_day ['price_adult'];
-		$premoney = $price_day ['price_adult'] * 0.3;
+		$premoney = $price_day ['price_adultpre'];
 		$cmoney = $price_day ['price_children'];
-		$cremoney = $price_day ['price_children'] * 0.3;
+		$cremoney = $price_day ['price_childrenpre'];
 		$lcode = $line_base ['code'];
 		$startdate = $ends;
 		$_POST ['status'] = 0;
@@ -555,43 +564,119 @@ class travelAction extends CommonAction {
 		}
 		// 按指定日期
 		foreach ( $price_day_tmp1 as $tmp ) {
-			$key = date ( "Ymd", $tmp ["price_date"] );
+			// $key = date ( "Ymd", $tmp ["price_date"] );
+			$vmonth = $tmp ["month"];
+			
+			if (strlen ( $vmonth ) < 2) {
+				$vmonth = '0' . $vmonth;
+			}
+			$iday=$tmp ["day"];
+			if (strlen ( $iday ) < 2) {
+				$iday = '0' . $iday;
+			}
+			$key = $tmp ["year"] . $vmonth . $iday;
 			$price_day1 [$key] = array (
 					"RACKRATE" => $tmp ["RACKRATE"],
 					"price_adult" => $tmp ["price_adult"],
-					"price_children" => $tmp ["price_adult"] 
+					"price_adultpre" => $tmp ["price_adultpre"],
+					"price_adultec" => $tmp ["price_adultec"],
+					"price_adultyk" => $tmp ["price_adultyk"],
+					"price_children" => $tmp ["price_children"],
+					"price_childrenec" => $tmp ["price_childrenec"],
+					"price_childrenpre" => $tmp ["price_childrenpre"],
+					"price_childrenyk" => $tmp ["price_childrenyk"] 
 			);
 		}
 		foreach ( $price_day_tmp2 as $tmp ) {
-			$key = date ( "Ymd", $tmp ["price_date"] );
+			// $key = date ( "Ymd", $tmp ["price_date"] );
+			$vmonth = $tmp ["month"];
+			if (strlen ( $vmonth ) < 2) {
+				$vmonth = '0' . $vmonth;
+			}
+			$iday=$tmp ["day"];
+			if (strlen ( $iday ) < 2) {
+				$iday = '0' . $iday;
+			}
+			$key = $tmp ["year"] . $vmonth . $iday;
 			$price_day2 [$key] = array (
 					"RACKRATE" => $tmp ["RACKRATE"],
 					"price_adult" => $tmp ["price_adult"],
-					"price_children" => $tmp ["price_adult"] 
+					"price_adultpre" => $tmp ["price_adultpre"],
+					"price_adultec" => $tmp ["price_adultec"],
+					"price_adultyk" => $tmp ["price_adultyk"],
+					"price_children" => $tmp ["price_children"],
+					"price_childrenec" => $tmp ["price_childrenec"],
+					"price_childrenpre" => $tmp ["price_childrenpre"],
+					"price_childrenyk" => $tmp ["price_childrenyk"] 
 			);
 		}
 		foreach ( $price_day_tmp3 as $tmp ) {
-			$key = date ( "Ymd", $tmp ["price_date"] );
+			// $key = date ( "Ymd", $tmp ["price_date"] );
+			$vmonth = $tmp ["month"];
+			if (strlen ( $vmonth ) < 2) {
+				$vmonth = '0' . $vmonth;
+			}
+			$iday=$tmp ["day"];
+			if (strlen ( $iday ) < 2) {
+				$iday = '0' . $iday;
+			}
+			$key = $tmp ["year"] . $vmonth . $iday;
 			$price_day3 [$key] = array (
 					"RACKRATE" => $tmp ["RACKRATE"],
 					"price_adult" => $tmp ["price_adult"],
-					"price_children" => $tmp ["price_adult"] 
+					"price_adultpre" => $tmp ["price_adultpre"],
+					"price_adultec" => $tmp ["price_adultec"],
+					"price_adultyk" => $tmp ["price_adultyk"],
+					"price_children" => $tmp ["price_children"],
+					"price_childrenec" => $tmp ["price_childrenec"],
+					"price_childrenpre" => $tmp ["price_childrenpre"],
+					"price_childrenyk" => $tmp ["price_childrenyk"] 
 			);
 		}
 		foreach ( $price_day_tmp4 as $tmp ) {
-			$key = date ( "Ymd", $tmp ["price_date"] );
+			// $key = date ( "Ymd", $tmp ["price_date"] );
+			$vmonth = $tmp ["month"];
+			if (strlen ( $vmonth ) < 2) {
+				$vmonth = '0' . $vmonth;
+			}
+			$iday=$tmp ["day"];
+			if (strlen ( $iday ) < 2) {
+				$iday = '0' . $iday;
+			}
+			$key = $tmp ["year"] . $vmonth . $iday;
 			$price_day4 [$key] = array (
 					"RACKRATE" => $tmp ["RACKRATE"],
 					"price_adult" => $tmp ["price_adult"],
-					"price_children" => $tmp ["price_adult"] 
+					"price_adultpre" => $tmp ["price_adultpre"],
+					"price_adultec" => $tmp ["price_adultec"],
+					"price_adultyk" => $tmp ["price_adultyk"],
+					"price_children" => $tmp ["price_children"],
+					"price_childrenec" => $tmp ["price_childrenec"],
+					"price_childrenpre" => $tmp ["price_childrenpre"],
+					"price_childrenyk" => $tmp ["price_childrenyk"] 
 			);
 		}
 		foreach ( $price_day_tmp5 as $tmp ) {
-			$key = date ( "Ymd", $tmp ["price_date"] );
+			// $key = date ( "Ymd", $tmp ["price_date"] );
+			$vmonth = $tmp ["month"];
+			if (strlen ( $vmonth ) < 2) {
+				$vmonth = '0' . $vmonth;
+			}
+			$iday=$tmp ["day"];
+			if (strlen ( $iday ) < 2) {
+				$iday = '0' . $iday;
+			}
+			$key = $tmp ["year"] . $vmonth . $iday;
 			$price_day5 [$key] = array (
 					"RACKRATE" => $tmp ["RACKRATE"],
 					"price_adult" => $tmp ["price_adult"],
-					"price_children" => $tmp ["price_adult"] 
+					"price_adultpre" => $tmp ["price_adultpre"],
+					"price_adultec" => $tmp ["price_adultec"],
+					"price_adultyk" => $tmp ["price_adultyk"],
+					"price_children" => $tmp ["price_children"],
+					"price_childrenec" => $tmp ["price_childrenec"],
+					"price_childrenpre" => $tmp ["price_childrenpre"],
+					"price_childrenyk" => $tmp ["price_childrenyk"] 
 			);
 		}
 		$travel_price_list = array (
@@ -897,70 +982,70 @@ EOF;
 				'cacert' => getcwd () . '\\alipay\\cacert.pem',
 				'transport' => 'http' 
 		) );
-		//$verify_result = $alipayNotify->verifyReturn ();
-		//if ($verify_result) { // 验证成功
-		                      // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		                      // 请在这里加上商户的业务逻辑程序代码
-		                      
-			// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-		                      // 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
-		                      
-			// 商户订单号
-			
-			$out_trade_no = $_GET ['out_trade_no'];
-			
-			// 支付宝交易号
-			
-			$trade_no = $_GET ['trade_no'];
-			
-			// 交易状态
-			$trade_status = $_GET ['trade_status'];
-			
-			if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
-				// 判断该笔订单是否在商户网站中已经做过处理
-				// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
-				$LineOrder = D ( 'LineOrder' );
-				$orderInfo = $LineOrder->where ( array (
+		// $verify_result = $alipayNotify->verifyReturn ();
+		// if ($verify_result) { // 验证成功
+		// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 请在这里加上商户的业务逻辑程序代码
+		
+		// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+		// 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+		
+		// 商户订单号
+		
+		$out_trade_no = $_GET ['out_trade_no'];
+		
+		// 支付宝交易号
+		
+		$trade_no = $_GET ['trade_no'];
+		
+		// 交易状态
+		$trade_status = $_GET ['trade_status'];
+		
+		if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
+			// 判断该笔订单是否在商户网站中已经做过处理
+			// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
+			$LineOrder = D ( 'LineOrder' );
+			$orderInfo = $LineOrder->where ( array (
+					'orderid' => $out_trade_no 
+			) )->find ();
+			$state = $orderInfo ['state'];
+			if ($state == 0) { // 如果订单状态是未支付则修改为已支付
+				$LinePin = D ( 'LinePin' );
+				$LinePin->where ( array (
 						'orderid' => $out_trade_no 
-				) )->find ();
-				$state = $orderInfo ['state'];
-				if ($state == 0) { // 如果订单状态是未支付则修改为已支付
-					$LinePin = D ( 'LinePin' );
-					$LinePin->where ( array (
-							'orderid' => $out_trade_no 
-					) )->setField ( array (
-							'state' => 1,
-							'trade_no' => $trade_no 
-					) );
-					$LineOrder = D ( 'LineOrder' );
-					$LineOrder->where ( array (
-							'orderid' => $out_trade_no 
-					) )->setField ( array (
-							'state' => 1,
-							'trade_no' => $trade_no 
-					) );
-				}
-				
-				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-				
-				// 如果有做过处理，不执行商户的业务程序
-			} else {
-				echo "trade_status=" . $_GET ['trade_status'];
+				) )->setField ( array (
+						'state' => 1,
+						'trade_no' => $trade_no 
+				) );
+				$LineOrder = D ( 'LineOrder' );
+				$LineOrder->where ( array (
+						'orderid' => $out_trade_no 
+				) )->setField ( array (
+						'state' => 1,
+						'trade_no' => $trade_no 
+				) );
 			}
 			
-			echo "验证成功<br />";
+			// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 			
-			// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-			
-			// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//} else {
-			// 验证失败
-			// 如要调试，请看alipay_notify.php页面的verifyReturn函数
-			//echo "验证失败";
-		//}
+			// 如果有做过处理，不执行商户的业务程序
+		} else {
+			echo "trade_status=" . $_GET ['trade_status'];
+		}
+		
+		echo "验证成功<br />";
+		
+		// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+		
+		// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// } else {
+		// 验证失败
+		// 如要调试，请看alipay_notify.php页面的verifyReturn函数
+		// echo "验证失败";
+		// }
 	}
 	public function alipayreturn() {
-		$alipayNotify = new AlipayNotify (array (
+		$alipayNotify = new AlipayNotify ( array (
 				'partner' => '2088911378604746',
 				'seller_email' => '3094372894@qq.com',
 				'key' => 'u5ak2wi6qtt1jg0qdjb68n0dm7l1hgur',
@@ -970,72 +1055,72 @@ EOF;
 				'transport' => 'http' 
 		) );
 		$verify_result = $alipayNotify->verifyReturn ();
-		//echo print_r($verify_result);
-	//	exit();
-		//if ($verify_result==1) { // 验证成功
-		                      // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		                      // 请在这里加上商户的业务逻辑程序代码
-		                      
-			// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-		                      // 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
-		                      
-			// 商户订单号
-			
-			$out_trade_no = $_GET ['out_trade_no'];
-			
-			// 支付宝交易号
-			
-			$trade_no = $_GET ['trade_no'];
-			
-			// 交易状态
-			$trade_status = $_GET ['trade_status'];
-			//echo $_GET ['trade_status'];
-			//exit();
-			
-			if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
-				// 判断该笔订单是否在商户网站中已经做过处理
-				// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
-			    $LineOrder = D ( 'LineOrder' );
-				$orderInfo = $LineOrder->where ( array (
+		// echo print_r($verify_result);
+		// exit();
+		// if ($verify_result==1) { // 验证成功
+		// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 请在这里加上商户的业务逻辑程序代码
+		
+		// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+		// 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+		
+		// 商户订单号
+		
+		$out_trade_no = $_GET ['out_trade_no'];
+		
+		// 支付宝交易号
+		
+		$trade_no = $_GET ['trade_no'];
+		
+		// 交易状态
+		$trade_status = $_GET ['trade_status'];
+		// echo $_GET ['trade_status'];
+		// exit();
+		
+		if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
+			// 判断该笔订单是否在商户网站中已经做过处理
+			// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
+			$LineOrder = D ( 'LineOrder' );
+			$orderInfo = $LineOrder->where ( array (
+					'orderid' => $out_trade_no 
+			) )->find ();
+			$state = $orderInfo ['state'];
+			if ($state == 0) { // 如果订单状态是未支付则修改为已支付
+				$LinePin = D ( 'LinePin' );
+				$LinePin->where ( array (
 						'orderid' => $out_trade_no 
-				) )->find ();
-				$state = $orderInfo ['state'];
-				if ($state == 0) { // 如果订单状态是未支付则修改为已支付
-					$LinePin = D ( 'LinePin' );
-					$LinePin->where ( array (
-							'orderid' => $out_trade_no 
-					) )->setField ( array (
-							'state' => 1,
-							'trade_no' => $trade_no 
-					) );
+				) )->setField ( array (
+						'state' => 1,
+						'trade_no' => $trade_no 
+				) );
 				
-					$LineOrder->where ( array (
-							'orderid' => $out_trade_no 
-					) )->setField ( array (
-							'state' => 1,
-							'trade_no' => $trade_no 
-					) );
-				}
-				
-				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-				
-				// 如果有做过处理，不执行商户的业务程序
-				$this->assign ( "mess", '支付成功!' );
-			} else {
-				echo "trade_status=" . $_GET ['trade_status'];
-				$this->assign ( "mess", '此订单已经支付过!' );
+				$LineOrder->where ( array (
+						'orderid' => $out_trade_no 
+				) )->setField ( array (
+						'state' => 1,
+						'trade_no' => $trade_no 
+				) );
 			}
 			
-			//echo "验证成功<br />";
+			// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 			
-			// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-			
-			// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//} else {
-			// 验证失败
-			// 如要调试，请看alipay_notify.php页面的verifyReturn函数
-			//echo "验证失败";
-		//}
+			// 如果有做过处理，不执行商户的业务程序
+			$this->assign ( "mess", '支付成功!' );
+		} else {
+			echo "trade_status=" . $_GET ['trade_status'];
+			$this->assign ( "mess", '此订单已经支付过!' );
+		}
+		
+		// echo "验证成功<br />";
+		
+		// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+		
+		// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// } else {
+		// 验证失败
+		// 如要调试，请看alipay_notify.php页面的verifyReturn函数
+		// echo "验证失败";
+		// }
 		$this->display ();
 	}
 }

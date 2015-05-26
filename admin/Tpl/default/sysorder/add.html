@@ -1,0 +1,39 @@
+<div id="nav" class="mainnav_title">
+	<ul>
+		<a class="on" href="{:U('citybelong/add',array('t'=>$types))}">添加</a>
+	</ul>
+</div>
+<form id="myform" action="{:U('sysorder/add')}"
+	method="post" class="validate" target="main">
+	<table border="0" cellspacing="0" cellpadding="0" class="table_form"
+		width="100%">
+		<tr>
+			<td align="right" width="90"><span class="red">*</span>订单信息</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>名称:</td>
+			<td><input type="text" name="name" id="name"></td>
+		<tr>
+		<tr>
+			<td>成人人数:</td>
+			<td><input type="text" maxlength="3" name="pcount"
+				id="pcount" class="txt" value="1" >
+			</td>
+		<tr>
+		<tr>
+			<td>儿童人数:</td>
+			<td><input type="text" maxlength="3" name="ccount"
+				id="ccount" class="txt" value="1" ></td>
+		<tr>
+		<tr>
+			<td>订单时间:</td>
+			<td><input name="orderdate" type="text" id="orderdate" value=''
+				class="input-text calender" /></td>
+		<tr>
+	</table>
+	<div id="btnbox" class="btn">
+		<INPUT TYPE="submit" name="submit" value=" 保 存 " class="button">
+		<input TYPE="reset" value=" 重 置 " class="button">
+	</div>
+</form>

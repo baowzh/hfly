@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td class="names" style="color: #f85c23; font-weight: bold">旅行日期</td>
-				<td class="ru"><input name="ends" type="text" id="ends"
+				<td class="ru"><input name="ends" type="text" id="ends" value="{$tripday}"
 					style="width: 145px;" class="Wdate" onchange="onDateChange();"
 					onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'%y-%M-%d'});"
 					valid="required" errmsg="请选择预定日期" readonly=""></td>
@@ -99,10 +99,19 @@
 					<span style="margin-top: 10px">（接收Email报名通知）</span></td>
 			</tr>
 			<tr>
+				<td class="names">房间数</td>
+				<td style="text-align: left; padding-left: 10px"><input
+					type="text" name="roomnum" style="width: 145px;"></td>
+				<td class="names">单房差</td>
+				<td colspan="3" style="text-align: left">
+				<b id="dfc">{$price_day.dfc}</b>元
+				</td>
+			</tr>
+			<tr>
 				<td class="names">备注说明</td>
 				<td colspan="5"><textarea name="desc"
 						style="width: 705px; height: 70px; margin-top: 5px; border: 1px solid #05adae;"></textarea>
-					<p>如：请把航班车次以及其他信息，以及客服留给您承诺的信息写入</p></td>
+					<p>报价已包含旅游意外险，请在备注里写清楚参加旅游人员的姓名和身份证号码，如果您没有留名单信息，我们无法为您上意外保险，即默认为您自动放弃此保险</p></td>
 			</tr>
 			<tr>
 				<td class="names">客服编号</td>

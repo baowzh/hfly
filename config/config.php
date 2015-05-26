@@ -9,7 +9,7 @@ return array(
     'DB_PORT' => '3306',
     'DB_PREFIX' => 'jee_',
     'DB_SUFFIX' => '',
-    'APP_DEBUG' => 1,
+    'APP_DEBUG' => true,
     'MAIL_ADDRESS' => '', // 邮箱地址
     'MAIL_SMTP' => 'smtp.qq.com', // 邮箱SMTP服务器
     'MAIL_LOGINNAME' => '', // 邮箱登录帐号

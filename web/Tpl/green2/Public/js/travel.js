@@ -324,33 +324,31 @@ var setMoney = function() {
 				datePriceList[1][numrange][i];
 				$('#crdj').html(datePriceList[1][numrange][i].price_adult);
 				$('#etdj').html(datePriceList[1][numrange][i].price_children);
-				$('#cryf')
-						.html(datePriceList[1][numrange][i].price_adult * 0.3);
-				$('#etyf').html(
-						datePriceList[1][numrange][i].price_children *cnumber* 0.3);
+				$('#cryf').html(datePriceList[1][numrange][i].price_adultpre);
+				$('#etyf')
+						.html(datePriceList[1][numrange][i].price_childrenpre);
 				$('#ydzf').html(
-						datePriceList[1][numrange][i].price_adult * pnumber
-								* 0.3
-								+ datePriceList[1][numrange][i].price_children
-								* cnumber * 0.3);
+						datePriceList[1][numrange][i].price_adultpre * pnumber
+
+						+ datePriceList[1][numrange][i].price_childrenpre
+								* cnumber);
 				$('#ddhzf')
 						.html(
 								(datePriceList[1][numrange][i].price_adult
-										* pnumber  + datePriceList[1][numrange][i].price_children
-										* cnumber )
+										* pnumber + datePriceList[1][numrange][i].price_children
+										* cnumber)
 										- (
 
-										datePriceList[1][numrange][i].price_adult
-												* pnumber * 0.3 + datePriceList[1][numrange][i].price_children
-												* cnumber * 0.3)
+										datePriceList[1][numrange][i].price_adultpre
+												* pnumber + datePriceList[1][numrange][i].price_childrenpre
+												* cnumber)
 
 						);
 				$('#zfy')
-				.html(
-						(datePriceList[1][numrange][i].price_adult
-								* pnumber  + datePriceList[1][numrange][i].price_children
-								* cnumber )						
-				);
+						.html(
+								(datePriceList[1][numrange][i].price_adult
+										* pnumber + datePriceList[1][numrange][i].price_children
+										* cnumber));
 				existprice = true;
 			}
 		}

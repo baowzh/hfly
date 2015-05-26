@@ -319,3 +319,20 @@
   enable: 1
   show: 1  
   url: datafile/lists
+- 
+  names: 自定义订单
+  id: 70
+  pid: 3
+  sort: 0
+  enable: 1
+  show: 1  
+  url: sysorder/show_list
+- 
+  names: 线路地区管理
+  id: 71
+  pid: 3
+  sort: 0
+  enable: 1
+  show: 1  
+  url: linearea/lists
+ 

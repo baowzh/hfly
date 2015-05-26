@@ -429,9 +429,7 @@ class lineAction extends CommonAction {
 	
 	public function query_price(){
 		$sel_numrange = $_POST ['sel_numrange'];
-		// echo $sel_numrange;
-		// exit();
-		$id = $_POST ['line_id'] ? intval ( $_GET ['line_id'] ) : 0;
+		$id = $_POST ['line_id'] ? intval ( $_POST ['line_id'] ) : 0;
 		$this->redirect ( "line/price_list", array (
 				'line_id' => $id,'sel_numrange'=>$sel_numrange
 		), 1, '页面跳转中~' );
@@ -442,10 +440,7 @@ class lineAction extends CommonAction {
 		$line_price = M ( "LinePrice" );
 		$line_info = M ( 'LineInfo' );
 		$sel_numrange = $_GET ['sel_numrange'];
-		// echo $sel_numrange;
-		// exit();
 		$id = $_GET ['line_id'] ? intval ( $_GET ['line_id'] ) : 0;
-		
 		// 基本价格
 		$price_pt = $line_price->where ( "price_type=4 and line_id=" . $id )->find ();
 		// 按星期价格
@@ -542,6 +537,11 @@ class lineAction extends CommonAction {
 			}
 			$linePrice->price_date = strtotime ( $val );
 			$linePrice->day = substr ( $val, 6, 2 );
+			if(strlen($linePrice->day)<2){
+				$linePrice->day='0'.$linePrice->day;
+			}
+			echo $linePrice->day;
+			//exit();
 			$linePrice->line_id = $_POST ["line_id"];
 			/*
 			$linePrice1 = D ( 'LinePrice' );
