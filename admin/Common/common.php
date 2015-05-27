@@ -239,8 +239,8 @@ function conf($config_string, $value = null) {
 }
 
 //通过ID获取城市信息
-function _get_city($cityid, $field = 'names') {
-	return M('area')->where("id='$cityid'")->getField($field);
+function _get_city($cityid, $field = 'asname') {
+	return M('linearea')->where("code='$cityid'")->getField($field);
 }
 
 /**

@@ -259,7 +259,9 @@ class travelAction extends CommonAction {
 		$_POST ['type'] = 1;
 		$order = D ( 'order' );
 		if ($LineOrder->create ()) {
-			$LineOrder->orderdate = time ();
+			$time = time();
+			$currentdate= date("y-m-d",$time);
+			$LineOrder->orderdate = $currentdate;
 			$LineOrder->startdate = $_POST ['ends'];
 			$LineOrder->price = $price;
 			$LineOrder->remoney = $remoney;

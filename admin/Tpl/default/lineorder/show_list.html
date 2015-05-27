@@ -1,17 +1,17 @@
 <form action="{:U('show_list')}" method="get">
+	<!--  
 	<div id="nav" class="mainnav_title">
 		<ul>
 			<if condition="$type eq 0"> <a class="on"
 				href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
 				href="__URL__/show_list?type=1&line_id={$line_id}">报名拼团订单</a> <a
 				href="__URL__/show_list?type=2&line_id={$line_id}">普通订单</a> </if>
-			 
-			<if condition="$type eq 1">
-			 <a
+
+			<if condition="$type eq 1"> <a
 				href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
 				href="__URL__/show_list?type=1&line_id={$line_id}" class="on">报名拼团订单</a>
 			<a href="__URL__/show_list?type=2&line_id={$line_id}">普通订单</a> </if>
-			
+
 
 			<if condition="$type eq 2"> <a
 				href="__URL__/show_list?type=0&line_id={$line_id}">发起拼团订单</a> <a
@@ -20,21 +20,33 @@
 			</if>
 		</ul>
 	</div>
+	-->
 
 	<table class="search_table" width="100%">
 		<tr>
-			<td class="search">关键词: <input id="search_key" type="text"
-				class="input-text" name="names" value="{$search_key}" /> <!-- 			<input -->
+			<td class="search">线路编号: <input id="lcode" type="text"
+				class="input-text" name="lcode" value="{$lcode}" />
+			</td>
+			<td class="search">联系方式: <input id="phone" type="text"
+				class="input-text" name="phone" value="{$phone}" /> <!-- 			<input -->
 				<!-- 				type="submit" value="查询" class="button" /> -->
 			</td>
-			<td class="search">联系方式: <input id="search_key" type="text"
-				class="input-text" name="names" value="{$search_key}" /> <!-- 			<input -->
-				<!-- 				type="submit" value="查询" class="button" /> -->
+			<td class="search">姓名: <input id="name" type="text"
+				class="input-text" name="name" value="{$name}" />
 			</td>
-			<td class="search">订单号: <input id="search_key" type="text"
-				class="input-text" name="names" value="{$search_key}" /> <input
-				type="submit" value="查询" class="button" />
+
+		</tr>
+		<tr>
+			<td class="search">订单号: <input id="orderid" type="text"
+				class="input-text" name="orderid" value="{$orderid}" />
 			</td>
+			<td class="search">起始时间: <input name="strorderdate" type="text"
+				id="strorderdate" value='' class="input-text calender" />
+			</td>
+			<td class="search">终止时间:<input name="endorderdate" type="text"
+				id="endorderdate" value='' class="input-text calender" />
+			</td>
+			<td><input type="submit" value="查询" class="button" /></td>
 		</tr>
 	</table>
 </form>
@@ -44,13 +56,14 @@
 		<table cellspacing="1" cellpadding="1" width="100%">
 			<thead>
 				<tr style="background: #fff;">
-					<th>订单ID</th>
+					<!-- 					<th>订单ID</th> -->
 					<th>订单号</th>
 					<th>联系人</th>
 					<th>线路名</th>
 					<th>报名时间</th>
 					<th>发团日期&人数&价格</th>
 					<th>组团方式</th>
+					<th>预付款</th>
 					<th>总费用</th>
 					<th>状态</th>
 					<th>操作</th>
@@ -60,18 +73,20 @@
 			<tbody id="content">
 				<volist name="list" id="vo">
 				<tr>
-					<td>{$vo.id}</td>
+					<!-- 					<td>{$vo.id}</td> -->
 					<td>{$vo.orderid}</td>
 					<td>{$vo.name}<br>{$vo.phone}
 					</td>
 					<td>{$vo.names}</td>
 					<td>{$vo.orderdate}</td>
-					<td>{$vo.start}<br>{$vo.num}人 <br> 每人￥{$vo.cmoney}元
+					<td>{$vo.startdate}<br>成人{$vo.pnumber}/ 每人￥{$vo.pmoney}元<br>儿童{$vo.cnumber}/每人￥{$vo.cmoney}元 <br> 
 					</td>
+					
 					<td><if condition="$vo.line_type eq '1'">包团自由行 <elseif
 							condition="$vo.line_type eq '2'" />纯玩团 <elseif
 							condition="$vo.line_type eq '3'" />纯玩团 <elseif
 							condition="$vo.line_type eq '4'" />团队策划 </if></td>
+					<td>{$vo.remoney}</td>
 					<td>￥{$vo.price}元</td>
 					<td><if condition="$vo.state eq '0'">待付款 <elseif
 							condition="$vo.state eq '1'" />待付款 <elseif
@@ -81,7 +96,7 @@
 							condition="$vo.state eq '6'" />已结束 <elseif
 							condition="$vo.state eq '7'" />已取消 </if></td>
 					<td><a href="javascript:void(0);"
-						onclick="select_win({$vo.o_id});">查看</a> <if
+						onclick="select_win({$vo.orderid});">查看</a> <if
 							condition="$vo.o_status eq '1'">&nbsp;|&nbsp;<a
 							href="{:U('lineorder/set_status',array('id'=>$vo['o_id']))}"
 							onclick="return atr_confirm(this.href,'确定处理该订单吗?')">处理订单</a>&nbsp;|&nbsp;<a
@@ -107,11 +122,11 @@
 <div class="page">{$page}</div>
 <script language="javascript">
     
-    function select_win(id){
-        art.dialog.open('{:U('select_win')}?id='+id,{
+    function select_win(orderid){
+        art.dialog.open('{:U('select_win')}?orderid='+orderid,{
 		title:'查看订单',
 		width:640,
-		height:480,
+		height:510,
 		lock:'true'
 		});
     }

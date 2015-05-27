@@ -12,6 +12,7 @@
 					<th><a href="javascript:void(0);" onclick="sel_all()">全选</a></th>
 					<th>地区名称</th>
 					<th>编码</th>
+					<th>别名</th>
 					<th>图片</th>
 					<th>操作</th>
 				</tr>
@@ -23,6 +24,7 @@
 						value="{$vo.id}" name="items_{$vo.id}" /></td>
 					<td>{$vo.name}</td>
 					<td>{$vo.code}</td>
+					<td>{$vo.asname}</td>
 					<td><img src="__ROOT__/{$vo.imgurl}"
 						style="max-height: 50px; max-width: 120px;" /></td>
 					<td><a href="{:U('edit',array('id'=>$vo['id']))}">编辑</a>&nbsp;<a

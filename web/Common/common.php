@@ -362,7 +362,7 @@ function get_line_min_price($id) {
 	$unix_time = $time;
 	$week_date = date("w", $unix_time);
 	$where['id'] = $id;
-	$price_sql = "price_type=4 or (price_type=3 and '$week_date'=price_date) or (price_type=2 and '$unix_time'>=price_date and '$unix_time'<=price_date_end) or (price_type=1 and from_unixtime(price_date,'%Y%m%d')= from_unixtime(UNIX_TIMESTAMP(),'%Y%m%d'))";
+	$price_sql = "(price_type=2 and from_unixtime(price_date,'%Y%m%d')= from_unixtime(UNIX_TIMESTAMP(),'%Y%m%d'))  or (price_type=1 and from_unixtime(price_date,'%Y%m%d')= from_unixtime(UNIX_TIMESTAMP(),'%Y%m%d'))";
 	$line = M("Line")->getTableName() . " line";
 	$line_price = M("line_price")->getTableName() . " price";
 	$table = M()->table($line)
