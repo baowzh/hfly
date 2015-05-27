@@ -316,8 +316,9 @@ function _U2_Utf8_Gb($_C) {
 }
 
 //通过ID获取城市信息
-function _get_city($cityid, $field = 'names') {
-	return M('area')->where("id='$cityid'")->getField($field);
+function _get_city($cityid, $field = 'asname') {
+	$cityname= M('line_area')->where("code='$cityid'")->getField($field);
+	return $cityname;
 }
 
 //获取线路预付金额

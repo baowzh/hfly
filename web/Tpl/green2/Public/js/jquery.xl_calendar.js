@@ -35,7 +35,9 @@
                 '<td  class="the_calendar_icon2"><b></b></td></tr>' +
                 '</table>'
                header += '<div class="the_calendar_center"><span class="the_calendar_weekend">周日</span><span class="the_calendar_day" style="border-left:0px;">周一</span><span class="the_calendar_day">周二</span><span class="the_calendar_day">周三</span><span class="the_calendar_day" style="width:168px;">周四</span><span class="the_calendar_day" style="width:168px;">周五</span><span class="the_calendar_weekend" style="width:168px;">周六</span></div><div class="the_calendar_down"><table width="407" border="1" class="calendar_list"></table></div>';
-
+             /**
+              * 加载数据
+              */
             var write_data = function (data) {
                 var table = $(""+options.container+" table.calendar_list");
                 var data_detail = {}
@@ -93,7 +95,9 @@
                 table.find("td.day.disable span.price").empty();
 
             }
-
+            /**
+             * 创建日历表
+             */
             var create_month = function (year, month) {
                 var data_month = year.toString() + month.toString();
                 if (parseInt(data_month) > parseInt(options.max_date) || parseInt(data_month) < parseInt(options.min_date)) {
@@ -132,6 +136,9 @@
                 var return_obj = $(table_str)
                 return return_obj;
             }
+            /**
+             * 上一个月
+             */
             var prew_month = function () {
 
                 var y = $(options.container).find("i.year").html();
@@ -148,6 +155,9 @@
                 }
                 $(""+options.container+" table.calendar_list td.day").bind("click", td_click);
             }
+            /**
+             * 下一个月 
+             */
             var next_month = function () {
                 var y = $(options.container).find("i.year").html();
                 var m = $(options.container).find("i.month").html();
@@ -163,6 +173,9 @@
                 }
                 $(""+options.container+" table.calendar_list td.day").bind("click", td_click);
             }
+            /**
+             * td鼠标点击事件
+             */
             var td_click = function () {
                 var day = $(this).attr("data-day").match(/(\d{4})(\d{2})(\d{2})/);
                 if ($(this).hasClass("disable")) {
@@ -189,7 +202,9 @@
                 $(options.container).trigger("blur");
             }
 
-
+            /**
+             * 初始化表格
+             */
             var init = function () {
                 var init_val = $(this).val().match(/^(\d{4})\-(\d{2})\-(\d{2})$/);
                 $(options.container).prepend(header);

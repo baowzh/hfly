@@ -249,7 +249,7 @@
 #pricetitle {
 	margin: 0 auto;
 	height: 52px;
-	width: 666px;
+	width: 800px;
 	border-left: 1px #05b5b5 solid;
 	padding: 0px 0px 0px 0px;
 }
@@ -1728,7 +1728,7 @@
 	margin: auto auto;
 	left: 0;
 	right: 0;
-	top: 20%;
+	top: 17%;
 }
 
 .link_2 table {
@@ -1739,8 +1739,8 @@
 
 .link_2 table tr {
 	width: 800px;
-	height: 40px;
-	line-height: 40px;
+	height: 32px;
+	line-height: 32px;
 	border-bottom: 1px solid #05adae;
 }
 
@@ -1761,7 +1761,7 @@
 
 .link_2 table input {
 	width: 74px;
-	height: 28px;
+	height: 22px;
 	border: 1px solid #10b0b1;
 	color: #888988;
 	padding-left: 5px;

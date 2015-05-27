@@ -134,29 +134,34 @@ class travelAction extends CommonAction {
 		$day = $_GET ['day'];
 		$index = $_GET ['index'];
 		$numrange = $_GET ['numrange'];
-		$numrange = $numrange + 1;
+		$price_type = 1;
 		$line = M ( "line" );
 		$line_base = $line->find ( $lineid );
 		$this->assign ( "line_base", $line_base ); // 基本信息
 		                                           // 获取 价钱设置
 		                                           // 取 2-3人 4-6人7-9人10-12人 13人以上设置
 		$line_price = M ( "LinePrice" );
-		$price_type = 1;
 		$price_day_tmp1 = null;
 		$price_day_tmp2 = null;
 		$price_day_tmp3 = null;
 		$price_day_tmp4 = null;
 		$price_day_tmp5 = null;
 		$price_day = null;
-		if ($line_base [line_type] != 3) {
+		if ($line_base ['line_type'] != 3) {
+			if ($numrange == 0) {
+				$numrange = 6;
+			}
 			$price_day = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=" . $numrange . " and year=" . $year . " and month=" . $month . " and day=" . $day )->find ();
+			$price_day_tmp0 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=6" )->select ();
 			$price_day_tmp1 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=1" )->select ();
 			$price_day_tmp2 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=2" )->select ();
 			$price_day_tmp3 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=3" )->select ();
 			$price_day_tmp4 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=4" )->select ();
 			$price_day_tmp5 = $line_price->where ( "price_type=1 and line_id=$lineid and numrange=5" )->select ();
 		} else {
+			$price_type = 2;
 			$price_day = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=" . $numrange . " and year=" . $year . " and month=" . $month . " and day=" . $day )->find ();
+			$price_day_tmp0 = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=0" )->select ();
 			$price_day_tmp1 = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=0" )->select ();
 			$price_day_tmp2 = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=0" )->select ();
 			$price_day_tmp3 = $line_price->where ( "price_type=2 and line_id=$lineid and numrange=0" )->select ();
@@ -168,23 +173,28 @@ class travelAction extends CommonAction {
 				4 => $price_day_tmp4,
 				3 => $price_day_tmp3,
 				2 => $price_day_tmp2,
-				1 => $price_day_tmp1 
+				1 => $price_day_tmp1,
+				0 => $price_day_tmp0 
 		);
-		$this->assign ( "line_type", $line_type [line_type] );
+		$this->assign ( "line_type", $line_type ['line_type'] );
 		$this->assign ( "travel_price_list", json_encode ( $travel_price_list ) );
-		$price_day [cryf] = $price_day [price_adultpre];
-		$price_day [etyf] = 0;
-		$price_day [ydzf] = $price_day [price_adultpre];
-		if ($price_day [price_adultec] != null) {
-			$price_day [ddhzf] = $price_day [price_adultec];
+		$price_day ['cryf'] = $price_day ['price_adultpre'];
+		$price_day ['etyf'] = $price_day ['price_childrenpre'];
+		;
+		$price_day ['ydzf'] = $price_day ['price_adultpre'];
+		$price_day ['creczf'] = $price_day ['price_adultec'];
+		$price_day ['eteczf'] = $price_day ['price_childrenec'];
+		
+		if ($price_day ['price_adultec'] != null) {
+			$price_day ['ddhzf'] = $price_day ['price_adultec'];
 		} else {
-			$price_day [ddhzf] = $price_day [price_adult] - $price_day [price_adultpre];
+			$price_day ['ddhzf'] = $price_day ['price_adult'] - $price_day ['price_adultpre'];
 		}
 		
 		$this->assign ( "price_day", $price_day );
 		$this->assign ( "tripday", $year . '-' . $month . '-' . $day );
-		// print_r($price_day);
-		// exit();
+		// print_r ( $price_day );
+		// exit ();
 		$this->display ();
 	}
 	public function order_ding_act() {
@@ -210,6 +220,14 @@ class travelAction extends CommonAction {
 			$this->ajaxReturn ( "", "备注说明不能为空", "n" );
 			exit ();
 		}
+		if (empty ( $_POST ['ends'] )) {
+			$this->ajaxReturn ( "", "请填写旅行日期", "n" );
+			exit ();
+		}
+		if (empty ( $_POST ['roomnum'] )) {
+			$this->ajaxReturn ( "", "请填写房间数", "n" );
+			exit ();
+		}
 		// 获取用户选择日期和人数规模从后台取得线路价钱
 		$id = $_POST ['lid'];
 		$ends = $_POST ['ends'];
@@ -218,6 +236,7 @@ class travelAction extends CommonAction {
 		$day = substr ( $ends, 8, 2 );
 		$pnumber = $_POST ['pnumber'];
 		$cnumber = $_POST ['cnumber'];
+		$roomnum = $_POST ['roomnum'];
 		$numrange = 1;
 		if ($pnumber == 1) {
 			$numrange = 0;
@@ -237,17 +256,36 @@ class travelAction extends CommonAction {
 		$price_type = 1;
 		if ($line_base ['line_type'] != 3) {
 			$price_type = 1;
+			if($numrange==0){
+				$numrange=6;
+			}
 		} else {
 			$price_type = 2;
 			$numrange = 0;
 		}
 		$line_price = M ( "LinePrice" );
 		$price_day = $line_price->where ( "price_type=" . $price_type . " and line_id=" . $id . " and numrange=" . $numrange . " and year=" . $year . " and month=" . $month . " and day=" . $day )->find ();
-		if($price_day==null){
-			$this->ajaxReturn ( "", "订单提交失败".$year.'-'.$month.'-'.$day.'没有报价设置，请拨打热线电话咨询。', "n" );
+		if ($price_day == null) {
+			$this->ajaxReturn ( "", "订单提交失败" . $year . '-' . $month . '-' . $day . '没有报价设置，请拨打热线电话咨询。', "n" );
 		}
-		$price = $price_day ['price_adult'] * $pnumber + $price_day ['price_children'] * $cnumber;
-		$remoney = $price_day ['price_adultpre'] * $pnumber  + $price_day ['price_childrenpre'] * $cnumber ;
+		// 计算单房差
+		if ($roomnum != null && $roomnum != '') {
+			$totalnum = $pnumber * 1 + $cnumber * 1;
+			$ytfjs = $totalnum / 2;
+			if ($totalnum % 2 > 0) {
+				$ytfjs = $ytfjs + 1 - 0.5;
+			}
+			$sjfjs = $roomnum * 1;
+			if ($sjfjs - $ytfjs > 0) {
+				$dfcz = $price_day ['dfc'] * ($sjfjs - $ytfjs);
+			} else {
+				$dfcz = 0;
+			}
+		}
+		//
+		
+		$price = $price_day ['price_adult'] * $pnumber + $price_day ['price_children'] * $cnumber+$dfcz;
+		$remoney = $price_day ['price_adultpre'] * $pnumber + $price_day ['price_childrenpre'] * $cnumber;
 		$pmoney = $price_day ['price_adult'];
 		$premoney = $price_day ['price_adultpre'];
 		$cmoney = $price_day ['price_children'];
@@ -259,8 +297,8 @@ class travelAction extends CommonAction {
 		$_POST ['type'] = 1;
 		$order = D ( 'order' );
 		if ($LineOrder->create ()) {
-			$time = time();
-			$currentdate= date("y-m-d",$time);
+			$time = time ();
+			$currentdate = date ( "y-m-d", $time );
 			$LineOrder->orderdate = $currentdate;
 			$LineOrder->startdate = $_POST ['ends'];
 			$LineOrder->price = $price;
@@ -271,6 +309,30 @@ class travelAction extends CommonAction {
 			$LineOrder->cremoney = $cremoney;
 			$LineOrder->lcode = $lcode;
 			$LineOrder->startdate = $startdate;
+			$LineOrder->dfc = $price_day ['dfc'];
+			$LineOrder->dfcz = $dfcz;
+			$LineOrder->pmoneyec = $price_day ['price_adultec'];
+			$LineOrder->pmoneyyk = $price_day ['price_adultyk'];
+			$LineOrder->cmoneyec = $price_day ['price_childrenec'];
+			$LineOrder->cmoneyyk = $price_day ['price_childrenyk'];
+			$pmoneyec = 0;
+			if ($LineOrder->pmoneyec != 0) {
+				$pmoneyec = $LineOrder->pmoneyec;
+			}
+			$cmoneyec = 0;
+			if ($LineOrder->cmoneyec != 0) {
+				$cmoneyec = $LineOrder->cmoneyec;
+			}
+			$LineOrder->eczfz = $pmoneyec * $pnumber + $cmoneyec * $cnumber;
+			$pyk = 0;
+			if ($LineOrder->pmoneyyk != 0) {
+				$pyk = $LineOrder->pmoneyyk;
+			}
+			$cyk = 0;
+			if ($LineOrder->cmoneyyk != 0) {
+				$cyk = $LineOrder->cmoneyyk;
+			}
+			$LineOrder->ykz = $pyk * $pnumber + $cyk * $cnumber;
 			$LineOrder->add ();
 			$insert_id = $LineOrder->getLastInsID ();
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
@@ -552,12 +614,14 @@ class travelAction extends CommonAction {
 		$price_day_tmp4 = null;
 		$price_day_tmp5 = null;
 		if ($line_type [line_type] != 3) {
+			$price_day_tmp0 = $line_price->where ( "price_type=1 and line_id=$id and numrange=6" )->select ();
 			$price_day_tmp1 = $line_price->where ( "price_type=1 and line_id=$id and numrange=1" )->select ();
 			$price_day_tmp2 = $line_price->where ( "price_type=1 and line_id=$id and numrange=2" )->select ();
 			$price_day_tmp3 = $line_price->where ( "price_type=1 and line_id=$id and numrange=3" )->select ();
 			$price_day_tmp4 = $line_price->where ( "price_type=1 and line_id=$id and numrange=4" )->select ();
 			$price_day_tmp5 = $line_price->where ( "price_type=1 and line_id=$id and numrange=5" )->select ();
 		} else {
+			$price_day_tmp0 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
 			$price_day_tmp1 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
 			$price_day_tmp2 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
 			$price_day_tmp3 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
@@ -565,6 +629,32 @@ class travelAction extends CommonAction {
 			$price_day_tmp5 = $line_price->where ( "price_type=2 and line_id=$id and numrange=0" )->select ();
 		}
 		// 按指定日期
+		foreach ( $price_day_tmp0 as $tmp ) {
+			// $key = date ( "Ymd", $tmp ["price_date"] );
+			$vmonth = $tmp ["month"];
+			
+			if (strlen ( $vmonth ) < 2) {
+				$vmonth = '0' . $vmonth;
+			}
+			$iday = $tmp ["day"];
+			if (strlen ( $iday ) < 2) {
+				$iday = '0' . $iday;
+			}
+			$key = $tmp ["year"] . $vmonth . $iday;
+			$price_day0 [$key] = array (
+					"RACKRATE" => $tmp ["RACKRATE"],
+					"price_adult" => $tmp ["price_adult"],
+					"price_adultpre" => $tmp ["price_adultpre"],
+					"price_adultec" => $tmp ["price_adultec"],
+					"price_adultyk" => $tmp ["price_adultyk"],
+					"price_children" => $tmp ["price_children"],
+					"price_childrenec" => $tmp ["price_childrenec"],
+					"price_childrenpre" => $tmp ["price_childrenpre"],
+					"price_childrenyk" => $tmp ["price_childrenyk"],
+					"dfc" => $tmp ["dfc"] 
+			);
+		}
+		
 		foreach ( $price_day_tmp1 as $tmp ) {
 			// $key = date ( "Ymd", $tmp ["price_date"] );
 			$vmonth = $tmp ["month"];
@@ -572,7 +662,7 @@ class travelAction extends CommonAction {
 			if (strlen ( $vmonth ) < 2) {
 				$vmonth = '0' . $vmonth;
 			}
-			$iday=$tmp ["day"];
+			$iday = $tmp ["day"];
 			if (strlen ( $iday ) < 2) {
 				$iday = '0' . $iday;
 			}
@@ -586,7 +676,8 @@ class travelAction extends CommonAction {
 					"price_children" => $tmp ["price_children"],
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
-					"price_childrenyk" => $tmp ["price_childrenyk"] 
+					"price_childrenyk" => $tmp ["price_childrenyk"],
+					"dfc" => $tmp ["dfc"] 
 			);
 		}
 		foreach ( $price_day_tmp2 as $tmp ) {
@@ -595,7 +686,7 @@ class travelAction extends CommonAction {
 			if (strlen ( $vmonth ) < 2) {
 				$vmonth = '0' . $vmonth;
 			}
-			$iday=$tmp ["day"];
+			$iday = $tmp ["day"];
 			if (strlen ( $iday ) < 2) {
 				$iday = '0' . $iday;
 			}
@@ -609,7 +700,8 @@ class travelAction extends CommonAction {
 					"price_children" => $tmp ["price_children"],
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
-					"price_childrenyk" => $tmp ["price_childrenyk"] 
+					"price_childrenyk" => $tmp ["price_childrenyk"],
+					"dfc" => $tmp ["dfc"] 
 			);
 		}
 		foreach ( $price_day_tmp3 as $tmp ) {
@@ -618,7 +710,7 @@ class travelAction extends CommonAction {
 			if (strlen ( $vmonth ) < 2) {
 				$vmonth = '0' . $vmonth;
 			}
-			$iday=$tmp ["day"];
+			$iday = $tmp ["day"];
 			if (strlen ( $iday ) < 2) {
 				$iday = '0' . $iday;
 			}
@@ -632,7 +724,8 @@ class travelAction extends CommonAction {
 					"price_children" => $tmp ["price_children"],
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
-					"price_childrenyk" => $tmp ["price_childrenyk"] 
+					"price_childrenyk" => $tmp ["price_childrenyk"],
+					"dfc" => $tmp ["dfc"] 
 			);
 		}
 		foreach ( $price_day_tmp4 as $tmp ) {
@@ -641,7 +734,7 @@ class travelAction extends CommonAction {
 			if (strlen ( $vmonth ) < 2) {
 				$vmonth = '0' . $vmonth;
 			}
-			$iday=$tmp ["day"];
+			$iday = $tmp ["day"];
 			if (strlen ( $iday ) < 2) {
 				$iday = '0' . $iday;
 			}
@@ -655,7 +748,8 @@ class travelAction extends CommonAction {
 					"price_children" => $tmp ["price_children"],
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
-					"price_childrenyk" => $tmp ["price_childrenyk"] 
+					"price_childrenyk" => $tmp ["price_childrenyk"],
+					"dfc" => $tmp ["dfc"] 
 			);
 		}
 		foreach ( $price_day_tmp5 as $tmp ) {
@@ -664,7 +758,7 @@ class travelAction extends CommonAction {
 			if (strlen ( $vmonth ) < 2) {
 				$vmonth = '0' . $vmonth;
 			}
-			$iday=$tmp ["day"];
+			$iday = $tmp ["day"];
 			if (strlen ( $iday ) < 2) {
 				$iday = '0' . $iday;
 			}
@@ -678,7 +772,8 @@ class travelAction extends CommonAction {
 					"price_children" => $tmp ["price_children"],
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
-					"price_childrenyk" => $tmp ["price_childrenyk"] 
+					"price_childrenyk" => $tmp ["price_childrenyk"],
+					"dfc" => $tmp ["dfc"] 
 			);
 		}
 		$travel_price_list = array (
@@ -686,11 +781,12 @@ class travelAction extends CommonAction {
 				3 => $price_date,
 				2 => $price_stage,
 				1 => $price_day = array (
-						4 => $price_day5,
-						3 => $price_day4,
-						2 => $price_day3,
-						1 => $price_day2,
-						0 => $price_day1 
+						5 => $price_day5,
+						4 => $price_day4,
+						3 => $price_day3,
+						2 => $price_day2,
+						1 => $price_day1,
+						0 => $price_day0 
 				) 
 		);
 		$this->assign ( "line_type", $line_type [line_type] );

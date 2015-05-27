@@ -19,8 +19,9 @@
 			</tr>
 			<tr>
 				<td class="names" style="color: #f85c23; font-weight: bold">旅行日期</td>
-				<td class="ru"><input name="ends" type="text" id="ends" value="{$tripday}"
-					style="width: 145px;" class="Wdate" onchange="onDateChange();"
+				<td class="ru"><input name="ends" type="text" id="ends"
+					value="{$tripday}" style="width: 145px;" class="Wdate"
+					onchange="onDateChange();"
 					onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'%y-%M-%d'});"
 					valid="required" errmsg="请选择预定日期" readonly=""></td>
 				<td class="names" style="color: #f85c23; font-weight: bold">成人单价</td>
@@ -69,16 +70,42 @@
 				<td class="wlef"><b id="etyf">{$price_day.etyf}</b>元</td>
 			</tr>
 			<tr>
-				<td class="names" style="color: #f85c23; font-weight: bold">预定支付</td>
+				<td class="names">房间数:</td>
+				<td style="text-align: left; padding-left: 10px"><input
+					type="text" name="roomnum" id="roomnum"  onchange="onCNumChange();" style="width: 145px;"></td>
+				<td class="names" style="color: #f85c23; font-weight: bold">成人二次支付</td>
+				<td class="wlef"><b id="creczf">{$price_day.price_adultec}</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">成人余款</td>
+				<td class="wlef"><b id="cryk">{$price_day.price_adultyk}</b>元</td>
+				
+			</tr>
+			<tr>
+				<td class="names">单房差:</td>
+				<td style="text-align: left; padding-left: 10px"><b id="dfcz">0</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">儿童二次支付</td>
+				<td class="wlef"><b id="eteczf">{$price_day.price_childrenec}</b>元
+				</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">儿童余款</td>
+				<td class="wlef"><b id="etyk">{$price_day.price_childrenyk}</b>元</td>
+				
+				
+			</tr>
+			<tr>
+				<td class="names" style="color: #f85c23; font-weight: bold">预定支付(总)</td>
 				<td style="text-align: left; padding-left: 10px"><b
 					style="color: #f85c23; font-weight: bold; font-size: 20px"
-					id="ydzf">{$price_day.ydzf}</b>元</td>
-				<td class="names" style="color: #f85c23; font-weight: bold">抵达后支付</td>
-				<td class="wlef"><b id="ddhzf">{$price_day.ddhzf}</b>元</td>
+					id="ydzfz">{$price_day.ydzf}</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">二次支付(总)</td>
+				<td class="wlef"><b id="eczfz">{$price_day.ddhzf}</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">余款(总)</td>
+				<td class="wlef"><b id="ykz">{$price_day.ddhzf}</b>元</td>
+
+			</tr>
+			<tr>
+				<td colspan="4" class="names"></td>
 				<td class="names" style="color: #f85c23; font-weight: bold">费用总计</td>
 				<td class="wlef"><b id="zfy">{$price_day.price_adult}</b>元</td>
 			</tr>
-
 			<tr>
 				<td class="names">联系人</td>
 				<td style="text-align: left; padding-left: 10px"><input
@@ -98,15 +125,14 @@
 					name="email" style="margin-left: 8px; width: 145px; float: left">
 					<span style="margin-top: 10px">（接收Email报名通知）</span></td>
 			</tr>
-			<tr>
-				<td class="names">房间数</td>
-				<td style="text-align: left; padding-left: 10px"><input
-					type="text" name="roomnum" style="width: 145px;"></td>
-				<td class="names">单房差</td>
-				<td colspan="3" style="text-align: left">
-				<b id="dfc">{$price_day.dfc}</b>元
-				</td>
-			</tr>
+			<!-- 			<tr> -->
+			<!-- 				<td class="names">房间数</td> -->
+			<!-- 				<td style="text-align: left; padding-left: 10px"><input -->
+			<!-- 					type="text" name="roomnum" style="width: 145px;"></td> -->
+			<!-- 				<td class="names">单房差</td> -->
+			<!-- 				<td colspan="3" style="text-align: left"><b id="dfc">{$price_day.dfc}</b>元 -->
+			<!-- 				</td> -->
+			<!-- 			</tr> -->
 			<tr>
 				<td class="names">备注说明</td>
 				<td colspan="5"><textarea name="desc"

@@ -87,7 +87,7 @@ $(function() {
 		titleeasing : 'easeOutExpo',
 		titlespeed : 1200
 	});
-	for (var i = 0; i < 5; i++) {
+	for (var i = 0; i < 6; i++) {
 		$("#go_time" + i).xl_calendar({
 			data : jQuery.parseJSON($("#travel_price_list" + i).val()),
 			serverurl : '',
@@ -284,25 +284,28 @@ var setMoney = function() {
 	var ends = $('#ends').val();
 	var pnumber = $('#pnumber').val();
 	var cnumber = $('#cnumber').val();
-	var numrange = 0;
+	var numrange = 1;
+	var roomnum = $('#roomnum').val();
 	if (pnumber == 1) {// 使用标准价钱
-		numrange = 0;
+		numrange = 0;// 价格标准
 	} else if (pnumber >= 2 && pnumber <= 3) {
-		numrange = 0;
-	} else if (pnumber >= 4 && pnumber <= 6) {
 		numrange = 1;
-	} else if (pnumber >= 7 && pnumber <= 9) {
+	} else if (pnumber >= 4 && pnumber <= 6) {
 		numrange = 2;
-	} else if (pnumber >= 10 && pnumber <= 12) {
+	} else if (pnumber >= 7 && pnumber <= 9) {
 		numrange = 3;
-	} else if (pnumber >= 13) {
+	} else if (pnumber >= 10 && pnumber <= 12) {
 		numrange = 4;
+	} else if (pnumber >= 13) {
+		numrange = 5;
 	}
 	var datePriceList = jQuery.parseJSON($("#travel_price_list0").val());
 	if (datePriceList[1]) {
 		if (datePriceList[1][numrange] == null) {
 			var alertmes = '';
-			if (numrange == 1) {
+			if (numrange == 0) {
+				alertmes = '1人报价';
+			} else if (numrange == 1) {
 				alertmes = '2-3人报价';
 			} else if (numrange == 2) {
 				alertmes = '4-6人报价';
@@ -327,11 +330,26 @@ var setMoney = function() {
 				$('#cryf').html(datePriceList[1][numrange][i].price_adultpre);
 				$('#etyf')
 						.html(datePriceList[1][numrange][i].price_childrenpre);
-				$('#ydzf').html(
-						datePriceList[1][numrange][i].price_adultpre * pnumber
+				$('#creczf').html(datePriceList[1][numrange][i].price_adultec);
+				$('#eteczf').html(
+						datePriceList[1][numrange][i].price_childrenec);
+				$('#cryk').html(datePriceList[1][numrange][i].price_adultyk);
+				$('#etyk').html(datePriceList[1][numrange][i].price_childrenyk);
+				$('#eczfz').html(
+						(datePriceList[1][numrange][i].price_adultec * pnumber
+
+						+ datePriceList[1][numrange][i].price_childrenec
+								* cnumber));
+				$('#ykz').html(
+						(datePriceList[1][numrange][i].price_adultyk * pnumber
+
+						+ datePriceList[1][numrange][i].price_childrenyk
+								* cnumber));
+				$('#ydzfz').html(
+						(datePriceList[1][numrange][i].price_adultpre * pnumber
 
 						+ datePriceList[1][numrange][i].price_childrenpre
-								* cnumber);
+								* cnumber));
 				$('#ddhzf')
 						.html(
 								(datePriceList[1][numrange][i].price_adult
@@ -344,11 +362,37 @@ var setMoney = function() {
 												* cnumber)
 
 						);
+				// 计算单房差
+				var dfcz = 0;
+				if (roomnum != null && roomnum != '') {
+					var totalnum = pnumber * 1 + cnumber * 1;
+					var ytfjs = totalnum / 2;
+					if (totalnum % 2 > 0) {
+						ytfjs = ytfjs + 1 - 0.5;
+					}
+					var sjfjs = roomnum * 1;
+					if (sjfjs - ytfjs > 0) {
+						dfcz = datePriceList[1][numrange][i].dfc
+								* (sjfjs - ytfjs);
+					} else {
+						var dfcz = 0;
+					}
+					if (dfcz != 0) {
+						var dfcstr = datePriceList[1][numrange][i].dfc + 'x'
+								+ ((sjfjs - ytfjs) * 1) + '=' + dfcz
+						$('#dfcz').html(dfcstr);
+					} else {
+						$('#dfcz').html(0);
+					}
+
+				}
+
 				$('#zfy')
 						.html(
 								(datePriceList[1][numrange][i].price_adult
 										* pnumber + datePriceList[1][numrange][i].price_children
-										* cnumber));
+										* cnumber)
+										+ dfcz);
 				existprice = true;
 			}
 		}

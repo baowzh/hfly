@@ -29,7 +29,7 @@
     var selday='';
     var submitorder=function(year,month,day,index){
     	// 回传预订时间和人数规模 
-    	submitorderurl=submitorderurl+'/year/'+year+'/month/'+month+'/day/'+day+'/numrange/'+index;
+    	submitorderurl=submitorderurl+'/year/'+year+'/month/'+month+'/day/'+day+'/numrange/'+index+'/price_type/'+$('#lineprice_type').val();
     	showTipsWindown('发起订单',submitorderurl);
     };
     var currentdate='';
@@ -156,20 +156,25 @@
 		<div id="pricetitle" style="margin: 10px 0px 0px 0px;">
 			<ul style="padding: 0; margin: 0;">
 				<li><a id="bbc_btn_0" style="cursor: pointer"
-					onclick="tabit(this,5)" class="postion">2-3人包团</a></li>
+					onclick="tabit(this,6)" class="postion">1人包团</a></li>
 				<li><a id="bbc_btn_1" style="cursor: pointer"
-					onclick="tabit(this,5)">4-6人包团</a></li>
+					onclick="tabit(this,6)">2-3人包团</a></li>
 				<li><a id="bbc_btn_2" style="cursor: pointer"
-					onclick="tabit(this,5)">7-9人包团</a></li>
+					onclick="tabit(this,6)">4-6人包团</a></li>
 				<li><a id="bbc_btn_3" style="cursor: pointer"
-					onclick="tabit(this,5)">10-12人包团</a></li>
+					onclick="tabit(this,6)">7-9人包团</a></li>
 				<li><a id="bbc_btn_4" style="cursor: pointer"
-					onclick="tabit(this,5)">13人及以上</a></li>
+					onclick="tabit(this,6)">10-12人包团</a></li>
+				<li><a id="bbc_btn_5" style="cursor: pointer"
+					onclick="tabit(this,6)">13人及以上</a></li>
 			</ul>
+			<input type="hidden" id="lineprice_type" name="lineprice_type"
+				value="{$price_type}">
 		</div>
 		</if>
 		<div class="pricecontent" style="margin-left: 0px; width: 100%;">
-			<div id="bbc_div_0" style="display: block; position: relative">
+			<div id="bbc_div_0"
+				style="display: block; position: relative; border-top: 1px #05b5b5 solid;">
 				<input tabindex="1" type="text" name="go_time0" id="go_time0"
 					style="display: none" />
 				<textarea id="travel_price_list0" style="display: none;">{$travel_price_list}</textarea>
@@ -177,35 +182,37 @@
 				<span style="display: none"><span id="price_type">周末价</span></span>
 				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
 			</div>
-			<div id="bbc_div_1" style="display: none; position: relative;">
-				<input tabindex="2" type="text" name="go_time1" id="go_time1"
+			<div id="bbc_div_1"
+				style="display: none; position: relative; border-top: 1px #05b5b5 solid;">
+				<input tabindex="1" type="text" name="go_time1" id="go_time1"
 					style="display: none" />
 				<textarea id="travel_price_list1" style="display: none;">{$travel_price_list}</textarea>
 				<div tabindex="2" class="the_calendar" id="the_calendar1"></div>
 				<span style="display: none"><span id="price_type">周末价</span></span>
 				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
 			</div>
-			<div id="bbc_div_2" style="display: none; position: relative;">
-				<input tabindex="3" type="text" name="go_time2" id="go_time2"
+			<div id="bbc_div_2"
+				style="display: none; position: relative; border-top: 1px #05b5b5 solid;">
+				<input tabindex="2" type="text" name="go_time2" id="go_time2"
 					style="display: none" />
 				<textarea id="travel_price_list2" style="display: none;">{$travel_price_list}</textarea>
 				<div tabindex="2" class="the_calendar" id="the_calendar2"></div>
 				<span style="display: none"><span id="price_type">周末价</span></span>
 				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
-
 			</div>
 			<div id="bbc_div_3"
-				style="display: none; border-top: 1px #05b5b5 solid;">
-
-				<input tabindex="2" type="text" name="go_time3" id="go_time3"
+				style="display: none; position: relative; border-top: 1px #05b5b5 solid;">
+				<input tabindex="3" type="text" name="go_time3" id="go_time3"
 					style="display: none" />
 				<textarea id="travel_price_list3" style="display: none;">{$travel_price_list}</textarea>
 				<div tabindex="2" class="the_calendar" id="the_calendar3"></div>
 				<span style="display: none"><span id="price_type">周末价</span></span>
 				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+
 			</div>
 			<div id="bbc_div_4"
 				style="display: none; border-top: 1px #05b5b5 solid;">
+
 				<input tabindex="2" type="text" name="go_time4" id="go_time4"
 					style="display: none" />
 				<textarea id="travel_price_list4" style="display: none;">{$travel_price_list}</textarea>
@@ -213,10 +220,19 @@
 				<span style="display: none"><span id="price_type">周末价</span></span>
 				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
 			</div>
+			<div id="bbc_div_5"
+				style="display: none; border-top: 1px #05b5b5 solid;">
+				<input tabindex="2" type="text" name="go_time5" id="go_time5"
+					style="display: none" />
+				<textarea id="travel_price_list5" style="display: none;">{$travel_price_list}</textarea>
+				<div tabindex="2" class="the_calendar" id="the_calendar5"></div>
+				<span style="display: none"><span id="price_type">周末价</span></span>
+				<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+			</div>
 		</div>
 	</div>
 	<if condition="$lineinfo.special_info neq ''">
-	<div class="detail_road" style="min-height:300px;">
+	<div class="detail_road" style="min-height: 300px;">
 		<h2>特别告知</h2>
 		<div class="feature">{$lineinfo.special_info}</div>
 	</div>
