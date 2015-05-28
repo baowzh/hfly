@@ -11,7 +11,7 @@
    <div class="mianconent">
       <volist name="list" id="vo" mod='3'>
       <li <if condition="$mod eq 2 ">  class="lasts"</if>>
-          <a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}" target="_blank"><img alt="{$vo.names}" width="376" height="247" src="__ROOT__/{$vo.pic}" ></a>
+          <a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}" target="_blank"><img alt="{$vo.names}" width="376" height="247" src="__ROOT__{$vo.pic}" ></a>
           <div class="desc"><span class="adds"><a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}">{$vo.names}</a></span></div>
       </li>
       </volist>

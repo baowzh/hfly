@@ -86,11 +86,12 @@ function formcheck()
         
         <tr>
             <th><span class="red">*</span>所属地区：</th>
-            <td colspan="2"><select id="city_id" name="city_id" class="txt" datatype="/^[^0]\d*$/" nullmsg="请选择所属地区" errmsg="请选择所属地区" sucmsg=" ">
+            <td colspan="2"><select id="city_id" name="city_id" class="txt"  nullmsg="请选择所属地区" errmsg="请选择所属地区" sucmsg=" ">
                     <option value="0">请选择</option>
-                    <volist name="list_city_id" id="vo">
-                    <option  value="{$vo.cid}" <if condition="$vo.id eq $objViewpoint['city_id']"> selected="selected"</if>>{$vo.names}</option>
-                    </volist>
+                   <option value="0471" <if condition="$objViewpoint.city_id eq '0471'"> selected="selected" </if>>呼和浩特</option>
+					<option value="0470" <if condition="$objViewpoint.city_id eq '0470'"> selected="selected" </if>>呼伦贝尔</option>
+					<option value="0479" <if condition="$objViewpoint.city_id eq '0479'"> selected="selected" </if>>锡林郭勒盟</option>
+					<option value="0483" <if condition="$objViewpoint.city_id eq '0483'"> selected="selected" </if>>阿拉善盟</option>
                 </select>
                 <span id="msg_city_belong" class="msg1"></span>
             </td>
