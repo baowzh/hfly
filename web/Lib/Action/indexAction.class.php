@@ -46,17 +46,18 @@ class indexAction extends CommonAction {
 			$this->assign ( 'Line4', $Line4 );
 			$Line44 = $mod_Line->where ( "line_type = '4'  and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
 			$this->assign ( 'Line44', $Line44 );
+			// 获取要滚动的常规团线路列表
+			$normalline = $mod_Line->where ( "line_type = '3' and  linebelongto='" . $areaid . "'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
+			$this->assign ( 'normalline', $normalline );
 		} else {
 			$Line1 = $mod_Line->where ( "line_type = '1'" )->order ( 'sort,id desc' )->limit ( 2 )->select ();
 			$this->assign ( 'Line1', $Line1 );
 			$Line11 = $mod_Line->where ( "line_type = '1'" )->order ( 'id desc' )->limit ( 2 )->select ();
 			$this->assign ( 'Line11', $Line11 );
-			
 			$Line2 = $mod_Line->where ( "line_type = '2'" )->order ( 'sort,id desc' )->limit ( 2 )->select ();
 			$this->assign ( 'Line2', $Line2 );
 			$Line22 = $mod_Line->where ( "line_type = '2'" )->order ( 'id desc' )->limit ( 2 )->select ();
 			$this->assign ( 'Line22', $Line22 );
-			
 			$Line3 = $mod_Line->where ( "line_type = '3'" )->order ( 'sort,id desc' )->limit ( 2 )->select ();
 			$this->assign ( 'Line3', $Line3 );
 			$Line33 = $mod_Line->where ( "line_type = '3'" )->order ( 'id desc' )->limit ( 2 )->select ();
@@ -66,10 +67,14 @@ class indexAction extends CommonAction {
 			$this->assign ( 'Line4', $Line4 );
 			$Line44 = $mod_Line->where ( "line_type = '4'" )->order ( 'id desc' )->limit ( 2 )->select ();
 			$this->assign ( 'Line44', $Line44 );
+			// 获取要滚动的常规团线路列表
+			$normalline = $mod_Line->where ( "line_type = '3'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
+			$this->assign ( 'normalline', $normalline );
 			// echo $areaid;
 		}
 		$this->assign ( 'areaid', $areaid );
 		$latercounsel = session ( 'latercounsel' );
+		session ( 'areaid', $areaid );
 		$this->assign ( 'latercounsel', $latercounsel );
 		$property = $mod_Line->where ( "property = '4'" )->order ( 'sort,id desc' )->limit ( 4 )->select ();
 		$this->assign ( 'property', $property );
@@ -100,9 +105,6 @@ class indexAction extends CommonAction {
 		$sysOrder = M ( 'SysOrder' );
 		$orderlist = $sysOrder->order ( 'orderdate desc' )->limit ( 14 - count ( $realorder ) )->select ();
 		$this->assign ( 'orderlist', $orderlist );
-		// 获取要滚动的常规团线路列表
-		$normalline = $mod_Line->where ( "line_type = '3'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
-		$this->assign ( 'normalline', $normalline );
 		$this->display ();
 	}
 	

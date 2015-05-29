@@ -11,7 +11,7 @@ class TagLibWj extends TagLib {
         // 标签定义： 
         //attr 属性列表 close 是否闭合（0 或者1 默认1） alias 标签别名 level 嵌套层次 
         'lists' => array('attr' => 'name,field,page,row,order,catid,where,id,sql', 'level' => 3),
-        'advert' => array('attr' => 'name,order,limit,id', 'level' => 1),
+        'advert' => array('attr' => 'name,order,limit,id,areaid', 'level' => 1),
         'sfor' => array('attr' => 'max,id', 'level' => 1),
         'input' => array('attr' =>array(array("name"=>"_value","required"=>true)), 'close' => 0),
         '_option' => array('attr' =>array(array("name"=>"_value","required"=>true)), 'close' => 1)
@@ -57,15 +57,19 @@ class TagLibWj extends TagLib {
     }
 
     public function _advert($attr, $content) {
+    	$areaid = $_SESSION['areaid'];
         $tag = $this->parseXmlAttr($attr, 'advert');
         $id = !empty($tag['id']) ? $tag['id'] : 'ad'; //定义数据查询的结果存放变量
         $adcount = !empty($tag['adcount']) ? $tag['adcount'] : 'adcount'; //定义广告总数变量
         $key = !empty($tag['key']) ? $tag['key'] : 'i';
         $order = isset($tag['order']) ? $tag['order'] : 'ad.id desc';
         $limit = isset($tag['limit']) ? $tag['limit'] : '0,5';
+        if($areaid==null){
+        	$areaid='0471';
+        }
         $where = isset($tag['name']) ? "area.status=1 and area.names_en='{$tag['name']}'" : "area.status=1 and area.names_en=''";
         $time = time();
-        $where .= " and ad.start_time<=$time and (ad.end_time=0 or ad.end_time>=$time)";
+        $where .= " and ad.areaid='".$areaid. "' and ad.start_time<=$time and (ad.end_time=0 or ad.end_time>=$time)";
         $ad_db = M("advert")->getTableName() . " ad";
         $area_db = M("advert_area")->getTableName() . " area on ad.area_id=area.id";
         $sql = "M(\"advert\")->table(\"{$ad_db}\")
