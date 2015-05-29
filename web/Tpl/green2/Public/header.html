@@ -76,7 +76,7 @@ $(document).ready(function() {
 			<li><a href="__ROOT__/index.php">首页</a></li>
 			</if>
 			<volist name="arealist" id="vo">
-			<li style="width: 210px; text-align: center;" id="menu{$vo.code}">
+			<li style="min-width: 210px; text-align: center;" id="menu{$vo.code}">
 				<a href=" __ROOT__/index.php?areaid={$vo.code}">{$vo.name}</a>
 			</li>
 			</volist>
