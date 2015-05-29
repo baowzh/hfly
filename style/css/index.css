@@ -89,7 +89,7 @@
 .mianconent li .desc {
 	height: 60px;
 	padding: 10px;
-	overflow:hidden;
+	overflow: hidden;
 }
 
 .mianconent li .desc .price {
@@ -118,7 +118,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-/* 	background: url(../images/tui.png) no-repeat left center; */
+	/* 	background: url(../images/tui.png) no-repeat left center; */
 }
 
 .mianconent .lasts {
@@ -941,7 +941,8 @@
 
 .banner_left {
 	width: 222px;
-	height: 435px;
+	/* 	height: 435px; */
+	height: 400px;
 	float: left;
 	margin-right: 12px;
 	background: #fff
@@ -949,7 +950,7 @@
 
 .banner_center {
 	width: 725px;
-	height: 388px;
+	height: 400px;
 	float: left;
 	margin-right: 12px;
 	background: #000
@@ -957,7 +958,8 @@
 
 .banner_right {
 	width: 229px;
-	height: 435px;
+	/* 	height: 435px; */
+	height: 400px;
 	float: left;
 	background: #fff
 }
@@ -1075,7 +1077,8 @@
 
 .bao_detail .bao_left li .desc {
 	height: 60px;
-	padding: 10px
+	padding: 10px;
+	overflow: hidden;
 }
 
 .bao_detail .bao_left li .desc .price {
@@ -1093,10 +1096,11 @@
 
 .bao_detail .bao_left li .desc p {
 	color: #6d6e6d;
-	font-size: 16px;
+/* 	font-size: 16px; */
 	font-weight: bold;
 	font-weight: normal;
-	line-height: 20px
+	line-height: 20px;
+	font-size: 16px;
 }
 
 .bao_detail .bao_left li .tui {
@@ -1105,7 +1109,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: url(../images/tui2.png) no-repeat left center;
+/* 	background: url(../images/tui2.png) no-repeat left center; */
 }
 
 .bao_detail .bao_right {
@@ -1301,7 +1305,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: url(../images/cd.png) no-repeat left center;
+/* 	background: url(../images/cd.png) no-repeat left center; */
 }
 
 .jing_dec  .jing_left li .shaw {
@@ -2089,12 +2093,24 @@ td.day:not (.disable ):hover {
 	margin: 3px;
 }
 
+.travellinecommselyello {
+	background: #ec9200;
+	color: #fff;
+	font-size: 14px;
+	width: 50px;
+	text-align: center;
+	float: left;
+	margin: 3px;
+}
+
 .travellinecomm {
 	font-size: 14px;
 	width: 150px;
 	text-align: left;
 	float: left;
 	margin: 3px;
+	overflow:hidden;
+	height:20px;
 }
 
 .details_q p {

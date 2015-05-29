@@ -210,6 +210,7 @@ body {
 .nav li a {
 	color: #fff;
 	padding: 0px 20px;
+	font-weight: bold;
 }
 
 .footer {

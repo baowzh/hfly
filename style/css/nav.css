@@ -81,6 +81,7 @@ a {
 	margin-right: 2px;
 	float: right
 }
+
 .sort .sort-list .bgs_4 span em {
 	font-style: normal;
 	font-size: 7px;
@@ -122,6 +123,7 @@ a {
 	line-height: 47px;
 	float: left;
 	border-bottom: 1px solid #f0fafa;
+	list-style: none;
 }
 
 .sort .sort-list li a {
@@ -133,10 +135,15 @@ a {
 	cursor: pointer;
 }
 
+/* .sort .sort-list li a:hover { */
+/* 	color: red; */
+/* } */
+
 .sort .sort-list li a span {
 	display: block;
 	height: 47px;
-	color: #04aeae
+	color: #04aeae;
+	font-weight: bold;
 }
 
 .sort .sort-list li.hover {
@@ -239,7 +246,7 @@ a {
 
 .sort .sort-list ul li.hover ul li {
 	height: 27px;
-	padding: 0
+	padding: 0;
 }
 
 .sort .sort-list ul li.hover ul {
@@ -258,5 +265,6 @@ a {
 }
 
 .sort .sort-list ul li.hover ul li a:hover {
-	background-position: 15px -181px
+	background-position: 15px -181px;
+	color: red;
 }

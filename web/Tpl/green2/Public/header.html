@@ -9,6 +9,8 @@
 <script src="../Public/js/jquery.city_list_plugs.js"
 	type="text/javascript"></script>
 <script src="../Public/js/index.js" type="text/javascript"></script>
+<script src="../Public/js/scrollview-min.js" type="text/javascript"></script>
+<script src="../Public/js/jquery.totemticker.min.js" type="text/javascript"></script>
 <script
 	src="__ROOT__/Public/Plugins/jquery.artDialog/jquery.artDialog.js?skin=default"
 	type="text/javascript"></script>
@@ -19,6 +21,16 @@
 <link rel="stylesheet" href="../Public/assets/css/workless.css">
 <link rel="stylesheet" href="../Public/css/style_index.css">
 <title>欢迎来到内蒙古汇丰旅行社有限公司</title>
+<script type="text/javascript">
+$(document).ready(function() {
+	 var selmenu='{$selmenu}';
+	 if(selmenu!=null&&selmenu!=''){
+		 $('#menu'+selmenu).addClass('curt')
+	 }
+});
+ 
+ //alert(selmenu);
+</script>
 </head>
 <body>
 
@@ -32,15 +44,16 @@
 			</div>
 		</div>
 		<div class="search">
-			<div class="logo" style="margin-top:0px;height:130px;">
-				<img src="__ROOT__/style/images/logo.jpg" style="height:130px;width:560px;">
+			<div class="logo" style="margin-top: 0px; height: 130px;">
+				<img src="__ROOT__/style/images/logo.jpg"
+					style="height: 130px; width: 560px;">
 			</div>
 			<div class="dectails" style="width: 230px; margin-top: 58px;">
 				<!-- 				<li class="hotline" style="background:none;width:200px;">&nbsp;</li> -->
 				<li style="padding-right: 0px;">
 					<form action="{:U('travel/order_query')}">
-						<input type="text" class="shuru" style="width: 120px;" id="phone" name="phone"
-							value="请输入手机号"
+						<input type="text" class="shuru" style="width: 120px;" id="phone"
+							name="phone" value="请输入手机号"
 							onFocus="if(value==defaultValue){value='';this.style.color='#999'}"
 							onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
 						<input type="submit" value="订单查询" class="buts" />
@@ -59,10 +72,15 @@
 			<if condition="$selmenu eq ''">
 			<li class="curt"><a href="__ROOT__/index.php">首页</a></li>
 			</if>
-
 			<if condition="$selmenu neq ''">
 			<li><a href="__ROOT__/index.php">首页</a></li>
 			</if>
+			<volist name="arealist" id="vo">
+			<li style="width: 210px; text-align: center;" id="menu{$vo.code}">
+				<a href=" __ROOT__/index.php?areaid={$vo.code}">{$vo.name}</a>
+			</li>
+			</volist>
+			<!--  
 			<li style="width: 150px; text-align: center;"<eq name="selmenu"
 					value="0471">class="curt"</eq>><a
 				href=" __ROOT__/index.php?areaid=0471">呼和浩特</a></li>
@@ -75,5 +93,6 @@
 			<li style="width: 150px; text-align: center;"<eq name="selmenu"
 					value="0483">class="curt"</eq> ><a
 				href=" __ROOT__/index.php?areaid=0483">阿拉善盟</a></li>
+			-->
 		</div>
 	</div>

@@ -360,6 +360,7 @@ function get_viewpoint_img($viewpoint_id, $type = 's') {
 }
 
 function get_line_min_price($id) {
+	
 	$unix_time = $time;
 	$week_date = date("w", $unix_time);
 	$where['id'] = $id;
@@ -373,6 +374,8 @@ function get_line_min_price($id) {
 			 ->select(false);
 	$lists = M()->table($table . " as tmp_table1")->where($where)->where($price_sql)->group("line_id")->find();
 	return $lists['price_adult'];
+	
+	//return 100;
 }
 
 function get_min_price($id) {

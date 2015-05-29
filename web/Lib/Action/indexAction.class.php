@@ -92,6 +92,17 @@ class indexAction extends CommonAction {
 		$this->assign ( 'cygjmhnmi', $cygjmhnmi );
 		$wmlxi = $article->join ( M ( 'article_section' )->getTableName () . " article_section" . ' on article_section.id=cid' )->where ( "article_section.e_names='{$wmlx}'" )->order ( 'add_time' )->limit ( 1 )->select ();
 		$this->assign ( 'wmlxi', $wmlxi );
+		// 自定义订单
+		//
+		$LineOrder = M ( 'LineOrder' );
+		$realorder = $LineOrder->field ( " SUBSTR(name from 1 for 3) name,pnumber pcount,cnumber ccount,lcode,orderdate" )->order ( " orderdate desc" )->limit ( 8 )->select ();
+		$this->assign ( 'realorder', $realorder );
+		$sysOrder = M ( 'SysOrder' );
+		$orderlist = $sysOrder->order ( 'orderdate desc' )->limit ( 14 - count ( $realorder ) )->select ();
+		$this->assign ( 'orderlist', $orderlist );
+		// 获取要滚动的常规团线路列表
+		$normalline = $mod_Line->where ( "line_type = '3'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
+		$this->assign ( 'normalline', $normalline );
 		$this->display ();
 	}
 	

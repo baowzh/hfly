@@ -2,20 +2,24 @@
 <div class="tanchu1">
 	<div class="tanbox">
 		<div class="tan_left">
+			<volist name="arealist" id="vo">
 			<li class="lasts" style="position: relative;"><a
-				href="__ROOT__/index.php?areaid=0471"> <img alt=""
-					src="style/images/lvxing.jpg">
+				href="__ROOT__/index.php?areaid={$vo.code}"> <img alt=""
+					src="__ROOT__{$vo.imgurl}">
 			</a>
 				<div
 					style="width: 170px; height: 22px; position: absolute; bottom: 0px; background-color: #eee; text-align: right; opacity: 0.6; color: #00acac;">
 					<div style="width: 70px; height: 22px; float: right;">
-						<a style="color: #00acac;" href="__ROOT__/index.php?areaid=0471">呼和浩特&nbsp;</a>
+						<a style="color: #00acac;"
+							href="__ROOT__/index.php?areaid={$vo.code}">{$vo.name}&nbsp;</a>
 					</div>
 					<div class="icon">
 						<img src="style/images/ding.png"
 							style="width: 21px; height: 24px; float: right">
 					</div>
 				</div></li>
+			</volist>
+			<!--  
 			<li class="lasts" style="position: relative;"><a
 				href="__ROOT__/index.php?areaid=0470"> <img alt=""
 					src="style/images/hs2.jpg">
@@ -60,6 +64,7 @@
 							style="width: 21px; height: 24px; float: right">
 					</div>
 				</div></li>
+				-->
 
 		</div>
 		<div class="tan_right">
@@ -87,7 +92,7 @@
 <link rel="stylesheet" type="text/css" href="style/css/css.css" />
 <script type="text/javascript" src="style/js/lrtk.js"></script>
 
-<div class="banner">
+<div class="banner" style="height: 400px;">
 	<div class="banner_left">
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -104,7 +109,8 @@
 
 					<li class="bgs_2"><a
 						href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}"
-						class="sort-list-2" target="_blank"><span>常规团<em>后付费行程</em> </span></a>
+						class="sort-list-2" target="_blank"><span>常规团<em>后付费行程</em>
+						</span></a>
 						<ul>
 							<li><a
 								href="{:U('travel/index',array('id'=>3,'day'=>1,'areaid'=>$areaid))}"
@@ -255,7 +261,17 @@
 		<div id="scrollDiv" style="margin-top: 17px;">
 			<ul>
 				<ul></ul>
-				<li><a href="">童** 2大1小 线路0061[2015年2月22日]</a></li>
+				<volist name="realorder" id="vo">
+				<li style="width: 224px; height: 17px; overflow: hidden;"><a
+					href="">{$vo.name} {$vo.pcount}大{$vo.ccount}小
+						线路{$vo.lcode}[{$vo.orderdate}]<!-- [2015年2月22日]-->
+				</a></li>
+				</volist>
+				<volist name="orderlist" id="vo">
+				<li><a href="">{$vo.name} {$vo.pcount}大{$vo.ccount}小
+						线路{$vo.lcode}[{$vo.orderdate}]</a></li>
+				</volist>
+				<!-- 
 				<li><a href="">童** 2大1小 线路0061[2015年2月23日]</a></li>
 				<li><a href="">童** 2大1小 线路0061[2015年2月24日]</a></li>
 				<li><a href="">童** 2大1小 线路0061[2015年2月25日]</a></li>
@@ -268,6 +284,8 @@
 				<li><a href="">童** 2大1小 线路0061[2015年2月02日]</a></li>
 				<li><a href="">童** 2大1小 线路0061[2015年2月03日]</a></li>
 				<li><a href="">童** 2大1小 线路0061[2015年2月04日]</a></li>
+				-->
+
 			</ul>
 		</div>
 	</div>
@@ -355,7 +373,12 @@
 					target="_blank">包团自由行</a>
 			</div>
 			<div style="float: left; margin-left: 10px;" class="travelpoint">
-				<div class="recommendedch">路线推荐</div>
+				<div class="recommendedch" style="width: 210px;">
+					<div class="recommendedch"
+						style="float: left; width: 100px; background: #05b5b5; margin: 0px 2px 0px 2px;">后付费行程</div>
+					<div class="recommendedch"
+						style="float: left; margin: 0px 2px 0px 2px;">路线推荐</div>
+				</div>
 				<div class="recommendeden">RECOMMEDDED ROUTES</div>
 			</div>
 		</div>
@@ -391,42 +414,67 @@
 				target="_blank"> <img alt="" width="421" height="315"
 					src="{$vo.id|get_line_img}">
 					<div class="desc">
-						<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
+						<span class="price">
+						￥{$vo.id|get_line_min_price}起
+						</span> <span
 							class="adds">{$vo.linebelongto|_get_city}</span>
 						<p>{$vo.names} {$vo.trip_days}日</p>
 					</div>
 			</a>
-				<div class="tui">&nbsp;</div></li>
+<!-- 				<div class="tui">&nbsp;</div></li> -->
 			</volist>
 		</div>
-
-		<div class="bao_right">
-			<volist name="Line11" id="vo" offset="0" length='3'>
-			<div class="details_q">
-				<div style="width: 244px; height: 22px;">
-					<if condition="$vo['trip_days'] eq 1">
-					<div class="travellinecommsel">一日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 2">
-					<div class="travellinecommsel">二日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 3">
-					<div class="travellinecommsel">三日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 4">
-					<div class="travellinecommsel">四日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 5">
-					<div class="travellinecommsel">五日游</div>
-					</if>
-					<div class="travellinecomm">{$vo['names']}</div>
-				</div>
-				<br>
-				<p style="width: 244px; height: 50px; overflow: hidden;">
-					{$vo.id|get_special_info1}</p>
-				<br>
-			</div>
-			</volist>
+		<div class="bao_right" style="overflow: hidden;">
+			<ul id="vertical-ticker1">
+				<volist name="normalline" id="vo" mod="2">
+				<li>
+					<div class="details_q">
+						<div style="width: 244px; height: 22px;">
+							<if condition="$vo['trip_days'] eq 1">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>一日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 2">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>二日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 3">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>三日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 4">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>四日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 5">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>五日游
+							</div>
+							</if>
+							<div class="travellinecomm">{$vo['names']}</div>
+						</div>
+						<br>
+						<p style="width: 244px; height: 50px; overflow: hidden;">
+							<!-- 					{$vo.id|get_special_info1}</p> -->
+							{$vo['names']} <br>
+					</div>
+				</li>
+				</volist>
+			</ul>
 		</div>
 	</div>
 </div>
@@ -438,7 +486,12 @@
 					target="_blank">纯玩团</a>
 			</div>
 			<div style="float: left; margin-left: 10px;" class="travelpoint">
-				<div class="recommendedch">路线推荐</div>
+				<div class="recommendedch" style="width: 210px;">
+					<div class="recommendedch"
+						style="float: left; width: 100px; background: #05b5b5; margin: 0px 2px 0px 2px;">后付费行程</div>
+					<div class="recommendedch"
+						style="float: left; margin: 0px 2px 0px 2px;">路线推荐</div>
+				</div>
 				<div class="recommendeden">RECOMMEDDED ROUTES</div>
 			</div>
 		</div>
@@ -476,41 +529,67 @@
 				target="_blank"><img alt="" width="421" height="315"
 					src="{$vo.id|get_line_img}"> </a>
 				<div class="desc">
-					<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
+					<span class="price">
+					￥{$vo.id|get_line_min_price}起
+					</span> <span
 						class="adds">{$vo.linebelongto|_get_city}</span>
 					<p>{$vo.names} {$vo.trip_days}日</p>
 				</div> </a>
-				<div class="tui">&nbsp;</div></li>
+<!-- 				<div class="tui">&nbsp;</div></li> -->
 			</volist>
 		</div>
 
-		<div class="bao_right">
-			<volist name="Line22" id="vo" offset="0" length='3'>
-			<div class="details_q">
-				<div style="width: 244px; height: 22px;">
-					<if condition="$vo['trip_days'] eq 1">
-					<div class="travellinecommsel">一日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 2">
-					<div class="travellinecommsel">二日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 3">
-					<div class="travellinecommsel">三日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 4">
-					<div class="travellinecommsel">四日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 5">
-					<div class="travellinecommsel">五日游</div>
-					</if>
-					<div class="travellinecomm">{$vo['names']}</div>
-				</div>
-				<br>
-				<p style="width: 244px; height: 50px; overflow: hidden;">
-					{$vo.id|get_special_info1}</p>
-				<br>
-			</div>
-			</volist>
+		<div class="bao_right" style="overflow: hidden;">
+			<ul id="vertical-ticker2">
+				<volist name="normalline" id="vo" mod="2">
+				<li>
+					<div class="details_q">
+						<div style="width: 244px; height: 22px;">
+							<if condition="$vo['trip_days'] eq 1">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>一日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 2">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>二日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 3">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>三日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 4">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>四日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 5">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>五日游
+							</div>
+							</if>
+							<div class="travellinecomm">{$vo['names']}</div>
+						</div>
+						<br>
+						<p style="width: 244px; height: 50px; overflow: hidden;">
+							<!-- 					{$vo.id|get_special_info1}</p> -->
+							{$vo['names']} <br>
+					</div>
+				</li>
+				</volist>
+			</ul>
 		</div>
 	</div>
 </div>
@@ -522,7 +601,12 @@
 					target="_blank">常规团</a>
 			</div>
 			<div style="float: left; margin-left: 10px;" class="travelpoint">
-				<div class="recommendedch">路线推荐</div>
+				<div class="recommendedch" style="width: 210px;">
+					<div class="recommendedch"
+						style="float: left; width: 100px; background: #05b5b5; margin: 0px 2px 0px 2px;">后付费行程</div>
+					<div class="recommendedch"
+						style="float: left; margin: 0px 2px 0px 2px;">路线推荐</div>
+				</div>
 				<div class="recommendeden">RECOMMEDDED ROUTES</div>
 			</div>
 		</div>
@@ -560,42 +644,68 @@
 				target="_blank"> <img alt="" width="421" height="315"
 					src="{$vo.id|get_line_img}">
 					<div class="desc">
-						<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
+						<span class="price">
+						￥{$vo.id|get_line_min_price}起
+						</span> <span
 							class="adds">{$vo.linebelongto|_get_city}</span>
 						<p>{$vo.names} {$vo.trip_days}日</p>
 					</div>
 			</a>
-				<div class="tui">&nbsp;</div></li>
+<!-- 				<div class="tui">&nbsp;</div></li> -->
 			</volist>
 		</div>
 
-		<div class="bao_right">
-			<volist name="Line33" id="vo" offset="0" length='3'>
-			<div class="details_q">
-				<div style="width: 244px; height: 22px;">
-					<if condition="$vo['trip_days'] eq 1">
-					<div class="travellinecommsel">一日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 2">
-					<div class="travellinecommsel">二日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 3">
-					<div class="travellinecommsel">三日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 4">
-					<div class="travellinecommsel">四日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 5">
-					<div class="travellinecommsel">五日游</div>
-					</if>
-					<div class="travellinecomm">{$vo['names']}</div>
-				</div>
-				<br>
-				<p style="width: 244px; height: 50px; overflow: hidden;">
-					{$vo.id|get_special_info1}</p>
-				<br>
-			</div>
-			</volist>
+		<div class="bao_right" style="overflow: hidden;">
+			<ul id="vertical-ticker3">
+				<volist name="normalline" id="vo" mod="2">
+				<li>
+					<div class="details_q">
+						<div style="width: 244px; height: 22px;">
+							<if condition="$vo['trip_days'] eq 1">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>一日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 2">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>二日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 3">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>三日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 4">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>四日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 5">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>五日游
+							</div>
+							</if>
+							<div class="travellinecomm">{$vo['names']}</div>
+						</div>
+						<br>
+						<p style="width: 244px; height: 50px; overflow: hidden;">
+							<!-- 					{$vo.id|get_special_info1}</p> -->
+							{$vo['names']} <br>
+					</div>
+				</li>
+				</volist>
+			</ul>
 		</div>
 	</div>
 </div>
@@ -607,7 +717,12 @@
 					target="_blank">团体策划</a>
 			</div>
 			<div style="float: left; margin-left: 10px;" class="travelpoint">
-				<div class="recommendedch">路线推荐</div>
+				<div class="recommendedch" style="width: 210px;">
+					<div class="recommendedch"
+						style="float: left; width: 100px; background: #05b5b5; margin: 0px 2px 0px 2px;">后付费行程</div>
+					<div class="recommendedch"
+						style="float: left; margin: 0px 2px 0px 2px;">路线推荐</div>
+				</div>
 				<div class="recommendeden">RECOMMEDDED ROUTES</div>
 			</div>
 		</div>
@@ -645,42 +760,68 @@
 				target="_blank"> <img alt="" width="421" height="315"
 					src="{$vo.id|get_line_img}">
 					<div class="desc">
-						<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
+						<span class="price">
+						￥{$vo.id|get_line_min_price}起
+						</span> <span
 							class="adds">{$vo.linebelongto|_get_city}</span>
 						<p>{$vo.names} {$vo.trip_days}日</p>
 					</div>
 			</a>
-				<div class="tui">&nbsp;</div></li>
+<!-- 				<div class="tui">&nbsp;</div></li> -->
 			</volist>
 		</div>
 
-		<div class="bao_right">
-			<volist name="Line44" id="vo" offset="0" length='3'>
-			<div class="details_q">
-				<div style="width: 244px; height: 22px;">
-					<if condition="$vo['trip_days'] eq 1">
-					<div class="travellinecommsel">一日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 2">
-					<div class="travellinecommsel">二日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 3">
-					<div class="travellinecommsel">三日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 4">
-					<div class="travellinecommsel">四日游</div>
-					</if>
-					<if condition="$vo['trip_days'] eq 5">
-					<div class="travellinecommsel">五日游</div>
-					</if>
-					<div class="travellinecomm">{$vo['names']}</div>
-				</div>
-				<br>
-				<p style="width: 244px; height: 50px; overflow: hidden;">
-					{$vo.id|get_special_info1}</p>
-				<br>
-			</div>
-			</volist>
+		<div class="bao_right" style="overflow: hidden;">
+			<ul id="vertical-ticker4">
+				<volist name="normalline" id="vo" mod="2">
+				<li>
+					<div class="details_q">
+						<div style="width: 244px; height: 22px;">
+							<if condition="$vo['trip_days'] eq 1">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>一日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 2">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>二日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 3">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>三日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 4">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>四日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 5">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>五日游
+							</div>
+							</if>
+							<div class="travellinecomm">{$vo['names']}</div>
+						</div>
+						<br>
+						<p style="width: 244px; height: 50px; overflow: hidden;">
+							<!-- 					{$vo.id|get_special_info1}</p> -->
+							{$vo['names']} <br>
+					</div>
+				</li>
+				</volist>
+			</ul>
 		</div>
 	</div>
 </div>
@@ -715,11 +856,11 @@
 	<div class="jing_dec">
 		<div class="jing_left">
 			<volist name="pointlist" id="vo" key="k">
-			<li<if condition="$mod eq 1 "> style="margin-right:0px"</if>><a
+			<li  <if condition="$mod eq 1 ">  style="margin-right:0px" </if> ><a
 				href="{:U('viewpoint/detail',array('id'=>$vo['id']))}"
 				target="_blank"><img alt="{$vo.names}" width="413" height="275"
 					src="__ROOT__{$vo.pic}" /></a>
-				<div class="tui">&nbsp;</div>
+<!-- 				<div class="tui">&nbsp;</div> -->
 				<div id="showa" class="shaw" style="display: none">
 					<a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}">{$vo.names}</a>
 				</div></li>
@@ -776,7 +917,7 @@
 		});
 	}
 	$(document).ready(function() {
-		setInterval('AutoScroll("#scrollDiv")', 3000)
+		setInterval('AutoScroll("#scrollDiv")', 3000);
 	});
 	var latercounsel = function() {
 		$('.tanchu1').hide();
@@ -789,4 +930,36 @@
 			}
 		});
 	};
+	$('#vertical-ticker1').totemticker({
+		row_height : '115px',
+		next : '#ticker-next',
+		previous : '#ticker-previous',
+		stop : '#stop',
+		start : '#start',
+		mousestop : true
+	});
+	$('#vertical-ticker2').totemticker({
+		row_height : '115px',
+		next : '#ticker-next',
+		previous : '#ticker-previous',
+		stop : '#stop',
+		start : '#start',
+		mousestop : true
+	});
+	$('#vertical-ticker3').totemticker({
+		row_height : '115px',
+		next : '#ticker-next',
+		previous : '#ticker-previous',
+		stop : '#stop',
+		start : '#start',
+		mousestop : true
+	});
+	$('#vertical-ticker4').totemticker({
+		row_height : '115px',
+		next : '#ticker-next',
+		previous : '#ticker-previous',
+		stop : '#stop',
+		start : '#start',
+		mousestop : true
+	});
 </script>

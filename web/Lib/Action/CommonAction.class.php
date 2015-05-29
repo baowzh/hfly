@@ -33,6 +33,10 @@ class CommonAction extends Action {
 		}
 		$this->assign('helps', $helps);
 		//帮助文章
+		// 线路地区
+		$LineArea=M('LineArea');
+		$arealist=$LineArea->select();
+		$this->assign ( 'arealist', $arealist );
 		$about = M("article")->where("cid='1' and status=1")->order("id asc")->limit(10)->select();
 		$this->assign('aboutlist', $about);
 		
