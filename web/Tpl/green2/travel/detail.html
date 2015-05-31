@@ -30,6 +30,19 @@
     var selday='';
     var submitorder=function(year,month,day,index){
     	// 回传预订时间和人数规模 
+    	var now_date = new Date();
+    	if(year==null){
+    		 year = now_date.getFullYear();
+    	}
+    	if(month==null){
+    		 month = now_date.getMonth() + 1;
+    	}
+    	if(day==null){
+    		day=now_date.getDate();
+    	}
+    	if(index==null){
+    		index=1;
+    	}
     	submitorderurl=submitorderurl+'/year/'+year+'/month/'+month+'/day/'+day+'/numrange/'+index+'/price_type/'+$('#lineprice_type').val();
     	showTipsWindown('发起订单',submitorderurl);
     };
@@ -44,35 +57,6 @@
     var onCNumChange=function(){
     	setMoney();
     };
-    // 获取总人数和具体旅行日期进行金额计算 
-    /*
-    var setMoney=function(){
-    	var ends=$('#ends').val();
-    	var pnumber=$('#pnumber').val();
-    	var cnumber=$('#cnumber').val();
-    	var numrange=1;
-    	if(pnumber==1){// 使用标准价钱
-    		numrange=0;
-    	}else if(pnumber>=2 and pnumber<=3){
-    		numrange=1;
-    	}
-       else if(pnumber>=4 and pnumber<=6){
-	    numrange=2;
-    	}
-       else if(pnumber>=7 and pnumber<=9){
-     	numrange=3;
-       }
-       else if(pnumber>=10 and pnumber<=12){
-	    numrange=4;
-       }
-       else if(pnumber>=13){
-	     numrange=5;
-       }
-    	alert(numrange);
-       var datePriceList=jQuery.parseJSON($("#travel_price_list0").val());	
-    	
-    }
-    */
     // Initialize Galleria
   //  Galleria.run('#galleria');
     $('#galleria').galleria({  
@@ -81,6 +65,27 @@
      }); 
     // Load the classic theme
     Galleria.loadTheme('../Public/js/galleria.classic.min.js');
+    $(document).ready(function() {
+    	$('#divFloatToolsView').hide();
+    	$('#aFloatTools_Show').show();
+		$('#aFloatTools_Hide').hide();	
+    	$("#aFloatTools_Show").click(function(){
+    			$('#divFloatToolsView').animate({width:'show',opacity:'show'},500,function(){$('#divFloatToolsView').show();});
+    			$('#aFloatTools_Show').hide();
+    			$('#aFloatTools_Hide').show();				
+    	});
+    	$("#aFloatTools_Hide").click(function(){
+    			$('#divFloatToolsView').animate({width:'hide', opacity:'hide'},500,function(){$('#divFloatToolsView').hide();});
+    			$('#aFloatTools_Show').show();
+    			$('#aFloatTools_Hide').hide();	
+    	});
+    	$(".btn-top").click(function(){
+			$("html, body").animate({
+				"scroll-top":0
+			},"fast");
+		});
+	});
+  
 
 </script>
 
@@ -101,28 +106,111 @@
 			<img alt="" width="1200" height="570" src="__ROOT__/style/images/cont.jpg">
 		</div>
 		-->
-		<div style="width: 1200px; min-height: 570px; overflow: hidden;">
+		<div style="width: 1200px; min-height: 480px; overflow: hidden;">
 
 			<div class="lineimg" id="galleria"
-				style="float: left; width: 440px; height: 440px;">
-				<img
-					src="__ROOT__/style/images/cont.jpg"/>
+				style="float: left; width: 600px; height: 440px;">
+				<img src="__ROOT__/style/images/cont.jpg" />
 
-				<volist name="linepic" id="vo"> 
-					
-					<img
-					src="__ROOT__{$vo.pic_path}"/>
-				</volist>
+				<volist name="linepic" id="vo"> <img
+					src="__ROOT__{$vo.pic_path}" /> </volist>
 
 			</div>
-			<div style="float: left; width: 440px; height: 10px;">
-			 <ul style="padding: 0; margin: 0;">
-				<li>
-				</li>
-				
-			</ul>
-			</div>
+			<!-- 价格日历 -->
+			<div style="width: 588px; float: left;">
+				<if condition="$line_type neq '3'">
+				<div id="pricetitle"
+					style="margin: 10px 0px 0px 0px; width: 600px; height: 42px;">
+					<ul style="padding: 0; margin: 0;">
+						<li style="width: 90px; height: 40px;"><a id="bbc_btn_0"
+							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
+							onclick="tabit(this,6)" class="postion">1人包团</a></li>
+						<li style="width: 90px; height: 40px;"><a id="bbc_btn_1"
+							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
+							onclick="tabit(this,6)">2-3人包团</a></li>
+						<li style="width: 90px; height: 40px;"><a id="bbc_btn_2"
+							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
+							onclick="tabit(this,6)">4-6人包团</a></li>
+						<li style="width: 100px; height: 40px;"><a id="bbc_btn_3"
+							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
+							onclick="tabit(this,6)">7-9人包团</a></li>
+						<li style="width: 100px; height: 40px;"><a id="bbc_btn_4"
+							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
+							onclick="tabit(this,6)">10-12人包团</a></li>
+						<li style="width: 110px; height: 40px;"><a id="bbc_btn_5"
+							style="cursor: pointer; font-size: 12px; height: 40px; width: 110px;"
+							onclick="tabit(this,6)">13人及以上</a></li>
+					</ul>
+					<input type="hidden" id="lineprice_type" name="lineprice_type"
+						value="{$price_type}">
+				</div>
+				</if>
+				<if condition="$line_type eq '3'">
+				<div style="width: 400px; height: 10px;"></div>
+				</if>
+				<div class="pricecontent" style="margin-left: 0px; width: 590;">
+					<div id="bbc_div_0"
+						style="display: block; position: relative; border-top: 1px #05b5b5 solid;">
+						<input tabindex="1" type="text" name="go_time0" id="go_time0"
+							style="display: none" />
+						<textarea id="travel_price_list0" style="display: none;">{$travel_price_list}</textarea>
+						<div tabindex="2" class="the_calendar" id="the_calendar0"></div>
+						<span style="display: none"><span id="price_type">周末价</span></span>
+						<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+					</div>
+					<div id="bbc_div_1"
+						style="display: none; position: relative; border-top: 1px #05b5b5 solid;">
+						<input tabindex="1" type="text" name="go_time1" id="go_time1"
+							style="display: none" />
+						<textarea id="travel_price_list1" style="display: none;">{$travel_price_list}</textarea>
+						<div tabindex="2" class="the_calendar" id="the_calendar1"></div>
+						<span style="display: none"><span id="price_type">周末价</span></span>
+						<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+					</div>
+					<div id="bbc_div_2"
+						style="display: none; position: relative; border-top: 1px #05b5b5 solid;">
+						<input tabindex="2" type="text" name="go_time2" id="go_time2"
+							style="display: none" />
+						<textarea id="travel_price_list2" style="display: none;">{$travel_price_list}</textarea>
+						<div tabindex="2" class="the_calendar" id="the_calendar2"></div>
+						<span style="display: none"><span id="price_type">周末价</span></span>
+						<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+					</div>
+					<div id="bbc_div_3"
+						style="display: none; position: relative; border-top: 1px #05b5b5 solid;">
+						<input tabindex="3" type="text" name="go_time3" id="go_time3"
+							style="display: none" />
+						<textarea id="travel_price_list3" style="display: none;">{$travel_price_list}</textarea>
+						<div tabindex="2" class="the_calendar" id="the_calendar3"></div>
+						<span style="display: none"><span id="price_type">周末价</span></span>
+						<span class="scroll_REF" style="height: 0;">&nbsp;</span>
 
+					</div>
+					<div id="bbc_div_4"
+						style="display: none; border-top: 1px #05b5b5 solid;">
+
+						<input tabindex="2" type="text" name="go_time4" id="go_time4"
+							style="display: none" />
+						<textarea id="travel_price_list4" style="display: none;">{$travel_price_list}</textarea>
+						<div tabindex="2" class="the_calendar" id="the_calendar4"></div>
+						<span style="display: none"><span id="price_type">周末价</span></span>
+						<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+					</div>
+					<div id="bbc_div_5"
+						style="display: none; border-top: 1px #05b5b5 solid;">
+						<input tabindex="2" type="text" name="go_time5" id="go_time5"
+							style="display: none" />
+						<textarea id="travel_price_list5" style="display: none;">{$travel_price_list}</textarea>
+						<div tabindex="2" class="the_calendar" id="the_calendar5"></div>
+						<span style="display: none"><span id="price_type">周末价</span></span>
+						<span class="scroll_REF" style="height: 0;">&nbsp;</span>
+					</div>
+				</div>
+			</div>
+			<!-- 价格日了 -->
+
+
+			<!--  
 			<div class="linedesc">
 				<table width="100%" height="100%" style="margin: 8px;">
 					<tr height="18">
@@ -192,19 +280,20 @@
 				</table>
 
 			</div>
+			-->
 
 		</div>
 	</div>
 	<div style="clear: both"></div>
-	<!--  
+
 	<div class="cont_sumit">
 		<h4>&nbsp;</h4>
-
 		<div>
+			<if condition="$line_type eq '1'">
 			<table width="100%" cellpadding="0" cellspacing="1" bgcolor="dadada"
 				style="padding: 0px; border: 1px solid #42c7c7">
 				<tbody>
-					<tr bgcolor="#cef0f1" height="50">
+					<tr bgcolor="#cef0f1" height="35">
 						<td width="80" align="center">线路编号</td>
 						<td bgcolor="#FFFFFF" width="180"
 							style="color: #fe3d00; font-weight: bold">{$line_base.code}</td>
@@ -215,14 +304,9 @@
 						<td align="center">发团公司</td>
 						<td bgcolor="#FFFFFF" style="color: #585556">{$line_base.compnay}</td>
 					</tr>
-					<tr bgcolor="#cef0f1" height="50">
+					<tr bgcolor="#cef0f1" height="35">
 						<td align="center" width="80">合同下载</td>
 						<td bgcolor="#FFFFFF" width="180" style="color: #585556">下单后(无须支付)自动发送</td>
-						<td align="center" width="80">合作拼团</td>
-						<td bgcolor="#FFFFFF" width="180"><a href="#plist.html"
-							style="cursor: pointer; color: #585556">查看/发起 (已有<span
-								id="pings">0</span>个拼团)
-						</a></td>
 						<td align="center" width="80">优惠政策</td>
 						<td bgcolor="#FFFFFF" width="180"><a
 							style="cursor: pointer; color: #585556"
@@ -230,35 +314,181 @@
 							<a style="cursor: pointer"
 							onclick="showTipsWindown('老客户优惠规则','ajaxs','/ajax/article_ajax.do?id=382',650,350);");"="">老客户优惠</a>
 						</td>
+						<td align="center">与众不同</td>
+						<td bgcolor="#FFFFFF">不进也不推任何形式的购物店</td>
+
+						<td align="center">支付方式</td>
+						<td bgcolor="#FFFFFF" style="color: #585556">支付宝、银行柜台、ATM转账</td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="35">
+						<td align="center" width="80">服务流程</td>
+						<td bgcolor="#FFFFFF" colspan="7" width="700"
+							style="text-align: left;"><img
+							src="__ROOT__/style/images/ht.jpg" width="723" height="67"
+							alt="服务流程" /></td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="50">
+						<td align="center" width="80">产品特色</td>
+						<td bgcolor="#FFFFFF" colspan="7" style="text-align: left;">
+							<div
+								style="font-size: 24px; color: #05b5b5; font-weight: bold; width: 1000px; text-align: center;">选择汇丰包团自由行的好处</div>
+							<div style="width: 500px; float: left;">
+								<ul style="padding-right: 8px;">
+									<li>全程独立用车，独立成团</li>
+									<li>行程中随意停车观光摄影（非限制停车地方）</li>
+									<li>每天出发时间结束时间完全自定</li>
+									<li>景区游览时间，游览节凑自定，只要当天抵达酒店即可</li>
+									<br>
+									<br>
+
+								</ul>
+							</div>
+							<div style="width: 500px; float: left;">
+								<ul style="padding-right: 8px;">
+									<li>拒绝低质团餐，吃什么自定,吃的舒服消费也少</li>
+									<li>行程当天免费接送机/站</li>
+									<li>全程无导游干扰，司机提供贴心服务</li>
+									<li>完善的旅行保障制度，司机按照客人最终回访满意度获取相应的奖惩</li>
+									<br>
+									<br>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</if>
+			<!-- 纯玩团 -->
+			<if condition="$line_type eq '2'">
+			<table width="100%" cellpadding="0" cellspacing="1" bgcolor="dadada"
+				style="padding: 0px; border: 1px solid #42c7c7">
+				<tbody>
+					<tr bgcolor="#cef0f1" height="35">
+						<td width="80" align="center">线路编号</td>
+						<td bgcolor="#FFFFFF" width="180"
+							style="color: #fe3d00; font-weight: bold">{$line_base.code}</td>
+						<td width="80" align="center">出发地点</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">{$start_city_belong.names}</td>
+						<td width="80" align="center">成团方式</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">{$line_base.ly_type}</td>
+						<td align="center">发团公司</td>
+						<td bgcolor="#FFFFFF" style="color: #585556">{$line_base.compnay}</td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="35">
+						<td align="center" width="80">合同下载</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">下单后(无须支付)自动发送</td>
+						<td align="center" width="80">优惠政策</td>
+						<td bgcolor="#FFFFFF" width="180"><a
+							style="cursor: pointer; color: #585556"
+							onclick="showTipsWindown('游记返现规则','ajaxs','/ajax/article_ajax.do?id=381',650,350);");"="">游记返现</a>
+							<a style="cursor: pointer"
+							onclick="showTipsWindown('老客户优惠规则','ajaxs','/ajax/article_ajax.do?id=382',650,350);");"="">老客户优惠</a>
+						</td>
+
+						<td align="center">与众不同</td>
+						<td bgcolor="#FFFFFF">不进也不推任何形式的购物店</td>
+
+						<td align="center">购物店</td>
+						<td bgcolor="#FFFFFF">包含购物店</td>
+					</tr>
+
+					<tr bgcolor="#cef0f1" height="35">
+						<td align="center" width="80">服务流程</td>
+						<td bgcolor="#FFFFFF" colspan="5" width="700"
+							style="text-align: left;"><img
+							src="__ROOT__/style/images/ht.jpg" width="723" height="67"
+							alt="服务流程" /></td>
 						<td align="center">支付方式</td>
 						<td bgcolor="#FFFFFF" style="color: #585556">支付宝、银行柜台、ATM转账</td>
 					</tr>
 					<tr bgcolor="#cef0f1" height="50">
-						<td align="center" width="80">服务流程</td>
-						<td bgcolor="#FFFFFF" colspan="5" width="700"><img
-							src="__ROOT__/style/images/ht.jpg" width="723" height="67"
-							alt="服务流程"></td>
-						<td colspan="2" rowspan="4" bgcolor="#FFFFFF" align="center"><img
-							src="__ROOT__/style/images/services_img.gif" width="250"
-							height="240" alt="客服微信：xingye_cc，客服电话：400 627 1861"></td>
-					</tr>
-					<tr bgcolor="#cef0f1" height="50">
-						<td align="center" width="80">行程预览</td>
-						<td bgcolor="#FFFFFF" colspan="5" width="700"
-							style="color: #585556">{$line_base.ps}</td>
-					</tr>
-					<tr bgcolor="#cef0f1" height="50">
-						<td align="center" width="80">产品特色</td>
-						<td bgcolor="#FFFFFF" colspan="5" width="700"><img
-							src="__ROOT__/style/images/chose.jpg" width="621" height="286"
-							alt="VIP"> <br></td>
+						<td align="center" width="80">实时订单</td>
+						<td bgcolor="#FFFFFF" colspan="7" style="text-align: left;">
+                               <br>
+                               
+							<volist name="orderlist" id="vo"> <eq name="mod"
+								value="0">
+							<div
+								style="width: 900px; height: 24px; font-size: 12px; color: #666;padding-left:100px;">
+							</eq>
+							<div
+								style="width: 400px; height: 24px; font-size: 12px; color: #666; float: left;text-align:left;">
+
+								{$vo.name} {$vo.pcount}大{$vo.ccount}小
+								线路{$vo.lcode}[{$vo.orderdate}]预定时间{$vo.orderdate}</div>
+
+							<eq name="mod" value="1">
+							</div>
+							</eq> <!--  
+						 <eq
+								name="mod" value="0">
+							<li
+								style="list-style-image: none; list-style-type: none; margin-left: 20px;width:700px;">
+							</eq> <eq name="mod" value="1">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</eq>
+							<a href="#" style="width:300px;height:20px;text-align:left;font-size:12px;">{$vo.name} {$vo.pcount}大{$vo.ccount}小
+								线路{$vo.lcode}[{$vo.orderdate}]</a> <eq name="mod" value="1">
+							</li>
+							</eq>
+							--> </volist>
+
+						</td>
 					</tr>
 				</tbody>
 			</table>
+			</if>
+			<if condition="$line_type eq '3'">
+			<table width="100%" cellpadding="0" cellspacing="1" bgcolor="dadada"
+				style="padding: 0px; border: 1px solid #42c7c7">
+				<tbody>
+					<tr bgcolor="#cef0f1" height="35">
+						<td width="80" align="center">线路编号</td>
+						<td bgcolor="#FFFFFF" width="180"
+							style="color: #fe3d00; font-weight: bold">{$line_base.code}</td>
+						<td width="80" align="center">出发地点</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">{$start_city_belong.names}</td>
+						<td width="80" align="center">成团方式</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">{$line_base.ly_type}</td>
+						<td align="center">发团公司</td>
+						<td bgcolor="#FFFFFF" style="color: #585556">{$line_base.compnay}</td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="35">
+						<td align="center" width="80">合同下载</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">下单后(无须支付)自动发送</td>
+						<td align="center" width="80">优惠政策</td>
+						<td bgcolor="#FFFFFF" width="180">人数超2人，加1人优惠10元，<br>
+							封顶30元/人；介绍朋友打95折
+						</td>
+
+
+						<td align="center">购物店</td>
+						<td bgcolor="#FFFFFF">包含购物店</td>
+
+						<td align="center">支付方式</td>
+						<td bgcolor="#FFFFFF" style="color: #585556">支付宝、银行柜台、ATM转账</td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="35">
+						<td align="center" width="80">服务流程</td>
+						<td bgcolor="#FFFFFF" colspan="7" width="700"
+							style="text-align: left;"><img
+							src="__ROOT__/style/images/services_list_wp.gif" width="723"
+							height="67" alt="服务流程" /></td>
+					</tr>
+				</tbody>
+			</table>
+			</if>
+
 		</div>
+		<div style="width: 1190px; height: 40px;">
+
+			<div
+				style="width: 80px; height: 30px; float: right; background: #f85c23; font-weight: bold; margin: 10px 10px; color: #fff; border-radius: 3px; text-align: center; padding-top: 5px; font-size: 13px;">
+				<a href="javascript:submitorder();" style="color: #fff;">报名预定</a>
+			</div>
+		</div>
+
 	</div>
-	-->
-	<if condition="$travel_price_list neq ''"> <!-- 	<div class="boat" id="baotuansection"> -->
+	<!--  
+	<if condition="$travel_price_list neq ''"> 
 	<div class="boat" id="baotuansection">
 		<h4>&nbsp;</h4>
 		<if condition="$line_type neq '3'">
@@ -346,11 +576,12 @@
 		<div class="feature">{$lineinfo.special_info}</div>
 	</div>
 	</if> </if>
+	-->
 	<input type="hidden" name="selyear" id="selyear" /> <input
 		type="hidden" name="month" id="selmonth" /> <input type="hidden"
 		name="selday" id="selday" />
-<!-- 	<div class="pins"> -->
-		<!--  
+	<!-- 	<div class="pins"> -->
+	<!--  
       <div id="trip_title" style="width:100%; margin-left:0px;margin-right:0px;margin-bottom:0px;">
 	     <ul style="padding:0; margin:0;">
 		    <li><a id="bbs_btn_0" style="cursor:pointer" onclick="tabit(this,2)" class="postion">拼团自由行</a></li>
@@ -447,69 +678,145 @@
          
       </div>
        -->
-		<div class="detail_road">
-			<h4>&nbsp;</h4>
-			<div class="line_my_content">
-				<if condition="$view_method eq 2">
-				<div class="feature">{$lineinfo.General}</div>
-				<else /> <include file="travel:day_model" /> </if>
+	<div class="detail_road">
+		<h4>&nbsp;</h4>
+		<div class="line_my_content">
+			<if condition="$view_method eq 2">
+			<div class="feature">{$lineinfo.General}</div>
+			<else /> <include file="travel:day_model" /> </if>
+		</div>
+		<h2>费用包含</h2>
+		<div class="feature" id="fybh">{$lineinfo.contain}</div>
+		<h2>费用不包含</h2>
+		<div class="feature">{$lineinfo.notcontain}</div>
+		<h2>自费项目</h2>
+		<div class="feature">{$lineinfo.selfpay}</div>
+		<h2>预订须知</h2>
+		<div class="feature">{$lineinfo.order_info}</div>
+		<h2>温馨提示</h2>
+		<div class="feature">{$lineinfo.tip}</div>
+		<h2>相关行程</h2>
+		<!-- 		<div class="feature"> -->
+		<div class="mianconent" style="margin-top: 10px; padding-left: 30px;">
+			<volist name="relines" id="vo" mod='3'>
+			<li style="width: 365px;"<if condition="$mod eq 2 ">
+				class="lasts"</if> ><a
+				href="{:U('travel/detail',array('id'=>$vo['id']))}" target="_blank">
+					<img alt="{$vo.names}" width="365" height="247"
+					src="{$vo.id|get_line_img}">
+					<div class="desc">
+						<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
+							class="adds">{$vo.linebelongto|_get_city}</span>
+						<p>{$vo.names} {$vo.trip_days}日</p>
+					</div>
+			</a>
+				<div class="tui">&nbsp;</div></li>
+			</volist>
+		</div>
+		<div style="clear: both"></div>
+		<!-- 		</div> -->
+	</div>
+	<div class="hudong">
+		<h4>&nbsp;</h4>
+		<div class="sumitss">
+			<form action="{:U('consult',array('id'=>$line_base['id']))}"
+				ajax="true" class="check-form" method="post" id="consult">
+				<div style="widht: 972px; height: 212px;">
+					<textarea name="question1" id="textarea" datatype="*5-255"
+						cols="55" rows="5" class="textarea" tip="请输入文本" nullmsg="请输入文本"></textarea>
+				</div>
+				<div style="width: 972px; height: 46px;">
+					<input name="consult_submit" type="submit" value="提交咨询"
+						class="btn warning active" style="float: right;"> <input
+						type="text" onfocus="if (this.value =='匿名'){this.value =''}"
+						onblur="if (this.value ==''){this.value='匿名'}" value="匿名"
+						name="user_id"
+						style="width: 120px; height: 25px; line-height: 20px; float: right; border: 1px #dadada solid; background: #fff; color: #000; font-size: 12px;">
+
+				</div>
+			</form>
+		</div>
+		<div class="dialog" id="lists_que"
+			style="min-height: 160px; overflow: hidden;">
+			<empty name="lists_que"> <span class="down"
+				style="text-align: center">该产品暂无咨询信息！ </span> <else /> <span
+				class="down">&nbsp;</span> <volist name="lists_que" id="que">
+			<div class="dialog_left">
+				<div class="toux">
+					<img height="45" src="__ROOT__/style/images/niu.jpg">
+				</div>
+				<div class="dia_cont">{$que.question1}</div>
+				<div class="clear"></div>
 			</div>
-			<h2>费用包含</h2>
-			<div class="feature" id="fybh">{$lineinfo.contain}</div>
-			<h2>费用不包含</h2>
-			<div class="feature">{$lineinfo.notcontain}</div>
-			<h2>自费项目</h2>
-			<div class="feature">{$lineinfo.selfpay}</div>
-			<h2>预订须知</h2>
-			<div class="feature">{$lineinfo.order_info}</div>
-			<h2>温馨提示</h2>
-			<div class="feature">{$lineinfo.tip}</div>
+			<if condition="$que['answer'] neq ''">
+			<div class="dialog_right">
+				<div class="toux">
+					<img height="45" src="__ROOT__/style/images/touxi.jpg">
+				</div>
+				<div class="dia_cont">{$que.answer|default="请等待回复"}</div>
+				<div class="clear"></div>
+			</div>
+			</if> </volist> </empty>
 		</div>
 
-		<div class="hudong">
-			<h4>&nbsp;</h4>
-			<div class="sumitss">
-				<form action="{:U('consult',array('id'=>$line_base['id']))}"
-					ajax="true" class="check-form" method="post" id="consult">
-					<div style="widht: 972px; height: 212px;">
-						<textarea name="question1" id="textarea" datatype="*5-255"
-							cols="55" rows="5" class="textarea" tip="请输入文本" nullmsg="请输入文本"></textarea>
-					</div>
-					<div style="width: 972px; height: 46px;">
-						<input name="consult_submit" type="submit" value="提交咨询"
-							class="btn warning active" style="float: right;"> <input
-							type="text" onfocus="if (this.value =='匿名'){this.value =''}"
-							onblur="if (this.value ==''){this.value='匿名'}" value="匿名"
-							name="user_id"
-							style="width: 120px; height: 25px; line-height: 20px; float: right; border: 1px #dadada solid; background: #fff; color: #000; font-size: 12px;">
+		<div class="clear"></div>
+		<div id="fixedService" class="rides-cs">
+			<div class="floatL">
+				<a style="display: none;" id="aFloatTools_Show" class="btnOpen"
+					title="查看在线客服" href="javascript:void(0);">展开</a> <a
+					style="display: block;" id="aFloatTools_Hide" class="btnCtn"
+					title="关闭在线客服" href="javascript:void(0);">收缩</a>
+			</div>
+			<div id="divFloatToolsView" class="floatR" style="display: block;">
+				<div class="cn">
+					<ul>
+						<div id="BDBridgeFixedWrap"
+							style="text-align: left; display: block; width: 170px; height: 0px; position: relative;">
+							<iframe id="BDBridgeIconIframe" src="about:blank" frameborder="0"
+								marginheight="0" marginwidth="0"
+								style="display: none; width: 170px; height: 0px;"></iframe>
+							<div id="IconContainer" style="width: 170px; height: 0px;">
+								<div id="bridgebottom"
+									style="position: relative; width: 170px; margin-left: 0px; left: 0px;">
+									<div class="bdbridge-icon-left"
+										style="position: absolute; zoom: 1; right: 0px; bottom: 0px;">
+										<div id="bdbridge-left-close" style="cursor: pointer;"
+											class=" bdbridge-right-img"></div>
+									</div>
 
-					</div>
-				</form>
-			</div>
-			<div class="dialog" id="lists_que"
-				style="min-height: 160px; overflow: hidden;">
-				<empty name="lists_que"> <span class="down"
-					style="text-align: center">该产品暂无咨询信息！ </span> <else /> <span
-					class="down">&nbsp;</span>
-					 <volist name="lists_que" id="que">
-				<div class="dialog_left">
-					<div class="toux">
-						<img height="45" src="__ROOT__/style/images/niu.jpg">
-					</div>
-					<div class="dia_cont">{$que.question1}</div>
-					<div class="clear"></div>
+									<div style="clear: both; font-size: 0; line-height: 0;"></div>
+								</div>
+							</div>
+						</div>
+					</ul>
+					<h3 class="titZx titQq">在线客服</h3>
+					<ul class="qq clearfix">
+						<li><a target="_blank" rel="nofollow"
+							href="http://wpa.qq.com/msgrd?v=3&amp;uin=1215568458&amp;site=qq&amp;menu=yes"><img
+								border="0" src="http://wpa.qq.com/pa?p=2:2412922203:52"
+								alt="在线客服" title="小张"><span>小张</span></a></li>
+						<li><a target="_blank" rel="nofollow"
+							href="http://wpa.qq.com/msgrd?v=3&amp;uin=2412922203&amp;site=qq&amp;menu=yes"><img
+								border="0" src="http://wpa.qq.com/pa?p=2:2412922203:52"
+								alt="在线客服" title="小李"><span>小李</span></a></li>
+						<li><a target="_blank" rel="nofollow"
+							href="http://wpa.qq.com/msgrd?v=3&amp;uin=2412922203&amp;site=qq&amp;menu=yes"><img
+								border="0" src="http://wpa.qq.com/pa?p=2:2412922203:52"
+								alt="在线客服" title="小王"><span>小王</span></a></li>
+						<li><a target="_blank" rel="nofollow"
+							href="http://wpa.qq.com/msgrd?v=3&amp;uin=2412922203&amp;site=qq&amp;menu=yes"><img
+								border="0" src="http://wpa.qq.com/pa?p=2:2412922203:52"
+								alt="在线客服" title="小王"><span>小南</span></a></li>
+					</ul>
+					<h3 class="titZx">咨询热线</h3>
+					<ul>
+						<li><span>400-000-0000</span></li>
+					</ul>
 				</div>
-				<if condition="$que['answer'] neq ''">
-				<div class="dialog_right">
-					<div class="toux">
-						<img height="45" src="__ROOT__/style/images/touxi.jpg">
-					</div>
-					<div class="dia_cont">{$que.answer|default="请等待回复"}</div>
-					<div class="clear"></div>
-				</div>
-				</if> </volist> </empty>
 			</div>
-			
-			<div class="clear"></div>
 		</div>
-<!-- 	</div> -->
+		<div id="izl_rmenu" class="izl-rmenu">
+			<div class="btn btn-top" style="display: block;"></div>
+		</div>
+	</div>
+	<!-- 	</div> -->

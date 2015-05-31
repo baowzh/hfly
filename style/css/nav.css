@@ -23,42 +23,42 @@ a {
 
 .sort .sort-list .bgs_1 {
 	background: url(../images/jiaoya.jpg) no-repeat 20px center;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 
 .sort .sort-list .bgs_2 {
 	background: url(../images/cemoro.jpg) no-repeat 20px center;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 
 .sort .sort-list .bgs_3 {
 	background: url(../images/feiji.png) no-repeat 20px center;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 
 .sort .sort-list .bgs_4 {
 	background: url(../images/huiyi.jpg) no-repeat 20px center;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 
 .sort .sort-list .bgs_5 {
 	background: url(../images/wang.jpg) no-repeat 20px center;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 
 .sort .sort-list .bgs_6 {
 	background: url(../images/car.jpg) no-repeat 20px center;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 
 .sort .sort-list .bgs_7 {
 	background: url(../images/dians.jpg) no-repeat 25px center;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 
 .sort .sort-list .bgs_8 {
 	background: url(../images/son.jpg) no-repeat 20px center;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 
 .sort .sort-list .bgs_1 span em {
@@ -131,14 +131,13 @@ a {
 	height: 47px;
 	line-height: 47px;
 	font-size: 16px;
-	padding-left: 50px;
+	padding-left: 37px;
 	cursor: pointer;
 }
 
 /* .sort .sort-list li a:hover { */
 /* 	color: red; */
 /* } */
-
 .sort .sort-list li a span {
 	display: block;
 	height: 47px;

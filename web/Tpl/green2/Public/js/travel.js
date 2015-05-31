@@ -365,10 +365,11 @@ var setMoney = function() {
 				// 计算单房差
 				var dfcz = 0;
 				if (roomnum != null && roomnum != '') {
-					var totalnum = pnumber * 1 + cnumber * 1;
+					var totalnum = pnumber * 1 ;
 					var ytfjs = totalnum / 2;
+					
 					if (totalnum % 2 > 0) {
-						ytfjs = ytfjs + 1 - 0.5;
+						ytfjs = ytfjs - 0.5;
 					}
 					var sjfjs = roomnum * 1;
 					if (sjfjs - ytfjs > 0) {

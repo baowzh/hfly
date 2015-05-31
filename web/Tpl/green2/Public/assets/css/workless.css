@@ -3356,7 +3356,7 @@ table thead th, table thead td {
 
 table th, table td {
 	border-top: 1px solid #dddddd;
-	padding: 8px;
+/* 	padding: 8px; */
 }
 
 table .text-l th, table tr.text-l th, table .text-l td, table tr.text-l td,

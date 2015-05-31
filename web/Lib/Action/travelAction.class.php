@@ -256,8 +256,8 @@ class travelAction extends CommonAction {
 		$price_type = 1;
 		if ($line_base ['line_type'] != 3) {
 			$price_type = 1;
-			if($numrange==0){
-				$numrange=6;
+			if ($numrange == 0) {
+				$numrange = 6;
 			}
 		} else {
 			$price_type = 2;
@@ -284,7 +284,7 @@ class travelAction extends CommonAction {
 		}
 		//
 		
-		$price = $price_day ['price_adult'] * $pnumber + $price_day ['price_children'] * $cnumber+$dfcz;
+		$price = $price_day ['price_adult'] * $pnumber + $price_day ['price_children'] * $cnumber + $dfcz;
 		$remoney = $price_day ['price_adultpre'] * $pnumber + $price_day ['price_childrenpre'] * $cnumber;
 		$pmoney = $price_day ['price_adult'];
 		$premoney = $price_day ['price_adultpre'];
@@ -567,8 +567,8 @@ class travelAction extends CommonAction {
 		
 		$this->assign ( "keep_status", $keep );
 		$this->assign ( "line_base", $line_base ); // 基本信息
-		//print_r($line_base);
-		//exit();
+		                                           // print_r($line_base);
+		                                           // exit();
 		$this->assign ( "view_method", $view_method ); // 显示方式1按天，2可视化
 		$this->assign ( "view_result", $view_result ); // 按天显示方式内容
 		$this->assign ( "lineinfo", $lineinfo ); // 其它信息
@@ -582,6 +582,15 @@ class travelAction extends CommonAction {
 		$this->assign ( "line_id", $id ); // 线路id
 		                                  // dump($line_base);
 		$this->init_function ();
+		// 获取相关的6个线路放下面 同一个地区，统一天数的线路
+		$city_id = $line_base ['linebelongto'];
+		$trip_days = $line_base ['trip_days'];
+		$relines = M ( 'line' )->where ( " linebelongto='" . $city_id . "' and trip_days=" . $trip_days )->limit ( 6 )->select();
+		$this->assign ( "relines", $relines ); // 相关旅游线路
+		// 获取实时订单信息
+		$sysOrder = M ( 'SysOrder' );
+		$orderlist = $sysOrder->order( 'orderdate desc' )->limit (10 )->select ();
+		$this->assign ( "orderlist", $orderlist );
 		$this->display ();
 	}
 	protected function travel_price_list($id) {
@@ -812,14 +821,13 @@ class travelAction extends CommonAction {
 		$line_que = M ( "line_que" );
 		$lists = $line_que->where ( "line_id=$id" )->order ( "id desc" )->select ();
 		$this->assign ( "lists_que", $lists );
-		$this->assign ( "lists_quecount", count($lists) );
+		$this->assign ( "lists_quecount", count ( $lists ) );
 	}
 	public function consult() {
-		//if (! isset ( $_SESSION ["user_id"] )) {
-			// $this->ajaxReturn(array("info" => "请先登录", "status" => "n"));
-			// exit;
-		//}
-		
+		// if (! isset ( $_SESSION ["user_id"] )) {
+		// $this->ajaxReturn(array("info" => "请先登录", "status" => "n"));
+		// exit;
+		// }
 		if (strlen ( trim ( $_POST ["question1"] ) ) < 5) {
 			$this->ajaxReturn ( array (
 					"info" => "至少输入5个字符-1",
@@ -849,7 +857,7 @@ class travelAction extends CommonAction {
 		}
 		$data = array (
 				"line_id" => $id,
-				"user_id" => $_POST["user_id"],
+				"user_id" => $_POST ["user_id"],
 				"question1" => trim ( $_POST ["question1"] ),
 				"publish_time" => time (),
 				"status" => 1,
