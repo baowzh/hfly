@@ -15,7 +15,7 @@
 		<!--       <div class="line_left"> -->
 		<!--       <img src="/style/images/hot.jpg" alt="" width="402" height="57" > -->
 		<!--       </div> -->
-		<div class="line_center" style="width:547px;">
+		<div class="line_center" style="width:497px;">
 			<li  <eq name="day" value="0"> class="curtent"</eq>><a
 				href="{:U('travel/index',array('id'=>$id,'day'=>0,'areaid'=>$areaid))}">全部</a></li>
 			<li   <eq name="day" value="1"> class="curtent"</eq>><a
@@ -28,8 +28,7 @@
 				href="{:U('travel/index',array('id'=>$id,'day'=>4,'areaid'=>$areaid))}">四日游</a></li>
 			<li   <eq name="day" value="5"> class="curtent"</eq>><a
 				href="{:U('travel/index',array('id'=>$id,'day'=>5,'areaid'=>$areaid))}">五日游</a></li>
-			<li  <eq name="day" value="6"> class="curtent"</eq>><a
-				href="{:U('travel/index',array('id'=>$id,'day'=>6,'areaid'=>$areaid))}">六日游</a></li>
+			
 		</div>
 		<div class="line_right">
 			<a href="{:U('travel/index',array('id'=>$id,'areaid'=>$areaid))}">更多推存</a>
@@ -41,7 +40,7 @@
 		<li  <if condition="$mod eq 2 "> class="lasts"</if> > <a
 			href="{:U('travel/detail',array('id'=>$vo['id']))}" target="_blank">
 				<!--            <img alt="{$vo.names}" width="376" height="247" src="{$vo.id|get_line_img}"  > -->
-				<img alt="{$vo.names}" width="376" height="247" src="{$vo.id|get_line_img}"  >
+				<img alt="{$vo.names}" width="342" height="247" src="{$vo.id|get_line_img}"  >
 
 				<div class="desc">
 					<span class="price">￥{$vo.id|get_line_min_price}起</span> <span

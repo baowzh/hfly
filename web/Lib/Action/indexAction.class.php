@@ -17,9 +17,11 @@ class indexAction extends CommonAction {
 		if (isset ( $_GET ["areaid"] )) {
 			$areaid = $_GET ['areaid'];
 			$this->assign ( 'areaid', $areaid );
+			$this->assign ( 'areaid1', $areaid );
 		} else {
 			$areaid = "0471";
-			$this->assign ( 'areaid', $_GET ['areaid'] );
+			$this->assign ( 'areaid', $areaid );
+			$this->assign ( 'areaid1', $_GET ['areaid'] );
 		}
 		$pointlist = $Viewpoint->where ( "pic != '' and  city_id='" . $areaid . "'" )->order ( 'sort,id desc' )->limit ( 0, 6 )->select ();
 		$this->assign ( 'pointlist', $pointlist );

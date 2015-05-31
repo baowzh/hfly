@@ -271,9 +271,9 @@ class travelAction extends CommonAction {
 		// 计算单房差
 		if ($roomnum != null && $roomnum != '') {
 			$totalnum = $pnumber * 1 + $cnumber * 1;
-			$ytfjs = $totalnum / 2;
-			if ($totalnum % 2 > 0) {
-				$ytfjs = $ytfjs + 1 - 0.5;
+			$ytfjs = $pnumber / 2;
+			if ($pnumber % 2 > 0) {
+				$ytfjs = $ytfjs  - 0.5;
 			}
 			$sjfjs = $roomnum * 1;
 			if ($sjfjs - $ytfjs > 0) {

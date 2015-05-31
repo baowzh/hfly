@@ -326,15 +326,31 @@ var setMoney = function() {
 			if (priceday == i) {
 				datePriceList[1][numrange][i];
 				$('#crdj').html(datePriceList[1][numrange][i].price_adult);
-				$('#etdj').html(datePriceList[1][numrange][i].price_children);
+				if (cnumber - 0 > 0) {
+					$('#etdj').html(
+							datePriceList[1][numrange][i].price_children);
+				} else {
+					$('#etdj').html('0');
+				}
+
 				$('#cryf').html(datePriceList[1][numrange][i].price_adultpre);
-				$('#etyf')
-						.html(datePriceList[1][numrange][i].price_childrenpre);
+				if (cnumber - 0 > 0) {
+					$('#etyf').html(
+							datePriceList[1][numrange][i].price_childrenpre);
+				} else {
+					$('#etyf').html('0');
+				}
 				$('#creczf').html(datePriceList[1][numrange][i].price_adultec);
-				$('#eteczf').html(
-						datePriceList[1][numrange][i].price_childrenec);
+				if (cnumber - 0 > 0) {
+					$('#eteczf').html(
+							datePriceList[1][numrange][i].price_childrenec);
+				} else {
+					$('#eteczf').html('0');
+				}
+
 				$('#cryk').html(datePriceList[1][numrange][i].price_adultyk);
-				$('#etyk').html(datePriceList[1][numrange][i].price_childrenyk);
+				// $('#etyk').html(datePriceList[1][numrange][i].price_childrenyk);
+
 				$('#eczfz').html(
 						(datePriceList[1][numrange][i].price_adultec * pnumber
 
@@ -365,9 +381,9 @@ var setMoney = function() {
 				// 计算单房差
 				var dfcz = 0;
 				if (roomnum != null && roomnum != '') {
-					var totalnum = pnumber * 1 ;
+					var totalnum = pnumber * 1;
 					var ytfjs = totalnum / 2;
-					
+
 					if (totalnum % 2 > 0) {
 						ytfjs = ytfjs - 0.5;
 					}

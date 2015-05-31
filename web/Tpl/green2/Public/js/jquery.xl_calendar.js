@@ -37,7 +37,7 @@
 							+ '<td class="the_calendar_month"><span class="the_calendar_font"> <i class="year"></i> 年 <i class="month"></i> 月</span></td>'
 							+ '<td  class="the_calendar_icon2"><b></b></td></tr>'
 							+ '</table>'
-					header += '<div class="the_calendar_center"><span class="the_calendar_weekend">周日</span><span class="the_calendar_day" style="border-left:0px;">周一</span><span class="the_calendar_day">周二</span><span class="the_calendar_day">周三</span><span class="the_calendar_day" >周四</span><span class="the_calendar_day" >周五</span><span class="the_calendar_weekend" style="width:87px;">周六</span></div><div class="the_calendar_down"><table width="408" border="1" class="calendar_list"></table></div>';
+					header += '<div class="the_calendar_center"><span class="the_calendar_weekend">周日</span><span class="the_calendar_day" style="border-left:0px;">周一</span><span class="the_calendar_day">周二</span><span class="the_calendar_day">周三</span><span class="the_calendar_day" >周四</span><span class="the_calendar_day" >周五</span><span class="the_calendar_weekend" style="width:90px;">周六</span></div><div class="the_calendar_down"><table width="550" border="1" class="calendar_list"></table></div>';
 					/**
 					 * 加载数据
 					 */

@@ -13,7 +13,7 @@
 				<td class="names">路线编号</td>
 				<td class="ttleft">{$line_base.code}</td>
 				<td class="names">成团方式</td>
-				<td class="wlef">拼团（最少{$tao.place}人）</td>
+				<td class="wlef">{$line_base.ly_type}</td>
 				<td class="names">发团公司</td>
 				<td class="wlef">{$line_base.compnay}</td>
 			</tr>
@@ -27,7 +27,7 @@
 				<td class="names" style="color: #f85c23; font-weight: bold">成人单价</td>
 				<td class="wlef"><b id="crdj">{$price_day.price_adult}</b>元</td>
 				<td class="names" style="color: #f85c23; font-weight: bold">儿童单价</td>
-				<td class="wlef"><b id="etdj">{$price_day.price_children}</b>元
+				<td class="wlef"><b id="etdj">0</b>元
 				</td>
 			</tr>
 			<tr>
@@ -64,51 +64,64 @@
 						<option value="8">8位儿童</option>
 						<option value="9">9位儿童</option>
 						<option value="10">10位儿童</option></select></td>
-				<td class="names" style="color: #f85c23; font-weight: bold">成人预付</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">成人订金</td>
 				<td class="wlef"><b id="cryf">{$price_day.cryf}</b>元</td>
-				<td class="names" style="color: #f85c23; font-weight: bold">儿童预付</td>
-				<td class="wlef"><b id="etyf">{$price_day.etyf}</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">儿童订金</td>
+				<td class="wlef"><b id="etyf">0</b>元</td>
 			</tr>
 			<tr>
 				<td class="names">房间数:</td>
 				<td style="text-align: left; padding-left: 10px"><input
-					type="text" name="roomnum" id="roomnum"  onchange="onCNumChange();" style="width: 145px;"></td>
-				<td class="names" style="color: #f85c23; font-weight: bold">成人二次支付</td>
+					type="text" name="roomnum" id="roomnum" onchange="onCNumChange();"
+					style="width: 145px;"></td>
+				<td class="names" style="color: #f85c23; font-weight: bold">成人到付</td>
 				<td class="wlef"><b id="creczf">{$price_day.price_adultec}</b>元</td>
-				<td class="names" style="color: #f85c23; font-weight: bold">儿童二次支付</td>
-				<td class="wlef"><b id="eteczf">{$price_day.price_childrenec}</b>元
+				<td class="names" style="color: #f85c23; font-weight: bold">儿童到付</td>
+				<td class="wlef"><b id="eteczf">0</b>元
 				</td>
-<!-- 				<td class="names" style="color: #f85c23; font-weight: bold">成人余款</td> -->
-<!-- 				<td class="wlef"><b id="cryk">{$price_day.price_adultyk}</b>元</td> -->
-				
+				<!-- 				<td class="names" style="color: #f85c23; font-weight: bold">成人余款</td> -->
+				<!-- 				<td class="wlef"><b id="cryk">{$price_day.price_adultyk}</b>元</td> -->
+
 			</tr>
 			<tr>
 				<td class="names">单房差:</td>
 				<td style="text-align: left; padding-left: 10px"><b id="dfcz">0</b>元</td>
 				<td class="names" style="color: #f85c23; font-weight: bold">成人余款</td>
 				<td class="wlef"><b id="cryk">{$price_day.price_adultyk}</b>元</td>
-				
-				<td class="names" style="color: #f85c23; font-weight: bold">儿童余款</td>
-				<td class="wlef"><b id="etyk">{$price_day.price_childrenyk}</b>元</td>
-				
-				
+
+				<td class="names" style="color: #f85c23; font-weight: bold"></td>
+				<td class="wlef"><b id="etyk"></b></td>
 			</tr>
 			<tr>
-				<td class="names" style="color: #f85c23; font-weight: bold">预定支付(总)</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">费用总计</td>
+				<td class="wlef"><b id="zfy">{$price_day.price_adult}</b>元</td>
+				<td rowspan="4" class="names">起价说明</td>
+				<td rowspan="4" class="wlef"> </td>
+				<td rowspan="4" class="names" >服务热线</td>
+				<td  rowspan="4" class="wlef"> 4001-888-332</td>
+			</tr>
+			<tr>
+				<td class="names" style="color: #f85c23; font-weight: bold">预付订金总额</td>
 				<td style="text-align: left; padding-left: 10px"><b
-					style="color: #f85c23; font-weight: bold; font-size: 20px"
+					style="color: #f85c23; font-weight: bold; font-size: 14px"
 					id="ydzfz">{$price_day.ydzf}</b>元</td>
+				<!--  
 				<td class="names" style="color: #f85c23; font-weight: bold">二次支付(总)</td>
 				<td class="wlef"><b id="eczfz">{$price_day.ddhzf}</b>元</td>
 				<td class="names" style="color: #f85c23; font-weight: bold">余款(总)</td>
 				<td class="wlef"><b id="ykz">{$price_day.ddhzf}</b>元</td>
+				-->
 
 			</tr>
 			<tr>
-				<td colspan="4" class="names"></td>
-				<td class="names" style="color: #f85c23; font-weight: bold">费用总计</td>
-				<td class="wlef"><b id="zfy">{$price_day.price_adult}</b>元</td>
+				<td class="names" style="color: #f85c23; font-weight: bold">到达支付总额</td>
+				<td class="wlef"><b id="eczfz">{$price_day.ddhzf}</b>元</td>
 			</tr>
+			<tr>
+				<td class="names" style="color: #f85c23; font-weight: bold">余款总额</td>
+				<td class="wlef"><b id="ykz">{$price_day.ddhzf}</b>元</td>
+			</tr>
+
 			<tr>
 				<td class="names">联系人</td>
 				<td style="text-align: left; padding-left: 10px"><input
@@ -147,7 +160,7 @@
 				<td colspan="5"><select style="width: 150px;">
 						<option>我没联系过客服</option>
 				</select> <span class="queren">下一步生成订单，自动生成合同</span> <input type="submit"
-					value="提交订单" class="sumbit"></td>
+					value="提交订单" class="sumbit" style="height:20px;"></td>
 			</tr>
 		</table>
 	</form>

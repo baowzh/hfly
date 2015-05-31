@@ -80,7 +80,8 @@ body {
 }
 
 .head {
-	width: 1200px;
+	/* 	width: 1200px; */
+	width: 1100px;
 	height: 45px;
 	margin: 0 auto;
 	border-bottom: 1px solid #d5d5d5
@@ -134,7 +135,8 @@ body {
 }
 
 .search {
-	width: 1200px;
+	/* 	width: 1200px; */
+	width: 1100px;
 	height: 110px;
 	margin: 0 auto;
 }
@@ -146,7 +148,8 @@ body {
 
 .dectails {
 	float: right;
-	width: 380px;
+	/* 	width: 380px; */
+	width: 330px;
 	height: 66px;
 	margin-top: 18px
 }
@@ -160,7 +163,8 @@ body {
 	color: #07b3b2;
 	font-family: "微软雅黑";
 	font-size: 24px;
-	width: 360px;
+	/* 	width: 360px; */
+	width: 320px;
 	font-weight: bold;
 	text-align: right;
 	margin-bottom: 8px;
@@ -168,7 +172,8 @@ body {
 }
 
 .dectails .shuru {
-	width: 272px;
+	/* 	width: 272px; */
+	width: 232px;
 	float: left;
 	border: 1px solid #05b5b5
 }
@@ -192,7 +197,7 @@ body {
 }
 
 .nav {
-	width: 1200px;
+	width: 1100px;
 	height: 58px;
 	line-height: 58px;
 	margin: 0 auto;
@@ -221,12 +226,12 @@ body {
 
 .foottop {
 	width: 100%;
-	height: 36px;
+	height: 26px;
 	background: #04aeae
 }
 
 .footcont {
-	width: 1150px;
+	width: 1050px;
 	height: 178px;
 	padding-left: 50px;
 	margin: 0 auto;
@@ -236,15 +241,15 @@ body {
 }
 
 .footbox {
-	width: 220px;
-	height: 178px;
+	width: 200px;
+	height: 168px;
 	float: left;
 	margin-left: 10px
 }
 
 .footbox h3 {
-	font-size: 20px;
-	margin-bottom: 18px;
+	font-size: 19px;
+	margin-bottom: 10px;
 }
 
 .footbox li a {
@@ -256,7 +261,7 @@ body {
 	width: 720px;
 	height: 145px;
 	margin: 0 auto;
-	margin-top: 30px;
+	margin-top: 10px;
 	text-align: center;
 }
 
@@ -268,7 +273,7 @@ body {
 
 .footbottom  ul {
 	width: 656px;
-	height: 25px;
+	height: 20px;
 	text-align: center;
 	margin: 0 auto;
 }

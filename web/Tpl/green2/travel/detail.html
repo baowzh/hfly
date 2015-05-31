@@ -90,7 +90,7 @@
 </script>
 
 <div class="contents_nei">
-	<div class="topcont" style="margin: 20px auto;">
+	<div class="topcont" style="margin: 15px auto;">
 		<div class="cont_title">
 			<h1>{$line_base.names}</h1>
 			<div class="cont_nav">
@@ -106,32 +106,32 @@
 			<img alt="" width="1200" height="570" src="__ROOT__/style/images/cont.jpg">
 		</div>
 		-->
-		<div style="width: 1200px; min-height: 480px; overflow: hidden;">
+		<div style="width: 1100px; min-height: 480px; overflow: hidden;">
 
 			<div class="lineimg" id="galleria"
-				style="float: left; width: 600px; height: 440px;">
+				style="float: left; width: 540px; height: 440px;">
 				<img src="__ROOT__/style/images/cont.jpg" />
 
 				<volist name="linepic" id="vo"> <img
-					src="__ROOT__{$vo.pic_path}" /> </volist>
+					src="__ROOT__{$vo.pic_path}" style="width: 540px;" /> </volist>
 
 			</div>
 			<!-- 价格日历 -->
-			<div style="width: 588px; float: left;">
+			<div style="width: 550px; float: left;">
 				<if condition="$line_type neq '3'">
 				<div id="pricetitle"
 					style="margin: 10px 0px 0px 0px; width: 600px; height: 42px;">
 					<ul style="padding: 0; margin: 0;">
-						<li style="width: 90px; height: 40px;"><a id="bbc_btn_0"
+						<li style="width: 80px; height: 40px;"><a id="bbc_btn_0"
 							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
 							onclick="tabit(this,6)" class="postion">1人包团</a></li>
-						<li style="width: 90px; height: 40px;"><a id="bbc_btn_1"
+						<li style="width: 80px; height: 40px;"><a id="bbc_btn_1"
 							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
 							onclick="tabit(this,6)">2-3人包团</a></li>
-						<li style="width: 90px; height: 40px;"><a id="bbc_btn_2"
+						<li style="width: 80px; height: 40px;"><a id="bbc_btn_2"
 							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
 							onclick="tabit(this,6)">4-6人包团</a></li>
-						<li style="width: 100px; height: 40px;"><a id="bbc_btn_3"
+						<li style="width: 93px; height: 40px;"><a id="bbc_btn_3"
 							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
 							onclick="tabit(this,6)">7-9人包团</a></li>
 						<li style="width: 100px; height: 40px;"><a id="bbc_btn_4"
@@ -478,7 +478,7 @@
 			</if>
 
 		</div>
-		<div style="width: 1190px; height: 40px;">
+		<div style="width: 1090px; height: 40px;">
 
 			<div
 				style="width: 80px; height: 30px; float: right; background: #f85c23; font-weight: bold; margin: 10px 10px; color: #fff; border-radius: 3px; text-align: center; padding-top: 5px; font-size: 13px;">
@@ -699,10 +699,10 @@
 		<!-- 		<div class="feature"> -->
 		<div class="mianconent" style="margin-top: 10px; padding-left: 30px;">
 			<volist name="relines" id="vo" mod='3'>
-			<li style="width: 365px;"<if condition="$mod eq 2 ">
+			<li  style="width: 340px;"<if condition="$mod eq 2 ">
 				class="lasts"</if> ><a
 				href="{:U('travel/detail',array('id'=>$vo['id']))}" target="_blank">
-					<img alt="{$vo.names}" width="365" height="247"
+					<img alt="{$vo.names}" width="340" height="247"
 					src="{$vo.id|get_line_img}">
 					<div class="desc">
 						<span class="price">￥{$vo.id|get_line_min_price}起</span> <span

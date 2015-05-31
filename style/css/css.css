@@ -18,7 +18,7 @@
 }
 
 #playBox {
-	width: 725px;
+	width: 625px;
 	height: 400px;
 /* 	height: 435px; */
 /* 	background: #333; */
@@ -38,7 +38,7 @@
 }
 #playBox .oUlplay li img {
 /* 	height: 435px; */
-	width:725px;
+	width:625px;
 	height: 400px;
 }
 
