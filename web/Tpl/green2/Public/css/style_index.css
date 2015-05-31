@@ -16,12 +16,25 @@ s {
 
 .page {
 	margin-top: 15px;
+	color: #6d6e6d;
+	font-size: 14px;
+}
+.page  a{
+	margin-top: 15px;
+	color: #6d6e6d;
+	font-size: 14px;
 }
 
 .page select {
 	margin: 0 3px;
 	height: 26px;
 	padding: 0 4px;
+}
+
+.page .current {
+margin-top: 15px;
+	color: #fe1f0f;;
+	font-size: 14px;
 }
 
 .more {
