@@ -86,7 +86,7 @@
                                // continue;
                            // }
                             data_detail = {"data-type": 1, "rackrate": data[1][options.index][i_1]["RACKRATE"], "price_adult": data[1][options.index][i_1]["price_adult"], "price_children": data[1][options.index][i_1]["price_children"]}
-                            table.find("td.day[data-day='" + i_1 + "'] span.price").html("￥" + parseFloat(data[1][options.index][i_1]["price_adult"]))
+                            table.find("td.day[data-day='" + i_1 + "'] span.price").html("<a href=\"javascript:void(0);\">成人:￥" + parseFloat(data[1][options.index][i_1]["price_adult"])+"<br> 儿童：￥"+parseFloat(data[1][options.index][i_1]["price_children"])+"</a>")
                                 .removeClass("date_price4 date_price3 date_price2").addClass("date_price1").attr(data_detail);
                         }	
                 	}
@@ -125,7 +125,7 @@
                     key = data_month + day;
                     week = first_day == 0 ? 7 : first_day;
                     disable = parseInt(options.now_day) > parseInt(key) ? " disable" : "";
-                    table_str += '<td  class="day' + disable + '" data-day="' + key + '" data-week="' + week + '"><span>' + i + '</span><span class="price"></span></td>';
+                    table_str += '<td  class="day' + disable + '" data-day="' + key + '" data-week="' + week + '"><span style="float:left;">' + i + '</span><span class="price"></span></td>';
                     first_day++;
                 }
                 while (first_day <= 6) {

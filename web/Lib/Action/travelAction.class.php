@@ -567,6 +567,8 @@ class travelAction extends CommonAction {
 		
 		$this->assign ( "keep_status", $keep );
 		$this->assign ( "line_base", $line_base ); // 基本信息
+		//print_r($line_base);
+		//exit();
 		$this->assign ( "view_method", $view_method ); // 显示方式1按天，2可视化
 		$this->assign ( "view_result", $view_result ); // 按天显示方式内容
 		$this->assign ( "lineinfo", $lineinfo ); // 其它信息
@@ -810,12 +812,13 @@ class travelAction extends CommonAction {
 		$line_que = M ( "line_que" );
 		$lists = $line_que->where ( "line_id=$id" )->order ( "id desc" )->select ();
 		$this->assign ( "lists_que", $lists );
+		$this->assign ( "lists_quecount", count($lists) );
 	}
 	public function consult() {
-		if (! isset ( $_SESSION ["user_id"] )) {
+		//if (! isset ( $_SESSION ["user_id"] )) {
 			// $this->ajaxReturn(array("info" => "请先登录", "status" => "n"));
 			// exit;
-		}
+		//}
 		
 		if (strlen ( trim ( $_POST ["question1"] ) ) < 5) {
 			$this->ajaxReturn ( array (
@@ -836,7 +839,7 @@ class travelAction extends CommonAction {
 			exit ();
 		}
 		$line = M ( "line" );
-		$line_count = $line->where ( "id=$id and status=1" )->count ();
+		$line_count = $line->where ( "id=$id and status=0" )->count ();
 		if ($line_count == 0) {
 			$this->ajaxReturn ( array (
 					"info" => "您咨询的路线不存在或已经停用-3",
@@ -846,7 +849,7 @@ class travelAction extends CommonAction {
 		}
 		$data = array (
 				"line_id" => $id,
-				"user_id" => $_SESSION ["user_id"],
+				"user_id" => $_POST["user_id"],
 				"question1" => trim ( $_POST ["question1"] ),
 				"publish_time" => time (),
 				"status" => 1,
@@ -858,7 +861,7 @@ class travelAction extends CommonAction {
 		$user_name = get_user ( $_SESSION ["user_id"] );
 		$dom = <<<EOF
 		           <div class="dialog_left">
-                        <div class="toux"><img height="45" src="/style/images/niu.jpg" ></div>
+                        <div class="toux"><img height="45" src="http://www.hf97667.com/style/images/niu.jpg" ></div>
                         <div class="dia_cont">{$data["question1"]}</div>
                         <div class="clear"></div>
                    </div>

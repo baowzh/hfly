@@ -14,65 +14,43 @@ class indexAction extends CommonAction {
 		$this->assign ( "notice_list", $notice_list );
 		
 		$Viewpoint = M ( "Viewpoint" );
-		if ($areaid != null and $areaid != '') {
-			$pointlist = $Viewpoint->where ( "pic != '' and  city_id='" + $areaid + "'" )->order ( 'sort,id desc' )->limit ( 0, 6 )->select ();
-			$this->assign ( 'pointlist', $pointlist );
+		if (isset ( $_GET ["areaid"] )) {
+			$areaid = $_GET ['areaid'];
+			$this->assign ( 'areaid', $areaid );
 		} else {
-			$pointlist = $Viewpoint->where ( "pic != ''" )->order ( 'sort,id desc' )->limit ( 0, 6 )->select ();
-			$this->assign ( 'pointlist', $pointlist );
+			$areaid = "0471";
+			$this->assign ( 'areaid', $_GET ['areaid'] );
 		}
+		$pointlist = $Viewpoint->where ( "pic != '' and  city_id='" . $areaid . "'" )->order ( 'sort,id desc' )->limit ( 0, 6 )->select ();
+		$this->assign ( 'pointlist', $pointlist );
 		
 		$article = M ( "Article" );
 		$Articlelist = $article->order ( 'sort,id desc' )->limit ( 18 )->select ();
 		$this->assign ( 'Articlelist', $Articlelist );
 		$mod_Line = M ( "Line" );
-		if (isset ( $_GET ["areaid"] )) {
-			$Line1 = $mod_Line->where ( "line_type = '1' and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line1', $Line1 );
-			$Line11 = $mod_Line->where ( "line_type = '1' and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line11', $Line11 );
-			
-			$Line2 = $mod_Line->where ( "line_type = '2' and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line2', $Line2 );
-			$Line22 = $mod_Line->where ( "line_type = '2' and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line22', $Line22 );
-			
-			$Line3 = $mod_Line->where ( "line_type = '3' and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line3', $Line3 );
-			$Line33 = $mod_Line->where ( "line_type = '3'  and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line33', $Line33 );
-			
-			$Line4 = $mod_Line->where ( "line_type = '4'  and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line4', $Line4 );
-			$Line44 = $mod_Line->where ( "line_type = '4'  and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line44', $Line44 );
-			// 获取要滚动的常规团线路列表
-			$normalline = $mod_Line->where ( "line_type = '3' and  linebelongto='" . $areaid . "'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
-			$this->assign ( 'normalline', $normalline );
-		} else {
-			$Line1 = $mod_Line->where ( "line_type = '1'" )->order ( 'sort,id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line1', $Line1 );
-			$Line11 = $mod_Line->where ( "line_type = '1'" )->order ( 'id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line11', $Line11 );
-			$Line2 = $mod_Line->where ( "line_type = '2'" )->order ( 'sort,id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line2', $Line2 );
-			$Line22 = $mod_Line->where ( "line_type = '2'" )->order ( 'id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line22', $Line22 );
-			$Line3 = $mod_Line->where ( "line_type = '3'" )->order ( 'sort,id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line3', $Line3 );
-			$Line33 = $mod_Line->where ( "line_type = '3'" )->order ( 'id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line33', $Line33 );
-			
-			$Line4 = $mod_Line->where ( "line_type = '4'" )->order ( 'sort,id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line4', $Line4 );
-			$Line44 = $mod_Line->where ( "line_type = '4'" )->order ( 'id desc' )->limit ( 2 )->select ();
-			$this->assign ( 'Line44', $Line44 );
-			// 获取要滚动的常规团线路列表
-			$normalline = $mod_Line->where ( "line_type = '3'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
-			$this->assign ( 'normalline', $normalline );
-			// echo $areaid;
-		}
-		$this->assign ( 'areaid', $areaid );
+		
+		$Line1 = $mod_Line->where ( "line_type = '1' and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
+		$this->assign ( 'Line1', $Line1 );
+		$Line11 = $mod_Line->where ( "line_type = '1' and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
+		$this->assign ( 'Line11', $Line11 );
+		
+		$Line2 = $mod_Line->where ( "line_type = '2' and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
+		$this->assign ( 'Line2', $Line2 );
+		$Line22 = $mod_Line->where ( "line_type = '2' and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
+		$this->assign ( 'Line22', $Line22 );
+		
+		$Line3 = $mod_Line->where ( "line_type = '3' and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
+		$this->assign ( 'Line3', $Line3 );
+		$Line33 = $mod_Line->where ( "line_type = '3'  and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
+		$this->assign ( 'Line33', $Line33 );
+		
+		$Line4 = $mod_Line->where ( "line_type = '4'  and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
+		$this->assign ( 'Line4', $Line4 );
+		$Line44 = $mod_Line->where ( "line_type = '4'  and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
+		$this->assign ( 'Line44', $Line44 );
+		// 获取要滚动的常规团线路列表
+		$normalline = $mod_Line->where ( "line_type = '3' and  linebelongto='" . $areaid . "'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
+		$this->assign ( 'normalline', $normalline );
 		$latercounsel = session ( 'latercounsel' );
 		session ( 'areaid', $areaid );
 		$this->assign ( 'latercounsel', $latercounsel );

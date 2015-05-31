@@ -363,16 +363,21 @@ function get_line_min_price($id) {
 	
 	$unix_time = $time;
 	$week_date = date("w", $unix_time);
+	$mindaterow=M("line_price")->field(" IFNULL(min(price_date),UNIX_TIMESTAMP()) as mindate  ")->where("line_id=".$id." and price_date>=UNIX_TIMESTAMP()")->find();
+	$mindate=$mindaterow['mindate'];
 	$where['id'] = $id;
-	$price_sql = "(price_type=2 and from_unixtime(price_date,'%Y%m%d')= from_unixtime(UNIX_TIMESTAMP(),'%Y%m%d'))  or (price_type=1 and from_unixtime(price_date,'%Y%m%d')= from_unixtime(UNIX_TIMESTAMP(),'%Y%m%d'))";
+	$price_sql = "(price_type=2 and from_unixtime(price_date,'%Y%m%d')= from_unixtime('".$mindate."','%Y%m%d'))  or (price_type=1 and from_unixtime(price_date,'%Y%m%d')= from_unixtime('".$mindate."','%Y%m%d'))";
 	$line = M("Line")->getTableName() . " line";
 	$line_price = M("line_price")->getTableName() . " price";
+	/*
 	$table = M()->table($line)
 			 ->join($line_price . " on line.id=price.line_id")
 			 ->field("line.*,line_id,price_type,price_date,	price_date_end,price_adult,price_children")
 			 ->order("price_type")
 			 ->select(false);
 	$lists = M()->table($table . " as tmp_table1")->where($where)->where($price_sql)->group("line_id")->find();
+	*/
+	$lists=M("line_price")->field(" min(price_adult) as  price_adult  ")->where("line_id=".$id." and ( (price_type=2 and from_unixtime(price_date,'%Y%m%d')= from_unixtime('".$mindate."','%Y%m%d')) or  (price_type=1  and from_unixtime(price_date,'%Y%m%d')= from_unixtime('".$mindate."','%Y%m%d')) ) ")->find();
 	return $lists['price_adult'];
 	
 	//return 100;

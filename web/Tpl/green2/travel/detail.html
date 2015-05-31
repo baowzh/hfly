@@ -1,5 +1,6 @@
 <script type="text/javascript" src="../Public/js/jquery.xl_calendar.js"></script>
 <script type="text/javascript" src="../Public/js/travel.js"></script>
+<script src="../Public/js/galleria-1.4.2.min.js"></script>
 <script type="text/javascript"
 	src="__ROOT__/style/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
@@ -72,24 +73,130 @@
     	
     }
     */
+    // Initialize Galleria
+  //  Galleria.run('#galleria');
+    $('#galleria').galleria({  
+        image_crop:true,  
+        transition: 'fade',  
+     }); 
+    // Load the classic theme
+    Galleria.loadTheme('../Public/js/galleria.classic.min.js');
+
 </script>
+
 <div class="contents_nei">
-	<div class="topcont">
+	<div class="topcont" style="margin: 20px auto;">
 		<div class="cont_title">
 			<h1>{$line_base.names}</h1>
 			<div class="cont_nav">
-				<a href="">呼和浩特旅游</a> <a href="">包团自由行</a> <a href="">3日游</a>| <a
-					href="">关注（8429）</a>| <a href="">喜欢（6666）</a>| <a href="">游客咨询与互动（4）</a>|
-				<a href="">查看人数与价格 </a>| <a href="">查看费用包含 </a>| <a href="">查看或发起拼团
-				</a>
+				<a href="">{$line_base.linebelongto|_get_city}</a> <a href="">
+					{$line_base.ly_type} </a> <a href="">{$line_base.trip_days}日游</a>| <a
+					href="">关注（{$line_base.attamount}）</a>| <a href="">喜欢（{$line_base.likeamount}）</a>|
+				<a href="">游客咨询与互动（{$lists_quecount}）</a>| <a href="#baotuansection">查看人数与价格
+				</a>| <a href="#fybh">查看费用包含 </a> </a>
 			</div>
 		</div>
-
+		<!--  
 		<div>
-			<img alt="" width="1200" height="570"
-				src="__ROOT__/style/images/cont.jpg">
+			<img alt="" width="1200" height="570" src="__ROOT__/style/images/cont.jpg">
+		</div>
+		-->
+		<div style="width: 1200px; min-height: 570px; overflow: hidden;">
+
+			<div class="lineimg" id="galleria"
+				style="float: left; width: 440px; height: 440px;">
+				<img
+					src="__ROOT__/style/images/cont.jpg"/>
+
+				<volist name="linepic" id="vo"> 
+					
+					<img
+					src="__ROOT__{$vo.pic_path}"/>
+				</volist>
+
+			</div>
+			<div style="float: left; width: 440px; height: 10px;">
+			 <ul style="padding: 0; margin: 0;">
+				<li>
+				</li>
+				
+			</ul>
+			</div>
+
+			<div class="linedesc">
+				<table width="100%" height="100%" style="margin: 8px;">
+					<tr height="18">
+						<td class="name">线路编号:</td>
+						<td class="value">{$line_base.code}</td>
+					</tr>
+					<tr height="18">
+						<td class="name">出发地点:</td>
+						<td class="value">{$start_city_belong.names}</td>
+					</tr>
+					<tr height="18">
+						<td class="name">成团方式:</td>
+						<td class="value">{$line_base.ly_type}</td>
+					</tr>
+
+					<tr height="18">
+						<td class="name">优惠政策:</td>
+						<td class="value"><a style="cursor: pointer; color: #585556"
+							onclick="showTipsWindown('游记返现规则','ajaxs','/ajax/article_ajax.do?id=381',650,350);");"="">游记返现</a>
+							<a style="cursor: pointer"
+							onclick="showTipsWindown('老客户优惠规则','ajaxs','/ajax/article_ajax.do?id=382',650,350);");"="">老客户优惠</a></td>
+					</tr>
+					<tr height="18">
+						<td class="name">支付方式:</td>
+						<td class="value">支付宝、银行柜台、ATM转账</td>
+					</tr>
+					<tr height="18">
+						<td class="name">发团公司:</td>
+						<td class="value">{$line_base.compnay}</td>
+					</tr>
+					<tr>
+						<td width="60" class="name">服务流程:</td>
+						<td style="text-align: left;" class="value"><img
+							src="__ROOT__/style/images/ht.jpg"
+							style="width: 640px; height: 67px;" alt="服务流程" /></td>
+					</tr>
+					<if condition="$line_type eq '1'">
+					<tr>
+						<td class="name">产品特色:</td>
+						<td style="text-align: left;" class="value"><span
+							style="font-size: 24px; color: #05b5b5; font-weight: bold;">选择汇丰包团自由行的好处</span>
+							<ul style="padding-right: 8px;">
+								<li>全程独立用车，独立成团</li>
+								<li>行程中随意停车观光摄影（非限制停车地方）</li>
+								<li>每天出发时间结束时间完全自定</li>
+								<li>景区游览时间，游览节凑自定，只要当天抵达酒店即可</li>
+								<li>拒绝低质团餐，吃什么自定,吃的舒服消费也少</li>
+								<li>行程当天免费接送机/站</li>
+								<li>全程无导游干扰，司机提供贴心服务</li>
+								<li>完善的旅行保障制度，司机按照客人最终回访满意度获取相应的奖惩</li>
+							</ul></td>
+					</tr>
+					</if>
+					<if condition="$line_type neq '1'">
+					<tr>
+						<td class="name">产品特色:</td>
+						<td style="text-align: left;" class="value">
+							<p
+								style="display: block; line-height: 25px; padding-right: 8px; font-size: 14px; text-indent: 24px;">
+
+							</p>
+
+						</td>
+					</tr>
+					</if>
+
+				</table>
+
+			</div>
+
 		</div>
 	</div>
+	<div style="clear: both"></div>
+	<!--  
 	<div class="cont_sumit">
 		<h4>&nbsp;</h4>
 
@@ -150,8 +257,10 @@
 			</table>
 		</div>
 	</div>
-	<if condition="$travel_price_list neq ''">
-	<div class="boat">
+	-->
+	<if condition="$travel_price_list neq ''"> <!-- 	<div class="boat" id="baotuansection"> -->
+	<div class="boat" id="baotuansection">
+		<h4>&nbsp;</h4>
 		<if condition="$line_type neq '3'">
 		<div id="pricetitle" style="margin: 10px 0px 0px 0px;">
 			<ul style="padding: 0; margin: 0;">
@@ -240,7 +349,7 @@
 	<input type="hidden" name="selyear" id="selyear" /> <input
 		type="hidden" name="month" id="selmonth" /> <input type="hidden"
 		name="selday" id="selday" />
-	<div class="pins">
+<!-- 	<div class="pins"> -->
 		<!--  
       <div id="trip_title" style="width:100%; margin-left:0px;margin-right:0px;margin-bottom:0px;">
 	     <ul style="padding:0; margin:0;">
@@ -346,7 +455,7 @@
 				<else /> <include file="travel:day_model" /> </if>
 			</div>
 			<h2>费用包含</h2>
-			<div class="feature">{$lineinfo.contain}</div>
+			<div class="feature" id="fybh">{$lineinfo.contain}</div>
 			<h2>费用不包含</h2>
 			<div class="feature">{$lineinfo.notcontain}</div>
 			<h2>自费项目</h2>
@@ -362,17 +471,27 @@
 			<div class="sumitss">
 				<form action="{:U('consult',array('id'=>$line_base['id']))}"
 					ajax="true" class="check-form" method="post" id="consult">
-					<textarea name="question1" id="textarea" datatype="*5-255"
-						cols="55" rows="5" class="textarea" tip="请输入文本" nullmsg="请输入文本"></textarea>
-					<input name="consult_submit" type="submit" value="提交咨询"
-						class="btn warning active">
-					</td>
+					<div style="widht: 972px; height: 212px;">
+						<textarea name="question1" id="textarea" datatype="*5-255"
+							cols="55" rows="5" class="textarea" tip="请输入文本" nullmsg="请输入文本"></textarea>
+					</div>
+					<div style="width: 972px; height: 46px;">
+						<input name="consult_submit" type="submit" value="提交咨询"
+							class="btn warning active" style="float: right;"> <input
+							type="text" onfocus="if (this.value =='匿名'){this.value =''}"
+							onblur="if (this.value ==''){this.value='匿名'}" value="匿名"
+							name="user_id"
+							style="width: 120px; height: 25px; line-height: 20px; float: right; border: 1px #dadada solid; background: #fff; color: #000; font-size: 12px;">
+
+					</div>
 				</form>
 			</div>
-			<div class="dialog" id="lists_que">
+			<div class="dialog" id="lists_que"
+				style="min-height: 160px; overflow: hidden;">
 				<empty name="lists_que"> <span class="down"
 					style="text-align: center">该产品暂无咨询信息！ </span> <else /> <span
-					class="down">&nbsp;</span> <volist name="lists_que" id="que">
+					class="down">&nbsp;</span>
+					 <volist name="lists_que" id="que">
 				<div class="dialog_left">
 					<div class="toux">
 						<img height="45" src="__ROOT__/style/images/niu.jpg">
@@ -389,8 +508,8 @@
 					<div class="clear"></div>
 				</div>
 				</if> </volist> </empty>
-
 			</div>
+			
 			<div class="clear"></div>
 		</div>
-	</div>
+<!-- 	</div> -->
