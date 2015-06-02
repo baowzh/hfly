@@ -1,6 +1,74 @@
 <div class="col-24 travel_main">
-    <div class="col-24 travel_title alpha">
-        <h1 class="hot_route">{$mess}</h1>
-    </div>
+	<div class="col-24 travel_title alpha">
+		<h1 class="hot_route">{$mess}</h1>
+	</div>
 </div>
-<div class="clear"></div>
+<if condition="$success eq 1">
+<div class="dogview">
+	<div class="link_title">
+		<h3>订单号 :{$$vo.orderid} &nbsp;线路编号：{$vo.lcode}</h3>
+		<span><a class="close" onclick="showclose()"
+			style="cursor: pointer">&nbsp;</a></span>
+	</div>
+	<div style="padding: 15px; border: 1px solid #05adae;">
+		<span style="color: #ff0000">注：如价格有变动，请联系客服修改价格后，通过手机号查询到订单再进行支付！<br>如非在线支付，汇款账户<a
+			href="http://www.xingye.cc/help/pay.html" target="_blank">点此查看</a>，仅限以上账户，打入其他账户与我方无关
+		</span>
+		<form id="a" method="post" target="_blank"
+			action="{:U('/order/index')}">
+			<input type="text" value="{$vo.phone}" name="topphone"
+				style="border-bottom: #FFFFFF solid 1px; border-top: 0px; border-left: 0px; border-right: 0px; background-color: #507596; color: #fff; width: 90px">
+			<!-- 			<input type="submit" value="查看拼团" style="border: 1px #333333 solid"> -->
+		</form>
+	</div>
+	<form method="post" target="_blank" action="{:U('order_pay')}">
+		<input type="hidden" name="orderid" value="{$vo.orderid}" />
+		<table>
+			<tr>
+				<td class="names" style="width: 240px;">订单编号</td>
+				<td class="ru">{$vo.orderid}</td>
+				<td class="names" style="width: 240px;">成团方式</td>
+				<td style="color: #993300; font-weight: bold" class="ru">
+					{$lineInfo.ly_type}</td>
+				<td class="names" style="width: 240px;">发团公司</td>
+				<td style="color: #993300; font-weight: bold" class="ru">
+					{$lineInfo.compnay}</td>
+			</tr>
+			<tr>
+				<td class="names" style="width: 240px;">开始旅行时间</td>
+				<td class="ru">{$vo.startdate}/(共{$lineInfo.trip_days}天)</td>
+				<td class="names" style="width: 240px;">成人单价</td>
+				<td style="color: #993300; font-weight: bold" class="ru">{$vo.pmoney}/{$vo.pnumber}</td>
+				<td class="names" style="width: 240px;">儿童单价</td>
+				<td style="color: #993300; font-weight: bold" class="ru">{$vo.cmoney}/{$vo.cnumber}</td>
+			</tr>
+
+			<tr style="color: #993300; font-weight: bold">
+				<td class="names" style="width: 240px;">支付金额</td>
+				<td class="ru" colspan="2"><span
+					style="font-size: 24px; color: #993300">{$vo.remoney}</span>元</td>
+				<td class="names" style="width: 240px;">费用总计</td>
+				<td class="ru" colspan="2">{$vo.price}元</td>
+			</tr>
+
+			<tr>
+				<td class="names" style="width: 240px;">预定人</td>
+				<td class="ru">{$vo.name}</td>
+				<td class="names" style="width: 240px;">手机</td>
+				<td class="ru">{$vo.phone}</td>
+				<td class="ru" colspan="2">支付成功会收到付款凭证</td>
+			</tr>
+			<tr height="50px">
+				<td class="names" style="width: 240px;">支付方式</td>
+				<td class="ru" colspan="2"><select name="payclass"><option
+							value="0">支付宝(支持网银信用卡)</option></select></td>
+				<td class="names" colspan="3"
+					style="text-align: left; padding-left: 10px;"><input
+					class="sub_bg"
+					style="width: 190px; height: 40px; line-height: 40px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
+					type="submit" value="开始支付"><br />支付成功会收到付款确认短信凭证</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</if>

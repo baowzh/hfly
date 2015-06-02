@@ -2,7 +2,6 @@
 
 /**
  * Description of emailModel
- *
  * @author Administrator
  */
 class emailModel extends Model {
@@ -40,11 +39,6 @@ class emailModel extends Model {
         parent::_initialize();
         $this->send_log = M("email_log");
         $this->file_manager = M("file_manager");
-        if (session_name() != "ADMIN_PHPSESSID") {
-            $this->user_id = $_SESSION['user_id'];
-        } else {
-            $this->user_id = 0;
-        }
         $this->email_config = C("email_api");
         class_exists('PHPMailer') or import('ORG.Net.PHPMailer');
     }
@@ -59,10 +53,19 @@ class emailModel extends Model {
      * @return boolean
      */
     public function send($email = null, $email_name = null, $title = null, $content = null, &$return = array()) {
-        $email = $this->get_email($email);
+      //  $email = $this->get_email($email);
         if (!$email) {
             $return["msg"] = '邮箱地址不能为空';
             return false;
+        }
+        $emails = explode(",", $email);
+        foreach ($emails as $email_item) {
+        	
+            if (!$this->regex($email_item, "email")) {
+                $return["msg"] = '邮箱格式不正确';
+                return false;
+                break;
+            }
         }
         $title = $this->get_title($title);
         $content = $this->get_content($content);
@@ -80,18 +83,21 @@ class emailModel extends Model {
         $att = $this->setting["att"] ? $this->setting["att"] : "";
         $Attachment = $this->get_attachment();
         $user_id = $this->get_user($email);
+        /*
         if (!$this->is_timeout($time, $email, $type, $out) || !$this->is_auth($email, $auth)) {
             $return["msg"] = $this->email_error;
+            $return["timeout"]=true;
             return false;
-        }
+        }*/
         if (!$this->send_email($email, $email_name, $title, $content, $Attachment)) {
             $return["sms_return"] = $this->email_return;
             $return["msg"] = $this->email_error;
             return false;
         }
+        /*
         $sms_data = array();
         $sms_data["email_id"] = $email_id;
-        $sms_data["send_id"] = $this->user_id == 0 ? $_SESSION['user_id'] : 0;
+        $sms_data["send_id"] = $this->user_id == 0 && isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
         $sms_data["user_id"] = $user_id;
         $sms_data["email"] = $email;
         $sms_data["create_time"] = $time;
@@ -105,11 +111,30 @@ class emailModel extends Model {
         $sms_data["sid"] = $status = $this->send_log->add($sms_data);
         $return["data"] = $sms_data;
         $return["email_return"] = $this->email_error;
+        $return["email_server"] = "http://mail." . end(explode("@", $email));
+        */
         return true;
     }
 
+    public function check_email(&$return, $change_status = 1) {
+        $time = time();
+        $email = $this->setting["email"] ? $this->setting["email"] : M("user")->where("id=" . $this->setting["user_id"])->getField("email");
+        $map = array(
+            'email' => array('eq', $email),
+            'type' => array('eq', $this->setting["type"]),
+            'create_time' => array('gt', $time - $this->setting["timeout"]),
+            'user_id' => array('eq', $this->setting["user_id"]),
+            'link' => array('eq', $this->setting["link"]),
+            "status" => 0
+        );
+        $return = $this->send_log->where($map)->order("id desc")->find();
+        if ($return && $change_status) {
+            $this->send_log->where($map)->setField("status", $change_status);
+        }
+        return $return ? true : false;
+    }
+
     /**
-     * 
      * @param type $email
      * @param type $email_name
      * @param type $title
@@ -117,10 +142,10 @@ class emailModel extends Model {
      * @param type $Attachment
      * @return boolean
      */
-    private function send_email($email, $email_name, $title, $body, $Attachment = null) {
+      private function send_email($email, $email_name, $title, $body, $Attachment = null) {
         $mail = new PHPMailer();
         $mail->IsSMTP(); //使用SMTP方式发送
-        $mail->SMTPAuth = true; //设置服务器是否需要SMTP身份验证 
+        $mail->SMTPAuth = true; //设置服务器是否需要SMTP身份验证
         $mail->Host = $this->email_config['email_server']; //SMTP 主机地址 
         $mail->Port = $this->email_config['email_port']; //SMTP 主机端口
         $mail->From = $this->email_config['email_user']; //发件人EMAIL地址
@@ -131,7 +156,7 @@ class emailModel extends Model {
         $mail->Subject = $title; //邮件主题 
         $mail->AltBody = 'text/html'; //设置在邮件正文不支持HTML时的备用显示
         $mail->Body = $body; //邮件内容做成
-        $mail->IsHTML(true);  //是否是HTML邮件
+        $mail->IsHTML(true); //是否是HTML邮件
         $emails = explode(',', $email);
         $email_names = explode(',', $email_name);
         foreach ($emails as $k => $v) {
@@ -144,8 +169,17 @@ class emailModel extends Model {
                 $mail->AddAttachment($v['path'], $v['name']); //附件的路径和附件名称
             }
         }
-        if (!$mail->Send()) {
-            $this->email_error = "邮件错误: " . $mail->ErrorInfo;
+        try {
+            $mail->Send(true);
+        } catch (phpmailerException $e) {
+            $code = $e->getCode();
+            if ($code == 0)
+                $msg = "您输入的邮箱不存在！";
+            else {
+                $msg = $e->errorMessage();
+            }
+            $this->email_error = "邮件错误: " . $msg;
+            //print_r( $this->email_error);
             return false;
         }
         return true;
@@ -180,12 +214,12 @@ class emailModel extends Model {
         return $id;
     }
 
-    private function get_title($title) {
-        return $title ? $title : (isset($this->setting['title']) ? $this->setting['title'] : "");
-    }
-
     private function get_content($content) {
         return $content ? $content : (isset($this->setting['content']) ? $this->setting['content'] : "");
+    }
+
+    private function get_title($title) {
+        return $title ? $title : (isset($this->setting['title']) ? $this->setting['title'] : "");
     }
 
     private function is_timeout($time, $email, $type, $out, $gtype = false) {
@@ -194,7 +228,7 @@ class emailModel extends Model {
         }
         $map0 = array(
             'email' => array('eq', $email),
-            'send_type' => array('eq', $type),
+            'type' => array('eq', $type),
             'create_time' => array('lt', $time - $out),
             "status" => 0
         );
@@ -202,7 +236,7 @@ class emailModel extends Model {
         $this->send_log->where($map0)->setField('status', '1');
         $map = array(
             'email' => array('eq', $email),
-            'send_type' => array('eq', $type),
+            'type' => array('eq', $type),
             'create_time' => array('gt', $time - $out),
             "status" => 0
         );

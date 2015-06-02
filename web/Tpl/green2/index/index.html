@@ -421,7 +421,7 @@
 				target="_blank">五日游</a></li>
 		</div>
 		<div class="line_right">
-			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">更多推存</a>
+			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">更多推荐</a>
 		</div>
 	</div>
 
@@ -483,10 +483,10 @@
 							</if>
 							<div class="travellinecomm">{$vo['names']}</div>
 						</div>
-<!-- 						<br> -->
 						<p style="width: 244px; height: 50px; overflow: hidden;">
-							<!-- 					{$vo.id|get_special_info1}</p> -->
-							{$vo['names']} <br>
+							<a href="{:U('travel/detail',array('id'=>$vo['id']))}"
+				target="_blank">{$vo['names']} </a>
+							<br>
 					</div>
 				</li>
 				</volist>
@@ -538,7 +538,7 @@
 				target="_blank">五日游</a></li>
 		</div>
 		<div class="line_right">
-			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">更多推存</a>
+			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">更多推荐</a>
 		</div>
 	</div>
 
@@ -600,10 +600,10 @@
 							</if>
 							<div class="travellinecomm">{$vo['names']}</div>
 						</div>
-<!-- 						<br> -->
 						<p style="width: 244px; height: 50px; overflow: hidden;">
-							<!-- 					{$vo.id|get_special_info1}</p> -->
-							{$vo['names']} <br>
+							<a href="{:U('travel/detail',array('id'=>$vo['id']))}"
+				target="_blank">{$vo['names']} </a> 
+				 <br>
 					</div>
 				</li>
 				</volist>
@@ -654,7 +654,7 @@
 				target="_blank">五日游</a></li>
 		</div>
 		<div class="line_right">
-			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">更多推存</a>
+			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">更多推荐</a>
 		</div>
 	</div>
 
@@ -715,10 +715,11 @@
 							</if>
 							<div class="travellinecomm">{$vo['names']}</div>
 						</div>
-<!-- 						<br> -->
+
 						<p style="width: 244px; height: 50px; overflow: hidden;">
-							<!-- 					{$vo.id|get_special_info1}</p> -->
-							{$vo['names']} <br>
+
+							<a href="{:U('travel/detail',array('id'=>$vo['id']))}"
+				target="_blank">{$vo['names']} </a> <br>
 					</div>
 				</li>
 
@@ -773,7 +774,7 @@
 				target="_blank">五日游</a></li>
 		</div>
 		<div class="line_right">
-			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">更多推存</a>
+			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">更多推荐</a>
 		</div>
 	</div>
 
@@ -836,10 +837,9 @@
 							</if>
 							<div class="travellinecomm">{$vo['names']}</div>
 						</div>
-<!-- 						<br> -->
 						<p style="width: 244px; height: 50px; overflow: hidden;">
-							<!-- 					{$vo.id|get_special_info1}</p> -->
-							{$vo['names']} <br>
+							<a href="{:U('travel/detail',array('id'=>$vo['id']))}"
+				target="_blank">{$vo['names']} </a> <br>
 					</div>
 				</li>
 				</volist>
@@ -862,7 +862,7 @@
 			<li><a href="">五当召</a></li>
 		</div>
 		<div class="line_right">
-			<a href="{:U('viewpoint/index',array('areaid'=>$areaid))}">更多推存</a>
+			<a href="{:U('viewpoint/index',array('areaid'=>$areaid))}">更多推荐</a>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -879,7 +879,7 @@
 	<div class="jing_dec">
 		<div class="jing_left">
 			<volist name="pointlist" id="vo" key="k">
-			<li  <if condition="$mod eq 1 "> style="margin-right:0px" </if> ><a
+			<li  <if condition="$mod eq 1 ">  style="margin-right:0px" </if> ><a
 				href="{:U('viewpoint/detail',array('id'=>$vo['id']))}"
 				target="_blank"><img alt="{$vo.names}" width="363" height="275"
 					src="__ROOT__{$vo.pic}" /></a> <!-- 				<div class="tui">&nbsp;</div> -->

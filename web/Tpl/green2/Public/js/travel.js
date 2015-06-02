@@ -361,11 +361,6 @@ var setMoney = function() {
 
 						+ datePriceList[1][numrange][i].price_childrenyk
 								* cnumber));
-				$('#ydzfz').html(
-						(datePriceList[1][numrange][i].price_adultpre * pnumber
-
-						+ datePriceList[1][numrange][i].price_childrenpre
-								* cnumber));
 				$('#ddhzf')
 						.html(
 								(datePriceList[1][numrange][i].price_adult
@@ -403,6 +398,11 @@ var setMoney = function() {
 					}
 
 				}
+				$('#ydzfz').html(
+						(datePriceList[1][numrange][i].price_adultpre * pnumber
+
+						+ datePriceList[1][numrange][i].price_childrenpre
+								* cnumber)+datePriceList[1][numrange][i].dfc);
 
 				$('#zfy')
 						.html(

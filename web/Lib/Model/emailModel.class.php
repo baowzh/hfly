@@ -39,11 +39,6 @@ class emailModel extends Model {
         parent::_initialize();
         $this->send_log = M("email_log");
         $this->file_manager = M("file_manager");
-        if (session_name() != "ADMIN_PHPSESSID") {
-            $this->user_id = $_SESSION['user_id'];
-        } else {
-            $this->user_id = 0;
-        }
         $this->email_config = C("email_api");
         class_exists('PHPMailer') or import('ORG.Net.PHPMailer');
     }
@@ -58,13 +53,14 @@ class emailModel extends Model {
      * @return boolean
      */
     public function send($email = null, $email_name = null, $title = null, $content = null, &$return = array()) {
-        $email = $this->get_email($email);
+      //  $email = $this->get_email($email);
         if (!$email) {
             $return["msg"] = '邮箱地址不能为空';
             return false;
         }
         $emails = explode(",", $email);
         foreach ($emails as $email_item) {
+        	
             if (!$this->regex($email_item, "email")) {
                 $return["msg"] = '邮箱格式不正确';
                 return false;
@@ -85,18 +81,20 @@ class emailModel extends Model {
         $email_id = $this->setting["email_id"] ? $this->setting["email_id"] : 0;
         $link = $this->setting["link"] ? $this->setting["link"] : "#";
         $att = $this->setting["att"] ? $this->setting["att"] : "";
-        $Attachment = $this->get_attachment();
+       // $Attachment = $this->get_attachment();
         $user_id = $this->get_user($email);
+        /*
         if (!$this->is_timeout($time, $email, $type, $out) || !$this->is_auth($email, $auth)) {
             $return["msg"] = $this->email_error;
             $return["timeout"]=true;
             return false;
-        }
-        if (!$this->send_email($email, $email_name, $title, $content, $Attachment)) {
+        }*/
+        if (!$this->send_email($email, $email_name, $title, $content, null)) {
             $return["sms_return"] = $this->email_return;
             $return["msg"] = $this->email_error;
             return false;
         }
+        /*
         $sms_data = array();
         $sms_data["email_id"] = $email_id;
         $sms_data["send_id"] = $this->user_id == 0 && isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
@@ -114,6 +112,7 @@ class emailModel extends Model {
         $return["data"] = $sms_data;
         $return["email_return"] = $this->email_error;
         $return["email_server"] = "http://mail." . end(explode("@", $email));
+        */
         return true;
     }
 
@@ -143,7 +142,7 @@ class emailModel extends Model {
      * @param type $Attachment
      * @return boolean
      */
-    private function send_email($email, $email_name, $title, $body, $Attachment = null) {
+      private function send_email($email, $email_name, $title, $body, $Attachment = null) {
         $mail = new PHPMailer();
         $mail->IsSMTP(); //使用SMTP方式发送
         $mail->SMTPAuth = true; //设置服务器是否需要SMTP身份验证
@@ -180,6 +179,7 @@ class emailModel extends Model {
                 $msg = $e->errorMessage();
             }
             $this->email_error = "邮件错误: " . $msg;
+           //  print_r( $this->email_error);
             return false;
         }
         return true;

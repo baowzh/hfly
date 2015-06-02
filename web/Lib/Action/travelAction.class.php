@@ -199,7 +199,6 @@ class travelAction extends CommonAction {
 	}
 	public function order_ding_act() {
 		$LineOrder = D ( 'LineOrder' );
-		$_POST ['num'] = intval ( $_POST ['people'] ) + intval ( $_POST ['woman'] ) + intval ( $_POST ['chd'] );
 		if (empty ( $_POST ['name'] )) {
 			$this->ajaxReturn ( "", "联系人不能为空", "n" );
 			exit ();
@@ -257,7 +256,7 @@ class travelAction extends CommonAction {
 		if ($line_base ['line_type'] != 3) {
 			$price_type = 1;
 			if ($numrange == 0) {
-				$numrange = 6;
+				$numrange = 6; // 获取单个人的价钱
 			}
 		} else {
 			$price_type = 2;
@@ -273,7 +272,7 @@ class travelAction extends CommonAction {
 			$totalnum = $pnumber * 1 + $cnumber * 1;
 			$ytfjs = $pnumber / 2;
 			if ($pnumber % 2 > 0) {
-				$ytfjs = $ytfjs  - 0.5;
+				$ytfjs = $ytfjs - 0.5;
 			}
 			$sjfjs = $roomnum * 1;
 			if ($sjfjs - $ytfjs > 0) {
@@ -283,9 +282,8 @@ class travelAction extends CommonAction {
 			}
 		}
 		//
-		
 		$price = $price_day ['price_adult'] * $pnumber + $price_day ['price_children'] * $cnumber + $dfcz;
-		$remoney = $price_day ['price_adultpre'] * $pnumber + $price_day ['price_childrenpre'] * $cnumber;
+		$remoney = $price_day ['price_adultpre'] * $pnumber + $price_day ['price_childrenpre'] * $cnumber + $dfcz;
 		$pmoney = $price_day ['price_adult'];
 		$premoney = $price_day ['price_adultpre'];
 		$cmoney = $price_day ['price_children'];
@@ -315,6 +313,7 @@ class travelAction extends CommonAction {
 			$LineOrder->pmoneyyk = $price_day ['price_adultyk'];
 			$LineOrder->cmoneyec = $price_day ['price_childrenec'];
 			$LineOrder->cmoneyyk = $price_day ['price_childrenyk'];
+			$LineOrder->trip_days = $line_base ['trip_days'];
 			$pmoneyec = 0;
 			if ($LineOrder->pmoneyec != 0) {
 				$pmoneyec = $LineOrder->pmoneyec;
@@ -335,6 +334,21 @@ class travelAction extends CommonAction {
 			$LineOrder->ykz = $pyk * $pnumber + $cyk * $cnumber;
 			$LineOrder->add ();
 			$insert_id = $LineOrder->getLastInsID ();
+			// 邮件发送
+			$OrderData = $LineOrder->field ( "*,date_add(startdate, interval trip_days day) as enddate" )->find ( $insert_id );
+			$this->assign ( "protocolData", $OrderData );
+			$protocolcontent = $this->fetch ( "protocol", "", "" );
+			$messContent = "您好" . $OrderData ['name'] . "您的订单[" . $OrderData ['orderid'] . "]已提交成功，合同已发送到您的电子邮箱[" . $OrderData ['email'] . "]，如有变动，请联系客服修改[免费热线4001-888-332]，您通过手机号可随时在官网[http://www.hf97667.com]查询支付订单.【汇丰旅游】";
+			$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
+			$messDate = array (
+					'action' => 'send',
+					'username' => '70208213',
+					'password' => md5 ( 'hf6317995' ),
+					'phone' => $OrderData ['phone'],
+					'content' => urlencode ( $messContent ) 
+			);
+			// 短信发送
+			$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
 					"id" => $insert_id 
 			) ), "订单详情", "u" );
@@ -395,7 +409,6 @@ class travelAction extends CommonAction {
 			$this->ajaxReturn ( "", "目标人数不能大于最多接受人数", "n" );
 			exit ();
 		}
-		
 		$_POST ['price'] = $_POST ['num'] * $_POST ['cmoney'];
 		$_POST ['status'] = 0;
 		$_POST ['orderid'] = time () . rand ( 1000, 9999 );
@@ -585,11 +598,11 @@ class travelAction extends CommonAction {
 		// 获取相关的6个线路放下面 同一个地区，统一天数的线路
 		$city_id = $line_base ['linebelongto'];
 		$trip_days = $line_base ['trip_days'];
-		$relines = M ( 'line' )->where ( " linebelongto='" . $city_id . "' and trip_days=" . $trip_days )->limit ( 6 )->select();
+		$relines = M ( 'line' )->where ( " linebelongto='" . $city_id . "' and trip_days=" . $trip_days )->limit ( 6 )->select ();
 		$this->assign ( "relines", $relines ); // 相关旅游线路
-		// 获取实时订单信息
+		                                       // 获取实时订单信息
 		$sysOrder = M ( 'SysOrder' );
-		$orderlist = $sysOrder->order( 'orderdate desc' )->limit (10 )->select ();
+		$orderlist = $sysOrder->order ( 'orderdate desc' )->limit ( 10 )->select ();
 		$this->assign ( "orderlist", $orderlist );
 		$this->display ();
 	}
@@ -969,15 +982,12 @@ EOF;
 		/**
 		 * 获取订单信息并进行支付
 		 */
-		// $LinePin = D ( 'LinePin' );
 		$orderid = $_POST ['orderid'];
-		// $count = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $orderid . " union select orderid,price,state from jee_line_order where orderid=" . $orderid . "" );
 		$LineOrder = D ( 'LineOrder' );
 		$orderInfo = $LineOrder->where ( array (
 				'orderid' => $orderid 
 		) )->find ();
 		if ($orderInfo != null) {
-			// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $orderid . " union select orderid,price,state from jee_line_order where orderid=" . $orderid . "" );
 			$price = $orderInfo ['remoney'];
 			$state = $orderInfo ['state'];
 			if ($state != 0) {
@@ -1133,6 +1143,17 @@ EOF;
 						'state' => 1,
 						'trade_no' => $trade_no 
 				) );
+				
+				// 发送支付短信开始
+				$messContent = "您好" . $orderInfo ['name'] . "先生/ 女士，您的订单[" . $orderInfo ['orderid'] . "]已支付成功，行程已确认，客服会在出团前一天通知您具体集合时间地点联系人等信息。如有变动请联系客服[免费热线4001-888-332]，您通过手机号可随时在官网[http://www.hf97667.com]查询订单详情.【汇丰旅游】";
+				$messDate = array (
+						'action' => 'send',
+						'username' => '70208213',
+						'password' => md5 ( 'hf6317995' ),
+						'phone' => $OrderData ['phone'],
+						'content' => urlencode ( $messContent ) 
+				);
+				$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			}
 			
 			// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
@@ -1209,15 +1230,31 @@ EOF;
 						'state' => 1,
 						'trade_no' => $trade_no 
 				) );
+				// 发送支付短信开始
+				$messContent = "您好" . $orderInfo ['name'] . "先生/ 女士，您的订单[" . $orderInfo ['orderid'] . "]已支付成功，行程已确认，客服会在出团前一天通知您具体集合时间地点联系人等信息。如有变动请联系客服[免费热线4001-888-332]，您通过手机号可随时在官网[http://www.hf97667.com]查询订单详情.【汇丰旅游】";
+				$messDate = array (
+						'action' => 'send',
+						'username' => '70208213',
+						'password' => md5 ( 'hf6317995' ),
+						'phone' => $OrderData ['phone'],
+						'content' => urlencode ( $messContent ) 
+				);
+				$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			}
 			
 			// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 			
 			// 如果有做过处理，不执行商户的业务程序
 			$this->assign ( "mess", '支付成功!' );
+			$Line = D ( 'Line' );
+			$lineInfo = $Line->find ( $orderInfo ['lid'] );
+			$this->assign ( "vo", $orderInfo); // 基本信息
+			$this->assign ( "lineInfo", $lineInfo );
+			$this->assign ( "success", 1 );
 		} else {
 			echo "trade_status=" . $_GET ['trade_status'];
 			$this->assign ( "mess", '此订单已经支付过!' );
+			$this->assign ( "success", 0);
 		}
 		
 		// echo "验证成功<br />";
@@ -1231,6 +1268,81 @@ EOF;
 		// echo "验证失败";
 		// }
 		$this->display ();
+	}
+	function curl_post($url, $param = null, $isJson = false) {
+		$ch = curl_init ();
+		curl_setopt ( $ch, CURLOPT_URL, $url );
+		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+		curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+		if ($param != null && $param != "") {
+			curl_setopt ( $ch, CURLOPT_POST, 1 );
+			curl_setopt ( $ch, CURLOPT_POSTFIELDS, $param );
+		}
+		if ($isJson == false)
+			$data = json_decode ( curl_exec ( $ch ), true );
+		else
+			$data = curl_exec ( $ch );
+		curl_close ( $ch );
+		return $data;
+	}
+	/**
+	 * post 方式提交http 请求并获取返回结果
+	 *
+	 * @param unknown $URL        	
+	 * @param unknown $data        	
+	 * @param unknown $cookie        	
+	 * @param string $referrer        	
+	 * @return string
+	 */
+	function HTTP_Post($URL, $data, $cookie, $referrer = "") {
+		// parsing the given URL
+		$URL_Info = parse_url ( $URL );
+		// Building referrer
+		if ($referrer == "") // if not given use this script as referrer
+			$referrer = "111";
+			// making string from $data
+		foreach ( $data as $key => $value )
+			$values [] = "$key=" . urlencode ( $value );
+		$data_string = implode ( "&", $values );
+		// Find out which port is needed - if not given use standard (=80)
+		if (! isset ( $URL_Info ["port"] ))
+			$URL_Info ["port"] = 80;
+			// building POST-request:
+		$request = "POST " . $URL_Info ["path"] . " HTTP/1.1\n";
+		$request .= "Host: " . $URL_Info ["host"] . "\n";
+		$request .= "Referer: $referrer\n";
+		$request .= "Content-type: application/x-www-form-urlencoded\n";
+		$request .= "Content-length: " . strlen ( $data_string ) . "\n";
+		$request .= "Connection: close\n";
+		// $request .= "Cookie: $cookie\n";
+		$request .= "\n";
+		$request .= $data_string . "\n";
+		$fp = fsockopen ( $URL_Info ["host"], $URL_Info ["port"] );
+		fputs ( $fp, $request );
+		$result = "";
+		while ( ! feof ( $fp ) ) {
+			$result .= fgets ( $fp, 1024 );
+		}
+		
+		fclose ( $fp );
+		return $result;
+	}
+	function sendEmail($emailaddr = 'hf97667@163.com', $emailname = 'hf97667', $subject = '团队境内旅游合同', $content = '团队境内旅游合同') {
+		$email = D ( "email" );
+		$email->send ( $emailaddr, $emailname, $subject, $content );
+	}
+	function sendMail() {
+		$this->sendEmail ( 'imubwz@126.com', 'baowz', '测试邮件', '测试邮件' );
+	}
+	function sendMess() {
+		$messDate = array (
+				'action' => 'send',
+				'username' => '70208213',
+				'password' => md5 ( 'hf6317995' ),
+				'phone' => '15184707203',
+				'content' => urlencode ( "测试短信" ) 
+		);
+		$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 	}
 }
 

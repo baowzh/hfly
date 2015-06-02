@@ -12,14 +12,14 @@ return array(
     "pay_model"=>1,
     "pay_debug_id"=>1,    
     "email_api" => array(
-        "email_server" => "smtp.exmail.qq.com",
-        "email_port" => "463",
-        "email_user" => "",
-        "email_fromname" => "",
-        "email_pwd" => "",
-        "email_charset" => "UTF-8",
-        "email_return" => "",
-        "email_returnname" => "旅游网",
+        "email_server" => "smtp.126.com",
+        "email_port" => "25",
+        "email_user" => "imubwz@126.com",
+        "email_fromname" => "imubwz",
+        "email_pwd" => "bwz8()",
+        "email_charset" => "utf-8",
+        "email_return" => "imubwz@126.com",
+        "email_returnname" => "imubwz",
     ),
 );
 ?>

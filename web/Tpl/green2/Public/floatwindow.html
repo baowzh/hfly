@@ -1,0 +1,81 @@
+<div class="clear"></div>
+		<div id="fixedService" class="rides-cs">
+			<div class="floatL">
+				<a style="display: none;" id="aFloatTools_Show" class="btnOpen"
+					title="查看在线客服" href="javascript:void(0);">展开</a> <a
+					style="display: block;" id="aFloatTools_Hide" class="btnCtn"
+					title="关闭在线客服" href="javascript:void(0);">收缩</a>
+			</div>
+			<div id="divFloatToolsView" class="floatR" style="display: block;">
+				<div class="cn">
+					<ul>
+						<div id="BDBridgeFixedWrap"
+							style="text-align: left; display: block; width: 170px; height: 0px; position: relative;">
+							<iframe id="BDBridgeIconIframe" src="about:blank" frameborder="0"
+								marginheight="0" marginwidth="0"
+								style="display: none; width: 170px; height: 0px;"></iframe>
+							<div id="IconContainer" style="width: 170px; height: 0px;">
+								<div id="bridgebottom"
+									style="position: relative; width: 170px; margin-left: 0px; left: 0px;">
+									<div class="bdbridge-icon-left"
+										style="position: absolute; zoom: 1; right: 0px; bottom: 0px;">
+										<div id="bdbridge-left-close" style="cursor: pointer;"
+											class=" bdbridge-right-img"></div>
+									</div>
+
+									<div style="clear: both; font-size: 0; line-height: 0;"></div>
+								</div>
+							</div>
+						</div>
+					</ul>
+					<h3 class="titZx titQq">在线客服</h3>
+					<ul class="qq clearfix">
+						<li><a target="_blank" rel="nofollow"
+							href="http://wpa.qq.com/msgrd?v=3&amp;uin=1215568458&amp;site=qq&amp;menu=yes"><img
+								border="0" src="http://wpa.qq.com/pa?p=2:2412922203:52"
+								alt="在线客服" title="小张"><span>小张</span></a></li>
+						<li><a target="_blank" rel="nofollow"
+							href="http://wpa.qq.com/msgrd?v=3&amp;uin=2412922203&amp;site=qq&amp;menu=yes"><img
+								border="0" src="http://wpa.qq.com/pa?p=2:2412922203:52"
+								alt="在线客服" title="小李"><span>小李</span></a></li>
+						<li><a target="_blank" rel="nofollow"
+							href="http://wpa.qq.com/msgrd?v=3&amp;uin=2412922203&amp;site=qq&amp;menu=yes"><img
+								border="0" src="http://wpa.qq.com/pa?p=2:2412922203:52"
+								alt="在线客服" title="小王"><span>小王</span></a></li>
+						<li><a target="_blank" rel="nofollow"
+							href="http://wpa.qq.com/msgrd?v=3&amp;uin=2412922203&amp;site=qq&amp;menu=yes"><img
+								border="0" src="http://wpa.qq.com/pa?p=2:2412922203:52"
+								alt="在线客服" title="小王"><span>小南</span></a></li>
+					</ul>
+					<h3 class="titZx">咨询热线</h3>
+					<ul>
+						<li><span>4001-888-332</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="izl_rmenu" class="izl-rmenu">
+			<div class="btn btn-top" style="display: block;"></div>
+		</div>
+<script type="text/javascript">
+ $(document).ready(function() {
+    	$('#divFloatToolsView').hide();
+    	$('#aFloatTools_Show').show();
+		$('#aFloatTools_Hide').hide();	
+    	$("#aFloatTools_Show").click(function(){
+    			$('#divFloatToolsView').animate({width:'show',opacity:'show'},500,function(){$('#divFloatToolsView').show();});
+    			$('#aFloatTools_Show').hide();
+    			$('#aFloatTools_Hide').show();				
+    	});
+    	$("#aFloatTools_Hide").click(function(){
+    			$('#divFloatToolsView').animate({width:'hide', opacity:'hide'},500,function(){$('#divFloatToolsView').hide();});
+    			$('#aFloatTools_Show').show();
+    			$('#aFloatTools_Hide').hide();	
+    	});
+    	$(".btn-top").click(function(){
+			$("html, body").animate({
+				"scroll-top":0
+			},"fast");
+		});
+	});
+</script>

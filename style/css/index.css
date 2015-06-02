@@ -80,7 +80,7 @@
 }
 
 .mianconent li {
-/* 	width: 376px; */
+	/* 	width: 376px; */
 	/* 	height: 312px; */
 	width: 342px;
 	height: 330px;
@@ -89,6 +89,9 @@
 	margin-right: 10px;
 	margin-bottom: 5px;
 	/* 	margin-bottom: 35px; */
+}
+.mianconent li img{
+	border-radius: 5px 5px 5px 5px;
 }
 
 .mianconent li .desc {
@@ -131,8 +134,8 @@
 }
 
 .main_cont {
-/* 	width: 1200px; */
-width: 1050px;
+	/* 	width: 1200px; */
+	width: 1050px;
 	min-height: 900px;
 	margin: 0 auto;
 	background: #FFF;
@@ -172,8 +175,8 @@ width: 1050px;
 }
 
 .contents_nei {
-/* 	width: 1200px; */
-width: 1100px;
+	/* 	width: 1200px; */
+	width: 1100px;
 	min-height: 1500px;
 	margin: 0 auto;
 	margin-top: 10px;
@@ -785,7 +788,7 @@ width: 1100px;
 }
 
 .container {
-	width: 1150px;
+	width: 1050px;
 	margin: 0 auto;
 }
 
@@ -867,7 +870,8 @@ width: 1100px;
 	margin-top: 0px;
 	margin-left: 10px;
 	float: left;
-	width: 960px;
+	/* 	width: 960px; */
+	width: 860px;
 	overflow: hidden;
 	background: #fff
 }
@@ -1083,8 +1087,8 @@ width: 1100px;
 	/* 	width: 1150px; */
 	width: 1050px;
 	margin: 0 auto;
-/* 	height: 460px; */
-    height: 440px;
+	/* 	height: 460px; */
+	height: 440px;
 	margin-top: 15px;
 	margin-bottom: 15px;
 	background: #fff;
@@ -1107,6 +1111,10 @@ width: 1100px;
 	float: left;
 	position: relative;
 	margin-right: 13px;
+}
+
+.bao_detail .bao_left li img {
+	border-radius: 5px 5px 5px 5px;
 }
 
 .bao_detail .bao_left li .desc {
@@ -1154,7 +1162,7 @@ width: 1100px;
 	padding: 0px 0px 0px 25px;
 	border-left: 1px solid #f6f6f6;
 	height: 365px;
-	overflow:hidden;
+	overflow: hidden;
 }
 
 .bao_detail .bao_right h5 a {
@@ -1401,14 +1409,14 @@ width: 1100px;
 }
 
 .knowledge {
-/* 	width: 1150px; */
-width: 1050px;
+	/* 	width: 1150px; */
+	width: 1050px;
 	margin: 0 auto;
 	height: 250px;
 	margin-top: 15px;
 	margin-bottom: 15px;
 	background: #fff;
-	padding: 15px 25px 15px 25px ;
+	padding: 15px 25px 15px 25px;
 }
 
 .know_list {
@@ -2039,12 +2047,12 @@ width: 1050px;
 }
 
 .calendar_list .price {
-/* 	width: 72px; */
+	/* 	width: 72px; */
 	background: white;
 }
 
 .calendar_list .noprice {
-/* 	width: 77px; */
+	/* 	width: 77px; */
 	background: #fcfcfc;
 }
 
