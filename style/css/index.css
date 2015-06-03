@@ -1305,7 +1305,7 @@
 	/* 	width: 1150px; */
 	width: 1050px;
 	margin: 0 auto;
-	height: 960px;
+	height: 1084px;
 	margin-top: 15px;
 	margin-bottom: 15px;
 	background: #fff;
@@ -1330,7 +1330,7 @@
 .jing_dec  .jing_left li {
 	/* 	width: 413px; */
 	width: 363px;
-	height: 275px;
+	height: 313px;
 	float: left;
 	margin-right: 20px;
 	margin-bottom: 20px;
@@ -1359,23 +1359,23 @@
 
 .jing_dec  .jing_left li .shaw {
 	width: 100%;
-	position: absolute;
-	bottom: 0px;
+/* 	position: absolute; */
+/* 	bottom: 0px; */
 	height: 48px;
-	line-height: 48px;
+	line-height: 38px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 0px 0px 5px 5px;
 	z-index: 888;
-	color: #fff;
-	text-align: right;
+/* 	color: #fff; */
+	text-align: left;
 	font-size: 16px;
-	background: url(../images/toum.png?vfdd) repeat;
+/* 	background: url(../images/toum.png?vfdd) repeat; */
 }
 
 .jing_dec  .jing_left li .shaw a {
-	color: #fff;
+/* 	color: #fff; */
 	padding: 0px 25px;
 	background: url(../images/ding.png) no-repeat left center;
 }
@@ -1790,7 +1790,7 @@
 	margin: auto auto;
 	left: 0;
 	right: 0;
-	top: 17%;
+	top: 8%;
 }
 
 .link_2 table {
@@ -1818,7 +1818,8 @@
 	border-right: 1px solid #05adae;
 	color: #009998;
 	font-size: 14px;
-	padding: 0px
+	padding: 0px;
+	overflow:hidden;
 }
 
 .link_2 table input {
@@ -1914,7 +1915,9 @@
 
 .link_2 table .wlef {
 	text-align: left;
-	padding-left: 10px
+	padding-left: 10px;
+	width:92px;
+	overflow:hidden;
 }
 
 .pricecontent table {

@@ -12,14 +12,14 @@ return array(
     "pay_model"=>1,
     "pay_debug_id"=>1,    
     "email_api" => array(
-        "email_server" => "smtp.126.com",
+        "email_server" => "smtp.163.com",
         "email_port" => "25",
-        "email_user" => "imubwz@126.com",
-        "email_fromname" => "imubwz",
-        "email_pwd" => "bwz8()",
+        "email_user" => "hf97667@163.com",
+        "email_fromname" => "hf97667",
+        "email_pwd" => "929006129@qq.com",
         "email_charset" => "utf-8",
-        "email_return" => "imubwz@126.com",
-        "email_returnname" => "imubwz",
+        "email_return" => "hf97667@163.com",
+        "email_returnname" => "hf97667",
     ),
 );
 ?>

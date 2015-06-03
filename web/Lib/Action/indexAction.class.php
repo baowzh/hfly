@@ -6,7 +6,6 @@ class indexAction extends CommonAction {
 		parent::_initialize ();
 	}
 	public function index() {
-		
 		// 网站公告
 		$areaid = $_GET ['areaid'];
 		$time = time ();
@@ -80,7 +79,7 @@ class indexAction extends CommonAction {
 		// 自定义订单
 		//
 		$LineOrder = M ( 'LineOrder' );
-		$realorder = $LineOrder->field ( " SUBSTR(name from 1 for 3) name,pnumber pcount,cnumber ccount,lcode,orderdate" )->order ( " orderdate desc" )->limit ( 8 )->select ();
+		$realorder = $LineOrder->field ( " CONCAT(SUBSTR(name from 1 for 1),'**') name,pnumber pcount,cnumber ccount,lcode,orderdate" )->order ( " orderdate desc" )->limit ( 8 )->select ();
 		$this->assign ( 'realorder', $realorder );
 		$sysOrder = M ( 'SysOrder' );
 		$orderlist = $sysOrder->order ( 'orderdate desc' )->limit ( 14 - count ( $realorder ) )->select ();

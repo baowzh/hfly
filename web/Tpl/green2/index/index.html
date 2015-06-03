@@ -275,30 +275,15 @@
 			<ul>
 				<ul></ul>
 				<volist name="realorder" id="vo">
-				<li style="width: 224px; height: 17px; overflow: hidden;"><a
+				<li style="width: 224px; height: 18px; overflow: hidden;"><a
 					href="">{$vo.name} {$vo.pcount}大{$vo.ccount}小
 						线路{$vo.lcode}[{$vo.orderdate}]<!-- [2015年2月22日]-->
 				</a></li>
 				</volist>
 				<volist name="orderlist" id="vo">
-				<li><a href="">{$vo.name} {$vo.pcount}大{$vo.ccount}小
+				<li style="width: 224px; height: 18px; overflow: hidden;"><a href="">{$vo.name} {$vo.pcount}大{$vo.ccount}小
 						线路{$vo.lcode}[{$vo.orderdate}]</a></li>
 				</volist>
-				<!-- 
-				<li><a href="">童** 2大1小 线路0061[2015年2月23日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月24日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月25日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月26日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月27日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月28日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月29日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月30日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年3月01日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月02日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月03日]</a></li>
-				<li><a href="">童** 2大1小 线路0061[2015年2月04日]</a></li>
-				-->
-
 			</ul>
 		</div>
 	</div>
@@ -865,6 +850,7 @@
 			<a href="{:U('viewpoint/index',array('areaid'=>$areaid))}">更多推荐</a>
 		</div>
 	</div>
+	<!--  
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".jing_left li").hover(function() {
@@ -876,6 +862,7 @@
 
 		});
 	</script>
+	-->
 	<div class="jing_dec">
 		<div class="jing_left">
 			<volist name="pointlist" id="vo" key="k">
@@ -883,7 +870,7 @@
 				href="{:U('viewpoint/detail',array('id'=>$vo['id']))}"
 				target="_blank"><img alt="{$vo.names}" width="363" height="275"
 					src="__ROOT__{$vo.pic}" /></a> <!-- 				<div class="tui">&nbsp;</div> -->
-				<div id="showa" class="shaw" style="display: none">
+				<div id="showa" class="shaw" style="display: block">
 					<a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}">{$vo.names}</a>
 				</div></li>
 			</volist>

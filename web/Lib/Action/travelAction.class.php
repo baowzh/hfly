@@ -180,21 +180,16 @@ class travelAction extends CommonAction {
 		$this->assign ( "travel_price_list", json_encode ( $travel_price_list ) );
 		$price_day ['cryf'] = $price_day ['price_adultpre'];
 		$price_day ['etyf'] = $price_day ['price_childrenpre'];
-		;
 		$price_day ['ydzf'] = $price_day ['price_adultpre'];
 		$price_day ['creczf'] = $price_day ['price_adultec'];
 		$price_day ['eteczf'] = $price_day ['price_childrenec'];
-		
 		if ($price_day ['price_adultec'] != null) {
 			$price_day ['ddhzf'] = $price_day ['price_adultec'];
 		} else {
 			$price_day ['ddhzf'] = $price_day ['price_adult'] - $price_day ['price_adultpre'];
 		}
-		
 		$this->assign ( "price_day", $price_day );
 		$this->assign ( "tripday", $year . '-' . $month . '-' . $day );
-		// print_r ( $price_day );
-		// exit ();
 		$this->display ();
 	}
 	public function order_ding_act() {
@@ -223,10 +218,10 @@ class travelAction extends CommonAction {
 			$this->ajaxReturn ( "", "请填写旅行日期", "n" );
 			exit ();
 		}
-		if (empty ( $_POST ['roomnum'] )) {
-			$this->ajaxReturn ( "", "请填写房间数", "n" );
-			exit ();
-		}
+// 		if (empty ( $_POST ['roomnum'] )) {
+// 			$this->ajaxReturn ( "", "请填写房间数", "n" );
+// 			exit ();
+// 		}
 		// 获取用户选择日期和人数规模从后台取得线路价钱
 		$id = $_POST ['lid'];
 		$ends = $_POST ['ends'];
@@ -268,6 +263,7 @@ class travelAction extends CommonAction {
 			$this->ajaxReturn ( "", "订单提交失败" . $year . '-' . $month . '-' . $day . '没有报价设置，请拨打热线电话咨询。', "n" );
 		}
 		// 计算单房差
+		$dfcz=0;
 		if ($roomnum != null && $roomnum != '') {
 			$totalnum = $pnumber * 1 + $cnumber * 1;
 			$ytfjs = $pnumber / 2;
@@ -488,9 +484,7 @@ class travelAction extends CommonAction {
 		}
 		$user = M ( 'user' );
 		$order_id = $_POST ['orderid'];
-		$orderinfo = D ( 'LineOrder' )->find ( array (
-				'orderid' => $order_id 
-		) );
+		$orderinfo = D ( 'LineOrder' )->where("orderid='".$order_id."'")->find();
 		$should_amount = $orderinfo ['remoney'];
 		$name = $orderinfo ['name'];
 		$phone = $orderinfo ['phone'];
@@ -675,7 +669,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] 
+					"dfc" => $tmp ["dfc"] ,
+					"price_desc" => $tmp ["price_desc"] 
 			);
 		}
 		
@@ -701,7 +696,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] 
+					"dfc" => $tmp ["dfc"] ,
+					"price_desc" => $tmp ["price_desc"]
 			);
 		}
 		foreach ( $price_day_tmp2 as $tmp ) {
@@ -725,7 +721,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] 
+					"dfc" => $tmp ["dfc"] ,
+					"price_desc" => $tmp ["price_desc"]
 			);
 		}
 		foreach ( $price_day_tmp3 as $tmp ) {
@@ -749,7 +746,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] 
+					"dfc" => $tmp ["dfc"] ,
+					"price_desc" => $tmp ["price_desc"]
 			);
 		}
 		foreach ( $price_day_tmp4 as $tmp ) {
@@ -773,7 +771,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] 
+					"dfc" => $tmp ["dfc"] ,
+					"price_desc" => $tmp ["price_desc"]
 			);
 		}
 		foreach ( $price_day_tmp5 as $tmp ) {
@@ -797,7 +796,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] 
+					"dfc" => $tmp ["dfc"] ,
+					"price_desc" => $tmp ["price_desc"]
 			);
 		}
 		$travel_price_list = array (
@@ -1029,8 +1029,8 @@ EOF;
 				
 				$body = '内蒙古汇丰旅行社有限公司包团旅行预定订单';
 				// 默认支付方式
-				$paymodel = $_POST ['paymethod'];
-				if ($paymodel == 'directPay') {
+				$paymethod = "bankPay";
+				if ($_POST ['pay_bank'] == 'directPay') {
 					$paymethod = "directPay";
 				} else {
 					$paymethod = "bankPay";
@@ -1038,8 +1038,11 @@ EOF;
 				// 必填
 				// 默认网银
 				// $defaultbank = $_POST ['WIDdefaultbank'];
-				$defaultbank = $_POST ['pay_bank'];
-				;
+				if($paymethod=='directPay'){
+					$defaultbank = "";
+				}else{
+					$defaultbank = $_POST ['pay_bank'];
+				}
 				// 必填，银行简码请参考接口技术文档
 				
 				// 商品展示地址
@@ -1344,6 +1347,7 @@ EOF;
 		);
 		$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 	}
+	
 }
 
 ?>

@@ -27,8 +27,7 @@
 				<td class="names" style="color: #f85c23; font-weight: bold">成人单价</td>
 				<td class="wlef"><b id="crdj">{$price_day.price_adult}</b>元</td>
 				<td class="names" style="color: #f85c23; font-weight: bold">儿童单价</td>
-				<td class="wlef"><b id="etdj">0</b>元
-				</td>
+				<td class="wlef"><b id="etdj">0</b>元</td>
 			</tr>
 			<tr>
 				<td class="names" style="color: #f85c23; font-weight: bold">预定人数</td>
@@ -71,14 +70,35 @@
 			</tr>
 			<tr>
 				<td class="names">房间数:</td>
-				<td style="text-align: left; padding-left: 10px"><input
+				<td style="text-align: left; padding-left: 10px">
+				<select
+					name="roomnum" id="roomnum" onchange="onPNumChange();">
+					    <option value="0">请选择</option>
+						<option value="1">1间</option>
+						<option value="2">2间</option>
+						<option value="3">3间</option>
+						<option value="4">4间</option>
+						<option value="5">5间</option>
+						<option value="6">6间</option>
+						<option value="7">7间</option>
+						<option value="8">8间</option>
+						<option value="9">9间</option>
+						<option value="10">10间</option>
+						<option value="11">11间</option>
+						<option value="12">12间</option>
+						<option value="13">13间</option>
+						<option value="14">14间</option>
+						<option value="15">15间</option>
+						<option value="16">16间</option>
+				</select> <!--  
+				<input
 					type="text" name="roomnum" id="roomnum" onchange="onCNumChange();"
-					style="width: 145px;"></td>
+					style="width: 145px;">
+					--></td>
 				<td class="names" style="color: #f85c23; font-weight: bold">成人到付</td>
 				<td class="wlef"><b id="creczf">{$price_day.price_adultec}</b>元</td>
 				<td class="names" style="color: #f85c23; font-weight: bold">儿童到付</td>
-				<td class="wlef"><b id="eteczf">0</b>元
-				</td>
+				<td class="wlef"><b id="eteczf">0</b>元</td>
 				<!-- 				<td class="names" style="color: #f85c23; font-weight: bold">成人余款</td> -->
 				<!-- 				<td class="wlef"><b id="cryk">{$price_day.price_adultyk}</b>元</td> -->
 
@@ -96,9 +116,11 @@
 				<td class="names" style="color: #f85c23; font-weight: bold">费用总计</td>
 				<td class="wlef"><b id="zfy">{$price_day.price_adult}</b>元</td>
 				<td rowspan="4" class="names">起价说明</td>
-				<td rowspan="4" class="wlef"> </td>
-				<td rowspan="4" class="names" >服务热线</td>
-				<td  rowspan="4" class="wlef"> 4001-888-332</td>
+				<td rowspan="4" class="wlef"><p id="qjsm"
+						style="line-height: 18px; height: 120px; width: 80px; word-wrap: break-word;"></p>
+				</td>
+				<td rowspan="4" class="names">服务热线</td>
+				<td rowspan="4" class="wlef">4001-888-332</td>
 			</tr>
 			<tr>
 				<td class="names" style="color: #f85c23; font-weight: bold">预付订金总额</td>
@@ -119,7 +141,7 @@
 			</tr>
 			<tr>
 				<td class="names" style="color: #f85c23; font-weight: bold">余款总额</td>
-				<td class="wlef"><b id="ykz">{$price_day.ddhzf}</b>元</td>
+				<td class="wlef"><b id="ykz">{$price_day.price_adultyk}</b>元</td>
 			</tr>
 
 			<tr>
@@ -160,7 +182,7 @@
 				<td colspan="5"><select style="width: 150px;">
 						<option>我没联系过客服</option>
 				</select> <span class="queren">下一步生成订单，自动生成合同</span> <input type="submit"
-					value="提交订单" class="sumbit" style="height:20px;"></td>
+					value="提交订单" class="sumbit" style="height: 20px;"></td>
 			</tr>
 		</table>
 	</form>

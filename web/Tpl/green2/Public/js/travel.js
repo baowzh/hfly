@@ -249,7 +249,6 @@ function showTipsWindown(tit, url) {
 		url : url,
 		dataType : "html",
 		success : function(html) {
-			// alert(html);
 			$("#bodys").html(html);
 			$("#link_tit").html(tit);
 		}
@@ -402,7 +401,8 @@ var setMoney = function() {
 						(datePriceList[1][numrange][i].price_adultpre * pnumber
 
 						+ datePriceList[1][numrange][i].price_childrenpre
-								* cnumber)+datePriceList[1][numrange][i].dfc);
+								* cnumber)
+								+ dfcz);
 
 				$('#zfy')
 						.html(
@@ -410,6 +410,7 @@ var setMoney = function() {
 										* pnumber + datePriceList[1][numrange][i].price_children
 										* cnumber)
 										+ dfcz);
+				$('#qjsm').html(datePriceList[1][numrange][i].price_desc);
 				existprice = true;
 			}
 		}
