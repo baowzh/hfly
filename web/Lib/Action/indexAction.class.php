@@ -26,7 +26,7 @@ class indexAction extends CommonAction {
 		$this->assign ( 'pointlist', $pointlist );
 		
 		$article = M ( "Article" );
-		$Articlelist = $article->order ( 'sort,id desc' )->limit ( 18 )->select ();
+		$Articlelist = $article->where("cid<>'7' and cid<>'9' and cid<>'10'" )->order ( 'sort,id desc' )->limit ( 18 )->select ();
 		$this->assign ( 'Articlelist', $Articlelist );
 		$mod_Line = M ( "Line" );
 		
@@ -77,7 +77,9 @@ class indexAction extends CommonAction {
 		$wmlxi = $article->join ( M ( 'article_section' )->getTableName () . " article_section" . ' on article_section.id=cid' )->where ( "article_section.e_names='{$wmlx}'" )->order ( 'add_time' )->limit ( 1 )->select ();
 		$this->assign ( 'wmlxi', $wmlxi );
 		// 自定义订单
-		//
+		// 获取旅游咨询文章列表
+		$lvzx = $article->join( M ( 'article_section' )->getTableName () . " article_section" . ' on article_section.id=cid')->where("article_section.e_names='lvzx'")->order ( 'add_time' )->limit ( 18 )->select ();
+		$this->assign ( 'lvzx', $lvzx );
 		$LineOrder = M ( 'LineOrder' );
 		$realorder = $LineOrder->field ( " CONCAT(SUBSTR(name from 1 for 1),'**') name,pnumber pcount,cnumber ccount,lcode,orderdate" )->order ( " orderdate desc" )->limit ( 8 )->select ();
 		$this->assign ( 'realorder', $realorder );

@@ -148,8 +148,8 @@ body {
 
 .dectails {
 	float: right;
-	/* 	width: 380px; */
-	width: 330px;
+		width: 380px;
+/* 	width: 330px; */
 	height: 66px;
 	margin-top: 18px
 }
@@ -163,12 +163,11 @@ body {
 	color: #07b3b2;
 	font-family: "微软雅黑";
 	font-size: 24px;
-	/* 	width: 360px; */
-	width: 320px;
+	width: 380px;
 	font-weight: bold;
 	text-align: right;
 	margin-bottom: 8px;
-	background: url(../images/rexian.jpg) no-repeat 10px center;
+	background: url(../images/rexian.jpg) no-repeat 50px center;
 }
 
 .dectails .shuru {
@@ -188,6 +187,8 @@ body {
 	cursor: pointer;
 	font-size: 15px;
 	font-family: "微软雅黑";
+	border-radius: 3px;
+	margin-left:2px;
 }
 
 .navs {

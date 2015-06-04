@@ -45,11 +45,14 @@ $(document).ready(function() {
 		</div>
 		<div class="search">
 			<div class="logo" style="margin-top: 0px; height: 130px;">
-				<img src="__ROOT__/style/images/logo.jpg"
-					style="height: 130px; width: 560px;">
+				<img src="__ROOT__/style/images/LOGO.jpg"
+					style="height: 130px; width: 130px;float:left">
+				<img src="__ROOT__/style/images/compname.jpg"
+					style="height: 70px; width: 420px;float:left;margin-top:35px;margin-left:10px;">
+					
 			</div>
-			<div class="dectails" style="width: 210px; margin-top: 58px;">
-				<!-- 				<li class="hotline" style="background:none;width:200px;">&nbsp;</li> -->
+			<!--  
+			<div class="dectails">				
 				<li style="padding-right: 0px;">
 					<form action="{:U('travel/order_query')}">
 						<input type="text" class="shuru" style="width: 120px;" id="phone"
@@ -57,14 +60,21 @@ $(document).ready(function() {
 							onFocus="if(value==defaultValue){value='';this.style.color='#999'}"
 							onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
 						<input type="submit" value="订单查询" class="buts" />
+					</form>
 				</li>
-				</form>
 			</div>
+			-->
+			
 			<div class="dectails">
+			<form action="{:U('travel/order_query')}">
 				<li class="hotline">4001-888-332&nbsp;</li>
-				<li><input type="text" class="shuru" /><input type="button"
-					value="搜索" class="buts" /></li>
+				<li style="width:380px;height:31px;padding-left:50px;">
+				<input type="text" class="shuru" value="请输入手机号" onFocus="if(value==defaultValue){value='';this.style.color='#999'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+				<input type="submit" value="订单查询" class="buts" />
+					</li>
+			</form>
 			</div>
+			
 		</div>
 	</div>
 	<div class="navs">

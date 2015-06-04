@@ -793,7 +793,7 @@
 				target="_blank">五日游</a></li>
 		</div>
 		<div class="line_right">
-			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}">更多推荐</a>
+			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}" target="_blank">更多推荐</a>
 		</div>
 	</div>
 
@@ -892,7 +892,7 @@
 			<li><a href="">五当召</a></li>
 		</div>
 		<div class="line_right">
-			<a href="{:U('viewpoint/index',array('areaid'=>$areaid))}">更多推荐</a>
+			<a href="{:U('viewpoint/index',array('areaid'=>$areaid))}" target="_blank">更多推荐</a>
 		</div>
 	</div>
 	<!--  
@@ -916,7 +916,7 @@
 				target="_blank"><img alt="{$vo.names}" width="363" height="275"
 					src="__ROOT__{$vo.pic}" /></a> <!-- 				<div class="tui">&nbsp;</div> -->
 				<div id="showa" class="shaw" style="display: block">
-					<a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}">{$vo.names}</a>
+					<a href="{:U('viewpoint/detail',array('id'=>$vo['id']))}" target="_blank">{$vo.names}</a>
 				</div></li>
 			</volist>
 		</div>
@@ -925,6 +925,10 @@
 				<a href="">旅游咨询</a>
 			</h5>
 			<div class="details_q">
+			  <volist name="lvzx" id="vo" key="k">
+				<li><a href="{:U('article/detail',array('id'=>$vo['id']))}" target="_blank">{$vo.title}</a></li>
+			  </volist>
+				<!--  
 				<li><a href="">诚意拼团 已有两人 住草原沙漠 3日包团 欢迎您的加入</a></li>
 				<li><a href="">诚意拼团 已有两人 住草原沙漠 3日包团 欢迎您的加入</a></li>
 				<li><a href="">诚意拼团 已有两人 住草原沙漠 3日包团 欢迎您的加入</a></li>
@@ -937,7 +941,7 @@
 				<li><a href="">诚意拼团 已有两人 住草原沙漠 3日包团 欢迎您的加入</a></li>
 				<li><a href="">诚意拼团 已有两人 住草原沙漠 3日包团 欢迎您的加入</a></li>
 				<li><a href="">诚意拼团 已有两人 住草原沙漠 3日包团 欢迎您的加入</a></li>
-				<li><a href="">诚意拼团 已有两人 住草原沙漠 3日包团 欢迎您的加入</a></li>
+				-->
 			</div>
 		</div>
 	</div>
@@ -951,7 +955,7 @@
 	<div class="know_list">
 		<div class="know_left">
 			<volist name="Articlelist" id="vo" mod="2">
-			<li><a href="{:U('article/detail',array('id'=>$vo['id']))}">{$vo.title}</a></li>
+			<li><a href="{:U('article/detail',array('id'=>$vo['id']))}" target="_blank">{$vo.title}</a></li>
 			<if condition="$mod eq 1 ">
 		</div>
 		<div class="know_left">
