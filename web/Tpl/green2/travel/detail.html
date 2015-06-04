@@ -57,14 +57,21 @@
     var onCNumChange=function(){
     	setMoney();
     };
-    // Initialize Galleria
-  //  Galleria.run('#galleria');
     $('#galleria').galleria({  
         image_crop:true,  
         transition: 'fade',  
      }); 
-    // Load the classic theme
     Galleria.loadTheme('../Public/js/galleria.classic.min.js');
+    
+    $(document).ready(function() {
+       var lineType='{$line_type}';
+       if(lineType!='3'){
+    	   $('#bbc_btn_5').addClass("postion");
+    	   $('#bbc_div_5').css("display","block");  
+       }else{
+    	   $('#bbc_div_0').css("display","block");     
+       }
+    });
    
 </script>
 
@@ -103,7 +110,7 @@
 					<ul style="padding: 0; margin: 0;">
 						<li style="width: 80px; height: 40px;"><a id="bbc_btn_0"
 							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
-							onclick="tabit(this,6)" class="postion">1人包团</a></li>
+							onclick="tabit(this,6)">1人包团</a></li>
 						<li style="width: 80px; height: 40px;"><a id="bbc_btn_1"
 							style="cursor: pointer; font-size: 12px; height: 40px; width: 100px;"
 							onclick="tabit(this,6)">2-3人包团</a></li>
@@ -129,7 +136,7 @@
 				</if>
 				<div class="pricecontent" style="margin-left: 0px; width: 590;">
 					<div id="bbc_div_0"
-						style="display: block; position: relative; border-top: 1px #05b5b5 solid;">
+						style="display: none; position: relative; border-top: 1px #05b5b5 solid;">
 						<input tabindex="1" type="text" name="go_time0" id="go_time0"
 							style="display: none" />
 						<textarea id="travel_price_list0" style="display: none;">{$travel_price_list}</textarea>
