@@ -10,84 +10,6 @@
 }
 </style>
 <div class="main_lines" style="padding-bottom: 20px;">
-	<!--  
-	 <div id="nav" class="mainnav_title"
-		style="margin: 0px auto; width: 90%;border-bottom:none;">
-		 onClick="javascript:setcurrenthref(this);" 
-		
-		<ul class="orderlistul">
-			<a class="on section" href="javascript:showorderdiv('pingorder');"
-				onClick="javascript:setcurrenthref(this);">发起拼团订单</a>
-			<a class="section" href="javascript:showorderdiv('dingorder');"
-				onClick="javascript:setcurrenthref(this);">报名拼团订单</a>
-			<a class="section" href="javascript:showorderdiv('normalorder');"
-				onClick="javascript:setcurrenthref(this);">普通订单</a>
-		</ul>
-		
-	</div>
-	<div id="dingorder"
-		style="margin: 3px auto; width: 90%; display: none;" class="order">
-		<form name="myform" id="myform"
-			action="{:U('LineTarget/order_target')}" method="post">
-			<div class="table-list">
-				<table style="background: #efefef;">
-					<tr>
-						<td class="names">线路编号:</td>
-						<td class="ru">{$vo.lcode}</td>
-						<td class="names">团名:</td>
-						<td class="ru">{$vo.tuan_name}</td>
-						<td class="names">团长(发起人):</td>
-						<td class="ru">{$vo.name}</td>
-
-					</tr>
-					<tr>
-						<td class="names">报名时间:</td>
-						<td class="ru">{$vo.ends}</td>
-						<td class="names">旅行时间:</td>
-						<td class="ru">{$vo.start}</td>
-						<td class="names">预定人数:</td>
-						<td class="ru">{$vo.num}</td>
-
-					</tr>
-					<tr>
-						<td class="names">行程天数:</td>
-						<td class="ru">{$vo.maxs}</td>
-						<td class="names">成人单价:</td>
-						<td class="ru">{$vo.price}<br>
-
-						</td>
-						<td class="names" width="80px;">儿童单价:</td>
-						<td class="ru" style="text-align: left;">{$vo.cmoney}</td>
-					</tr>
-					<tr>
-						<td class="names">单房价:</td>
-						<td class="ru">{$vo.maxs}</td>
-						<td class="names">报名人数:</td>
-						<td class="ru" colspan="3">成人（） 儿童（）<br>
-						</td>
-					</tr>
-					<td class="names" width="50">住宿:</td>
-					<td class="ru">{$vo.maxs} 间房 （酒店标准间均为2人标准）</td>
-					<td class="names">旅游总费用:</td>
-					<td class="ru" colspan="2"><span style="color: #993300;">首次预付定金10%</span>：
-						元&nbsp;&nbsp;&nbsp;<span style="color: #993300;">
-							抵达后二次预付款70%</span>： 元 <span style="color: #993300;">&nbsp;&nbsp;行程结束后付余款20%</span>：
-						元
-						<br>
-						<input type="image" src="__ROOT__/style/images/pay.gif">
-						</td>
-
-					</tr>
-
-					<tr>
-					</tr>
-				</table>
-				<input type="hidden" name="base_pos" value="{~echo MODULE_NAME}">
-			</div>
-			<div class="btn"></div>
-		</form>
-	</div>
-	-->
 	<volist name="orderlist" id="vo">
 	<div id="normalorder"
 		style="display: block; margin: 3px auto; width: 90%;" class="order">
@@ -170,96 +92,15 @@
 				</if>
 				<if condition="$vo.state eq '1'">
 				<tr height="50px">
-					<td class="names" colspan="4">订单状态:已支付
-					<a href="#" style="color:#993300;font-weight: bold;">发起退款申请</a>
+					<td class="names" colspan="4">订单状态:已支付 <a href="#"
+						style="color: #993300; font-weight: bold;">发起退款申请</a>
 					</td>
-					
 				</tr>
 				</if>
 			</table>
 		</form>
 	</div>
 	</volist>
-	<!--  
-	<volist name="pinglist" id="vo">
-	<div id="pingorder" style="margin: 3px auto; width: 90%;" class="order">
-		<form method="post" target="_blank" action="{:U('order_pay')}">
-			<input type="hidden" name="orderid" value="{$vo.orderid}" />
-			<table style="background: #efefef;">
-				<tr>
-					<td class="names">线路编号:</td>
-					<td class="ru">{$vo.lcode}</td>
-					<td class="names">团名:</td>
-					<td class="ru">{$vo.tuan_name}</td>
-					<td class="names">团长(发起人):</td>
-					<td class="ru">{$vo.name}</td>
-
-				</tr>
-				<tr>
-					<td class="names">报名截止:</td>
-					<td class="ru">{$vo.ends}</td>
-					<td class="names">旅行时间:</td>
-					<td class="ru">{$vo.start}</td>
-					<td class="names">目标人数:</td>
-					<td class="ru">{$vo.num}</td>
-
-				</tr>
-				<tr>
-					<td class="names">最多人数:</td>
-					<td class="ru">{$vo.maxs}</td>
-					<td class="names">应付诚意金:</td>
-					<td class="ru">￥{$vo.price}<br>
-						<form method="post" name="f" id="f" action="/alipay/alipayapi.do"
-							target="_blank">
-							<input type="image" src="__ROOT__/style/images/pay.gif">
-						</form>
-					</td>
-					<td class="names" width="80px;">感谢金:</td>
-					<td class="ru" style="text-align: left;">￥{$vo.cmoney}
-						<form method="post" name="f" id="f" action="/alipay/alipayapi.do"
-							target="_blank">
-							<input type="image" src="__ROOT__/style/images/pay.gif">
-						</form>
-					</td>
-				</tr>
-				<tr align="center">
-					<td class="names">特别说明：</td>
-					<td colspan="5" rowspan="2" align="left" style="padding: 5px;"
-						style="text-align:left;">手机：{$vo.phpne} (客服：1008)<br>成行规则：
-						如最终人数不足{$vo.maxs}人，哪怕只有我们{$vo.num}个人，也要成行 <br>{$vo.desc}
-					</td>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-					<td colspan="6" style="padding: 0px;">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tbody>
-								<tr align="center" bgcolor="#f3f3f3" style="color: #993300;">
-									<td style="height: 30px; width: 78px;"><b>跟团</b></td>
-									<td>团成员</td>
-									<td>人数</td>
-									<td>应付诚意金</td>
-									<td>已付诚意金</td>
-								</tr>
-
-								<tr>
-									<td colspan="5"
-										style="border-bottom: 1px #dadada solid; height: 30px"
-										align="center">还没有人跟团报名，注：只有支付诚意金的订单别人才能报名</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</td>
-				</tr>
-
-			</table>
-			
-		</form>
-	</div>
-	</volist>
-	-->
 </div>
 
 <script type="text/javascript">

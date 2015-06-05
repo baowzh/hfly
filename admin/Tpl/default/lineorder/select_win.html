@@ -1,3 +1,4 @@
+<!--  
 <form action="" method="post" target="main">
 	<table border="0" cellspacing="0" cellpadding="0" class="table_form"
 		width="640">
@@ -7,7 +8,8 @@
 		</tr>
 		<tr>
 			<th height="18">订单状态：</th>
-			<td><if condition="$list.state eq '1'">待处理 <elseif
+			<td>
+			<if condition="$list.state eq '1'">待处理 <elseif
 					condition="$list.state eq '2'" />待付款 <elseif
 					condition="$list.state eq '3'" />已付款 <elseif
 					condition="$list.state eq '4'" />已出团 <elseif
@@ -67,10 +69,6 @@
 			<th height="18">增减额度：</th>
 			<td>0</td>
 		</tr>
-		<!--         <tr> -->
-		<!--             <th height="18">使用奖金：</th> -->
-		<!--             <td>{$list.used_award}</td> -->
-		<!--         </tr> -->
 		<tr>
 			<th height="18">出发日期：</th>
 			<td>{$list.startdate}</td>
@@ -83,25 +81,147 @@
 			<th height="18">联系方式：</th>
 			<td><b>电话：</b>{$list.phone}&nbsp;&nbsp;<b>Email：</b>{$list.email}</td>
 		</tr>
-		<!--  
-		</tr>
-		<volist name="order_userinfolist" id='vo'>
+	</table>
+</form>
+-->
+<form  action="{:U('edit_win')}" method="post"  >
+	<input type="hidden" value="{$line_base.code}" name="lcode"> <input
+		type="hidden" value="{$line_base.id}" name="lid"> <input
+		type="hidden" value="{$line_base.front_money}" name="front_money">
+	<table border="0" cellspacing="0" cellpadding="0" class="table_form"
+		width="700">
 		<tr>
-			<th height="18">第{$i}位游客：</th>
-			<td><b>姓名：</b>{$vo.names}&nbsp;/&nbsp;<b><if
-						condition="$vo.credentials eq '0'">身份证<elseif
-						condition="$vo.credentials eq '1'" />护照<elseif
-						condition="$vo.credentials eq '2'">军官证<elseif
-						condition="$vo.credentials eq '3'">回乡证<elseif
-						condition="$vo.credentials eq '4'">台胞证<elseif
-						condition="$vo.credentials eq '5'">国际海员证</if> ：</b>{$vo.content}</td>
+			<th width="99">订单号：</th>
+			<td colspan="3">{$list.orderid}</td>
 		</tr>
-		</volist>
+		<tr>
+			<th width="99">订单状态：</th>
+			<td><if condition="$list.state eq '0'">待付款 <elseif
+					condition="$list.state eq '1'" />已付款 <elseif
+					condition="$list.state eq '2'" />已发团 <elseif
+					condition="$list.state eq '3'" />已出团 <elseif
+					condition="$list.state eq '5'" />已点评 <elseif
+					condition="$list.state eq '6'" />已结束 <elseif
+					condition="$list.state eq '7'" />已取消 </if></td>
+			<th width="99">旅游线路名称：</th>
+			<td>{$list.names}</td>
 		</tr>
-		-->
-		<!-- 		<tr> -->
-		<!-- 			<th height="18">点评奖金：</th> -->
-		<!-- 			<td>{$list.review_award}</td> -->
-		<!-- 		</tr> -->
+		<tr>
+			<th width="99">成团方式：</th>
+			<td><if condition="$get.line_type eq '1'"> 包团自由行 </if> <if
+					condition="$get.line_type eq '2'"> 纯玩团 </if> <if
+					condition="$get.line_type eq '3'"> 常规团 </if> <if
+					condition="$get.line_type eq '4'"> 团队策划 </if></td>
+			<th width="99">出发日期：</th>
+			<td><input name="startdate" type="text" id="startdate"
+				value='{$list.startdate}' class="input-text calender" /></td>
+		</tr>
+		<tr>
+			<th width="99">出游人数:</th>
+			<td colspan="3">成人{$list.pnumber}/儿童{$list.cnumber}</td>
+		</tr>
+		<tr>
+			<th width="99">房间数:</th>
+			<td><select name="roomnum" id="roomnum">
+					<option value="0">请选择</option>
+					<option value="1">1间</option>
+					<option value="2">2间</option>
+					<option value="3">3间</option>
+					<option value="4">4间</option>
+					<option value="5">5间</option>
+					<option value="6">6间</option>
+					<option value="7">7间</option>
+					<option value="8">8间</option>
+					<option value="9">9间</option>
+					<option value="10">10间</option>
+					<option value="11">11间</option>
+					<option value="12">12间</option>
+					<option value="13">13间</option>
+					<option value="14">14间</option>
+					<option value="15">15间</option>
+					<option value="16">16间</option>
+			</select></td>
+			<th width="99">单房差:</th>
+			<td>{$list.dfc}</td>
+		</tr>
+		<tr>
+			<th width="99">成人单价:</th>
+			<td>{$list.pmoney}</td>
+			<th width="99">儿童单价:</th>
+			<td>{$list.cmoney}</td>
+		</tr>
+		<tr>
+			<th width="99">成人订金:</th>
+			<td>{$list.premoney}</td>
+			<th width="99">儿童订金:</th>
+			<td>{$list.cremoney}</td>
+		</tr>
+		<tr>
+			<th width="99">成人到付:</th>
+			<td>{$list.pmoneyec}</td>
+			<th width="99">儿童到付:</th>
+			<td>{$list.cmoneyec}</td>
+		</tr>
+		<tr>
+			<th width="99">成人余款:</th>
+			<td colspan="3">{$list.pmoneyyk}</td>
+		</tr>
+		<tr>
+			<th width="99">费用总计:</th>
+			<td><input name="price" type="text" id="price"
+				value='{$list.price}' /></td>
+			<th width="99">预付订金总额:</th>
+			<td><input name="remoney" type="text" id="remoney"
+				value='{$list.remoney}' /></td>
+		</tr>
+		<tr>
+			<th width="99">到达支付总额:</th>
+			<td><input name="eczfz" type="text" id="eczfz"
+				value='{$list.eczfz}' /></td>
+			<th width="99">余款总额：</th>
+			<td><input name="ykz" type="text" id="ykz" value='{$list.ykz}' />
+			</td>
+		</tr>
+		<tr>
+			<th width="99">增减额度费用：</th>
+			<td colspan="3"><input name="zjed" type="text" id="zjed"
+				value='{$list.zjed}' /></td>
+
+		</tr>
+		<tr>
+			<th width="99">联系人：</th>
+			<td>{$list.name}</td>
+			<th width="99">联系方式：</th>
+			<td>{$list.phone}</td>
+		<tr>
+			<th width="99">备注信息:</th>
+			<td colspan="3">{$list.desc}</td>
+		</tr>
+		<tr>
+			<th width="99">客服编号:</th>
+			<td colspan="3">
+			<select name="roomnum" id="roomnum">
+					<option value="0">请选择</option>
+					<option value="1">1间</option>
+					<option value="2">2间</option>
+					<option value="3">3间</option>
+					<option value="4">4间</option>
+					<option value="5">5间</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<th width="99">退款金额:</th>
+			<td></td>
+			<th width="99">退款原因:</th>
+			<td><texearea id=""> </texearea></td>
+		</tr>
+		<tr>
+			<td colspan="4"><input type="checkbox value=" name="reject" id="reject"
+				确认退款" name="checkbox"></td>
+		</tr>
+		<tr>
+			<td colspan="4"><input type="submit" value="提交"></td>
+		</tr>
 	</table>
 </form>

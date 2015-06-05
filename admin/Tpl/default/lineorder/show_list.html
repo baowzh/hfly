@@ -46,8 +46,47 @@
 			<td class="search">终止时间:<input name="endorderdate" type="text"
 				id="endorderdate" value='' class="input-text calender" />
 			</td>
+		</tr>
+		<tr>
+			<td class="search">客服编号: <input id="assistcode" type="text"
+				class="input-text" name="assistcode" value="{$assistcode}" />
+			</td>
+			<td class="search">订单状态: <select name="state" id="state">
+					<option value="">请选择</option>
+					<option value="0">未付款</option>
+					<option value="1">已付款</option>
+					<option value="2">已退款</option>
+			</select> <!-- 			<input name="state" type="text" --> <!-- 				id="state" value='' class="input-text calender" /> -->
+			</td>
+			<td class="search">产品类型: 
+			<select name="line_type" id="line_type">
+					<option value="">请选择</option>
+					<option value="1">包团</option>
+					<option value="2">纯玩</option>
+					<option value="3">常规</option>
+					<option value="4">自驾游</option>
+					<option value="5">团体策划</option>
+					<option value="6">其他</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="search">目的地: <select name="city" id="city">
+					<option value="">请选择</option>
+					<option value="0471">呼和浩特</option>
+					<option value="0470">呼伦贝尔</option>
+					<option value="0479">锡林浩特</option>
+					<option value="0479">赤峰</option>
+					<option value="0483">额济纳</option>
+					<option value="">其他</option>
+			</select>
+			</td>
+			<td class="search">客源地: <input name="strorderdate" type="text"
+				id="strorderdate" value='' class="input-text calender" />
+			</td>
 			<td><input type="submit" value="查询" class="button" /></td>
 		</tr>
+
 	</table>
 </form>
 <form name="myform" id="myform" action="{:U('LineTarget/order_target')}"
@@ -79,9 +118,10 @@
 					</td>
 					<td>{$vo.names}</td>
 					<td>{$vo.orderdate}</td>
-					<td>{$vo.startdate}<br>成人{$vo.pnumber}/ 每人￥{$vo.pmoney}元<br>儿童{$vo.cnumber}/每人￥{$vo.cmoney}元 <br> 
+					<td>{$vo.startdate}<br>成人{$vo.pnumber}/ 每人￥{$vo.pmoney}元<br>儿童{$vo.cnumber}/每人￥{$vo.cmoney}元
+						<br>
 					</td>
-					
+
 					<td><if condition="$vo.line_type eq '1'">包团自由行 <elseif
 							condition="$vo.line_type eq '2'" />纯玩团 <elseif
 							condition="$vo.line_type eq '3'" />纯玩团 <elseif
@@ -89,9 +129,9 @@
 					<td>{$vo.remoney}</td>
 					<td>￥{$vo.price}元</td>
 					<td><if condition="$vo.state eq '0'">待付款 <elseif
-							condition="$vo.state eq '1'" />待付款 <elseif
-							condition="$vo.state eq '3'" />已付款 <elseif
-							condition="$vo.state eq '4'" />已出团 <elseif
+							condition="$vo.state eq '1'" />已付款 <elseif
+							condition="$vo.state eq '2'" />已出团 <elseif
+							condition="$vo.state eq '3'" />已退款 <elseif
 							condition="$vo.state eq '5'" />已点评 <elseif
 							condition="$vo.state eq '6'" />已结束 <elseif
 							condition="$vo.state eq '7'" />已取消 </if></td>
@@ -125,7 +165,7 @@
     function select_win(orderid){
         art.dialog.open('{:U('select_win')}?orderid='+orderid,{
 		title:'查看订单',
-		width:640,
+		width:700,
 		height:510,
 		lock:'true'
 		});

@@ -34,17 +34,39 @@ class lineorderAction extends CommonAction {
 			);
 		}
 		if (! empty ( $_GET ['strorderdate'] )) {
-			$where ["orderdate"] = array (
+			$where ["startdate"] = array (
 					"elt",
 					"{$_GET['strorderdate']}" 
 			);
 		}
 		if (! empty ( $_GET ['endorderdate'] )) {
-			$where ["orderdate"] = array (
+			$where ["startdate"] = array (
 					"egt",
 					"{$_GET['endorderdate']}" 
 			);
 		}
+		if (! empty ( $_GET ['state'] )) {
+			$where ["jee_line_order.state"] = array (
+					"eq",
+					"{$_GET['state']}"
+			);
+		}
+		if (! empty ( $_GET ['city'] )) {
+			$where ["line.linebelongto"] = array (
+					"eq",
+					"{$_GET['city']}"
+			);
+		}
+		if (! empty ( $_GET ['line_type'] )) {
+			$where ["line.line_type"] = array (
+					"eq",
+					"{$_GET['line_type']}"
+			);
+		}
+		
+		
+		
+		
 		
 		$Line = M ( 'Line' );
 		/*
@@ -121,6 +143,7 @@ class lineorderAction extends CommonAction {
 			if ($data = $lineOrder->create ()) {
 				$lineOrder->where ( "id='$id'" )->save ();
 				$this->success ( "编辑成功！", U ( 'show_list' ) );
+				// 如果是退款则调用支付宝接口进行退款reject
 			} else {
 				$this->error ( "编辑失败！" );
 			}

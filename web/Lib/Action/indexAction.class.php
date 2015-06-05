@@ -78,7 +78,7 @@ class indexAction extends CommonAction {
 		$this->assign ( 'wmlxi', $wmlxi );
 		// 自定义订单
 		// 获取旅游咨询文章列表
-		$lvzx = $article->join( M ( 'article_section' )->getTableName () . " article_section" . ' on article_section.id=cid')->where("article_section.e_names='lvzx'")->order ( 'add_time' )->limit ( 18 )->select ();
+		$lvzx = $article->join( M ( 'article_section' )->getTableName () . " article_section" . ' on article_section.id=cid')->field( "jee_article.*")->where("article_section.e_names='lvzx'")->order ( 'add_time' )->limit ( 18 )->select ();
 		$this->assign ( 'lvzx', $lvzx );
 		$LineOrder = M ( 'LineOrder' );
 		$realorder = $LineOrder->field ( " CONCAT(SUBSTR(name from 1 for 1),'**') name,pnumber pcount,cnumber ccount,lcode,orderdate" )->order ( " orderdate desc" )->limit ( 8 )->select ();

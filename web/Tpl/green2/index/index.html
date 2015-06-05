@@ -421,14 +421,11 @@
 						<span
 							class="adds">{$vo.linebelongto|_get_city}</span>
 						<span
-							class="adds" style="background:none;width:5px;">&nbsp;
-							</span>
-						<span
-							class="adds" style="background:none;">
+							class="adds" style="background:none;width:70px;">
 							喜欢{$vo.likeamount}
 						</span>
 						<span
-							class="adds" style="background:none;">
+							class="adds" style="background:none;width:70px;">
 							关注{$vo.attamount}
 						</span>
 						<p>{$vo.names} {$vo.trip_days}日</p>
@@ -549,15 +546,12 @@
 				<div class="desc">
 					<span class="price"> ￥{$vo.id|get_line_min_price}起 </span> <span
 						class="adds">{$vo.linebelongto|_get_city}</span>
-					<span
-							class="adds" style="background:none;width:30px;">&nbsp;
-							</span>
 						<span
-							class="adds" style="background:none;">
+							class="adds" style="background:none;width:70px;">
 							喜欢{$vo.likeamount}
 						</span>
 						<span
-							class="adds" style="background:none;">
+							class="adds" style="background:none;width:70px;">
 							关注{$vo.attamount}
 						</span>
 					<p>{$vo.names} {$vo.trip_days}日</p>
@@ -675,15 +669,12 @@
 					<div class="desc">
 						<span class="price"> ￥{$vo.id|get_line_min_price}起 </span> <span
 							class="adds">{$vo.linebelongto|_get_city}</span>
-						<span
-							class="adds" style="background:none;width:30px;">&nbsp;
-							</span>
-						<span
-							class="adds" style="background:none;">
+							<span
+							class="adds" style="background:none;width:70px;">
 							喜欢{$vo.likeamount}
 						</span>
 						<span
-							class="adds" style="background:none;">
+							class="adds" style="background:none;width:70px;">
 							关注{$vo.attamount}
 						</span>
 						<p>{$vo.names} {$vo.trip_days}日</p>
@@ -807,15 +798,12 @@
 					<div class="desc">
 						<span class="price"> ￥{$vo.id|get_line_min_price}起 </span> <span
 							class="adds">{$vo.linebelongto|_get_city}</span>
-						<span
-							class="adds" style="background:none;width:30px;">&nbsp;
-							</span>
-						<span
-							class="adds" style="background:none;">
+							<span
+							class="adds" style="background:none;width:70px;">
 							喜欢{$vo.likeamount}
 						</span>
 						<span
-							class="adds" style="background:none;">
+							class="adds" style="background:none;width:70px;">
 							关注{$vo.attamount}
 						</span>
 						<p>{$vo.names} {$vo.trip_days}日</p>
@@ -910,7 +898,7 @@
 	-->
 	<div class="jing_dec">
 		<div class="jing_left">
-			<volist name="pointlist" id="vo" key="k">
+			<volist name="pointlist" id="vo" >
 			<li  <if condition="$mod eq 1 ">  style="margin-right:0px" </if> ><a
 				href="{:U('viewpoint/detail',array('id'=>$vo['id']))}"
 				target="_blank"><img alt="{$vo.names}" width="363" height="275"
