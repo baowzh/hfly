@@ -37,7 +37,19 @@
 							+ '<td class="the_calendar_month"><span class="the_calendar_font"> <i class="year"></i> 年 <i class="month"></i> 月</span></td>'
 							+ '<td  class="the_calendar_icon2"><b></b></td></tr>'
 							+ '</table>'
-					header += '<div class="the_calendar_center"><span class="the_calendar_weekend">周日</span><span class="the_calendar_day" style="border-left:0px;">周一</span><span class="the_calendar_day">周二</span><span class="the_calendar_day">周三</span><span class="the_calendar_day" >周四</span><span class="the_calendar_day" >周五</span><span class="the_calendar_weekend" style="width:90px;">周六</span></div><div class="the_calendar_down"><table width="550" border="1" class="calendar_list"></table></div>';
+					// header += '<div class="the_calendar_center"><span
+					// class="the_calendar_weekend">周日</span><span
+					// class="the_calendar_day"
+					// style="border-left:0px;">周一</span><span
+					// class="the_calendar_day">周二</span><span
+					// class="the_calendar_day">周三</span><span
+					// class="the_calendar_day" >周四</span><span
+					// class="the_calendar_day" >周五</span><span
+					// class="the_calendar_weekend"
+					// style="width:90px;">周六</span></div><div
+					// class="the_calendar_down"><table width="550" border="1"
+					// class="calendar_list"></table></div>';
+					header += '<div class="the_calendar_down"><table width="550" border="1" class="calendar_list"></table></div>';
 					/**
 					 * 加载数据
 					 */
@@ -129,7 +141,8 @@
 								var matchs = {};
 								for (i_1 in data[1][options.index]) {
 									matchs = i_1.match(/(\d{6})(\d{2})/);
-									//if (parseInt(matchs[1]) > data_month || parseInt(matchs[3]) < data_month) {
+									// if (parseInt(matchs[1]) > data_month ||
+									// parseInt(matchs[3]) < data_month) {
 									// continue;
 									// }
 									data_detail = {
@@ -168,10 +181,31 @@
 																"background",
 																"#fff");
 													});
-									table
-									.find(
+									table.find(
 											"td.day[data-day='" + i_1
-													+ "']").removeClass('noprice');
+													+ "'] span.price")
+											.mouseover(
+													function() {
+														$(this).css(
+																"background",
+																"#ffebee");
+													});
+									
+									table.find(
+											"td.day[data-day='" + i_1
+													+ "'] span.price")
+											.mouseout(
+													function() {
+														$(this).css(
+																"background",
+																"#fff");
+													});
+												
+									table
+											.find(
+													"td.day[data-day='" + i_1
+															+ "']")
+											.removeClass('noprice');
 
 								}
 							}
@@ -196,8 +230,10 @@
 						var max_day = new Date(year, month, 0).getDate();
 						var one_day = new Date(year, month - 1, 1).getDay();
 						var first_day = 0;
-						var table_str = '<tbody data-month="' + data_month
-								+ '"><tr>';
+						var table_str = '<tbody data-month="'
+								+ data_month
+								+ '"><tr><td style="background: #cef0f1;text-align:center;color:#f00;">周日</td><td style="background: #cef0f1;text-align:center;">星期一</td><td style="background: #cef0f1;text-align:center;">星期二</td><td style="background: #cef0f1;text-align:center;">星期三</td><td style="background: #cef0f1;text-align:center;">星期四</td><td style="background: #cef0f1;text-align:center;">星期五</td><td style="background: #cef0f1;text-align:center;color:#f00;">星期六</td></tr><tr>';
+
 						var key = "";
 						while (first_day < one_day) {
 							table_str += '<td   class="not_day noprice"><span></span></td>';
@@ -254,7 +290,7 @@
 								"click", td_click);
 					}
 					/**
-					 * 下一个月 
+					 * 下一个月
 					 */
 					var next_month = function() {
 						var y = $(options.container).find("i.year").html();
@@ -358,7 +394,6 @@
 								.html(create_months).attr("data-month",
 										now_month);
 						write_data(options.data);
-						// var selector='#the_calendar'+$(this).prop('tabindex')
 						$("" + options.container + " .the_calendar_icon b")
 								.bind("click", prew_month);
 						$("" + options.container + " .the_calendar_icon2 b")
@@ -367,20 +402,10 @@
 								"" + options.container
 										+ " table.calendar_list td.day").bind(
 								"click", td_click);
-						//if (parseInt(now_day) < parseInt(options.now_day))now_day = options.now_day;
-						// $("[data-day='" + now_day + "']").trigger("click");
 					}
 
 					var $this = this;
 					init.call(this);
-					//$(options.container).bind({
-					//      focusout: function () {
-					//          $(this).hide();
-					//      },
-					//     focusin: function () {
-					//          $(this).show();
-					//      }
-					//  }).trigger("focusout");
 					$(this).bind("click", function() {
 						$(options.container).trigger("focus");
 					});
