@@ -218,10 +218,10 @@ class travelAction extends CommonAction {
 			$this->ajaxReturn ( "", "请填写旅行日期", "n" );
 			exit ();
 		}
-// 		if (empty ( $_POST ['roomnum'] )) {
-// 			$this->ajaxReturn ( "", "请填写房间数", "n" );
-// 			exit ();
-// 		}
+		// if (empty ( $_POST ['roomnum'] )) {
+		// $this->ajaxReturn ( "", "请填写房间数", "n" );
+		// exit ();
+		// }
 		// 获取用户选择日期和人数规模从后台取得线路价钱
 		$id = $_POST ['lid'];
 		$ends = $_POST ['ends'];
@@ -263,7 +263,7 @@ class travelAction extends CommonAction {
 			$this->ajaxReturn ( "", "订单提交失败" . $year . '-' . $month . '-' . $day . '没有报价设置，请拨打热线电话咨询。', "n" );
 		}
 		// 计算单房差
-		$dfcz=0;
+		$dfcz = 0;
 		if ($roomnum != null && $roomnum != '') {
 			$totalnum = $pnumber * 1 + $cnumber * 1;
 			$ytfjs = $pnumber / 2;
@@ -484,7 +484,7 @@ class travelAction extends CommonAction {
 		}
 		$user = M ( 'user' );
 		$order_id = $_POST ['orderid'];
-		$orderinfo = D ( 'LineOrder' )->where("orderid='".$order_id."'")->find();
+		$orderinfo = D ( 'LineOrder' )->where ( "orderid='" . $order_id . "'" )->find ();
 		$should_amount = $orderinfo ['remoney'];
 		$name = $orderinfo ['name'];
 		$phone = $orderinfo ['phone'];
@@ -493,6 +493,24 @@ class travelAction extends CommonAction {
 		$this->assign ( "phone", $phone );
 		$this->assign ( "orderid", $order_id );
 		$this->display ();
+	}
+	public function order_reject() { // 把订单状态改为已申请退款
+		$orderid = $_GET ['orderid'];
+		$lineOrder = D ( 'LineOrder' );
+		$orderinfo = $lineOrder->where ( "orderid='" . $orderid . "'" )->find ();
+		// print_r($orderinfo);
+		// exit();
+		if ($orderinfo ['state'] == 1) {
+			$lineOrder->where ( "id=$id" )->setField ( "state", "2" );
+			$this->redirect ( "order_query", array (
+					'phone' => $_GET ['phone'] 
+			), 2, "申请退款成功。" );
+		} else if ($orderinfo ['state'] == 0) {
+			$this->error ( "此订单未支付，不能退款。" );
+		} else if ($orderinfo ['state'] == 4) {
+			$this->error ( "此订单已发团，不能退款。" );
+		}
+		
 	}
 	/**
 	 * 调用支付宝后者网银钱包进行支付
@@ -669,7 +687,7 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] ,
+					"dfc" => $tmp ["dfc"],
 					"price_desc" => $tmp ["price_desc"] 
 			);
 		}
@@ -696,8 +714,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] ,
-					"price_desc" => $tmp ["price_desc"]
+					"dfc" => $tmp ["dfc"],
+					"price_desc" => $tmp ["price_desc"] 
 			);
 		}
 		foreach ( $price_day_tmp2 as $tmp ) {
@@ -721,8 +739,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] ,
-					"price_desc" => $tmp ["price_desc"]
+					"dfc" => $tmp ["dfc"],
+					"price_desc" => $tmp ["price_desc"] 
 			);
 		}
 		foreach ( $price_day_tmp3 as $tmp ) {
@@ -746,8 +764,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] ,
-					"price_desc" => $tmp ["price_desc"]
+					"dfc" => $tmp ["dfc"],
+					"price_desc" => $tmp ["price_desc"] 
 			);
 		}
 		foreach ( $price_day_tmp4 as $tmp ) {
@@ -771,8 +789,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] ,
-					"price_desc" => $tmp ["price_desc"]
+					"dfc" => $tmp ["dfc"],
+					"price_desc" => $tmp ["price_desc"] 
 			);
 		}
 		foreach ( $price_day_tmp5 as $tmp ) {
@@ -796,8 +814,8 @@ class travelAction extends CommonAction {
 					"price_childrenec" => $tmp ["price_childrenec"],
 					"price_childrenpre" => $tmp ["price_childrenpre"],
 					"price_childrenyk" => $tmp ["price_childrenyk"],
-					"dfc" => $tmp ["dfc"] ,
-					"price_desc" => $tmp ["price_desc"]
+					"dfc" => $tmp ["dfc"],
+					"price_desc" => $tmp ["price_desc"] 
 			);
 		}
 		$travel_price_list = array (
@@ -973,7 +991,7 @@ EOF;
 		// print_r($list);
 		// 3.普通订单
 		$lineOrder = M ( 'lineOrder' );
-		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,' . $lineOrder->getTableName () . '.price-remoney restmoney,line.names,line.line_type' )->where ( "phone=$phone" )->order ( "id desc" )->select ();
+		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,' . $lineOrder->getTableName () . '.price-remoney restmoney,line.names,line.line_type,line.ly_type,line.compnay' )->where ( "phone=$phone" )->order ( "id desc" )->select ();
 		$this->assign ( "orderlist", $list );
 		// print_r($list);
 		$this->display ();
@@ -1038,9 +1056,9 @@ EOF;
 				// 必填
 				// 默认网银
 				// $defaultbank = $_POST ['WIDdefaultbank'];
-				if($paymethod=='directPay'){
+				if ($paymethod == 'directPay') {
 					$defaultbank = "";
-				}else{
+				} else {
 					$defaultbank = $_POST ['pay_bank'];
 				}
 				// 必填，银行简码请参考接口技术文档
@@ -1251,13 +1269,13 @@ EOF;
 			$this->assign ( "mess", '支付成功!' );
 			$Line = D ( 'Line' );
 			$lineInfo = $Line->find ( $orderInfo ['lid'] );
-			$this->assign ( "vo", $orderInfo); // 基本信息
+			$this->assign ( "vo", $orderInfo ); // 基本信息
 			$this->assign ( "lineInfo", $lineInfo );
 			$this->assign ( "success", 1 );
 		} else {
 			echo "trade_status=" . $_GET ['trade_status'];
 			$this->assign ( "mess", '此订单已经支付过!' );
-			$this->assign ( "success", 0);
+			$this->assign ( "success", 0 );
 		}
 		
 		// echo "验证成功<br />";
@@ -1347,7 +1365,6 @@ EOF;
 		);
 		$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 	}
-	
 }
 
 ?>

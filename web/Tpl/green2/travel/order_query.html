@@ -9,7 +9,7 @@
 	text-align: left;
 }
 </style>
-<div class="main_lines" style="padding-bottom: 20px;">
+<div class="main_lines" style="padding-bottom: 15px;">
 	<volist name="orderlist" id="vo">
 	<div id="normalorder"
 		style="display: block; margin: 3px auto; width: 90%;" class="order">
@@ -22,61 +22,76 @@
 					<td class="names">线路编号:</td>
 					<td style="color: #993300; font-weight: bold" class="ru">{$vo.lcode}</td>
 					<td class="names">成团方式:</td>
-					<td class="ru"><if condition="$lineInfo.line_type eq '1'">
-						包团自由行 </if> <if condition="$lineInfo.line_type eq '2'"> 纯团玩 </if> <if
-							condition="$lineInfo.line_type eq '3'"> 常规团 </if> <if
-							condition="$lineInfo.line_type eq '4'"> 团队策划 </if></td>
+					<td class="ru">{$vo.ly_type}</td>
 				</tr>
 				<tr style="color: #993300; font-weight: bold">
 					<td class="names">发团公司:</td>
-					<td class="ru">内蒙古汇丰旅行社有限公司</td>
+					<td class="ru">{$vo.compnay}</td>
 					<td class="names">出发日期:</td>
 					<td class="ru">{$vo.startdate}</td>
 					<td class="names">报名日期:</td>
 					<td class="ru">{$vo.orderdate}</td>
 				</tr>
 				<tr>
-					<td class="names">成人单价:</td>
-					<td class="ru">{$vo.pmoney}</td>
-					<td class="names">儿童单价:</td>
-					<td class="ru">{$vo.cmoney}</td>
-					<td class="names">成人预付:</td>
-					<td class="ru">{$vo.premoney}/{$vo.pnumber}人</td>
+					<td>出游人数</td>
+					<td colspan="5" class="ru">成人{$vo.pnumber} 儿童 {$vo.cnumber}</td>
 				</tr>
 				<tr>
-					<td class="names">儿童预付:</td>
-					<td class="ru">{$vo.cremoney}/{$vo.cnumber}人</td>
-					<td class="names">单房差:</td>
-					<td class="ru">0</td>
-					<td class="names">报名人数:</td>
-					<td class="ru">成人{$vo.pnumber} 儿童{$vo.cnumber}</td>
+					<td>房间数</td>
+					<td >{$vo.roomnum}</td>
+					<td>单房差</td>
+					<td colspan="3">{$vo.dfc}</td>
 				</tr>
 				<tr>
-					<td class="names">住宿:</td>
-					<td class="ru">间房（酒店标准间均为2人标准）</td>
-					<td class="names">旅游总费用:{$vo.price}</td>
-					<td colspan="3">首次预付定金30%：{$vo.remoney} 元
-						抵达后二次预付款70%：{$vo.restmoney} 元 <!-- 行程结束后付余款20%： 元 -->
-					</td>
+					<td >成人单价:</td>
+					<td >{$vo.pmoney}</td>
+					<td >儿童单价:</td>
+					<td colspan="3">{$vo.cmoney}</td>
+				</tr>
+				<tr>
+					<td >成人订金:</td>
+					<td  >{$vo.premoney}</td>
+					<td >儿童订金:</td>
+					<td  colspan="3">{$vo.cremoney}</td>
+
+				</tr>
+				<tr>
+					<td>成人到付:</td>
+					<td>{$vo.pmoneyec}</td>
+					<td>儿童到付:</td>
+					<td colspan="3">{$vo.cmoneyec}</td>
 				</tr>
 
 				<tr>
-					<td class="names">客人信息:</td>
-					<td colspan="5">联系人 手机:{$vo.phone}（接收订单通知 付款通知 出团通知等通知短信）
-						备用手机:{$vo.phones}</td>
+					<td>成人余款:</td>
+					<td colspan="5">{$vo.pmoneyyk}</td>
 				</tr>
 				<tr>
-					<td class="names">参团人员名单:{$vo.name}</td>
-					<td colspan="5">（姓名 身份证号码 备注：成人/儿童）</td>
+					<td class="names">费用总计:</td>
+					<td >{$vo.price}</td>
+					<td class="names">联系人</td>
+					<td colspan="3">{$vo.phone}</td>
 				</tr>
 				<tr>
-					<td class="names">备注说明：{$vo.desc}</td>
-					<td colspan="5">（请客人详细填写自己已经订好的往返航班车次时间及其它需要特殊说明的情况。）</td>
+					<td class="names">预付定金总额:</td>
+					<td >{$vo.price}</td>
+					<td class="names">邮箱</td>
+					<td colspan="3">{$vo.phone}</td>
 				</tr>
 
 				<tr>
-					<td class="names">邮箱:</td>
-					<td colspan="5">{$vo.email}</td>
+					<td class="names">到达后支付总:</td>
+					<td >{$vo.price}</td>
+					<td class="names">客服号码</td>
+					<td colspan="3">{$vo.phone}</td>
+				</tr>
+				<tr>
+					<td class="names">余款总额:</td>
+					<td colspan="5">{$vo.pmoneyyk}</td>
+				</tr>
+				<tr>
+					<td class="names">备注信息:</td>
+					<td colspan="5">{$vo.desc}</td>
 				</tr>
 				<if condition="$vo.state eq '0'">
 				<tr height="50px">
@@ -84,16 +99,23 @@
 					<td class="ru"><select name="payclass"><option
 								value="0">支付宝(支持网银信用卡)</option></select></td>
 					<td class="names" colspan="2"
-						style="text-align: left; padding-left: 10px;"><input
+						style="text-align: left; padding-left: 10px;">
+						<input
 						class="sub_bg"
-						style="width: 190px; height: 40px; line-height: 40px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
+						style="width: 170px; height: 30px; line-height: 30px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
 						type="submit" value="开始支付"><br />支付成功会收到付款确认短信凭证</td>
 				</tr>
 				</if>
 				<if condition="$vo.state eq '1'">
 				<tr height="50px">
-					<td class="names" colspan="4">订单状态:已支付 <a href="#"
-						style="color: #993300; font-weight: bold;">发起退款申请</a>
+					<td class="names" >订单状态:
+					</td>
+					<td>
+					已支付
+					</td>
+					<td> 
+					<a href="{:U('order_reject',array('id'=>3,'orderid'=>$vo['orderid']))}" 
+						style="width: 170px; height: 30px;display:block; line-height: 30px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;text-align:center;">发起退款申请</a>
 					</td>
 				</tr>
 				</if>
@@ -116,5 +138,9 @@
 	var setcurrenthref = function(obj) {
 		$(".section").removeClass('on');
 		$(obj).addClass("on");
+	}
+	var rejectorder=function(){
+		document.forms[0].action='{{:U('order_reject')}}';
+		document.forms[0].submit();
 	}
 </script>

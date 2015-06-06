@@ -84,11 +84,11 @@
 	</table>
 </form>
 -->
-<form  action="{:U('edit_win')}" method="post"  >
-	<input type="hidden" value="{$line_base.code}" name="lcode"> <input
-		type="hidden" value="{$line_base.id}" name="lid"> <input
-		type="hidden" value="{$line_base.front_money}" name="front_money">
-	<table border="0" cellspacing="0" cellpadding="0" class="table_form"
+<script type="text/javascript" src="../Public/js/orderedit.js"></script>
+<form action="{:U('edit_win')}" method="post">
+	<input type="hidden" value="{$list.id}" name="id" /> <input
+		type="hidden" value="{$list.orderid}" name="orderid" />
+	<table border="1" cellspacing="0" cellpadding="0" class="table_form"
 		width="700">
 		<tr>
 			<th width="99">订单号：</th>
@@ -99,7 +99,7 @@
 			<td><if condition="$list.state eq '0'">待付款 <elseif
 					condition="$list.state eq '1'" />已付款 <elseif
 					condition="$list.state eq '2'" />已发团 <elseif
-					condition="$list.state eq '3'" />已出团 <elseif
+					condition="$list.state eq '3'" />已退款 <elseif
 					condition="$list.state eq '5'" />已点评 <elseif
 					condition="$list.state eq '6'" />已结束 <elseif
 					condition="$list.state eq '7'" />已取消 </if></td>
@@ -108,17 +108,17 @@
 		</tr>
 		<tr>
 			<th width="99">成团方式：</th>
-			<td><if condition="$get.line_type eq '1'"> 包团自由行 </if> <if
-					condition="$get.line_type eq '2'"> 纯玩团 </if> <if
-					condition="$get.line_type eq '3'"> 常规团 </if> <if
-					condition="$get.line_type eq '4'"> 团队策划 </if></td>
+			<td><if condition="$list.line_type eq '1'"> 包团自由行 </if> <if
+					condition="$list.line_type eq '2'"> 纯玩团 </if> <if
+					condition="$list.line_type eq '3'"> 常规团 </if> <if
+					condition="$list.line_type eq '4'"> 团队策划 </if></td>
 			<th width="99">出发日期：</th>
 			<td><input name="startdate" type="text" id="startdate"
 				value='{$list.startdate}' class="input-text calender" /></td>
 		</tr>
 		<tr>
 			<th width="99">出游人数:</th>
-			<td colspan="3">成人{$list.pnumber}/儿童{$list.cnumber}</td>
+			<td colspan="3">{$list.pnumber} 成人&nbsp;&nbsp;{$list.cnumber}儿童</td>
 		</tr>
 		<tr>
 			<th width="99">房间数:</th>
@@ -142,7 +142,8 @@
 					<option value="16">16间</option>
 			</select></td>
 			<th width="99">单房差:</th>
-			<td>{$list.dfc}</td>
+			<td id="dfczhtml">{$list.dfc}X{$list.dfcnum}={$list.dfcz}</td>
+			<input type="hidden" id="dfcz" name="dfcz" value='{$list.dfcz}'>
 		</tr>
 		<tr>
 			<th width="99">成人单价:</th>
@@ -199,29 +200,48 @@
 		</tr>
 		<tr>
 			<th width="99">客服编号:</th>
-			<td colspan="3">
-			<select name="roomnum" id="roomnum">
-					<option value="0">请选择</option>
-					<option value="1">1间</option>
-					<option value="2">2间</option>
-					<option value="3">3间</option>
-					<option value="4">4间</option>
-					<option value="5">5间</option>
-			</select>
+			<td colspan="3"><select name="assistcode" id="assistcode">
+					<option value="">请选择</option>
+					<option value="101">101</option>
+					<option value="102">102</option>
+					<option value="103">103</option>
+					<option value="104">104</option>
+					<option value="105">105</option>
+					<option value="106">106</option>
+					<option value="107">107</option>
+					<option value="108">108</option>
+					<option value="109">109</option>
+					<option value="110">110</option>
+			</select></td>
+		</tr>
+		<if condition="($list.state eq '2') or ($list.state eq '3')">
+		<tr>
+			<th width="99">退款金额:</th>
+			<td><input name="rejectamount" type="text" id="rejectamount"
+				value='{$list.rejectamount}' /></td>
+			<th width="99">退款原因:</th>
+			<td>
+			<textarea  rows="3" cols="20" id="rejectreason" name="rejectreason" value="{$list.rejectreason}">
+				
+			</textarea>
 			</td>
 		</tr>
 		<tr>
-			<th width="99">退款金额:</th>
-			<td></td>
-			<th width="99">退款原因:</th>
-			<td><texearea id=""> </texearea></td>
+			<td colspan="4" style="text-align: center;">确认退款 <input
+				type="checkbox" name="reject" id="reject" name="checkbox">
+			</td>
 		</tr>
+		</if>
+		<if
+			condition="($list.state eq 0) OR ($list.state eq 1) or ($list.state eq 2)">
 		<tr>
-			<td colspan="4"><input type="checkbox value=" name="reject" id="reject"
-				确认退款" name="checkbox"></td>
+			<td colspan="4" style="text-align: center;"><input type="submit"
+				value="提交"></td>
 		</tr>
-		<tr>
-			<td colspan="4"><input type="submit" value="提交"></td>
-		</tr>
+		</if>
 	</table>
+	<br /> <br /> <br /> <br />
 </form>
+<script language="javascript">
+ var orderinfo={$jsonOrder};
+</script>

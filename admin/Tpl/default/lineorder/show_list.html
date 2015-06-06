@@ -25,20 +25,20 @@
 	<table class="search_table" width="100%">
 		<tr>
 			<td class="search">线路编号: <input id="lcode" type="text"
-				class="input-text" name="lcode" value="{$lcode}" />
+				class="input-text" name="lcode" value="{$get.lcode}" />
 			</td>
 			<td class="search">联系方式: <input id="phone" type="text"
-				class="input-text" name="phone" value="{$phone}" /> <!-- 			<input -->
+				class="input-text" name="phone" value="{$get.phone}" /> <!-- 			<input -->
 				<!-- 				type="submit" value="查询" class="button" /> -->
 			</td>
 			<td class="search">姓名: <input id="name" type="text"
-				class="input-text" name="name" value="{$name}" />
+				class="input-text" name="name" value="{$get.name}" />
 			</td>
 
 		</tr>
 		<tr>
 			<td class="search">订单号: <input id="orderid" type="text"
-				class="input-text" name="orderid" value="{$orderid}" />
+				class="input-text" name="orderid" value="{$get.orderid}" />
 			</td>
 			<td class="search">起始时间: <input name="strorderdate" type="text"
 				id="strorderdate" value='' class="input-text calender" />
@@ -49,35 +49,36 @@
 		</tr>
 		<tr>
 			<td class="search">客服编号: <input id="assistcode" type="text"
-				class="input-text" name="assistcode" value="{$assistcode}" />
+				class="input-text" name="assistcode" value="{$get.assistcode}" />
 			</td>
 			<td class="search">订单状态: <select name="state" id="state">
 					<option value="">请选择</option>
-					<option value="0">未付款</option>
-					<option value="1">已付款</option>
-					<option value="2">已退款</option>
-			</select> <!-- 			<input name="state" type="text" --> <!-- 				id="state" value='' class="input-text calender" /> -->
+					<option value="0" <if condition="$get.state eq 0">selected="true"</if>>未付款</option>
+					<option value="1" <if condition="$get.state eq 1">selected="true"</if>>已付款</option>
+					<option value="2" <if condition="$get.state eq 2">selected="true"</if>>已申请退款</option>
+					<option value="3" <if condition="$get.state eq 3">selected="true"</if>>已退款</option>
+					<option value="4" <if condition="$get.state eq 4">selected="true"</if>>已发团</option>
+			</select>
 			</td>
-			<td class="search">产品类型: 
-			<select name="line_type" id="line_type">
-					<option value="">请选择</option>
-					<option value="1">包团</option>
-					<option value="2">纯玩</option>
-					<option value="3">常规</option>
-					<option value="4">自驾游</option>
-					<option value="5">团体策划</option>
-					<option value="6">其他</option>
+			<td class="search">产品类型: <select name="line_type" id="line_type">
+					<option value=""  <if condition="$get.line_type eq ''">selected="true"</if>>请选择</option>
+					<option value="1" <if condition="$get.line_type eq 1">selected="true"</if>>包团</option>
+					<option value="2" <if condition="$get.line_type eq 2">selected="true"</if>>纯玩</option>
+					<option value="3" <if condition="$get.line_type eq 3">selected="true"</if>>常规</option>
+					<option value="4" <if condition="$get.line_type eq 4">selected="true"</if>>自驾游</option>
+					<option value="5" <if condition="$get.line_type eq 5">selected="true"</if>>团体策划</option>
+					<option value="6" <if condition="$get.line_type eq 6">selected="true"</if>>其他</option>
 			</select>
 			</td>
 		</tr>
 		<tr>
 			<td class="search">目的地: <select name="city" id="city">
 					<option value="">请选择</option>
-					<option value="0471">呼和浩特</option>
-					<option value="0470">呼伦贝尔</option>
-					<option value="0479">锡林浩特</option>
-					<option value="0479">赤峰</option>
-					<option value="0483">额济纳</option>
+					<option value="0471" <if condition="$get.city eq '0471'">selected="true"</if>>呼和浩特</option>
+					<option value="0470" <if condition="$get.city eq '0470'">selected="true"</if>>呼伦贝尔</option>
+					<option value="0479" <if condition="$get.city eq '0479'">selected="true"</if>>锡林浩特</option>
+					<option value="0479" <if condition="$get.city eq '0479'">selected="true"</if>>赤峰</option>
+					<option value="0483" <if condition="$get.city eq '0483'">selected="true"</if>>额济纳</option>
 					<option value="">其他</option>
 			</select>
 			</td>
@@ -89,6 +90,7 @@
 
 	</table>
 </form>
+
 <form name="myform" id="myform" action="{:U('LineTarget/order_target')}"
 	method="post">
 	<div class="table-list">
@@ -130,26 +132,18 @@
 					<td>￥{$vo.price}元</td>
 					<td><if condition="$vo.state eq '0'">待付款 <elseif
 							condition="$vo.state eq '1'" />已付款 <elseif
-							condition="$vo.state eq '2'" />已出团 <elseif
-							condition="$vo.state eq '3'" />已退款 <elseif
-							condition="$vo.state eq '5'" />已点评 <elseif
+							condition="$vo.state eq '2'" />已申请退款 <elseif
+							condition="$vo.state eq '3'" />已退款<elseif
+							condition="$vo.state eq '4'" />已发团 <elseif
 							condition="$vo.state eq '6'" />已结束 <elseif
 							condition="$vo.state eq '7'" />已取消 </if></td>
-					<td><a href="javascript:void(0);"
-						onclick="select_win({$vo.orderid});">查看</a> <if
-							condition="$vo.o_status eq '1'">&nbsp;|&nbsp;<a
-							href="{:U('lineorder/set_status',array('id'=>$vo['o_id']))}"
-							onclick="return atr_confirm(this.href,'确定处理该订单吗?')">处理订单</a>&nbsp;|&nbsp;<a
-							href="javascript:void(0);" onclick="edit_win({$vo.o_id});">编辑</a>
-						<elseif condition="$vo.o_status eq '2'" />&nbsp;|&nbsp;<a
-							href="javascript:void(0);" onclick="edit_win({$vo.o_id});">编辑</a>
-						<elseif condition="$vo.o_status eq '3'" />&nbsp;|&nbsp;<a
-							href="{:U('lineorder/set_status',array('id'=>$vo['o_id']))}"
-							onclick="return atr_confirm(this.href,'确定处理该订单吗?')">处理出团</a> <elseif
-							condition="$vo.o_status eq '4'" />发起退款<elseif
-							condition="$vo.o_status eq '5'" /> <elseif
-							condition="$vo.o_status eq '6'" /> <elseif
-							condition="$vo.o_status eq '7'" /> </if></td>
+					<td><a
+						href="{:U('lineorder/select_win',array('orderid'=>$vo['orderid']))}">查看</a>
+						<if condition="$vo.state eq '1'">&nbsp;|&nbsp;<a
+							href="{:U('lineorder/set_status',array('id'=>$vo['id']))}">发团</a>
+						<elseif condition="$vo.state eq '2'" />&nbsp;|&nbsp;<a
+							href="{:U('lineorder/select_win',array('orderid'=>$vo['orderid']))}">退款</a>
+						<elseif condition="$vo.o_status eq '7'" /> </if></td>
 				</tr>
 				</volist>
 			</tbody>
@@ -164,9 +158,9 @@
     
     function select_win(orderid){
         art.dialog.open('{:U('select_win')}?orderid='+orderid,{
-		title:'查看订单',
-		width:700,
-		height:510,
+		title:'订单信息',
+		width:720,
+		height:550,
 		lock:'true'
 		});
     }

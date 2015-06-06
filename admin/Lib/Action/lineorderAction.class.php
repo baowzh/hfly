@@ -1,19 +1,12 @@
 <?php
 class lineorderAction extends CommonAction {
 	public function show_list() {
-		// $lineOrder = M ( 'linePin' );
 		$where = array ();
 		if (! empty ( $_GET ['name'] )) {
 			$where ["name"] = array (
 					"like",
 					"%{$_GET['name']}%" 
 			);
-			// $where ['names'] = array (
-			// "like",
-			// "%{$_GET['names']}%"
-			// );
-			// $where ['_logic'] = 'OR';
-			// $this->assign ( "search_key", $_GET ['names'] );
 		}
 		if (! empty ( $_GET ['lcode'] )) {
 			$where ["lcode"] = array (
@@ -48,47 +41,30 @@ class lineorderAction extends CommonAction {
 		if (! empty ( $_GET ['state'] )) {
 			$where ["jee_line_order.state"] = array (
 					"eq",
-					"{$_GET['state']}"
+					"{$_GET['state']}" 
 			);
 		}
 		if (! empty ( $_GET ['city'] )) {
 			$where ["line.linebelongto"] = array (
 					"eq",
-					"{$_GET['city']}"
+					"{$_GET['city']}" 
 			);
 		}
 		if (! empty ( $_GET ['line_type'] )) {
 			$where ["line.line_type"] = array (
 					"eq",
-					"{$_GET['line_type']}"
+					"{$_GET['line_type']}" 
 			);
 		}
 		
-		
-		
-		
-		
 		$Line = M ( 'Line' );
-		/*
-		 * if ($_GET ['type'] == '' || $_GET ['type'] == '0' || $_GET ['type'] == '1') {
-		 * if ($_GET ['type'] != '') {
-		 * $where = $where . " and type=" . $_GET ['type'];
-		 * $this->assign ( "type", $_GET ['type'] );
-		 * } else {
-		 * $this->assign ( "type", 0 );
-		 * }
-		 * $count = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names' )->where ( $where )->count ();
-		 * $page = $this->pagebar ( $count );
-		 * $list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type' )->where ( $where )->order ( "id desc" )->page ( $page )->select ();
-		 * $this->assign ( "list", $list );
-		 * } else if ($_GET ['type'] == '2') {
-		 */
 		$lineOrder = M ( 'lineOrder' );
 		$count = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names' )->where ( $where )->count ();
 		$page = $this->pagebar ( $count );
 		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type' )->where ( $where )->order ( "id desc" )->page ( $page )->select ();
 		$this->assign ( "list", $list );
 		$this->assign ( "type", $_GET ['type'] );
+		$this->assign ( "get", $_GET );
 		// }
 		$this->display ();
 	}
@@ -97,21 +73,10 @@ class lineorderAction extends CommonAction {
 		$lineOrder = M ( 'lineOrder' );
 		$order_table = $lineOrder->getTableName () . " ordertab";
 		$line_table = M ( 'line' )->getTableName () . " line";
-		$list = $lineOrder->table ( $order_table )->field ( "ordertab.*,pnumber+cnumber as number,line.names,line.code,line.line_type " )->join ( "$line_table on line.id=ordertab.lid" )->where ( "ordertab.orderid='$orderid'" )->find ();
+		$list = $lineOrder->table ( $order_table )->field ( "ordertab.*,pnumber+cnumber as number,line.names,line.code,line.line_type,round(dfcz/dfc,0) as dfcnum " )->join ( "$line_table on line.id=ordertab.lid" )->where ( "ordertab.orderid='$orderid'" )->find ();
 		$this->assign ( "list", $list );
-		/*
-		 * $lineOrder = M ( 'linePin' );
-		 * $user_table = M ( 'user' )->getTableName () . " user";
-		 * $order_table = $lineOrder->getTableName () . " line_pin";
-		 * $line_table = M ( 'line' )->getTableName () . " line";
-		 * $order_userinfo = M ( 'order_userinfo' );
-		 * $list = $lineOrder->table ( $order_table )->field ( "*,line_pin.status o_status,line_pin.id o_id,line_pin.front_money o_front_money,line_pin.price o_amount" )->join ( "$line_table on line.id=line_pin.line_id" )->where ( "line_pin.id='$id'" )->find ();
-		 * $order_userinfo = M ( 'order_userinfo' );
-		 * $order_userinfolist = $order_userinfo->where ( "order_id='$id' and type='LINE'" )->select ();
-		 * $list ['total_money'] = $list ['o_amount'];
-		 * $this->assign ( "list", $list );
-		 * $this->assign ( "order_userinfolist", $order_userinfolist );
-		 */
+		$jsonOrder = json_encode ( $list );
+		$this->assign ( "jsonOrder", $jsonOrder );
 		$this->display ();
 	}
 	public function edit_win() {
@@ -138,14 +103,36 @@ class lineorderAction extends CommonAction {
 			$this->assign ( "order_userinfolist", $order_userinfolist );
 			$this->display ();
 		} else {
-			$id = $_GET ['id'];
+			$id = $_POST ['id'];
+			$price = $_POST ['price'];
+			$reject = $_POST ['reject'];
 			$lineOrder = M ( 'lineOrder' );
-			if ($data = $lineOrder->create ()) {
-				$lineOrder->where ( "id='$id'" )->save ();
+			if ($reject != null && $reject == 'on') {
+				// 修改订单状态为已退款同时调用支付宝接口进行退款
+				$lineOrder->where ( "id=$id" )->setField ( "state", "3" );
+				$lineOrder->where ( "id=$id" )->setField ( "rejectamount", $_POST ['rejectamount'] );
+				$lineOrder->where ( "id=$id" )->setField ( "rejectreason", $_POST ['rejectreason'] );
 				$this->success ( "编辑成功！", U ( 'show_list' ) );
-				// 如果是退款则调用支付宝接口进行退款reject
 			} else {
-				$this->error ( "编辑失败！" );
+				if ($price == '' or $price == 0) {
+					$this->error ( "费用总计不能0!" );
+				}
+				$remoney = $_POST ['remoney'];
+				if ($remoney == '' or $remoney == 0) {
+					$this->error ( "预付订金总额0!" );
+				}
+				// $eczfz=$_POST ['eczfz'];
+				// if($eczfz=='' or $eczfz==0){
+				// $this->error ( "到达支付总额0!" );
+				// }
+				
+				if ($data = $lineOrder->create ()) {
+					$lineOrder->where ( "id='$id'" )->save ();
+					$this->success ( "编辑成功！", U ( 'show_list' ) );
+					// 如果是退款则调用支付宝接口进行退款reject
+				} else {
+					$this->error ( "编辑失败！" );
+				}
 			}
 		}
 	}
@@ -153,20 +140,22 @@ class lineorderAction extends CommonAction {
 	// 处理状态
 	public function set_status() {
 		$id = $_GET ['id'];
-		$lineOrder = M ( 'linePin' );
+		$lineOrder = M ( 'lineOrder' );
 		$orderinfo = $lineOrder->where ( "id='$id'" )->find ();
-		if ($orderinfo ['status'] == 1) {
-			$orderinfo = $lineOrder->where ( "id='$id'" )->setField ( 'status', '2' );
+		if ($orderinfo ['state'] == 1) { // 已经支付的订单则改为发团
+			$orderinfo = $lineOrder->where ( "id='$id'" )->setField ( 'state', '4' );
 			$this->success ( "订单处理成功！" );
-		} elseif ($orderinfo ['status'] == 3) {
-			$orderinfo = $lineOrder->where ( "id='$id'" )->setField ( 'status', '4' );
-			$this->success ( "订单处理成功！" );
-		} elseif ($orderinfo ['status'] == 5) {
-			$orderinfo = $lineOrder->where ( "id='$id'" )->setField ( 'status', '6' );
-			$this->success ( "订单处理成功！" );
-		} else {
-			$this->error ( "订单状态错误！" );
 		}
+		
+		// elseif ($orderinfo ['state'] == 3) {
+		// $orderinfo = $lineOrder->where ( "id='$id'" )->setField ( 'status', '4' );
+		// $this->success ( "订单处理成功！" );
+		// } elseif ($orderinfo ['state'] == 5) {
+		// $orderinfo = $lineOrder->where ( "id='$id'" )->setField ( 'status', '6' );
+		// $this->success ( "订单处理成功！" );
+		// } else {
+		// $this->error ( "订单状态错误！" );
+		// }
 	}
 }
 

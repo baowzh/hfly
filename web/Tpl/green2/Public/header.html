@@ -69,7 +69,7 @@ $(document).ready(function() {
 			<form action="{:U('travel/order_query')}">
 				<li class="hotline">4001-888-332&nbsp;</li>
 				<li style="width:380px;height:31px;padding-left:50px;">
-				<input type="text" class="shuru" value="请输入手机号" onFocus="if(value==defaultValue){value='';this.style.color='#999'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+				<input type="text" class="shuru" value="请输入手机号" id="phone"	name="phone" onFocus="if(value==defaultValue){value='';this.style.color='#999'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
 				<input type="submit" value="订单查询" class="buts" />
 					</li>
 			</form>
