@@ -495,22 +495,19 @@ class travelAction extends CommonAction {
 		$this->display ();
 	}
 	public function order_reject() { // 把订单状态改为已申请退款
-		$orderid = $_GET ['orderid'];
+		$orderid = $_POST ['reorderid'];
 		$lineOrder = D ( 'LineOrder' );
 		$orderinfo = $lineOrder->where ( "orderid='" . $orderid . "'" )->find ();
-		// print_r($orderinfo);
-		// exit();
 		if ($orderinfo ['state'] == 1) {
-			$lineOrder->where ( "id=$id" )->setField ( "state", "2" );
-			$this->redirect ( "order_query", array (
-					'phone' => $_GET ['phone'] 
-			), 2, "申请退款成功。" );
+			$lineOrder->where ( "orderid='" . $orderid . "'" )->setField ( "state", "2" );
+			$this->success ( "申请退款成功。", U ( "order_query", array (
+					'phone' => $orderinfo ['phone'] 
+			) ) );
 		} else if ($orderinfo ['state'] == 0) {
 			$this->error ( "此订单未支付，不能退款。" );
 		} else if ($orderinfo ['state'] == 4) {
 			$this->error ( "此订单已发团，不能退款。" );
 		}
-		
 	}
 	/**
 	 * 调用支付宝后者网银钱包进行支付

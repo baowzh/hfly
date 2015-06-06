@@ -143,7 +143,14 @@
 							href="{:U('lineorder/set_status',array('id'=>$vo['id']))}">发团</a>
 						<elseif condition="$vo.state eq '2'" />&nbsp;|&nbsp;<a
 							href="{:U('lineorder/select_win',array('orderid'=>$vo['orderid']))}">退款</a>
-						<elseif condition="$vo.o_status eq '7'" /> </if></td>
+						<elseif condition="$vo.o_status eq '7'" /> </if>
+<!-- 						<if condition="$vo.del eq '1'"> -->
+						 &nbsp;
+						 &nbsp;
+						 <a
+							href="{:U('lineorder/delorder',array('orderid'=>$vo['orderid']))}">删除</a>
+<!-- 						</if> -->
+						</td>
 				</tr>
 				</volist>
 			</tbody>

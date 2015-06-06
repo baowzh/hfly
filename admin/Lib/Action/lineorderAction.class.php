@@ -61,11 +61,10 @@ class lineorderAction extends CommonAction {
 		$lineOrder = M ( 'lineOrder' );
 		$count = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names' )->where ( $where )->count ();
 		$page = $this->pagebar ( $count );
-		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type' )->where ( $where )->order ( "id desc" )->page ( $page )->select ();
+		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type,CASE WHEN UNIX_TIMESTAMP()-UNIX_TIMESTAMP(date_add(startdate, interval jee_line_order.trip_days day))>0 and state=0 THEN 1 ELSE 0 end as del' )->where ( $where )->order ( "id desc" )->page ( $page )->select ();
 		$this->assign ( "list", $list );
 		$this->assign ( "type", $_GET ['type'] );
 		$this->assign ( "get", $_GET );
-		// }
 		$this->display ();
 	}
 	public function select_win() {
@@ -146,16 +145,19 @@ class lineorderAction extends CommonAction {
 			$orderinfo = $lineOrder->where ( "id='$id'" )->setField ( 'state', '4' );
 			$this->success ( "订单处理成功！" );
 		}
-		
-		// elseif ($orderinfo ['state'] == 3) {
-		// $orderinfo = $lineOrder->where ( "id='$id'" )->setField ( 'status', '4' );
-		// $this->success ( "订单处理成功！" );
-		// } elseif ($orderinfo ['state'] == 5) {
-		// $orderinfo = $lineOrder->where ( "id='$id'" )->setField ( 'status', '6' );
-		// $this->success ( "订单处理成功！" );
-		// } else {
-		// $this->error ( "订单状态错误！" );
-		// }
+	}
+	public function delorder() {
+		$orderid = $_GET ['orderid'];
+		$lineOrder = M ( 'lineOrder' );
+		$orderinfo = $lineOrder->field ( "*,CASE WHEN UNIX_TIMESTAMP()-UNIX_TIMESTAMP(date_add(startdate, interval trip_days day))>0 and state=0 THEN 1 ELSE 0 end as del" )->where ( "orderid='".$orderid."'" )->find ();
+		//print_r($orderinfo);
+		//exit();
+		if ($orderinfo ['del'] == '1') { // 已经支付的订单则改为发团
+			$orderinfo = $lineOrder->where ( "orderid='$orderid'" )->delete ();
+			$this->success ( "删除成功！" );
+		} else {
+			$this->error ( "已支付过的订单不能删除！" );
+		}
 	}
 }
 

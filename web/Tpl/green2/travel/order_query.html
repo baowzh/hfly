@@ -8,139 +8,192 @@
 	width: 210px;
 	text-align: left;
 }
+
+table {
+	margin: 10px auto;
+}
+
+table tr {
+	/*   width: 800px; */
+	height: 26px;
+	line-height: 32px;
+	border: 1px solid #05adae;
+}
+
+table .names {
+	width: 90px;
+	background: #cdeff0;
+	border: 1px solid #05adae;
+	color: #009998;
+	font-size: 14px;
+	padding: 0px;
+	overflow: hidden;
+	font-weight: bold;
+}
+
+table .ru {
+	width: 90px;
+	background: #cdeff0;
+	border: 1px solid #05adae;
+	color: #993300;;
+	font-size: 14px;
+	padding: 0px;
+	overflow: hidden;
+	font-weight: bold;
+}
+
+table select {
+	background: #cdeff0;
+	border: 1px solid #05adae;
+	color: #993300;
+}
 </style>
 <div class="main_lines" style="padding-bottom: 15px;">
 	<volist name="orderlist" id="vo">
 	<div id="normalorder"
-		style="display: block; margin: 3px auto; width: 90%;" class="order">
-		<form method="post" target="_blank" action="{:U('order_pay')}">
-			<input type="hidden" name="orderid" value="{$vo.orderid}" />
-			<table style="background: #efefef;">
-				<tr>
-					<td class="names">订单编号:</td>
-					<td class="ru">{$vo.orderid}</td>
-					<td class="names">线路编号:</td>
-					<td style="color: #993300; font-weight: bold" class="ru">{$vo.lcode}</td>
-					<td class="names">成团方式:</td>
-					<td class="ru">{$vo.ly_type}</td>
-				</tr>
-				<tr style="color: #993300; font-weight: bold">
-					<td class="names">发团公司:</td>
-					<td class="ru">{$vo.compnay}</td>
-					<td class="names">出发日期:</td>
-					<td class="ru">{$vo.startdate}</td>
-					<td class="names">报名日期:</td>
-					<td class="ru">{$vo.orderdate}</td>
-				</tr>
-				<tr>
-					<td>出游人数</td>
-					<td colspan="5" class="ru">成人{$vo.pnumber} 儿童 {$vo.cnumber}</td>
-				</tr>
-				<tr>
-					<td>房间数</td>
-					<td >{$vo.roomnum}</td>
-					<td>单房差</td>
-					<td colspan="3">{$vo.dfc}</td>
-				</tr>
-				<tr>
-					<td >成人单价:</td>
-					<td >{$vo.pmoney}</td>
-					<td >儿童单价:</td>
-					<td colspan="3">{$vo.cmoney}</td>
-				</tr>
-				<tr>
-					<td >成人订金:</td>
-					<td  >{$vo.premoney}</td>
-					<td >儿童订金:</td>
-					<td  colspan="3">{$vo.cremoney}</td>
+		style="display: block; margin: 3px auto; width: 1000px;" class="order">
+		<table style="border-right: 1px solid #05adae; background: #FFF;">
+			<tr>
+				<td class="names">订单编号:</td>
+				<td class="ru">{$vo.orderid}</td>
+				<td class="names">线路编号:</td>
+				<td class="ru">{$vo.lcode}</td>
+				<td class="names">成团方式:</td>
+				<td class="ru">{$vo.ly_type}</td>
+			</tr>
+			<tr>
+				<td class="names">发团公司:</td>
+				<td class="ru">{$vo.compnay}</td>
+				<td class="names">出发日期:</td>
+				<td class="ru">{$vo.startdate}</td>
+				<td class="names">报名日期:</td>
+				<td class="ru">{$vo.orderdate}</td>
+			</tr>
+			<tr>
+				<td class="names">出游人数:</td>
+				<td colspan="5" class="ru">成人{$vo.pnumber} 儿童 {$vo.cnumber}</td>
+			</tr>
+			<tr>
+				<td class="names">房间数:</td>
+				<td class="ru">{$vo.roomnum}</td>
+				<td class="names">单房差:</td>
+				<td colspan="3" class="ru">{$vo.dfc}元</td>
+			</tr>
+			<tr>
+				<td class="names">成人单价:</td>
+				<td class="ru">{$vo.pmoney}元</td>
+				<td class="names">儿童单价:</td>
+				<td colspan="3" class="ru">{$vo.cmoney}元</td>
+			</tr>
+			<tr>
+				<td class="names">成人订金:</td>
+				<td class="ru">{$vo.premoney}元</td>
+				<td class="names">儿童订金:</td>
+				<td colspan="3" class="ru">{$vo.cremoney}元</td>
 
-				</tr>
-				<tr>
-					<td>成人到付:</td>
-					<td>{$vo.pmoneyec}</td>
-					<td>儿童到付:</td>
-					<td colspan="3">{$vo.cmoneyec}</td>
-				</tr>
+			</tr>
+			<tr>
+				<td class="names">成人到付:</td>
+				<td class="ru">{$vo.pmoneyec}元</td>
+				<td class="names">儿童到付:</td>
+				<td colspan="3" class="ru">{$vo.cmoneyec}元</td>
+			</tr>
 
-				<tr>
-					<td>成人余款:</td>
-					<td colspan="5">{$vo.pmoneyyk}</td>
-				</tr>
-				<tr>
-					<td class="names">费用总计:</td>
-					<td >{$vo.price}</td>
-					<td class="names">联系人</td>
-					<td colspan="3">{$vo.phone}</td>
-				</tr>
-				<tr>
-					<td class="names">预付定金总额:</td>
-					<td >{$vo.price}</td>
-					<td class="names">邮箱</td>
-					<td colspan="3">{$vo.phone}</td>
-				</tr>
+			<tr>
+				<td class="names">成人余款:</td>
+				<td colspan="5" class="ru">{$vo.pmoneyyk}元</td>
+			</tr>
+			<tr>
+				<td class="names">费用总计:</td>
+				<td class="ru">{$vo.price}元</td>
+				<td class="names">联系人:</td>
+				<td colspan="3" class="ru">{$vo.phone}</td>
+			</tr>
+			<tr>
+				<td class="names">预付定金总额:</td>
+				<td class="ru">{$vo.price}</td>
+				<td class="names">邮箱:</td>
+				<td colspan="3" class="ru">{$vo.phone}</td>
+			</tr>
 
-				<tr>
-					<td class="names">到达后支付总:</td>
-					<td >{$vo.price}</td>
-					<td class="names">客服号码</td>
-					<td colspan="3">{$vo.phone}</td>
-				</tr>
-				<tr>
-					<td class="names">余款总额:</td>
-					<td colspan="5">{$vo.pmoneyyk}</td>
-				</tr>
-				<tr>
-					<td class="names">备注信息:</td>
-					<td colspan="5">{$vo.desc}</td>
-				</tr>
-				<if condition="$vo.state eq '0'">
-				<tr height="50px">
-					<td class="names">支付方式:</td>
-					<td class="ru"><select name="payclass"><option
-								value="0">支付宝(支持网银信用卡)</option></select></td>
-					<td class="names" colspan="2"
-						style="text-align: left; padding-left: 10px;">
-						<input
-						class="sub_bg"
-						style="width: 170px; height: 30px; line-height: 30px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
-						type="submit" value="开始支付"><br />支付成功会收到付款确认短信凭证</td>
-				</tr>
-				</if>
-				<if condition="$vo.state eq '1'">
-				<tr height="50px">
-					<td class="names" >订单状态:
-					</td>
-					<td>
-					已支付
-					</td>
-					<td> 
-					<a href="{:U('order_reject',array('id'=>3,'orderid'=>$vo['orderid']))}" 
-						style="width: 170px; height: 30px;display:block; line-height: 30px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;text-align:center;">发起退款申请</a>
-					</td>
-				</tr>
-				</if>
-			</table>
-		</form>
+			<tr>
+				<td class="names">到达后支付总:</td>
+				<td class="ru">{$vo.price}元</td>
+				<td class="names">客服号码:</td>
+				<td colspan="3" class="ru">{$vo.phone}</td>
+			</tr>
+			<tr>
+				<td class="names">余款总额:</td>
+				<td colspan="5" class="ru">{$vo.pmoneyyk}元</td>
+			</tr>
+			<tr>
+				<td class="names">备注信息:</td>
+				<td colspan="5" class="ru">{$vo.desc}</td>
+			</tr>
+			<if condition="$vo.state eq '0'">
+			<tr height="50px">
+				<td class="names">支付方式:</td>
+				<td class="ru"><select name="payclass"><option
+							value="0">支付宝(支持网银信用卡)</option></select></td>
+				<td class="names" colspan="4"
+					style="text-align: left; padding-left: 10px;"><input
+					class="sub_bg"
+					style="width: 170px; height: 30px; line-height: 30px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
+					type="button" onclick="javascript:orderpay('{$vo.orderid}')"
+					value="开始支付"><br />支付成功会收到付款确认短信凭证</td>
+			</tr>
+			</if>
+			<if condition="$vo.state eq '1'">
+			<tr height="50px">
+				<td class="names">订单状态:</td>
+				<td class="ru">已支付</td>
+				<td class="ru" colspan="4"><input class="sub_bg" type="button"
+					style="width: 170px; height: 30px; display: block; line-height: 30px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px; text-align: center;"
+					value="发起退款申请" onclick="javascript:rejectorder('{$vo.orderid}')"></td>
+			</tr>
+			</if>
+			<if condition="$vo.state eq '2'">
+			<tr height="50px">
+				<td class="names">订单状态:</td>
+				<td class="ru" colspan="5">已申请退款</td>
+
+			</tr>
+			</if>
+			<if condition="$vo.state eq '3'">
+			<tr height="50px">
+				<td class="names">订单状态:</td>
+				<td class="ru" colspan="5">已退款</td>
+
+			</tr>
+			</if>
+			<if condition="$vo.state eq '4'">
+			<tr height="50px">
+				<td class="names">订单状态:</td>
+				<td class="ru" colspan="5">已发团</td>
+				
+			</tr>
+			</if>
+		</table>
 	</div>
 	</volist>
+	<form method="post" id="orderform" target="_blank"
+		action="{:U('order_pay')}">
+		<input type="hidden" name="orderid" id="orderid" />
+	</form>
+	<form id="rejectform" action="{:U('order_reject')}" method="post">
+		<input type="hidden" name="reorderid" id="reorderid" />
+	</form>
 </div>
 
 <script type="text/javascript">
-	var showorderdiv = function(divid) {
-		$(".order").each(function() {
-			if (divid == this.id) {
-				$(this).show();
-			} else {
-				$(this).hide();
-			}
-		});
-	};
-	var setcurrenthref = function(obj) {
-		$(".section").removeClass('on');
-		$(obj).addClass("on");
+	var orderpay=function(orderid){
+		$('#orderid').val(orderid);
+		//alert(orderid);
+		document.getElementById('orderform').submit();
 	}
-	var rejectorder=function(){
-		document.forms[0].action='{{:U('order_reject')}}';
-		document.forms[0].submit();
+	var rejectorder=function(reorderid){
+		$('#reorderid').val(reorderid);
+		//alert(reorderid);
+		document.getElementById('rejectform').submit();
 	}
 </script>
