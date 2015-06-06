@@ -376,21 +376,21 @@ var setMoney = function() {
 				var dfcz = 0;
 				if (roomnum != null && roomnum != '') {
 					var totalnum = pnumber * 1;
-					var ytfjs = totalnum / 2;
+					var ytfjs = totalnum ;
 
-					if (totalnum % 2 > 0) {
-						ytfjs = ytfjs - 0.5;
-					}
+					//if (totalnum % 2 > 0) {
+					//	ytfjs = ytfjs - 0.5;
+					//}
 					var sjfjs = roomnum * 1;
-					if (sjfjs - ytfjs > 0) {
+					if (sjfjs*2 - ytfjs > 0) {
 						dfcz = datePriceList[1][numrange][i].dfc
-								* (sjfjs - ytfjs);
+								* (sjfjs*2 - ytfjs);
 					} else {
 						var dfcz = 0;
 					}
 					if (dfcz != 0) {
 						var dfcstr = datePriceList[1][numrange][i].dfc + 'x'
-								+ ((sjfjs - ytfjs) * 1) + '=' + dfcz
+								+ ((sjfjs*2 - ytfjs) * 1) + '=' + dfcz
 						$('#dfcz').html(dfcstr);
 					} else {
 						$('#dfcz').html(0);
