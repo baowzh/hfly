@@ -26,31 +26,31 @@ class indexAction extends CommonAction {
 		$this->assign ( 'pointlist', $pointlist );
 		
 		$article = M ( "Article" );
-		$Articlelist = $article->where("cid<>'7' and cid<>'9' and cid<>'10'" )->order ( 'sort,id desc' )->limit ( 18 )->select ();
+		$Articlelist = $article->where ( "cid<>'7' and cid<>'9' and cid<>'10'" )->order ( 'sort,id desc' )->limit ( 18 )->select ();
 		$this->assign ( 'Articlelist', $Articlelist );
 		$mod_Line = M ( "Line" );
 		
-		$Line1 = $mod_Line->where ( "line_type = '1' and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
+		$Line1 = $mod_Line->where ( "line_type = '1' and status=0 and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
 		$this->assign ( 'Line1', $Line1 );
-		$Line11 = $mod_Line->where ( "line_type = '1' and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
+		$Line11 = $mod_Line->where ( "line_type = '1' and  status=0 and linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
 		$this->assign ( 'Line11', $Line11 );
 		
-		$Line2 = $mod_Line->where ( "line_type = '2' and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
+		$Line2 = $mod_Line->where ( "line_type = '2' and status=0  and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
 		$this->assign ( 'Line2', $Line2 );
-		$Line22 = $mod_Line->where ( "line_type = '2' and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
+		$Line22 = $mod_Line->where ( "line_type = '2' and status=0 and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
 		$this->assign ( 'Line22', $Line22 );
 		
-		$Line3 = $mod_Line->where ( "line_type = '3' and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
+		$Line3 = $mod_Line->where ( "line_type = '3' and status=0 and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
 		$this->assign ( 'Line3', $Line3 );
-		$Line33 = $mod_Line->where ( "line_type = '3'  and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
+		$Line33 = $mod_Line->where ( "line_type = '3' and status=0  and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
 		$this->assign ( 'Line33', $Line33 );
 		
-		$Line4 = $mod_Line->where ( "line_type = '4'  and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
+		$Line4 = $mod_Line->where ( "line_type = '4'   and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
 		$this->assign ( 'Line4', $Line4 );
 		$Line44 = $mod_Line->where ( "line_type = '4'  and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
 		$this->assign ( 'Line44', $Line44 );
 		// 获取要滚动的常规团线路列表
-		$normalline = $mod_Line->where ( "line_type = '3' and  linebelongto='" . $areaid . "'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
+		$normalline = $mod_Line->where ( "line_type = '3' and status=0 and   linebelongto='" . $areaid . "'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
 		$this->assign ( 'normalline', $normalline );
 		$latercounsel = session ( 'latercounsel' );
 		session ( 'areaid', $areaid );
@@ -78,7 +78,7 @@ class indexAction extends CommonAction {
 		$this->assign ( 'wmlxi', $wmlxi );
 		// 自定义订单
 		// 获取旅游咨询文章列表
-		$lvzx = $article->join( M ( 'article_section' )->getTableName () . " article_section" . ' on article_section.id=cid')->field( "jee_article.*")->where("article_section.e_names='lvzx'")->order ( 'add_time' )->limit ( 18 )->select ();
+		$lvzx = $article->join ( M ( 'article_section' )->getTableName () . " article_section" . ' on article_section.id=cid' )->field ( "jee_article.*" )->where ( "article_section.e_names='lvzx'" )->order ( 'add_time' )->limit ( 18 )->select ();
 		$this->assign ( 'lvzx', $lvzx );
 		$LineOrder = M ( 'LineOrder' );
 		$realorder = $LineOrder->field ( " CONCAT(SUBSTR(name from 1 for 1),'**') name,pnumber pcount,cnumber ccount,lcode,orderdate" )->order ( " orderdate desc" )->limit ( 8 )->select ();
@@ -86,6 +86,9 @@ class indexAction extends CommonAction {
 		$sysOrder = M ( 'SysOrder' );
 		$orderlist = $sysOrder->order ( 'orderdate desc' )->limit ( 14 - count ( $realorder ) )->select ();
 		$this->assign ( 'orderlist', $orderlist );
+		// 获取景点主题列表
+		$viewpointtopics = M ( 'viewpointtopic' )->where ( "citycode='" . $areaid . "'" )->limit ( 5 )->select ();
+		$this->assign ( 'viewpointtopics', $viewpointtopics );
 		$this->display ();
 	}
 	

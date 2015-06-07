@@ -873,11 +873,17 @@
 				src="style/images/jingdian.jpg" alt="" width="344" height="51"></a>
 		</div>
 		<div class="line_center">
+		 <volist name="viewpointtopics"
+			id="vo">
+			<li  <if condition="$i eq 1"> class="curtent"</if> ><a href="{:U('viewpoint/index',array('areaid'=>$areaid))}">{$vo.names}</a></li>
+		</volist>
+		<!--  
 			<li class="curtent"><a href="">响沙湾</a></li>
 			<li><a href="">希拉穆仁草原</a></li>
 			<li><a href="">成陵</a></li>
 			<li><a href="">大昭寺</a></li>
 			<li><a href="">五当召</a></li>
+		-->
 		</div>
 		<div class="line_right">
 			<a href="{:U('viewpoint/index',array('areaid'=>$areaid))}" target="_blank">更多推荐</a>

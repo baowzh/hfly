@@ -6,7 +6,13 @@ $(function() {
 	$('#roomnum').change(function() {// 重新计算单房差
 		var roomnum=$(this).val();
 		var dfcz=(roomnum*2-orderinfo.pnumber)*orderinfo.dfc;
-		$('#dfcz').val(dfcz);
-		$('#dfczhtml').html((roomnum*2-orderinfo.pnumber)+'x'+orderinfo.dfc+'='+dfcz);
+		if(dfcz-0>0){
+			$('#dfcz').val(dfcz);
+			$('#dfczhtml').html((roomnum*2-orderinfo.pnumber)+'x'+orderinfo.dfc+'='+dfcz);	
+		}else{
+			$('#dfcz').val(0);
+			$('#dfczhtml').html("0");	
+		}
+		
 	});
 });

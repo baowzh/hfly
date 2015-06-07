@@ -126,6 +126,8 @@ class lineorderAction extends CommonAction {
 				// }
 				
 				if ($data = $lineOrder->create ()) {
+					//print_r($data);
+					// exit();
 					$lineOrder->where ( "id='$id'" )->save ();
 					$this->success ( "编辑成功！", U ( 'show_list' ) );
 					// 如果是退款则调用支付宝接口进行退款reject

@@ -176,6 +176,16 @@
 				value='{$list.remoney}' /></td>
 		</tr>
 		<tr>
+			<th width="99">修改总费用<br>预付订金原因:</th>
+			<td colspan="5">
+			<textarea name="updreason"
+						style="width: 400px; height: 70px; margin-top: 5px;" value="{$list.updreason}">
+					{$list.updreason}	
+			</textarea>
+			
+			</td>
+		</tr>
+		<tr>
 			<th width="99">到达支付总额:</th>
 			<td><input name="eczfz" type="text" id="eczfz"
 				value='{$list.eczfz}' /></td>
@@ -183,12 +193,14 @@
 			<td><input name="ykz" type="text" id="ykz" value='{$list.ykz}' />
 			</td>
 		</tr>
+		<!--  
 		<tr>
 			<th width="99">增减额度费用：</th>
 			<td colspan="3"><input name="zjed" type="text" id="zjed"
 				value='{$list.zjed}' /></td>
 
 		</tr>
+		-->
 		<tr>
 			<th width="99">联系人：</th>
 			<td>{$list.name}</td>

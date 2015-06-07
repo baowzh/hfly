@@ -70,7 +70,7 @@ a {
 }
 
 body {
-	background: #efefef
+	background: #efefef;
 }
 
 .header {
@@ -148,8 +148,8 @@ body {
 
 .dectails {
 	float: right;
-		width: 380px;
-/* 	width: 330px; */
+	width: 380px;
+	/* 	width: 330px; */
 	height: 66px;
 	margin-top: 18px
 }
@@ -188,7 +188,7 @@ body {
 	font-size: 15px;
 	font-family: "微软雅黑";
 	border-radius: 3px;
-	margin-left:2px;
+	margin-left: 2px;
 }
 
 .navs {
