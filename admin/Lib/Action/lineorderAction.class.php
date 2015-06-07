@@ -149,12 +149,10 @@ class lineorderAction extends CommonAction {
 		}
 	}
 	public function delorder() {
-		$orderid = $_GET ['orderid'];
+		$orderid = $_GET ['delorderid'];
 		$lineOrder = M ( 'lineOrder' );
 		$orderinfo = $lineOrder->field ( "*,CASE WHEN UNIX_TIMESTAMP()-UNIX_TIMESTAMP(date_add(startdate, interval trip_days day))>0 and state=0 THEN 1 ELSE 0 end as del" )->where ( "orderid='".$orderid."'" )->find ();
-		//print_r($orderinfo);
-		//exit();
-		if ($orderinfo ['del'] == '1') { // 已经支付的订单则改为发团
+		if ($orderinfo ['state'] == '0') { // 已经支付的订单则改为发团
 			$orderinfo = $lineOrder->where ( "orderid='$orderid'" )->delete ();
 			$this->success ( "删除成功！" );
 		} else {

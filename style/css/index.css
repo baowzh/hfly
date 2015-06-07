@@ -1624,12 +1624,12 @@
 	width: 800px;
 	height: 408px;
 	position: fixed;
-	z-index: 1;
+	z-index: 100;
 	background: #FFF;
 	margin: auto auto;
 	left: 0;
 	right: 0;
-	top: 20%;
+	top: 12%;
 	margin-bottom: 50px;
 }
 

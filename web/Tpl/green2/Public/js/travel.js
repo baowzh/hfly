@@ -374,7 +374,7 @@ var setMoney = function() {
 						);
 				// 计算单房差
 				var dfcz = 0;
-				if (roomnum != null && roomnum != '') {
+				if (roomnum != null && roomnum != ''&&pnumber!=0) {
 					var totalnum = pnumber * 1;
 					var ytfjs = totalnum ;
 

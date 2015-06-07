@@ -218,6 +218,10 @@ class travelAction extends CommonAction {
 			$this->ajaxReturn ( "", "请填写旅行日期", "n" );
 			exit ();
 		}
+		if ( $_POST ['pnumber']==0 ) {
+			$this->ajaxReturn ( "", "请选择预定人数", "n" );
+			exit ();
+		}
 		// if (empty ( $_POST ['roomnum'] )) {
 		// $this->ajaxReturn ( "", "请填写房间数", "n" );
 		// exit ();
@@ -346,7 +350,7 @@ class travelAction extends CommonAction {
 			// 短信发送
 			$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
-					"id" => $insert_id 
+					"orderid" => $OrderData ['orderid'] 
 			) ), "订单详情", "u" );
 		} else {
 			$this->ajaxReturn ( "", "订单提交失败", "n" );
@@ -434,19 +438,17 @@ class travelAction extends CommonAction {
 		$this->display ();
 	}
 	public function order_ding_view() {
-		layout ( false ); // 临时关闭当前模板的布局功能
-		                  // 获取订单id
-		                  // 获取线路id
+		layout ( false ); 
 		$LineOrder = D ( 'LineOrder' );
-		$id = $_GET ["id"] ? intval ( $_GET ["id"] ) : 0;
-		$vo = $LineOrder->find ( $id );
+		$orderid = $_GET ["orderid"] ? intval ( $_GET ["orderid"] ) : 0;
+		$vo = $LineOrder->where("orderid='".$orderid."'")->find ();
 		$lineid = $vo ['lid'];
 		$Line = D ( 'Line' );
-		$lineInfo = $Line->find ( array (
-				'id' => $lineid 
-		) );
+		$lineInfo = $Line->where("id='".$lineid."'")->find();
 		$this->assign ( "vo", $vo ); // 基本信息
 		$this->assign ( "lineInfo", $lineInfo );
+		//print_r($lineInfo);
+		//exit();
 		$this->display ();
 	}
 	public function order_success() {
@@ -1231,7 +1233,7 @@ EOF;
 			$LineOrder = D ( 'LineOrder' );
 			$orderInfo = $LineOrder->where ( array (
 					'orderid' => $out_trade_no 
-			) )->find ();
+			) )->find ();	
 			$state = $orderInfo ['state'];
 			if ($state == 0) { // 如果订单状态是未支付则修改为已支付
 				$LinePin = D ( 'LinePin' );
@@ -1258,16 +1260,14 @@ EOF;
 						'content' => urlencode ( $messContent ) 
 				);
 				$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
+				$this->assign ( "mess", '支付成功!' );
+			}else if($state >=1){
+				$this->assign ( "mess", '此订单已经支付过!' );
 			}
-			
-			// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-			
-			// 如果有做过处理，不执行商户的业务程序
-			$this->assign ( "mess", '支付成功!' );
-			$Line = D ( 'Line' );
-			$lineInfo = $Line->find ( $orderInfo ['lid'] );
-			$this->assign ( "vo", $orderInfo ); // 基本信息
-			$this->assign ( "lineInfo", $lineInfo );
+			$Line = M ( 'Line' );
+			$lineOrder1 = M ( 'lineOrder' );
+			$list = $lineOrder1->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder1->getTableName () . '.lid' )->field ( $lineOrder1->getTableName () . '.*,' . $lineOrder1->getTableName () . '.price-remoney restmoney,line.names,line.line_type,line.ly_type,line.compnay' )->where ( "orderid='".$out_trade_no."'")->select();
+			$this->assign ( "orderlist", $list );
 			$this->assign ( "success", 1 );
 		} else {
 			echo "trade_status=" . $_GET ['trade_status'];

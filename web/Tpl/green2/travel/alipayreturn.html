@@ -1,74 +1,166 @@
-<div class="col-24 travel_main">
-	<div class="col-24 travel_title alpha">
-		<h1 class="hot_route">{$mess}</h1>
-	</div>
-</div>
+<style>
+.names {
+	width: 80px;
+}
+
+.ru {
+	width: 210px;
+	text-align: left;
+}
+
+table {
+	margin: 10px auto;
+}
+
+table tr {
+	/*   width: 800px; */
+	height: 26px;
+	line-height: 32px;
+	border: 1px solid #05adae;
+}
+
+table .names {
+	width: 90px;
+	background: #cdeff0;
+	border: 1px solid #05adae;
+	color: #009998;
+	font-size: 14px;
+	padding: 0px;
+	overflow: hidden;
+	font-weight: bold;
+}
+
+table .ru {
+	width: 90px;
+	background: #cdeff0;
+	border: 1px solid #05adae;
+	color: #993300;;
+	font-size: 14px;
+	padding: 0px;
+	overflow: hidden;
+	font-weight: bold;
+}
+
+table select {
+	background: #cdeff0;
+	border: 1px solid #05adae;
+	color: #993300;
+}
+</style>
 <if condition="$success eq 1">
-<div class="dogview">
-	<div class="link_title">
-		<h3>订单号 :{$$vo.orderid} &nbsp;线路编号：{$vo.lcode}</h3>
-		<span><a class="close" onclick="showclose()"
-			style="cursor: pointer">&nbsp;</a></span>
-	</div>
-	<div style="padding: 15px; border: 1px solid #05adae;">
-		<span style="color: #ff0000">注：如价格有变动，请联系客服修改价格后，通过手机号查询到订单再进行支付！<br>如非在线支付，汇款账户<a
-			href="http://www.xingye.cc/help/pay.html" target="_blank">点此查看</a>，仅限以上账户，打入其他账户与我方无关
-		</span>
-		<form id="a" method="post" target="_blank"
-			action="{:U('/order/index')}">
-			<input type="text" value="{$vo.phone}" name="topphone"
-				style="border-bottom: #FFFFFF solid 1px; border-top: 0px; border-left: 0px; border-right: 0px; background-color: #507596; color: #fff; width: 90px">
-			<!-- 			<input type="submit" value="查看拼团" style="border: 1px #333333 solid"> -->
-		</form>
-	</div>
-	<form method="post" target="_blank" action="{:U('order_pay')}">
-		<input type="hidden" name="orderid" value="{$vo.orderid}" />
-		<table>
+<div class="main_lines" style="padding-bottom: 15px;">
+	<h1 class="hot_route" style="fonts-size: 30px; color: #f00;">{$mess}</h1>
+	<volist name="orderlist" id="vo">
+	<div id="normalorder"
+		style="display: block; margin: 3px auto; width: 1000px;" class="order">
+		<table style="border-right: 1px solid #05adae; background: #FFF;">
 			<tr>
-				<td class="names" style="width: 240px;">订单编号</td>
+				<td class="names">订单编号:</td>
 				<td class="ru">{$vo.orderid}</td>
-				<td class="names" style="width: 240px;">成团方式</td>
-				<td style="color: #993300; font-weight: bold" class="ru">
-					{$lineInfo.ly_type}</td>
-				<td class="names" style="width: 240px;">发团公司</td>
-				<td style="color: #993300; font-weight: bold" class="ru">
-					{$lineInfo.compnay}</td>
+				<td class="names">线路编号:</td>
+				<td class="ru">{$vo.lcode}</td>
+				<td class="names">成团方式:</td>
+				<td class="ru">{$vo.ly_type}</td>
 			</tr>
 			<tr>
-				<td class="names" style="width: 240px;">开始旅行时间</td>
-				<td class="ru">{$vo.startdate}/(共{$lineInfo.trip_days}天)</td>
-				<td class="names" style="width: 240px;">成人单价</td>
-				<td style="color: #993300; font-weight: bold" class="ru">{$vo.pmoney}/{$vo.pnumber}</td>
-				<td class="names" style="width: 240px;">儿童单价</td>
-				<td style="color: #993300; font-weight: bold" class="ru">{$vo.cmoney}/{$vo.cnumber}</td>
+				<td class="names">发团公司:</td>
+				<td class="ru">{$vo.compnay}</td>
+				<td class="names">出发日期:</td>
+				<td class="ru">{$vo.startdate}</td>
+				<td class="names">报名日期:</td>
+				<td class="ru">{$vo.orderdate}</td>
 			</tr>
+			<tr>
+				<td class="names">出游人数:</td>
+				<td colspan="5" class="ru">成人{$vo.pnumber}
+				 <if condition="$vo.cnumber neq 0">
+				  儿童 {$vo.cnumber}
+				 </if>
+				 </td>
+			</tr>
+			<tr>
+				<td class="names">房间数:</td>
+				<td class="ru">{$vo.roomnum}</td>
+				<td class="names">单房差:</td>
+				<td colspan="3" class="ru">
+				<if condition="$vo.dfcz neq 0">
+				  {$vo.dfcz}元
+				</if>
+				</td>
+			</tr>
+			<tr>
+				<td class="names">成人单价:</td>
+				<td class="ru">{$vo.pmoney}元</td>
+				<td class="names">儿童单价:</td>
+				<td colspan="3" class="ru">
+				<if condition="$vo.cnumber neq 0">
+				{$vo.cmoney}元
+				</if>
+				</td>
+			</tr>
+			<tr>
+				<td class="names">成人订金:</td>
+				<td class="ru">{$vo.premoney}元</td>
+				<td class="names">儿童订金:</td>
+				<td colspan="3" class="ru">
+				<if condition="$vo.cnumber neq 0">
+				{$vo.cremoney}元
+				</if>
+				</td>
 
-			<tr style="color: #993300; font-weight: bold">
-				<td class="names" style="width: 240px;">支付金额</td>
-				<td class="ru" colspan="2"><span
-					style="font-size: 24px; color: #993300">{$vo.remoney}</span>元</td>
-				<td class="names" style="width: 240px;">费用总计</td>
-				<td class="ru" colspan="2">{$vo.price}元</td>
+			</tr>
+			<tr>
+				<td class="names">成人到付:</td>
+				<td class="ru">{$vo.pmoneyec}元</td>
+				<td class="names">儿童到付:</td>
+				<td colspan="3" class="ru">
+				 <if condition="$vo.cnumber neq 0">
+				 {$vo.cmoneyec}元
+				 </if>
+				</td>
 			</tr>
 
 			<tr>
-				<td class="names" style="width: 240px;">预定人</td>
-				<td class="ru">{$vo.name}</td>
-				<td class="names" style="width: 240px;">手机</td>
-				<td class="ru">{$vo.phone}</td>
-				<td class="ru" colspan="2">支付成功会收到付款凭证</td>
+				<td class="names">成人余款:</td>
+				<td colspan="5" class="ru">{$vo.pmoneyyk}元</td>
 			</tr>
-			<tr height="50px">
-				<td class="names" style="width: 240px;">支付方式</td>
-				<td class="ru" colspan="2"><select name="payclass"><option
-							value="0">支付宝(支持网银信用卡)</option></select></td>
-				<td class="names" colspan="3"
-					style="text-align: left; padding-left: 10px;"><input
-					class="sub_bg"
-					style="width: 190px; height: 40px; line-height: 40px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
-					type="submit" value="开始支付"><br />支付成功会收到付款确认短信凭证</td>
+			<tr>
+				<td class="names">费用总计:</td>
+				<td class="ru">{$vo.price}元</td>
+				<td class="names">联系人:</td>
+				<td colspan="3" class="ru">{$vo.phone}</td>
+			</tr>
+			<tr>
+				<td class="names">预付定金总额:</td>
+				<td class="ru">{$vo.remoney}</td>
+				<td class="names">邮箱:</td>
+				<td colspan="3" class="ru">{$vo.email}</td>
+			</tr>
+
+			<tr>
+				<td class="names">到达后支付总:</td>
+				<td class="ru">{$vo.eczfz}元</td>
+				<td class="names">客服号码:</td>
+				<td colspan="3" class="ru">{$vo.assistcode}</td>
+			</tr>
+			<tr>
+				<td class="names">余款总额:</td>
+				<td colspan="5" class="ru">{$vo.ykz}元</td>
+			</tr>
+			<tr>
+				<td class="names">备注信息:</td>
+				<td colspan="5" class="ru">{$vo.desc}</td>
 			</tr>
 		</table>
+	</div>
+	</volist>
+	<form method="post" id="orderform" target="_blank"
+		action="{:U('order_pay')}">
+		<input type="hidden" name="orderid" id="orderid" />
+	</form>
+	<form id="rejectform" action="{:U('order_reject')}" method="post">
+		<input type="hidden" name="reorderid" id="reorderid" />
 	</form>
 </div>
 </if>
+

@@ -53,32 +53,49 @@
 			</td>
 			<td class="search">订单状态: <select name="state" id="state">
 					<option value="">请选择</option>
-					<option value="0" <if condition="$get.state eq 0">selected="true"</if>>未付款</option>
-					<option value="1" <if condition="$get.state eq 1">selected="true"</if>>已付款</option>
-					<option value="2" <if condition="$get.state eq 2">selected="true"</if>>已申请退款</option>
-					<option value="3" <if condition="$get.state eq 3">selected="true"</if>>已退款</option>
-					<option value="4" <if condition="$get.state eq 4">selected="true"</if>>已发团</option>
+					<option value="0"<if condition="$get.state eq 0">selected="true"</if>>未付款
+					</option>
+					<option value="1"<if condition="$get.state eq 1">selected="true"</if>>已付款
+					</option>
+					<option value="2"<if condition="$get.state eq 2">selected="true"</if>>已申请退款
+					</option>
+					<option value="3"<if condition="$get.state eq 3">selected="true"</if>>已退款
+					</option>
+					<option value="4"<if condition="$get.state eq 4">selected="true"</if>>已发团
+					</option>
 			</select>
 			</td>
 			<td class="search">产品类型: <select name="line_type" id="line_type">
-					<option value=""  <if condition="$get.line_type eq ''">selected="true"</if>>请选择</option>
-					<option value="1" <if condition="$get.line_type eq 1">selected="true"</if>>包团</option>
-					<option value="2" <if condition="$get.line_type eq 2">selected="true"</if>>纯玩</option>
-					<option value="3" <if condition="$get.line_type eq 3">selected="true"</if>>常规</option>
-					<option value="4" <if condition="$get.line_type eq 4">selected="true"</if>>自驾游</option>
-					<option value="5" <if condition="$get.line_type eq 5">selected="true"</if>>团体策划</option>
-					<option value="6" <if condition="$get.line_type eq 6">selected="true"</if>>其他</option>
+					<option value=""<if condition="$get.line_type eq ''">selected="true"</if>>请选择
+					</option>
+					<option value="1"<if condition="$get.line_type eq 1">selected="true"</if>>包团
+					</option>
+					<option value="2"<if condition="$get.line_type eq 2">selected="true"</if>>纯玩
+					</option>
+					<option value="3"<if condition="$get.line_type eq 3">selected="true"</if>>常规
+					</option>
+					<option value="4"<if condition="$get.line_type eq 4">selected="true"</if>>自驾游
+					</option>
+					<option value="5"<if condition="$get.line_type eq 5">selected="true"</if>>团体策划
+					</option>
+					<option value="6"<if condition="$get.line_type eq 6">selected="true"</if>>其他
+					</option>
 			</select>
 			</td>
 		</tr>
 		<tr>
 			<td class="search">目的地: <select name="city" id="city">
 					<option value="">请选择</option>
-					<option value="0471" <if condition="$get.city eq '0471'">selected="true"</if>>呼和浩特</option>
-					<option value="0470" <if condition="$get.city eq '0470'">selected="true"</if>>呼伦贝尔</option>
-					<option value="0479" <if condition="$get.city eq '0479'">selected="true"</if>>锡林浩特</option>
-					<option value="0479" <if condition="$get.city eq '0479'">selected="true"</if>>赤峰</option>
-					<option value="0483" <if condition="$get.city eq '0483'">selected="true"</if>>额济纳</option>
+					<option value="0471"<if condition="$get.city eq '0471'">selected="true"</if>>呼和浩特
+					</option>
+					<option value="0470"<if condition="$get.city eq '0470'">selected="true"</if>>呼伦贝尔
+					</option>
+					<option value="0479"<if condition="$get.city eq '0479'">selected="true"</if>>锡林浩特
+					</option>
+					<option value="0479"<if condition="$get.city eq '0479'">selected="true"</if>>赤峰
+					</option>
+					<option value="0483"<if condition="$get.city eq '0483'">selected="true"</if>>额济纳
+					</option>
 					<option value="">其他</option>
 			</select>
 			</td>
@@ -143,14 +160,8 @@
 							href="{:U('lineorder/set_status',array('id'=>$vo['id']))}">发团</a>
 						<elseif condition="$vo.state eq '2'" />&nbsp;|&nbsp;<a
 							href="{:U('lineorder/select_win',array('orderid'=>$vo['orderid']))}">退款</a>
-						<elseif condition="$vo.o_status eq '7'" /> </if>
-<!-- 						<if condition="$vo.del eq '1'"> -->
-						 &nbsp;
-						 &nbsp;
-						 <a
-							href="{:U('lineorder/delorder',array('orderid'=>$vo['orderid']))}">删除</a>
-<!-- 						</if> -->
-						</td>
+						<elseif condition="$vo.o_status eq '7'" /> </if> &nbsp; &nbsp; <a
+						href="javascript:delorder('{$vo['orderid']}');">删除</a></td>
 				</tr>
 				</volist>
 			</tbody>
@@ -159,6 +170,10 @@
 		<input type="hidden" name="base_pos" value="{~echo MODULE_NAME}">
 	</div>
 	<div class="btn"></div>
+</form>
+<form name="delform" id="delform" action="{:U('lineorder/delorder')}"
+	method="get">
+	<input type="hidden" id="delorderid" name="delorderid">
 </form>
 <div class="page">{$page}</div>
 <script language="javascript">
@@ -179,6 +194,10 @@
 		height:480,
 		lock:'true'
 		});
+    }
+    function delorder(orderid){
+    	$('#delorderid').val(orderid);
+    	art.dialog.confirm("您确定要删除此订单吗？", function(){$('#delform').trigger("submit")});
     }
 	
 </script>

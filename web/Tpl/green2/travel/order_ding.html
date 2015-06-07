@@ -25,14 +25,16 @@
 					onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'%y-%M-%d'});"
 					valid="required" errmsg="请选择预定日期" readonly=""></td>
 				<td class="names" style="color: #f85c23; font-weight: bold">成人单价</td>
-				<td class="wlef"><b id="crdj">{$price_day.price_adult}</b>元</td>
+				<td class="wlef"><b id="crdj">0</b>元</td>
 				<td class="names" style="color: #f85c23; font-weight: bold">儿童单价</td>
 				<td class="wlef"><b id="etdj">0</b>元</td>
 			</tr>
 			<tr>
 				<td class="names" style="color: #f85c23; font-weight: bold">预定人数</td>
 				<td><select name="pnumber" id="pnumber"
-					onchange="onPNumChange();"><option value="1">1位成人</option>
+					onchange="onPNumChange();">
+					     <option value="0">请选择</option>
+					    <option value="1">1位成人</option>
 						<option value="2">2位成人</option>
 						<option value="3">3位成人</option>
 						<option value="4">4位成人</option>
@@ -64,7 +66,7 @@
 						<option value="9">9位儿童</option>
 						<option value="10">10位儿童</option></select></td>
 				<td class="names" style="color: #f85c23; font-weight: bold">成人订金</td>
-				<td class="wlef"><b id="cryf">{$price_day.cryf}</b>元</td>
+				<td class="wlef"><b id="cryf">0</b>元</td>
 				<td class="names" style="color: #f85c23; font-weight: bold">儿童订金</td>
 				<td class="wlef"><b id="etyf">0</b>元</td>
 			</tr>
@@ -96,7 +98,7 @@
 					style="width: 145px;">
 					--></td>
 				<td class="names" style="color: #f85c23; font-weight: bold">成人到付</td>
-				<td class="wlef"><b id="creczf">{$price_day.price_adultec}</b>元</td>
+				<td class="wlef"><b id="creczf">0</b>元</td>
 				<td class="names" style="color: #f85c23; font-weight: bold">儿童到付</td>
 				<td class="wlef"><b id="eteczf">0</b>元</td>
 				<!-- 				<td class="names" style="color: #f85c23; font-weight: bold">成人余款</td> -->
@@ -107,14 +109,14 @@
 				<td class="names">单房差:</td>
 				<td style="text-align: left; padding-left: 10px"><b id="dfcz">0</b>元</td>
 				<td class="names" style="color: #f85c23; font-weight: bold">成人余款</td>
-				<td class="wlef"><b id="cryk">{$price_day.price_adultyk}</b>元</td>
+				<td class="wlef"><b id="cryk">0</b>元</td>
 
 				<td class="names" style="color: #f85c23; font-weight: bold"></td>
 				<td class="wlef"><b id="etyk"></b></td>
 			</tr>
 			<tr>
 				<td class="names" style="color: #f85c23; font-weight: bold">费用总计</td>
-				<td class="wlef"><b id="zfy">{$price_day.price_adult}</b>元</td>
+				<td class="wlef"><b id="zfy">0</b>元</td>
 				<td rowspan="4" class="names">起价说明</td>
 				<td rowspan="4" class="wlef"><p id="qjsm"
 						style="line-height: 18px; height: 120px; width: 80px; word-wrap: break-word;"></p>
@@ -126,7 +128,7 @@
 				<td class="names" style="color: #f85c23; font-weight: bold">预付订金总额</td>
 				<td style="text-align: left; padding-left: 10px"><b
 					style="color: #f85c23; font-weight: bold; font-size: 14px"
-					id="ydzfz">{$price_day.ydzf}</b>元</td>
+					id="ydzfz">0</b>元</td>
 				<!--  
 				<td class="names" style="color: #f85c23; font-weight: bold">二次支付(总)</td>
 				<td class="wlef"><b id="eczfz">{$price_day.ddhzf}</b>元</td>
@@ -137,11 +139,11 @@
 			</tr>
 			<tr>
 				<td class="names" style="color: #f85c23; font-weight: bold">到达支付总额</td>
-				<td class="wlef"><b id="eczfz">{$price_day.ddhzf}</b>元</td>
+				<td class="wlef"><b id="eczfz">0</b>元</td>
 			</tr>
 			<tr>
 				<td class="names" style="color: #f85c23; font-weight: bold">余款总额</td>
-				<td class="wlef"><b id="ykz">{$price_day.price_adultyk}</b>元</td>
+				<td class="wlef"><b id="ykz">0</b>元</td>
 			</tr>
 
 			<tr>
