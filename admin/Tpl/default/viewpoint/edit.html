@@ -130,6 +130,14 @@ function formcheck()
             </td>
         </tr>
         <tr>
+			<th><span class="red">*</span>景点主题：</th>
+			<td colspan="2"><select id="topiccode" name="topiccode">
+					<volist name="viewpointtopics" id="vo">
+				    	<option value="{$vo.code}"   <if condition="$vo.code eq $objViewpoint['topiccode']"> selected="selected" </if> >{$vo.names}</option>
+					</volist>
+			</select></td>
+		</tr>
+        <tr>
             <th><span class="red">*</span>排序：</th>
             <td colspan="2">
                 <input name="sort" type="text" id="sort" value='{$objViewpoint.sort}' class="txt" datatype="n" nullmsg="请填写排序" errmsg="请填写数字" sucmsg=" "/>

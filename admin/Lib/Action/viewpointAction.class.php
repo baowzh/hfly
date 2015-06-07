@@ -9,20 +9,18 @@ class viewpointAction extends CommonAction {
 	//添加
 	public function add() {
 		if (!isset($_POST['submit'])) {
-
 			//所属地区列表
 			$city_belong = M('city_belong');
 			$list_city_id = $city_belong->join(C('DB_PREFIX') . "area" . C('DB_SUFFIX') . " ON " . C('DB_PREFIX') . "city_belong" . C('DB_SUFFIX') . ".cid=" . C('DB_PREFIX') . "area" . C('DB_SUFFIX') . ".id")
 			->where("types='Viewpoint'")
 			->field("*," . C('DB_PREFIX') . "city_belong" . C('DB_SUFFIX') . ".sort as sort")
 			->select();
-
-
-
+			// 获取景点分组
+			$viewpointtopics=M("viewpointtopic")->select();
 			$this->assign('list_city_id', $list_city_id);
 			$this->assign('list_view_type', $list_view_type);
 			$this->assign('list_fit_person', $list_fit_person);
-
+			$this->assign('viewpointtopics', $viewpointtopics);
 			$this->display();
 		} else {
 			$Viewpoint = M('Viewpoint');
@@ -47,6 +45,8 @@ class viewpointAction extends CommonAction {
 		
 			$Viewpoint->sort = $_POST['sort'];
 			$Viewpoint->status = $_POST['status'];
+			$Viewpoint->status = $_POST['status'];
+			$Viewpoint->topiccode = $_POST['topiccode'];
 			$Viewpoint->add();
 			$this->redirect("show_list");
 		}
@@ -71,9 +71,7 @@ class viewpointAction extends CommonAction {
 			->field("*," . C('DB_PREFIX') . "city_belong" . C('DB_SUFFIX') . ".sort as sort")
 			->select();
 
-
 			$objViewpoint['fit_person'] = explode(",", $objViewpoint['fit_person']);
-
 
 			if ($objViewpoint['position'] != NULL) {
 				$position = explode(",", $objViewpoint['position']);
@@ -81,13 +79,12 @@ class viewpointAction extends CommonAction {
 				$objViewpoint['location_y'] = $position[1];
 				//dump($objViewpoint);
 			}
+			$viewpointtopics=M("viewpointtopic")->select();
+			$this->assign('viewpointtopics', $viewpointtopics);
 			$this->assign('objViewpoint', $objViewpoint);
 			$this->assign('objseo_info', $objseo_info);
-
 			$this->assign("id", $id);
 			$this->assign('list_city_id', $list_city_id);
-
-
 			$this->display();
 		} else {
 			$Viewpoint = M('Viewpoint');
@@ -125,6 +122,7 @@ class viewpointAction extends CommonAction {
 			
 			$Viewpoint->sort = $_POST['sort'];
 			$Viewpoint->status = $_POST['status'];
+			$Viewpoint->topiccode = $_POST['topiccode'];
 			$Viewpoint->save();
 			$this->redirect("show_list");
 		}

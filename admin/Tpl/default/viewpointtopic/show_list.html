@@ -1,0 +1,90 @@
+<script type="text/javascript">
+$(function(){
+	$.fn.allselect({
+			allselectclass:"allselect",
+			cselectname: "c_selected"
+	}); 
+});
+</script>
+<div id="nav" class="mainnav_title">
+	<ul>
+		<a class="on" href="{:U('show_list')}">景点主题</a> |
+		<a href="javascript:void(0);"
+			onclick="art.dialog.open('{:U('add')}',{title:'回答问题',width:440,height:280,window:'top',lock:'true'});">添加</a>
+	</ul>
+</div>
+<form name="myform" id="myform" action="" method="post">
+	<div class="table-list">
+		<table cellspacing="0" cellpadding="0" width="100%">
+			<thead>
+				<tr>
+					<th><input type="checkbox" value="" class="allselect"
+						id="check_box"> <label for="check_box" class="for_box">全选/反选</label></th>
+					<th style="text-align: left;">名称</th>
+					<th style="text-align: left;">编码</th>
+					<th style="text-align: left;">归属地区</th>
+					<th>排序</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			</tbody>
+			<volist name="list" id="vo">
+			<tr class="ulbc" id="tr_{$vo.id}">
+				<td id="td_sel">
+				<input type="checkbox" class="sel c_selected"
+					id="sel_{$vo.code}" value="{$vo.code}" name="items[$vo.code]" /></td>
+				
+				<td>
+				<input type="text" name="sort[{$vo.names}]" id="sort_{$vo.names}"
+					value="{$vo.names}" /></td>
+				<td style="text-align: left;">
+				{$vo.code}
+				</td>
+				<td style="text-align: left;">
+				{$vo.cityname}
+				</td>
+				<td>
+				<input type="text" name="sort[{$vo.code}]" id="sort_{$vo.code}"
+					value="{$vo.sort}" /></td>
+				<td>
+				<a href="javascript:void(0);"
+					onclick="ajax_save('{$vo.code}')">保存</a>&nbsp;|&nbsp; <a
+					href="{:U('del',array('code'=>$vo['code']))}"
+					onclick="return atr_confirm(this.href)">删除</a></td>
+			</tr>
+			</volist>
+			</tbody>
+		</table>
+		<input type="hidden" name="base_pos" value="{~echo MODULE_NAME}">
+	</div>
+	<div class="btn">
+		<input type="button" class="button" name="dosubmit" value="删除"
+			onclick="myform.action='{:U('deleteall')}';return confirm_deleteall()" />
+	</div>
+</form>
+<div class="page">{$page}</div>
+<script language="javascript">
+    function ajax_save(code) {
+        var url = "ajax_save?code=" + code;
+        var names = $('#names_' + code).val();
+        var sort = $('#sort_' + code).val();
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            complete: function () {
+            },
+            dataType: 'json',
+            data: "names=" + names + "&sort=" + sort,
+            error: function () {
+                alert('Ajax request error');
+            },
+            success: function (result) {
+                if (result == 1) {
+                    showTips('保存成功', 33, 1);
+                }
+            }
+        });
+    }
+</script>
+<include file="Public:footer" />

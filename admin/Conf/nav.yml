@@ -208,6 +208,14 @@
   show: 1  
   url: viewpoint/add
 -
+  names: 景点主题
+  id: 40
+  pid: 6
+  sort: 0
+  enable: 1
+  show: 1  
+  url: viewpointtopic/show_list
+-
   names: 所属城市
   id: 46
   pid: 6

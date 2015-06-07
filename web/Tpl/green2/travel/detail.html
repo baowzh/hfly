@@ -1,6 +1,7 @@
 <script type="text/javascript" src="../Public/js/jquery.xl_calendar.js"></script>
 <script type="text/javascript" src="../Public/js/travel.js"></script>
 <script src="../Public/js/galleria-1.4.2.min.js"></script>
+<script type="text/javascript" src="../Public/js/jquery.pin.js"></script>
 <script type="text/javascript"
 	src="__ROOT__/style/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
@@ -71,6 +72,13 @@
        }else{
     	   $('#bbc_div_0').css("display","block");     
        }
+       //
+       
+       $('.cont_title .cont_nav').pin({//菜单跟随
+         containerSelector: '.topcont'
+      });
+      
+       //
     });
    
 </script>
@@ -79,20 +87,23 @@
 	<div class="topcont" style="margin: 15px auto;">
 		<div class="cont_title">
 			<h1>{$line_base.names}</h1>
-			<div class="cont_nav">
-				<a href="">{$line_base.linebelongto|_get_city}</a> <a href="">
-					{$line_base.ly_type} </a> <a href="">{$line_base.trip_days}日游</a>| <a
-					href="">关注（{$line_base.attamount}）</a>| <a href="">喜欢（{$line_base.likeamount}）</a>|
-				<a href="">游客咨询与互动（{$lists_quecount}）</a>| <a href="#baotuansection">查看人数与价格
-				</a>| <a href="#fybh">查看费用包含 </a> </a>
+			<div class="cont_nav" >
+				<a href="">{$line_base.linebelongto|_get_city}</a> 
+				<a href="">
+					{$line_base.ly_type} </a>
+					 <a href="">{$line_base.trip_days}日游</a>| <a
+					href="#detail_road">详细行程</a>| <a href="#fybh">费用说明</a>|
+				<a href="#ydxz">预定须知</a>| <a href="#wxts">温馨提示
+				</a>| <a href="#ydbm">报名预定 </a> </a>
 			</div>
+			
 		</div>
 		<!--  
 		<div>
 			<img alt="" width="1200" height="570" src="__ROOT__/style/images/cont.jpg">
 		</div>
 		-->
-		<div style="width: 1100px; min-height: 480px; overflow: hidden;">
+		<div style="width: 1100px; min-height: 480px; overflow: hidden;" id="ydbm">
 
 			<div class="lineimg" id="galleria"
 				style="float: left; width: 540px; height: 440px;">
@@ -103,7 +114,7 @@
 
 			</div>
 			<!-- 价格日历 -->
-			<div style="width: 550px; float: left;">
+			<div style="width: 550px; float: left;" >
 				<if condition="$line_type neq '3'">
 				<div id="pricetitle"
 					style="margin: 10px 0px 0px 0px; width: 600px; height: 42px;">
@@ -664,22 +675,22 @@
          
       </div>
        -->
-	<div class="detail_road">
+	<div class="detail_road" id="detail_road">
 		<h4>&nbsp;</h4>
 		<div class="line_my_content">
 			<if condition="$view_method eq 2">
 			<div class="feature">{$lineinfo.General}</div>
 			<else /> <include file="travel:day_model" /> </if>
 		</div>
-		<h2>费用包含</h2>
+		<h2 id="fybh">费用包含</h2>
 		<div class="feature" id="fybh">{$lineinfo.contain}</div>
 		<h2>费用不包含</h2>
 		<div class="feature">{$lineinfo.notcontain}</div>
 		<h2>自费项目</h2>
 		<div class="feature">{$lineinfo.selfpay}</div>
-		<h2>预订须知</h2>
+		<h2 id="ydxz">预订须知</h2>
 		<div class="feature">{$lineinfo.order_info}</div>
-		<h2>温馨提示</h2>
+		<h2 id="wxts">温馨提示</h2>
 		<div class="feature">{$lineinfo.tip}</div>
 		<h2>相关行程</h2>
 		<!-- 		<div class="feature"> -->
@@ -745,4 +756,5 @@
 			</if> </volist> </empty>
 		</div>
 	</div>
-	<!-- 	</div> -->
+
+	 

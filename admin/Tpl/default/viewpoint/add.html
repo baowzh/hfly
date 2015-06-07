@@ -32,105 +32,119 @@ function formcheck()
 }
 </script>
 <div id="nav" class="mainnav_title">
-    <ul>
-        <a href="{:U('show_list')}">景点列表</a> |
-        <a class="on" href="{:U('add')}">添加景点</a>
-    </ul>
+	<ul>
+		<a href="{:U('show_list')}">景点列表</a> |
+		<a class="on" href="{:U('add')}">添加景点</a>
+	</ul>
 </div>
 <form action="{:U('add')}" enctype="multipart/form-data" method="post">
-    <table border="0" cellspacing="0" cellpadding="0" class="table_form" width="100%">
-        <tr>
-            <th width="120"><span class="red">*</span>景点名称：</th>
-            <td colspan="2"><span class="f_left"><input type="text" name="names" id="names" class="txt" datatype="*" nullmsg="请填写景点名称" errmsg="请填写景点名称" sucmsg=" " />
-              &nbsp;<span class="msg_span"><input id="SEO" type="checkbox" name="SEO" value="yes"/>
-            <label for="SEO">SEO优化</label></span></span>
-            <span class="Validform_checktip f_left"></span>
-            </td>
-        </tr>
-        <tr name="seo">
-            <th>SEO标题：</th>
-            <td colspan="2"><textarea name="title" rows="2" cols="20" id="title" style="height:50px;width:600px;"></textarea> <span id="box_keyword" class="Dp">建议不超出30个字</span></td>
-        </tr>
-        <tr name="seo">
-            <th>SEO关键词：</th>
-            <td colspan="2"><textarea name="keyword" rows="2" cols="20" id="keyword" style="height:50px;width:600px;"></textarea>
-                <span id="box_keyword" class="Dp">将被搜索引擎用来搜索您网站的关键内容，每个关键字用英文逗号分隔</span></td>
-        </tr>
-        <tr name="seo">
-            <th>SEO描述：</th>
-            <td colspan="2"><textarea name="detail" rows="2" cols="20" id="detail" style="height:50px;width:600px;"></textarea>
-                <span id="box_detail" class="Dp">描述中请不要带英文的逗号，建议不超出80个字</span></td>
-        </tr>
-        <tr>
-          <th>缩图：</th>
-          <td colspan="2"><div id="img1"></div>
-                    <div id="upload1-queue" style="margin-top:6px;"></div>
-                <input class="isFile" type="hidden" id="photo_1" name="pic_front"/>
-                    <input data-msg-isFile="请上传图片" class="isFile" id="upload1" name="file_upload1" type="file"/>
-                    <div class="f_left" style="margin:12px 0 0 6px;">
-                    <a class="upload_bt" href="javascript:void(0);" id="t_upload1" onclick="$('#show_msg').hide();">点击上传</a>
-                    </div><span class="Validform_checktip f_left Validform_wrong" id="show_msg">请先上传图片再提交</span></td>
-        </tr>
-        
-        <tr>
-            <th><span class="red">*</span>所属地区：</th>
-            <td colspan="2">
-            <select id="city_id" name="city_id"  class="txt"  nullmsg="请选择所属地区" errmsg="请选择所属地区" sucmsg=" ">
-                <option value="0">请选择</option>
-               <option value="0471">呼和浩特</option>
+	<table border="0" cellspacing="0" cellpadding="0" class="table_form"
+		width="100%">
+		<tr>
+			<th width="120"><span class="red">*</span>景点名称：</th>
+			<td colspan="2"><span class="f_left"><input type="text"
+					name="names" id="names" class="txt" datatype="*" nullmsg="请填写景点名称"
+					errmsg="请填写景点名称" sucmsg=" " /> &nbsp;<span class="msg_span"><input
+						id="SEO" type="checkbox" name="SEO" value="yes" /> <label
+						for="SEO">SEO优化</label></span></span> <span class="Validform_checktip f_left"></span>
+			</td>
+		</tr>
+		<tr name="seo">
+			<th>SEO标题：</th>
+			<td colspan="2"><textarea name="title" rows="2" cols="20"
+					id="title" style="height: 50px; width: 600px;"></textarea> <span
+				id="box_keyword" class="Dp">建议不超出30个字</span></td>
+		</tr>
+		<tr name="seo">
+			<th>SEO关键词：</th>
+			<td colspan="2"><textarea name="keyword" rows="2" cols="20"
+					id="keyword" style="height: 50px; width: 600px;"></textarea> <span
+				id="box_keyword" class="Dp">将被搜索引擎用来搜索您网站的关键内容，每个关键字用英文逗号分隔</span></td>
+		</tr>
+		<tr name="seo">
+			<th>SEO描述：</th>
+			<td colspan="2"><textarea name="detail" rows="2" cols="20"
+					id="detail" style="height: 50px; width: 600px;"></textarea> <span
+				id="box_detail" class="Dp">描述中请不要带英文的逗号，建议不超出80个字</span></td>
+		</tr>
+		<tr>
+			<th>缩图：</th>
+			<td colspan="2"><div id="img1"></div>
+				<div id="upload1-queue" style="margin-top: 6px;"></div> <input
+				class="isFile" type="hidden" id="photo_1" name="pic_front" /> <input
+				data-msg-isFile="请上传图片" class="isFile" id="upload1"
+				name="file_upload1" type="file" />
+				<div class="f_left" style="margin: 12px 0 0 6px;">
+					<a class="upload_bt" href="javascript:void(0);" id="t_upload1"
+						onclick="$('#show_msg').hide();">点击上传</a>
+				</div>
+				<span class="Validform_checktip f_left Validform_wrong"
+				id="show_msg">请先上传图片再提交</span></td>
+		</tr>
+
+		<tr>
+			<th><span class="red">*</span>所属地区：</th>
+			<td colspan="2"><select id="city_id" name="city_id" class="txt"
+				nullmsg="请选择所属地区" errmsg="请选择所属地区" sucmsg=" ">
+					<option value="0">请选择</option>
+					<option value="0471">呼和浩特</option>
 					<option value="0470">呼伦贝尔</option>
 					<option value="0479">锡林郭勒盟</option>
 					<option value="0483">阿拉善盟</option>
-            </select>
-            </td>
-        </tr>
-        <tr>
-            <th><span class="red">*</span>景点级别：</th>
-            <td colspan="2">
-                <select id="rank" name="rank" class="txt" datatype="/^[^0]\d*$/" nullmsg="请选择景点级别" errmsg="请选择景点级别" sucmsg=" ">
-                    <option value="0">请选择</option>
-                    <option value="2">A</option>
-                    <option value="2">AA</option>
-                    <option value="2">AAA</option>
-                    <option value="2">AAAA</option>
-                    <option value="2">AAAAA</option>
-                </select>
-            </td>
-        </tr>
+			</select></td>
+		</tr>
+		<tr>
+			<th><span class="red">*</span>景点级别：</th>
+			<td colspan="2"><select id="rank" name="rank" class="txt"
+				datatype="/^[^0]\d*$/" nullmsg="请选择景点级别" errmsg="请选择景点级别" sucmsg=" ">
+					<option value="0">请选择</option>
+					<option value="2">A</option>
+					<option value="2">AA</option>
+					<option value="2">AAA</option>
+					<option value="2">AAAA</option>
+					<option value="2">AAAAA</option>
+			</select></td>
+		</tr>
 
 
-      
-        <tr>
-            <th>景区介绍：</th>
-            <td>
-              <textarea class="kind-text" name="view_info" cols="100" rows="12" style="width:100%" id="view_info"></textarea>
-            </td>
-            <td width="150"></td>
-        </tr>
-    
-        <tr>
-            <th><span class="red">*</span>状态：</th>
-            <td colspan="2">
-                <select id="status" name="status">
-                    <option value="0">正常</option>
-                    <option value="1">推荐</option>
-                    <option value="2">隐藏</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th><span class="red">*</span>排序：</th>
-            <td colspan="2">
-                <input name="sort" type="text" value='50' class="txt" id="sort" datatype="n" nullmsg="请填写排序" errmsg="请填数字" sucmsg=" "/>
-            </td>
-        </tr>
-        <tr><td height="50"></td>
-        </tr>
-    </table>
-    <div id="btnbox" class="btn">
-<INPUT TYPE="submit" name="submit"  value=" 保 存 " class="button" >
-        <input TYPE="reset"  value=" 重 置 " class="button">
-    </div>
+
+		<tr>
+			<th>景区介绍：</th>
+			<td><textarea class="kind-text" name="view_info" cols="100"
+					rows="12" style="width: 100%" id="view_info"></textarea></td>
+			<td width="150"></td>
+		</tr>
+
+		<tr>
+			<th><span class="red">*</span>状态：</th>
+			<td colspan="2"><select id="status" name="status">
+					<option value="0">正常</option>
+					<option value="1">推荐</option>
+					<option value="2">隐藏</option>
+			</select></td>
+		</tr>
+		<tr>
+			<th><span class="red">*</span>景点主题：</th>
+			<td colspan="2"><select id="topiccode" name="topiccode">
+					<volist name="viewpointtopics" id="vo">
+					<option value="{$vo.code}">{$vo.names}</option>
+					</volist>
+			</select></td>
+		</tr>
+		<tr>
+			<th><span class="red">*</span>排序：</th>
+			<td colspan="2"><input name="sort" type="text" value='50'
+				class="txt" id="sort" datatype="n" nullmsg="请填写排序" errmsg="请填数字"
+				sucmsg=" " /></td>
+		</tr>
+		<tr>
+			<td height="50"></td>
+		</tr>
+	</table>
+	<div id="btnbox" class="btn">
+		<INPUT TYPE="submit" name="submit" value=" 保 存 " class="button">
+		<input TYPE="reset" value=" 重 置 " class="button">
+	</div>
 </form>
 <script language="javascript">
 

@@ -1,0 +1,39 @@
+<div id="nav" class="mainnav_title">
+	<ul>
+		<a class="on" href="{:U('add')}">添加</a>
+	</ul>
+</div>
+<form name="myform" id="myform" action="{:U('add')}" method="post"
+	target="main">
+	<table border="0" cellspacing="0" cellpadding="0" class="table_form"
+		width="100%">
+		<tr>
+			<td width="30%" align="right"><span class="red">*</span>名称:</td>
+			<td><input type="text" class="input-text" name="names"
+				id="names" /></td>
+		</tr>
+		<tr>
+			<td width="30%" align="right"><span class="red">*</span>编码:</td>
+			<td><input type="text" class="input-text" name="code" id="code" /></td>
+		</tr>
+		<tr>
+			<td width="30%" align="right"><span class="red">*</span>归属地区:</td>
+			<td>
+			<select name="citycode" id="citycode">
+					<option value="0471">呼和浩特</option>
+					<option value="0470">呼伦贝尔</option>
+					<option value="0479">锡林郭勒</option>
+					<option value="0483">额济纳</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td align="right"><span class="red">*</span>排序:</td>
+			<td><input name="sort" class="input-text" type="text" id="sort"
+				value='' /></td>
+		</tr>
+	</table>
+	<div id="btnbox" class="btn">
+		<INPUT TYPE="submit" value=" 保 存 " class="button"> <input
+			TYPE="reset" value=" 重 置 " class="button">
+	</div>
+</form>

@@ -90,7 +90,8 @@
 	margin-bottom: 5px;
 	/* 	margin-bottom: 35px; */
 }
-.mianconent li img{
+
+.mianconent li img {
 	border-radius: 5px 5px 5px 5px;
 }
 
@@ -188,9 +189,9 @@
 }
 
 .contents_nei .cont_title {
-	width: 1050px;
+	width: 1090px;
 	margin: 0 auto;
-	padding: 25px;
+	padding: 25px 0px 25px 0px;
 	padding-bottom: 0px;
 	margin-bottom: 10px;
 }
@@ -199,18 +200,32 @@
 	border-bottom: 1px solid #d5d5d5;
 	padding-bottom: 10px;
 	font-size: 24px;
-	color: #05b5b5
+	color: #05b5b5;
+	padding-left:25px;
 }
 
-.contents_nei .cont_nav {h37px;
+.contents_nei .cont_nav {
+	height: 37px;
 	line-height: 37px;
 	color: #646364;
+	z-index: 9999;
+	background: #05b5b5;
+	border-bottom: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
 }
 
 .contents_nei .cont_nav a {
 	color: #646364;
 	font-size: 14px;
 	padding: 0px 3px;
+	height: 36px;
+	text-align: center;
+	color: #fff;
+	display: inline-block;
+	border: 0 px 1px 1px 1px solid #fff;
+	border-width: 1px 1px 0 0;
+	background: #05b5b5;
 }
 
 .cont_sumit {
@@ -1359,8 +1374,8 @@
 
 .jing_dec  .jing_left li .shaw {
 	width: 100%;
-/* 	position: absolute; */
-/* 	bottom: 0px; */
+	/* 	position: absolute; */
+	/* 	bottom: 0px; */
 	height: 48px;
 	line-height: 38px;
 	border-radius: 5px;
@@ -1368,14 +1383,14 @@
 	-webkit-border-radius: 5px;
 	border-radius: 0px 0px 5px 5px;
 	z-index: 888;
-/* 	color: #fff; */
+	/* 	color: #fff; */
 	text-align: left;
 	font-size: 16px;
-/* 	background: url(../images/toum.png?vfdd) repeat; */
+	/* 	background: url(../images/toum.png?vfdd) repeat; */
 }
 
 .jing_dec  .jing_left li .shaw a {
-/* 	color: #fff; */
+	/* 	color: #fff; */
 	padding: 0px 25px;
 	background: url(../images/ding.png) no-repeat left center;
 }
@@ -1819,7 +1834,7 @@
 	color: #009998;
 	font-size: 14px;
 	padding: 0px;
-	overflow:hidden;
+	overflow: hidden;
 }
 
 .link_2 table input {
@@ -1916,8 +1931,8 @@
 .link_2 table .wlef {
 	text-align: left;
 	padding-left: 10px;
-	width:92px;
-	overflow:hidden;
+	width: 92px;
+	overflow: hidden;
 }
 
 .pricecontent table {
