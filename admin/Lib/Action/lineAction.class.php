@@ -272,8 +272,12 @@ class lineAction extends CommonAction {
 	public function del() {
 		$id = $_GET ['id'];
 		$Line = M ( 'Line' );
-		// $picpath = $Line->where("id=$id")->getField("picpath");
-		
+		$lineOrder = M ( 'lineOrder' );
+		$orders = $lineOrder->where ( "lid='" . $id . "'" )->select ();
+		if (count ( $orders ) > 0) {
+			$this->error ( "线路已经存在订单不能删除！" );
+			exit ();
+		}
 		$Line->where ( "id=$id" )->delete ();
 		$this->redirect ( "show_list" );
 	}
@@ -296,6 +300,12 @@ class lineAction extends CommonAction {
 		$Line = M ( 'Line' );
 		// $picpath = $Line->where("id=$id")->getField("picpath");
 		foreach ( $_POST ["deleteall"] as $id ) {
+			$lineOrder = M ( 'lineOrder' );
+			$orders = $lineOrder->where ( "lid='" . $id . "'" )->select ();
+			if (count ( $orders ) > 0) {
+				$this->error ( "线路已经存在订单不能删除！" );
+				exit ();
+			}
 			$Line->where ( "id=$id" )->delete ();
 		}
 		$this->success ( "删除成功", U ( "show_list" ) );
@@ -539,13 +549,12 @@ class lineAction extends CommonAction {
 			$linePrice->line_id = $_POST ["line_id"];
 			$linePrice1 = D ( 'LinePrice' );
 			$oldprice = $linePrice1->where ( "line_id=" . $_POST ["line_id"] . " and year=" . $_POST ["year"] . " and month=" . $_POST ['month'] . " and day=" . substr ( $val, 6, 2 ) . " and numrange=" . $linePrice->numrange . " and price_type=" . $linePrice->price_type )->find ();
-			//print_r ( $oldprice );
+			// print_r ( $oldprice );
 			if ($oldprice != null) {
 				$linePrice->save ();
-			}else{
+			} else {
 				$linePrice->add ();
 			}
-			
 		}
 		$LineInfo = M ( "LineInfo" );
 		$LineInfo->where ( "lid=" . $_POST ["line_id"] )->save ( $_POST );
@@ -722,6 +731,26 @@ class lineAction extends CommonAction {
 		$this->success ( "保存成功", U ( 'tao_list', array (
 				'line_id' => $_GET ["line_id"] 
 		) ) );
+	}
+	public function recomm() {
+		if (! isset ( $_POST ["deleteall"] )) {
+			$this->error ( "至少选中一项！" );
+		}
+		$Line = M ( 'Line' );
+		foreach ( $_POST ["deleteall"] as $id ) {
+			$Line->where ( "id=$id" )->setField ( "recomm", "1" );
+		}
+		$this->success ( "推荐成功", U ( "show_list" ) );
+	}
+	public function donrecomm() {
+		if (! isset ( $_POST ["deleteall"] )) {
+			$this->error ( "至少选中一项！" );
+		}
+		$Line = M ( 'Line' );
+		foreach ( $_POST ["deleteall"] as $id ) {
+			$Line->where ( "id=$id" )->setField ( "recomm", "0" );
+		}
+		$this->success ( "取消推荐成功", U ( "show_list" ) );
 	}
 }
 

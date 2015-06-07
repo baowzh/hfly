@@ -52,6 +52,8 @@ $(function(){
 					</option>
 					<option value="4"<if condition="$get.linetype eq '4'">selected="true"</if>>团队策划
 					</option>
+					<option value="5"<if condition="$get.linetype eq '5'">selected="true"</if>>自驾游
+					</option>
 			</select>
 			</td>
 			<td class="search">状态: <select name="status" id="status"
@@ -82,6 +84,7 @@ $(function(){
 					<th width="80">类型</th>
 					<th width="40">排序</th>
 					<th width="40">状态</th>
+					<th width="40">推荐</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -107,12 +110,20 @@ $(function(){
 					<td><if condition="$vo.line_type eq 1">包团自由行<elseif
 							condition="$vo.line_type eq 2" />纯玩团<elseif
 							condition="$vo.line_type eq 3" />常规团<elseif
-							condition="$vo.line_type eq 4" />团队策划</if></td>
+							condition="$vo.line_type eq 4" />团队策划
+							<elseif
+							condition="$vo.line_type eq 5" />自驾游
+							
+							</if>
+							</td>
 					<td>
 					 <input type="text" name="sort[{$vo.id}]"
 						id="sort_{$vo.id}" value="{$vo.sort}" style="width: 40px;" /></td>
 					<td><if condition="$vo['status'] eq 1"> 下线 </if> <if
 							condition="$vo['status'] eq 0"> 上线 </if></td>
+					<td>
+					<if condition="$vo['recomm'] eq 1"> 是 </if> <if
+							condition="$vo['recomm'] eq 0"> 否 </if></td>
 
 					<td><a href="__URL__/pic_list/line_id/{$vo.id}">图片</a>&nbsp; <a
 						href="__URL__/price_list/line_id/{$vo.id}">报价</a>&nbsp; <a
@@ -132,6 +143,10 @@ $(function(){
 				onclick="myform.action = '{:U('deleteall')}';return confirm_deleteall(this.form)" />
 			<input type="button" class="button" name="dosubmit" value="排序"
 				onclick="myform.action = '{:U('line/reset_sort',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');" />
+			<input type="button" class="button" name="dosubmit" value="推荐"
+				onclick="myform.action = '{:U('line/recomm',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');" />
+			<input type="button" class="button" name="dosubmit" value="取消推荐"
+				onclick="myform.action = '{:U('line/donrecomm',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');" />
 		</div>
 		<div class="page">{$page}</div>
 	</div>

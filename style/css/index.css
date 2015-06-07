@@ -127,7 +127,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	/* 	background: url(../images/tui.png) no-repeat left center; */
+	background: url(../images/tui.png) no-repeat left center;
 }
 
 .mianconent .lasts {

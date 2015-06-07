@@ -648,7 +648,7 @@ class travelAction extends CommonAction {
 		$price_day_tmp3 = null;
 		$price_day_tmp4 = null;
 		$price_day_tmp5 = null;
-		if ($line_type [line_type] != 3) {
+		if ($line_type [line_type] != 3&&$line_type [line_type] != 5) {
 			$price_day_tmp0 = $line_price->where ( "price_type=1 and line_id=$id and numrange=6" )->select ();
 			$price_day_tmp1 = $line_price->where ( "price_type=1 and line_id=$id and numrange=1" )->select ();
 			$price_day_tmp2 = $line_price->where ( "price_type=1 and line_id=$id and numrange=2" )->select ();
