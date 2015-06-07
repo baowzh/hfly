@@ -64,28 +64,34 @@ a {
 .sort .sort-list .bgs_1 span em {
 	font-style: normal;
 	font-size: 10px;
-	margin-right: 2px;
+	margin-right: 5px;
 	float: right
 }
 
 .sort .sort-list .bgs_2 span em {
 	font-style: normal;
 	font-size: 10px;
-	margin-right: 2px;
+	margin-right: 5px;
 	float: right
 }
 
 .sort .sort-list .bgs_3 span em {
 	font-style: normal;
 	font-size: 10px;
-	margin-right: 2px;
+	margin-right: 5px;
 	float: right
 }
 
 .sort .sort-list .bgs_4 span em {
 	font-style: normal;
 	font-size: 7px;
-	margin-right: 2px;
+	margin-right: 5px;
+	float: right
+}
+.sort .sort-list .bgs_5 span em {
+	font-style: normal;
+	font-size: 7px;
+	margin-right: 5px;
 	float: right
 }
 
