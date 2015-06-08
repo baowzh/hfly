@@ -338,7 +338,7 @@ class travelAction extends CommonAction {
 			$OrderData = $LineOrder->field ( "*,date_add(startdate, interval trip_days day) as enddate" )->find ( $insert_id );
 			$this->assign ( "protocolData", $OrderData );
 			$protocolcontent = $this->fetch ( "protocol", "", "" );
-			$messContent = "亲 您的订单" . $OrderData ['orderid'] . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情【汇丰旅游】";
+			$messContent = "亲 您的订单" . $OrderData ['orderid'] . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情";
 			$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
 			$messDate = array (
 					'action' => 'send',
@@ -1165,7 +1165,7 @@ EOF;
 				) );
 				
 				// 发送支付短信开始
-				$messContent = "您好" . $orderInfo ['name'] . "先生/ 女士，您的订单[" . $orderInfo ['orderid'] . "]已支付成功，行程已确认，客服会在出团前一天通知您具体集合时间地点联系人等信息。如有变动请联系客服[免费热线4001-888-332]，您通过手机号可随时在官网[http://www.hf97667.com]查询订单详情.【汇丰旅游】";
+				$messContent = "亲 您的订单" . $out_trade_no . "已支付成功,行程已确认,客服会在出团前一天通知您具体集合时间地点联系人等信息.如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情.";
 				$messDate = array (
 						'action' => 'send',
 						'username' => '70208213',
@@ -1251,7 +1251,7 @@ EOF;
 						'trade_no' => $trade_no 
 				) );
 				// 发送支付短信开始
-				$messContent = "亲 您的订单" . $out_trade_no . "已支付成功,行程已确认,客服会在出团前一天通知您具体集合时间地点联系人等信息.如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情【汇丰旅游】";
+				$messContent = "亲 您的订单" . $out_trade_no . "已支付成功,行程已确认,客服会在出团前一天通知您具体集合时间地点联系人等信息.如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情";
 				$messDate = array (
 						'action' => 'send',
 						'username' => '70208213',

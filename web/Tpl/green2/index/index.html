@@ -376,7 +376,7 @@
 				class="travelpoint">
 				<div style="width: 270px; height: 20px;">
 					<div class="recommendedch"
-						style="float: left; width: 100px; background: #05b5b5; margin: 0px 2px 0px 2px;">后付费行程</div>
+						style="float: left; width: 100px; background: #05b5b5; margin: 0px 2px 0px 2px;">分段付款</div>
 
 					<div class="recommendedch"
 						style="float: left; margin: 0px 2px 0px 2px;">路线推荐</div>
@@ -431,7 +431,12 @@
 						</span>
 						<p>{$vo.names} {$vo.trip_days}日</p>
 					</div>
-			</a> <!-- 				<div class="tui">&nbsp;</div></li> -->
+			</a> 
+			  <if condition="$vo.recomm eq 1">
+				<div class="tui">&nbsp;</div>
+			 </if>
+			  <div class="day{$vo.trip_days}">&nbsp;</div>		
+			</li>
 			</volist>
 		</div>
 
@@ -556,7 +561,12 @@
 							关注{$vo.attamount}
 						</span>
 					<p>{$vo.names} {$vo.trip_days}日</p>
-				</div> </a> <!-- 				<div class="tui">&nbsp;</div></li> -->
+				</div> </a> 
+				 <if condition="$vo.recomm eq 1">
+				<div class="tui">&nbsp;</div>
+			 </if>
+			 <div class="day{$vo.trip_days}">&nbsp;</div>	
+				</li>
 			</volist>
 		</div>
 
@@ -680,7 +690,12 @@
 						</span>
 						<p>{$vo.names} {$vo.trip_days}日</p>
 					</div>
-			</a> <!-- 				<div class="tui">&nbsp;</div></li> -->
+			</a> 
+				 <if condition="$vo.recomm eq 1">
+				<div class="tui">&nbsp;</div>
+			 </if>
+			 <div class="day{$vo.trip_days}">&nbsp;</div>	
+				</li>
 			</volist>
 		</div>
 		<div class="bao_right" style="overflow: hidden;">
@@ -741,7 +756,136 @@
 	</div>
 </div>
 </if>
+<if condition="count($Line5)!=0">
+<div class="baotuan">
+	<div class="travel">
+		<div class="line_left">
+			<div class="travelpointname">
+				<a href="{:U('travel/index',array('id'=>5,'areaid'=>$areaid))}"
+					target="_blank">自驾游</a>
+			</div>
+			<div style="float: left; margin-left: 10px; margin-top: 10px;"
+				class="travelpoint">
+				<div style="width: 270px; height: 20px;">
+<!-- 					<div class="recommendedch" -->
+<!-- 						style="float: left; width: 100px; background: #05b5b5; margin: 0px 2px 0px 2px;">后付费行程</div> -->
 
+					<div class="recommendedch"
+						style="float: left; margin: 0px 2px 0px 2px;">路线推荐</div>
+				</div>
+				<div class="recommendeden" style="width: 270px;">RECOMMEDDED
+					ROUTES</div>
+			</div>
+		</div>
+		<div class="line_center">
+			<li class="curtent"><a
+				href="{:U('travel/index',array('id'=>5,'areaid'=>$areaid))}"
+				target="_blank">全部</a></li>
+			<li>
+			<li><a
+				href="{:U('travel/index',array('id'=>5,'day'=>1,'areaid'=>$areaid))}"
+				target="_blank">一日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>5,'day'=>2,'areaid'=>$areaid))}"
+				target="_blank">二日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>5,'day'=>3,'areaid'=>$areaid))}"
+				target="_blank">三日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>5,'day'=>4,'areaid'=>$areaid))}"
+				target="_blank">四日游</a></li>
+			<li><a
+				href="{:U('travel/index',array('id'=>5,'day'=>5,'areaid'=>$areaid))}"
+				target="_blank">五日游</a></li>
+		</div>
+		<div class="line_right">
+			<a href="{:U('travel/index',array('id'=>3,'areaid'=>$areaid))}" target="_blank">更多推荐</a>
+		</div>
+	</div>
+
+	<div class="bao_detail">
+		<div class="bao_left">
+
+			<volist name="Line5" id="vo">
+			<li><a href="{:U('travel/detail',array('id'=>$vo['id']))}"
+				target="_blank"> <img alt="" width="371" height="275"
+					src="{$vo.id|get_line_img}">
+					<div class="desc">
+						<span class="price"> ￥{$vo.id|get_line_min_price}起 </span> <span
+							class="adds">{$vo.linebelongto|_get_city}</span>
+							<span
+							class="adds" style="background:none;width:70px;">
+							喜欢{$vo.likeamount}
+						</span>
+						<span
+							class="adds" style="background:none;width:70px;">
+							关注{$vo.attamount}
+						</span>
+						<p>{$vo.names} {$vo.trip_days}日</p>
+					</div>
+			</a> 
+					 <if condition="$vo.recomm eq 1">
+				<div class="tui">&nbsp;</div>
+			 </if>
+			 <div class="day{$vo.trip_days}">&nbsp;</div>	
+				</li>
+			</volist>
+		</div>
+
+		<div class="bao_right" style="overflow: hidden;">
+			<ul id="vertical-ticker5">
+				<volist name="normalline" id="vo" mod="2">
+				<li>
+					<div class="details_q">
+						<div style="width: 244px; height: 22px;margin-bottom:8px;">
+							<if condition="$vo['trip_days'] eq 1">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>一日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 2">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>二日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 3">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>三日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 4">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>四日游
+							</div>
+							</if>
+							<if condition="$vo['trip_days'] eq 5">
+							<div class="travellinecommsel"
+								<eq name="mod" value="0"> style="background-color:#ec9200;"
+								</eq>
+								>五日游
+							</div>
+							</if>
+							<div class="travellinecomm">{$vo['names']}</div>
+						</div>
+						<p style="width: 244px; height: 50px; overflow: hidden;">
+							<a href="{:U('travel/detail',array('id'=>$vo['id']))}"
+				target="_blank">{$vo['names']} </a> <br>
+					</div>
+				</li>
+				</volist>
+			</ul>
+		</div>
+	</div>
+</div>
+</if>
 <if condition="count($Line4)!=0">
 <div class="baotuan">
 	<div class="travel">
@@ -809,7 +953,12 @@
 						</span>
 						<p>{$vo.names} {$vo.trip_days}日</p>
 					</div>
-			</a> <!-- 				<div class="tui">&nbsp;</div></li> -->
+			</a> 
+					 <if condition="$vo.recomm eq 1">
+				<div class="tui">&nbsp;</div>
+			 </if>
+			 <div class="day{$vo.trip_days}">&nbsp;</div>	
+							</li>
 			</volist>
 		</div>
 
@@ -1010,6 +1159,14 @@
 		mousestop : true
 	});
 	$('#vertical-ticker4').totemticker({
+		row_height : '118px',
+		next : '#ticker-next',
+		previous : '#ticker-previous',
+		stop : '#stop',
+		start : '#start',
+		mousestop : true
+	});
+	$('#vertical-ticker5').totemticker({
 		row_height : '118px',
 		next : '#ticker-next',
 		previous : '#ticker-previous',

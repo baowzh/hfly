@@ -49,6 +49,9 @@ class indexAction extends CommonAction {
 		$this->assign ( 'Line4', $Line4 );
 		$Line44 = $mod_Line->where ( "line_type = '4'  and  linebelongto=" . $areaid )->order ( 'id desc' )->limit ( 2 )->select ();
 		$this->assign ( 'Line44', $Line44 );
+		
+		$Line5 = $mod_Line->where ( "line_type = '5'   and  linebelongto=" . $areaid )->order ( 'sort,id desc' )->limit ( 2 )->select ();
+		$this->assign ( 'Line5', $Line5 );
 		// 获取要滚动的常规团线路列表
 		$normalline = $mod_Line->where ( "line_type = '3' and status=0 and   linebelongto='" . $areaid . "'" )->order ( 'sort,id desc' )->limit ( 12 )->select ();
 		$this->assign ( 'normalline', $normalline );

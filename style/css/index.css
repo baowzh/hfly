@@ -130,6 +130,96 @@
 	background: url(../images/tui.png) no-repeat left center;
 }
 
+.mianconent li .day1 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day1.png) no-repeat left center;
+}
+
+.mianconent li .day2 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day2.png) no-repeat left center;
+}
+
+.mianconent li .day3 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day3.png) no-repeat left center;
+}
+
+.mianconent li .day4 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day4.png) no-repeat left center;
+}
+
+.mianconent li .day5 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day5.png) no-repeat left center;
+}
+
+.mianconent li .day6 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day6.png) no-repeat left center;
+}
+
+.mianconent li .day7 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day7.png) no-repeat left center;
+}
+
+.mianconent li .day8 {
+	width: 86px;
+	height: 80px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day8.png) no-repeat left center;
+}
+
+.mianconent li .day9 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day9.png) no-repeat left center;
+}
+
+.mianconent li .day10 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day10.png) no-repeat left center;
+}
+
 .mianconent .lasts {
 	margin-right: 0px;
 }
@@ -201,7 +291,7 @@
 	padding-bottom: 10px;
 	font-size: 24px;
 	color: #05b5b5;
-	padding-left:25px;
+	padding-left: 25px;
 }
 
 .contents_nei .cont_nav {
@@ -1168,7 +1258,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	/* 	background: url(../images/tui2.png) no-repeat left center; */
+	background: url(../images/tui2.png) no-repeat left center;
 }
 
 .bao_detail .bao_right {
@@ -2480,4 +2570,94 @@ td.day:not (.disable ):hover {
 	border-radius: 3px;
 	cursor: pointer;
 	position: relative;
+}
+
+.bao_detail .bao_left li .day1 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day1.png) no-repeat left center;
+}
+
+.bao_detail .bao_left li .day2 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day2.png) no-repeat left center;
+}
+
+.bao_detail .bao_left li .day3 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day3.png) no-repeat left center;
+}
+
+.bao_detail .bao_left li .day4 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day4.png) no-repeat left center;
+}
+
+.bao_detail .bao_left li .day5 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day5.png) no-repeat left center;
+}
+
+.bao_detail .bao_left li .day6 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day6.png) no-repeat left center;
+}
+
+.bao_detail .bao_left li .day7 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day7.png) no-repeat left center;
+}
+
+.bao_detail .bao_left li .day8 {
+	width: 86px;
+	height: 80px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day8.png) no-repeat left center;
+}
+
+.bao_detail .bao_left li .day9 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day9.png) no-repeat left center;
+}
+
+.bao_detail .bao_left li .day10 {
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: url(../images/day10.png) no-repeat left center;
 }
