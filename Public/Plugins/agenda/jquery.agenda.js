@@ -247,12 +247,22 @@
 												'hidden').attr('id',
 												'day' + key + '_numrange').val(
 												pricelist[dataprice].numrange));
+										//
+										ulbox
+												.append($('<input>')
+														.attr('type', 'hidden')
+														.attr(
+																'id',
+																'day'
+																		+ key
+																		+ '_desc')
+														.val(
+																pricelist[dataprice].price_desc));
 
 										var persontext = '';
 										if (pricelist[dataprice].numrange == 6) {
 											persontext = '1人';
-										} 
-										else if (pricelist[dataprice].numrange == 1) {
+										} else if (pricelist[dataprice].numrange == 1) {
 											persontext = '2-3人';
 										} else if (pricelist[dataprice].numrange == 2) {
 											persontext = '4-6人';
@@ -260,6 +270,10 @@
 											persontext = '7-9人';
 										} else if (pricelist[dataprice].numrange == 4) {
 											persontext = '10-12人';
+										} else if (pricelist[dataprice].numrange == 5) {
+											persontext = '13人';
+										} else if (pricelist[dataprice].numrange == 0) {
+											persontext = '不区分人数';
 										} else {
 											persontext = '13人';
 										}
@@ -452,8 +466,8 @@
 									if (i.length > 0) {
 										var sele = i.find(":checkbox").prop(
 												"checked");
-										if(sele==undefined){
-											return ;
+										if (sele == undefined) {
+											return;
 										}
 										i.find(":checkbox").prop("checked",
 												!sele);
@@ -469,8 +483,8 @@
 						//
 						// 给复选框添加选择事件
 						for (indexi = 0; indexi <= 6; indexi++) {
-							//$(".table_date")
-									$(".js_checkbox_checkrows_" + indexi)
+							// $(".table_date")
+							$(".js_checkbox_checkrows_" + indexi)
 									.find(":checkbox")
 									.change(
 											function() {
@@ -555,6 +569,11 @@
 																	+ '_room_type')
 															.val();
 													//
+													var _price_desc = $(
+															'#day' + t
+																	+ '_desc')
+															.val();
+													//
 
 													if (_price_adult != null) {
 														$('#price_adult').val(
@@ -610,6 +629,11 @@
 														$('#room_type').val(
 																_room_type);
 													}
+													//
+													if (_price_desc != null) {
+														$('#price_desc').val(
+																_price_desc);
+													}
 
 												} else { // 去掉hidden字段的值
 													$(
@@ -647,6 +671,8 @@
 													$('#numrange').val('');
 													$('#dfc').val('');
 													$('#room_type').val('');
+													$('#price_desc').val('');
+
 												}
 											});
 						}
@@ -685,9 +711,9 @@
 																		this)
 																		.prop(
 																				"id");
-																var selector=".js_checkbox_checkrows_"
-																	+ nwei;
-																
+																var selector = ".js_checkbox_checkrows_"
+																		+ nwei;
+
 																$(selector)
 																		.find(
 																				":checkbox")
@@ -734,16 +760,15 @@
 
 var seldates = function() {
 	seldayes = new Array();
-		$('.yellow').find(
-				":checkbox").each(function(obj1, obj2) {
-			var n = $(obj2).prop("checked");
-			if (n) {
-				//alert($(obj2).css('display'));
-				if($(obj2).data("id")!=undefined){
-					seldayes.push($(obj2).data("id"));
-				}
-				//alert($(obj2).data("id"));
+	$('.yellow').find(":checkbox").each(function(obj1, obj2) {
+		var n = $(obj2).prop("checked");
+		if (n) {
+			// alert($(obj2).css('display'));
+			if ($(obj2).data("id") != undefined) {
+				seldayes.push($(obj2).data("id"));
 			}
-		});
-		return seldayes;
+			// alert($(obj2).data("id"));
+		}
+	});
+	return seldayes;
 };

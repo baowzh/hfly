@@ -235,8 +235,9 @@
 											起价说明: <span
 												class="check_box js_checkbox_detail_textarea hide"
 												style="display: none;"><input type="checkbox"></span>
-										</h4> <textarea data-val="maxlength:500" data-valmsg="起价说明"
-											name="price_desc" id="price_desc" class="gray_textarea"></textarea></li>
+										</h4> <textarea data-val="maxlength:1000" data-valmsg="起价说明"
+											name="price_desc" id="price_desc" style="height: 50px; width: 220px;">
+											</textarea></li>
 									<!-- 									<li> -->
 									<input type="button" onclick="javascript:deleteprice();"
 										value="删除">
@@ -289,17 +290,19 @@
 	$(document).ready(function() {
 		var agenda_data = '{$price_day_json}';
 		agenda_data = $.parseJSON(agenda_data);
-		var stage_data = '{$price_stage|json_encode}';
-		var stage_data_html = '{$stage_data_html}';
+		//var stage_data = '{$price_stage|json_encode}';
+		//var stage_data_html = '{$stage_data_html}';
 		agenda_data.url='{:U('month_price_list')}';
-		stage_data = $.parseJSON(stage_data);
+		//stage_data = $.parseJSON(stage_data);
 		$("#agenda").agenda({
 			data : agenda_data
 		});
+		/*
 		$("#b_line_2").set_stage({
 			data : stage_data,
 			data_html : stage_data_html
 		});
+		*/
 		$(".showline").click(function() {
 			var id = this.id;
 			$('#b_' + id).show().siblings("table").hide();

@@ -83,7 +83,7 @@
 	/* 	width: 376px; */
 	/* 	height: 312px; */
 	width: 342px;
-	height: 330px;
+	height: 340px;
 	float: left;
 	position: relative;
 	margin-right: 10px;
@@ -96,8 +96,8 @@
 }
 
 .mianconent li .desc {
-	height: 60px;
-	padding: 10px;
+	height: 70px;
+	padding: 3px;
 	overflow: hidden;
 }
 
