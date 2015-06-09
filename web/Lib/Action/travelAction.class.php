@@ -218,7 +218,7 @@ class travelAction extends CommonAction {
 			$this->ajaxReturn ( "", "请填写旅行日期", "n" );
 			exit ();
 		}
-		if ( $_POST ['pnumber']==0 ) {
+		if ($_POST ['pnumber'] == 0) {
 			$this->ajaxReturn ( "", "请选择预定人数", "n" );
 			exit ();
 		}
@@ -252,7 +252,7 @@ class travelAction extends CommonAction {
 		$line = M ( "line" );
 		$line_base = $line->find ( $id );
 		$price_type = 1;
-		if ($line_base ['line_type'] != 3) {
+		if ($line_base ['line_type'] != 3&&$line_base ['line_type'] != 5) {
 			$price_type = 1;
 			if ($numrange == 0) {
 				$numrange = 6; // 获取单个人的价钱
@@ -290,8 +290,26 @@ class travelAction extends CommonAction {
 		$cremoney = $price_day ['price_childrenpre'];
 		$lcode = $line_base ['code'];
 		$startdate = $ends;
+		// $_POST ['phones']
+		$phone = $_POST ['phone'];
+		// 从系统中查找是否有phones 数据
+		$orderlist = $LineOrder->where ( "phone='" . $phone . "'" )->select ();
+		$orderid = $phone . "-" . "001";
+		if (count ( $orderlist ) != 0) {
+			$ordercount = count ( $orderlist );
+			$neworderid = "" . $ordercount . "";
+			$strlength = strlen ( $neworderid );
+			$zero = '';
+			for($i = $strlength; $i < 3; $i ++) {
+				$neworderid = "0" . $neworderid . "";
+			}
+			$orderid = $phone . "-" . $neworderid;
+		} else {
+			$orderid = $phone . "-" . "001";
+		}
 		$_POST ['status'] = 0;
-		$_POST ['orderid'] = time () . rand ( 1000, 9999 );
+		$_POST ['orderid'] = $orderid;
+		// $_POST ['orderid'] = time () . rand ( 1000, 9999 );
 		$_POST ['type'] = 1;
 		$order = D ( 'order' );
 		if ($LineOrder->create ()) {
@@ -314,6 +332,7 @@ class travelAction extends CommonAction {
 			$LineOrder->cmoneyec = $price_day ['price_childrenec'];
 			$LineOrder->cmoneyyk = $price_day ['price_childrenyk'];
 			$LineOrder->trip_days = $line_base ['trip_days'];
+			$LineOrder->orderid = $orderid;
 			$pmoneyec = 0;
 			if ($LineOrder->pmoneyec != 0) {
 				$pmoneyec = $LineOrder->pmoneyec;
@@ -339,7 +358,7 @@ class travelAction extends CommonAction {
 			$this->assign ( "protocolData", $OrderData );
 			$protocolcontent = $this->fetch ( "protocol", "", "" );
 			$messContent = "亲 您的订单" . $OrderData ['orderid'] . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情";
-			$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
+		    $this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
 			$messDate = array (
 					'action' => 'send',
 					'username' => '70208213',
@@ -348,9 +367,9 @@ class travelAction extends CommonAction {
 					'content' => urlencode ( $messContent ) 
 			);
 			// 短信发送
-			$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
+			 $this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
-					"orderid" => $OrderData ['orderid'] 
+					"orderid" => $OrderData ['orderid']
 			) ), "订单详情", "u" );
 		} else {
 			$this->ajaxReturn ( "", "订单提交失败", "n" );
@@ -438,17 +457,17 @@ class travelAction extends CommonAction {
 		$this->display ();
 	}
 	public function order_ding_view() {
-		layout ( false ); 
+		layout ( false );
 		$LineOrder = D ( 'LineOrder' );
-		$orderid = $_GET ["orderid"] ? intval ( $_GET ["orderid"] ) : 0;
-		$vo = $LineOrder->where("orderid='".$orderid."'")->find ();
+		$orderid = $_GET ["orderid"] ;
+		$vo = $LineOrder->where ( "orderid='" . $orderid . "'" )->find ();
 		$lineid = $vo ['lid'];
 		$Line = D ( 'Line' );
-		$lineInfo = $Line->where("id='".$lineid."'")->find();
+		$lineInfo = $Line->where ( "id='" . $lineid . "'" )->find ();
 		$this->assign ( "vo", $vo ); // 基本信息
 		$this->assign ( "lineInfo", $lineInfo );
-		//print_r($lineInfo);
-		//exit();
+		// print_r($lineInfo);
+		// exit();
 		$this->display ();
 	}
 	public function order_success() {
@@ -648,7 +667,7 @@ class travelAction extends CommonAction {
 		$price_day_tmp3 = null;
 		$price_day_tmp4 = null;
 		$price_day_tmp5 = null;
-		if ($line_type [line_type] != 3&&$line_type [line_type] != 5) {
+		if ($line_type [line_type] != 3 && $line_type [line_type] != 5) {
 			$price_day_tmp0 = $line_price->where ( "price_type=1 and line_id=$id and numrange=6" )->select ();
 			$price_day_tmp1 = $line_price->where ( "price_type=1 and line_id=$id and numrange=1" )->select ();
 			$price_day_tmp2 = $line_price->where ( "price_type=1 and line_id=$id and numrange=2" )->select ();
@@ -1233,7 +1252,7 @@ EOF;
 			$LineOrder = D ( 'LineOrder' );
 			$orderInfo = $LineOrder->where ( array (
 					'orderid' => $out_trade_no 
-			) )->find ();	
+			) )->find ();
 			$state = $orderInfo ['state'];
 			if ($state == 0) { // 如果订单状态是未支付则修改为已支付
 				$LinePin = D ( 'LinePin' );
@@ -1261,12 +1280,12 @@ EOF;
 				);
 				$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 				$this->assign ( "mess", '支付成功!' );
-			}else if($state >=1){
+			} else if ($state >= 1) {
 				$this->assign ( "mess", '此订单已经支付过!' );
 			}
 			$Line = M ( 'Line' );
 			$lineOrder1 = M ( 'lineOrder' );
-			$list = $lineOrder1->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder1->getTableName () . '.lid' )->field ( $lineOrder1->getTableName () . '.*,' . $lineOrder1->getTableName () . '.price-remoney restmoney,line.names,line.line_type,line.ly_type,line.compnay' )->where ( "orderid='".$out_trade_no."'")->select();
+			$list = $lineOrder1->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder1->getTableName () . '.lid' )->field ( $lineOrder1->getTableName () . '.*,' . $lineOrder1->getTableName () . '.price-remoney restmoney,line.names,line.line_type,line.ly_type,line.compnay' )->where ( "orderid='" . $out_trade_no . "'" )->select ();
 			$this->assign ( "orderlist", $list );
 			$this->assign ( "success", 1 );
 		} else {
