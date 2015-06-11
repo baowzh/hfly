@@ -2,6 +2,7 @@
 require_once ("alipay/alipay.config.php");
 require_once ("alipay/lib/alipay_submit.class.php");
 require_once ("alipay/lib/alipay_notify.class.php");
+require_once ("Core/Common/functions.php");
 class travelAction extends CommonAction {
 	private $type_select;
 	private $topic = array (
@@ -252,7 +253,7 @@ class travelAction extends CommonAction {
 		$line = M ( "line" );
 		$line_base = $line->find ( $id );
 		$price_type = 1;
-		if ($line_base ['line_type'] != 3&&$line_base ['line_type'] != 5) {
+		if ($line_base ['line_type'] != 3 && $line_base ['line_type'] != 5 && $line_base ['line_type'] != 2) {
 			$price_type = 1;
 			if ($numrange == 0) {
 				$numrange = 6; // 获取单个人的价钱
@@ -358,7 +359,7 @@ class travelAction extends CommonAction {
 			$this->assign ( "protocolData", $OrderData );
 			$protocolcontent = $this->fetch ( "protocol", "", "" );
 			$messContent = "亲 您的订单" . $OrderData ['orderid'] . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情";
-		    $this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
+			$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
 			$messDate = array (
 					'action' => 'send',
 					'username' => '70208213',
@@ -367,9 +368,9 @@ class travelAction extends CommonAction {
 					'content' => urlencode ( $messContent ) 
 			);
 			// 短信发送
-			 $this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
+			$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
-					"orderid" => $OrderData ['orderid']
+					"orderid" => $OrderData ['orderid'] 
 			) ), "订单详情", "u" );
 		} else {
 			$this->ajaxReturn ( "", "订单提交失败", "n" );
@@ -459,7 +460,7 @@ class travelAction extends CommonAction {
 	public function order_ding_view() {
 		layout ( false );
 		$LineOrder = D ( 'LineOrder' );
-		$orderid = $_GET ["orderid"] ;
+		$orderid = $_GET ["orderid"];
 		$vo = $LineOrder->where ( "orderid='" . $orderid . "'" )->find ();
 		$lineid = $vo ['lid'];
 		$Line = D ( 'Line' );
@@ -667,7 +668,7 @@ class travelAction extends CommonAction {
 		$price_day_tmp3 = null;
 		$price_day_tmp4 = null;
 		$price_day_tmp5 = null;
-		if ($line_type [line_type] != 3 && $line_type [line_type] != 5) {
+		if ($line_type [line_type] != 3 && $line_type [line_type] != 5 && $line_type [line_type] != 2) {
 			$price_day_tmp0 = $line_price->where ( "price_type=1 and line_id=$id and numrange=6" )->select ();
 			$price_day_tmp1 = $line_price->where ( "price_type=1 and line_id=$id and numrange=1" )->select ();
 			$price_day_tmp2 = $line_price->where ( "price_type=1 and line_id=$id and numrange=2" )->select ();
@@ -1381,6 +1382,114 @@ EOF;
 		);
 		$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 	}
+	function sendLineInfoToQuNRW() {
+		layout ( false );
+		$line = M ( "line" );
+		$linePrice = M ( "line_price" );
+		$year = date ( 'Y' );
+		$month = date ( 'm' );
+		$day = date ( 'd' );
+		// $linePrices = $linePrice->join ( $line->getTableName () . " on line_id=jee_line.id" )->where ( "year=" . $year . " and month=" . $month . " and day=" . $day . "" )->field ( "jee_line.*,1000 price_adult,1000 price_children,100 dfc" )->select ();
+		$lineInfos = $line->where ( "qunaer=1" )->field ( " *,front_money as price_adult, cmoney as price_children,100 as dfc " )->select ();
+		$list=array();
+		foreach ( $lineInfos as $lineInfo ) {
+			// 每条线路生成一个
+			$routes = array ();
+			$city_name = M ( 'area' )->where ( "id='" . $lineInfo ['city_id'] . "'" )->field ( "names" )->find ();
+			$images = M ( 'line_pic' )->where ( "line_id='" . $lineInfo ['id'] . "'" )->field ( "CONCAT('http://www.hf97667.com', pic_path) as pic_path " )->select ();
+			$imagesvar = array ();
+			foreach ( $images as $image ) {
+				$imagesvar ['image'] = $image ['pic_path'];
+			}
+			$line_info = M ( "line_info" )->where ( "lid='" . $lineInfo ['id'] . "'" )->field ( "special_info,contain,notcontain,tip" )->find ();
+			
+			if ($line_info ['special_info'] == null) {
+				$features = array (
+						'feature' => '线路特色' 
+				);
+			} else {
+				$features = array (
+						'feature' => '<![CDATA[' . strip_tags ( $line_info ['special_info'] ) . ']]>' 
+				);
+			}
+			$fee_includes = array (
+					'fee_include' => '<![CDATA[' . strip_tags ( $line_info ['contain'] ) . ']]>' 
+			);
+			$fee_excludes = array (
+					'fee_exclude' => '<![CDATA[' . $line_info ['notcontain'] . ']]>' 
+			);
+			$tips = array (
+					'tip' => '<![CDATA[' . strip_tags ( $line_info ['tip'] ) . ']]>' 
+			);
+			// 费用包含
+			// 获取每个线路的价格信息
+			$line_prices = M ( 'line_price' )->where ( "line_id='" . $lineInfo ['id'] . "'" )->field ( "price_date,price_adult,price_children,dfc" )->select ();
+			$route_dates = array ();
+			foreach ( $line_prices as $key => $line_price ) {
+				$route_date = array (
+						'date' => date('Y-m-d',$line_price ['price_date']),
+						'price' => $line_price ['price_adult'],
+						'child_price' => $line_price ['price_children'],
+						'price_diff' => $line_price ['dfc'],
+						'elename' => 'route_date' 
+				);
+				$route_dates [] = $route_date;
+			}
+			// 获取每天的形成
+			$line_travels = M ( 'line_travel' )->where ( "line_id='" . $lineInfo ['id'] . "'" )->select ();
+			$daily_trips = array ();
+			foreach ( $line_travels as $daily_trip ) {
+				$daily_trip = array (
+						'day' => $daily_trip ['day'],
+						'desc' => $daily_trip ['title'],
+						'title' => $daily_trip ['title'],
+						'elename' => 'daily_trip' 
+				);
+				array_push ( $daily_trips, $daily_trip );
+			}
+			
+			$route = array (
+					'title' => $lineInfo ['names'],
+					'url' => 'http://www.hf97667.com/index.php/travel/detail/id/' . $lineInfo ['id'] . '',
+					'price' => $lineInfo ['price_adult'],
+					'price_desc' => '价格说明',
+					'child_price' => $lineInfo ['price_children'],
+					'price_diff' => $lineInfo ['dfc'],
+					'function' => '自由行',
+					'departure' => $city_name ['names'],
+					'type' => '国内游',
+					'subject' => '自然风光',
+					'date_of_departure' => $year . '-' . $month . '-' . $day, // 最早出行时间
+					'date_of_expire' => $year . '-' . $month . '-' . $day, // 最晚出行时间
+					'advance_day' => 1,
+					'day_num' => $lineInfo ['trip_days'],
+					'hotel_night' => $lineInfo ['trip_days'] - 1,
+					'to_traffic' => $lineInfo['traffic'],
+					'back_traffic' => $lineInfo['traffic'],
+					'images' => $imagesvar,
+					'features' => $features,
+					'fee_includes' => $fee_includes,
+					'tips' => $tips,
+					'route_dates' => $route_dates,
+					'elename' => 'route' ,
+					'daily_trips'=>$daily_trips
+			);
+			array_push ( $routes, $route );
+			$xmlstr = xml_encode ( $routes, "utf-8", "routes" );
+			file_put_contents($lineInfo['code'].".xml", $xmlstr);
+			$listi=array('url'=>"http://www.hf97667.com/".$lineInfo['code'].".xml");
+			array_push ( $list, $listi );
+		}
+		// 转化为xml文件
+		$returnxml='<?xml version="1.0" encoding="utf-8"?><list>';
+		foreach ($list as $li){
+			$returnxml=$returnxml.'<url>'.$li['url'].'</url>';
+		}
+		$returnxml=$returnxml.'</list>';
+		header ( 'Content-Type:text/xml; charset=utf-8' );
+		$this->show ( $returnxml, "utf-8", "text/xml" );
+	}
+	
 }
 
 ?>

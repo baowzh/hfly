@@ -557,7 +557,17 @@ class lineAction extends CommonAction {
 			}
 		}
 		$LineInfo = M ( "LineInfo" );
-		$LineInfo->where ( "lid=" . $_POST ["line_id"] )->save ( $_POST );
+		$infocount=$LineInfo->where ( "lid=" . $_POST ["line_id"] )->count();
+		$LineInfo->create();
+		//print_r($infocount);
+		//exit();
+		$LineInfo->lid=$_POST ["line_id"];
+		if($infocount==0){
+			$LineInfo->add();
+		}else{
+			$LineInfo->where ( "lid=" . $_POST ["line_id"] )->save ( $_POST );
+		}
+		
 		$this->redirect ( "line/price_list", array (
 				'line_id' => $_POST ["line_id"] 
 		), 1, '页面跳转中~' );
@@ -752,6 +762,27 @@ class lineAction extends CommonAction {
 		}
 		$this->success ( "取消推荐成功", U ( "show_list" ) );
 	}
+	public function doncommqnew() {
+		if (! isset ( $_POST ["deleteall"] )) {
+			$this->error ( "至少选中一项！" );
+		}
+		$Line = M ( 'Line' );
+		foreach ( $_POST ["deleteall"] as $id ) {
+			$Line->where ( "id=$id" )->setField ( "qunaer", "1" );
+		}
+		$this->success ( "推荐成功", U ( "show_list" ) );
+	}
+	public function donrecommqnew() {
+		if (! isset ( $_POST ["deleteall"] )) {
+			$this->error ( "至少选中一项！" );
+		}
+		$Line = M ( 'Line' );
+		foreach ( $_POST ["deleteall"] as $id ) {
+			$Line->where ( "id=$id" )->setField ( "qunaer", "0" );
+		}
+		$this->success ( "取消推荐成功", U ( "show_list" ) );
+	}
+	
 }
 
 ?>

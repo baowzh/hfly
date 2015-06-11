@@ -115,7 +115,7 @@
 			</div>
 			<!-- 价格日历 -->
 			<div style="width: 550px; float: left;" >
-				<if condition="($line_type neq '3') and ($line_type neq '5')">
+				<if condition="($line_type neq '3') and ($line_type neq '5') and ($line_type neq '2')">
 				<div id="pricetitle"
 					style="margin: 10px 0px 0px 0px; width: 600px; height: 42px;">
 					<ul style="padding: 0; margin: 0;">
@@ -142,7 +142,7 @@
 						value="{$price_type}">
 				</div>
 				</if>
-				<if condition="($line_type eq '3') or ($line_type eq '5')">
+				<if condition="($line_type eq '3') or ($line_type eq '5') or ($line_type eq '2')">
 				<div style="width: 400px; height: 10px;"></div>
 				</if>
 				<div class="pricecontent" style="margin-left: 0px; width: 590;">
@@ -282,7 +282,6 @@
 		</div>
 	</div>
 	<div style="clear: both"></div>
-
 	<div class="cont_sumit">
 		<h4>&nbsp;</h4>
 		<div>
@@ -675,6 +674,12 @@
          
       </div>
        -->
+     <if condition="$lineinfo.special_info neq ''">
+	<div class="detail_road" style="min-height: 300px;">
+		<h2>特别告知</h2>
+		<div class="feature">{$lineinfo.special_info}</div>
+	</div>
+	</if>
 	<div class="detail_road" id="detail_road">
 		<h4>&nbsp;</h4>
 		<div class="line_my_content">

@@ -85,6 +85,7 @@ $(function(){
 					<th width="40">排序</th>
 					<th width="40">状态</th>
 					<th width="40">推荐</th>
+					<th width="40">去哪儿网</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -124,6 +125,9 @@ $(function(){
 					<td>
 					<if condition="$vo['recomm'] eq 1"> 是 </if> <if
 							condition="$vo['recomm'] eq 0"> 否 </if></td>
+					<td>
+					<if condition="$vo['qunaer'] eq 1"> 是 </if> <if
+							condition="$vo['qunaer'] eq 0"> 否 </if></td>
 
 					<td><a href="__URL__/pic_list/line_id/{$vo.id}">图片</a>&nbsp; <a
 						href="__URL__/price_list/line_id/{$vo.id}">报价</a>&nbsp; <a
@@ -147,6 +151,10 @@ $(function(){
 				onclick="myform.action = '{:U('line/recomm',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');" />
 			<input type="button" class="button" name="dosubmit" value="取消推荐"
 				onclick="myform.action = '{:U('line/donrecomm',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');" />
+			<input type="button" class="button" name="dosubmit" value="推荐去哪儿网"
+				onclick="myform.action = '{:U('line/doncommqnew',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');" />
+			<input type="button" class="button" name="dosubmit" value="取消推荐去哪儿网"
+				onclick="myform.action = '{:U('line/donrecommqnew',array('jumpurl'=>base64_encode('line/show_list')))}'; $('#myform').trigger('submit');" />
 		</div>
 		<div class="page">{$page}</div>
 	</div>
