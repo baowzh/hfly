@@ -87,23 +87,27 @@
 	<div class="topcont" style="margin: 15px auto;">
 		<div class="cont_title">
 			<h1>{$line_base.names}</h1>
-			<div class="cont_nav" >
-				<a href="">{$line_base.linebelongto|_get_city}</a> 
-				<a href="">
+			<div class="cont_nav">
+				  
+				    <a href="">{$line_base.linebelongto|_get_city}</a> 
+				    <a href="">
 					{$line_base.ly_type} </a>
-					 <a href="">{$line_base.trip_days}日游</a>| <a
-					href="#detail_road">详细行程</a>| <a href="#fybh">费用说明</a>|
-				<a href="#ydxz">预定须知</a>| <a href="#wxts">温馨提示
-				</a>| <a href="#ydbm">报名预定 </a> </a>
+				 <a href="">{$line_base.trip_days}日游</a>
+				 
+					 | <a
+					href="#detail_road">详细行程</a>| <a href="#fybh">费用说明</a>| <a
+					href="#ydxz">预定须知</a>| <a href="#wxts">温馨提示 </a>| <a href="javascript:submitorder();">报名预定
+				</a> </a>
 			</div>
-			
+
 		</div>
 		<!--  
 		<div>
 			<img alt="" width="1200" height="570" src="__ROOT__/style/images/cont.jpg">
 		</div>
 		-->
-		<div style="width: 1100px; min-height: 480px; overflow: hidden;" id="ydbm">
+		<div style="width: 1100px; min-height: 480px; overflow: hidden;"
+			id="ydbm">
 
 			<div class="lineimg" id="galleria"
 				style="float: left; width: 540px; height: 440px;">
@@ -114,8 +118,9 @@
 
 			</div>
 			<!-- 价格日历 -->
-			<div style="width: 550px; float: left;" >
-				<if condition="($line_type neq '3') and ($line_type neq '5') and ($line_type neq '2')">
+			<div style="width: 550px; float: left;">
+				<if
+					condition="($line_type neq '3') and ($line_type neq '5') and ($line_type neq '2')">
 				<div id="pricetitle"
 					style="margin: 10px 0px 0px 0px; width: 600px; height: 42px;">
 					<ul style="padding: 0; margin: 0;">
@@ -142,7 +147,8 @@
 						value="{$price_type}">
 				</div>
 				</if>
-				<if condition="($line_type eq '3') or ($line_type eq '5') or ($line_type eq '2')">
+				<if
+					condition="($line_type eq '3') or ($line_type eq '5') or ($line_type eq '2')">
 				<div style="width: 400px; height: 10px;"></div>
 				</if>
 				<div class="pricecontent" style="margin-left: 0px; width: 590;">
@@ -354,6 +360,63 @@
 				</tbody>
 			</table>
 			</if>
+			<!-- 自驾游 -->
+			<if condition="$line_type eq '5'">
+			<table width="100%" cellpadding="0" cellspacing="1" bgcolor="dadada"
+				style="padding: 0px; border: 1px solid #42c7c7">
+				<tbody>
+					<tr bgcolor="#cef0f1" height="35">
+						<td width="80" align="center">线路编号</td>
+						<td bgcolor="#FFFFFF" width="180"
+							style="color: #fe3d00; font-weight: bold">{$line_base.code}</td>
+						<td width="80" align="center">出发地点</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">{$start_city_belong.names}</td>
+						<td width="80" align="center">成团方式</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">{$line_base.ly_type}</td>
+						<td align="center">发团公司</td>
+						<td bgcolor="#FFFFFF" style="color: #585556">{$line_base.compnay}</td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="35">
+						<td align="center" width="80">合同下载</td>
+						<td bgcolor="#FFFFFF" width="180" style="color: #585556">下单后(无须支付)自动发送</td>
+						<td align="center" width="80">优惠政策</td>
+						<td bgcolor="#FFFFFF" width="180"><a
+							style="cursor: pointer; color: #585556"
+							onclick="showTipsWindown('游记返现规则','ajaxs','/ajax/article_ajax.do?id=381',650,350);");"="">游记返现</a>
+							<a style="cursor: pointer"
+							onclick="showTipsWindown('老客户优惠规则','ajaxs','/ajax/article_ajax.do?id=382',650,350);");"="">老客户优惠</a>
+						</td>
+						<td align="center">与众不同</td>
+						<td bgcolor="#FFFFFF">不进也不推任何形式的购物店</td>
+
+						<td align="center">支付方式</td>
+						<td bgcolor="#FFFFFF" style="color: #585556">支付宝、银行柜台、ATM转账</td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="35">
+						<td align="center" width="80">服务流程</td>
+						<td bgcolor="#FFFFFF" colspan="7" width="700"
+							style="text-align: left;"><img
+							src="__ROOT__/style/images/ht.jpg" width="723" height="67"
+							alt="服务流程" /></td>
+					</tr>
+					<tr bgcolor="#cef0f1" height="50">
+						<td align="center" width="80">产品特色</td>
+						<td bgcolor="#FFFFFF" colspan="7" style="text-align: left;">
+							<div style="width: 500px; float: left;">
+								<ul style="padding-right: 8px;">
+									<li>行程中随意停车观光摄影（非限制停车地方）</li>
+									<li>每天出发时间结束时间完全自定</li>
+									<li>景区游览时间，游览节凑自定，只要当天抵达酒店即可</li>
+									<li>拒绝低质团餐，吃什么自定,吃的舒服消费也少</li>
+								</ul>
+							</div>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</if>
+			<!--  -->
 			<!-- 纯玩团 -->
 			<if condition="$line_type eq '2'">
 			<table width="100%" cellpadding="0" cellspacing="1" bgcolor="dadada"
@@ -384,8 +447,8 @@
 						<td align="center">与众不同</td>
 						<td bgcolor="#FFFFFF" colspan="3">不进也不推任何形式的购物店</td>
 
-<!-- 						<td align="center">购物店</td> -->
-<!-- 						<td bgcolor="#FFFFFF">包含购物店</td> -->
+						<!-- 						<td align="center">购物店</td> -->
+						<!-- 						<td bgcolor="#FFFFFF">包含购物店</td> -->
 					</tr>
 
 					<tr bgcolor="#cef0f1" height="35">
@@ -400,15 +463,13 @@
 					<tr bgcolor="#cef0f1" height="50">
 						<td align="center" width="80">实时订单</td>
 						<td bgcolor="#FFFFFF" colspan="7" style="text-align: left;">
-                               <br>
-                               
-							<volist name="orderlist" id="vo"> <eq name="mod"
-								value="0">
+							<br> <volist name="orderlist" id="vo"> <eq
+								name="mod" value="0">
 							<div
-								style="width: 900px; height: 24px; font-size: 12px; color: #666;padding-left:100px;">
+								style="width: 900px; height: 24px; font-size: 12px; color: #666; padding-left: 100px;">
 							</eq>
 							<div
-								style="width: 400px; height: 24px; font-size: 12px; color: #666; float: left;text-align:left;">
+								style="width: 400px; height: 24px; font-size: 12px; color: #666; float: left; text-align: left;">
 
 								{$vo.name} {$vo.pcount}大{$vo.ccount}小
 								线路{$vo.lcode}[{$vo.orderdate}]预定时间{$vo.orderdate}</div>
@@ -674,7 +735,7 @@
          
       </div>
        -->
-     <if condition="$lineinfo.special_info neq ''">
+	<if condition="$lineinfo.special_info neq ''">
 	<div class="detail_road" style="min-height: 300px;">
 		<h2>特别告知</h2>
 		<div class="feature">{$lineinfo.special_info}</div>
@@ -701,7 +762,7 @@
 		<!-- 		<div class="feature"> -->
 		<div class="mianconent" style="margin-top: 10px; padding-left: 30px;">
 			<volist name="relines" id="vo" mod='3'>
-			<li  style="width: 340px;"<if condition="$mod eq 2 ">
+			<li style="width: 340px;"<if condition="$mod eq 2 ">
 				class="lasts"</if> ><a
 				href="{:U('travel/detail',array('id'=>$vo['id']))}" target="_blank">
 					<img alt="{$vo.names}" width="340" height="247"
@@ -761,5 +822,3 @@
 			</if> </volist> </empty>
 		</div>
 	</div>
-
-	 

@@ -295,8 +295,8 @@
 }
 
 .contents_nei .cont_nav {
-	height: 37px;
-	line-height: 37px;
+	height: 42px;
+	line-height: 42px;
 	color: #646364;
 	z-index: 9999;
 	background: #05b5b5;
@@ -307,9 +307,9 @@
 
 .contents_nei .cont_nav a {
 	color: #646364;
-	font-size: 14px;
+	font-size: 15px;
 	padding: 0px 3px;
-	height: 36px;
+	height: 42px;
 	text-align: center;
 	color: #fff;
 	display: inline-block;

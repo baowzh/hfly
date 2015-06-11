@@ -359,7 +359,7 @@ class travelAction extends CommonAction {
 			$this->assign ( "protocolData", $OrderData );
 			$protocolcontent = $this->fetch ( "protocol", "", "" );
 			$messContent = "亲 您的订单" . $OrderData ['orderid'] . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情";
-			$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
+		//	$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
 			$messDate = array (
 					'action' => 'send',
 					'username' => '70208213',
@@ -368,7 +368,7 @@ class travelAction extends CommonAction {
 					'content' => urlencode ( $messContent ) 
 			);
 			// 短信发送
-			$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
+			//$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
 					"orderid" => $OrderData ['orderid'] 
 			) ), "订单详情", "u" );
