@@ -36,9 +36,9 @@
 			<tbody>
 				<volist name="list" id="vo">
 				<tr class="ulbc" id="tr_{$vo.id}">
-					<td style="text-align: center;"><input type="checkbox"
-						class="sel" id="sel_{$vo.id}" value="{$vo.id}"
-						name="items_{$vo.id}" /></td>
+					<td id="td_sel"><input type="checkbox"
+						name="deleteall[{$vo.id}]" class="sel c_selected"
+						id="sel_{$vo.id}" value="{$vo.id}" /></td>
 					<td style="text-align: center;">{$vo.name}</td>
 					<td align="center">{$vo.pcount}</td>
 					<td align="center">{$vo.ccount}</td>

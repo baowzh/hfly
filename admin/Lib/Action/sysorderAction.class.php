@@ -19,6 +19,14 @@ class sysorderAction extends CommonAction {
 	
 	// 点击了列表下方的删除按钮之后
 	public function deleteall() {
+		if (! isset ( $_POST ["deleteall"] )) {
+			$this->error ( "至少选中一项！" );
+		}
+		$sysOrder = M ( "SysOrder" );
+		foreach ( $_POST ["deleteall"] as $id ) {
+			$sysOrder->where ( "id=$id" )->delete ();
+		}
+		$this->success ( "删除成功", U ( "show_list" ) );
 	}
 	
 	// 删除
