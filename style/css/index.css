@@ -2460,7 +2460,7 @@ td.day:not (.disable ):hover {
 .rides-cs {
 	font-size: 12px;
 	position: fixed;
-	top: 150px;
+	top: 100px;
 	right: 0px;
 	_position: absolute;
 	z-index: 1500;

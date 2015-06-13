@@ -56,7 +56,24 @@ $(document).ready(function() {
 <!-- 				<div style="width:392px;height:100px;margin-top:20px;"> -->
 <!-- 				</div> -->				
 			</div>
+			
+			<if condition="$selmenu eq ''">
 			<script type="text/javascript" src="http://ext.weather.com.cn/97609.js"></script>
+			</if>
+			<if condition="$selmenu eq '0471'">
+			<script type="text/javascript" src="http://ext.weather.com.cn/97609.101080101.js"></script>
+			</if>
+			<if condition="$selmenu eq '0470'">
+			<script type="text/javascript" src="http://ext.weather.com.cn/97609.101081001.js"></script>
+			</if>
+			<if condition="$selmenu eq '0479'">
+			<script type="text/javascript" src="http://ext.weather.com.cn/97609.101080901.js"></script>
+			</if>
+			<if condition="$selmenu eq '0483'">
+			<script type="text/javascript" src="http://ext.weather.com.cn/97609.101081203.js"></script>
+			</if>
+			
+			
 			<div class="dectails">
 			<form action="{:U('travel/order_query')}">
 				<li class="hotline">4001-888-332&nbsp;</li>
