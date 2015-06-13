@@ -79,6 +79,12 @@
 				id="trip_days" class="txt" value="1" datatype="/^[1-9]\\d{0,2}$/" /></td>
 		</tr>
 		<tr>
+			<th><span class="red">*</span><em>酒店入住晚数</em>：</th>
+			<td><input type="text" maxlength="3" name="hotel_night"
+				id="hotel_night" class="txt" value="1" datatype="/^[1-9]\\d{0,2}$/" /></td>
+		</tr>
+		
+		<tr>
 			<th><span class="red">*</span><em>往返交通</em>：</th>
 			<td><input type="text" name="traffic" id="traffic" class="txt"
 				datatype="s2-10" /></td>
@@ -291,6 +297,13 @@
 			<td><textarea name="tip" style="width: 100%" id="L_Reminder"
 					class="kind-text" datatype="*25-65535"
 					errmsg="请输入25到65535个字符之间的温馨提示"></textarea></td>
+			<td><div class='Validform_checktip'></div></td>
+		</tr>
+		<tr>
+			<th><em>线路特色 </em>：</th>
+			<td><textarea name="feature" style="width: 100%" id="L_Reminder"
+					class="kind-text" datatype="*25-65535"
+					errmsg="请输入25到65535个字符之间的线路特色"></textarea></td>
 			<td><div class='Validform_checktip'></div></td>
 		</tr>
 	</table>

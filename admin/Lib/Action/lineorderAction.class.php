@@ -61,7 +61,7 @@ class lineorderAction extends CommonAction {
 		$lineOrder = M ( 'lineOrder' );
 		$count = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names' )->where ( $where )->count ();
 		$page = $this->pagebar ( $count );
-		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.names,line.line_type,CASE WHEN UNIX_TIMESTAMP()-UNIX_TIMESTAMP(date_add(startdate, interval jee_line_order.trip_days day))>0 and state=0 THEN 1 ELSE 0 end as del' )->where ( $where )->order ( "id desc" )->page ( $page )->select ();
+		$list = $lineOrder->join ( $Line->getTableName () . ' line on line.id=' . $lineOrder->getTableName () . '.lid' )->field ( $lineOrder->getTableName () . '.*,line.id as line_id,line.names,line.line_type,CASE WHEN UNIX_TIMESTAMP()-UNIX_TIMESTAMP(date_add(startdate, interval jee_line_order.trip_days day))>0 and state=0 THEN 1 ELSE 0 end as del' )->where ( $where )->order ( "id desc" )->page ( $page )->select ();
 		$this->assign ( "list", $list );
 		$this->assign ( "type", $_GET ['type'] );
 		$this->assign ( "get", $_GET );

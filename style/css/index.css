@@ -647,7 +647,7 @@
 }
 
 .hudong .dialog {
-	width: 1150px;
+	width: 1050px;
 	margin: 0 auto;
 	padding: 25px;
 	padding-bottom: 0px;
@@ -679,7 +679,7 @@
 }
 
 .hudong .dialog_right {
-	width: 1150px;
+	width: 1050px;
 	text-align: left;
 	margin-right: 10px;
 	margin-top: 20px;
@@ -2462,6 +2462,16 @@ td.day:not (.disable ):hover {
 	position: fixed;
 	top: 150px;
 	right: 0px;
+	_position: absolute;
+	z-index: 1500;
+	border-radius: 6px 0px 0 6px;
+}
+
+.qrcode-cs {
+	font-size: 12px;
+	position: fixed;
+	left: 0px;
+	bottom:0px;
 	_position: absolute;
 	z-index: 1500;
 	border-radius: 6px 0px 0 6px;

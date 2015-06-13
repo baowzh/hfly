@@ -512,6 +512,14 @@ function data_to_xml($data) {
     $xml = '';
     foreach ($data as $key => $val) {
         is_numeric($key) && $key = "item id=\"$key\"";
+        if(is_array($val) || is_object($val)){
+        	if($val['elename']!=null){
+        		$key=$val['elename'];
+        	}
+        }
+        if($key=='elename'){
+        	continue;
+        }
         $xml    .=  "<$key>";
         $xml    .=  ( is_array($val) || is_object($val)) ? data_to_xml($val) : $val;
         list($key, ) = explode(' ', $key);

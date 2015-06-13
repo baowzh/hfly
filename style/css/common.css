@@ -145,11 +145,14 @@ body {
 	float: left;
 	margin-top: 20px;
 }
+.search iframe{
+	margin-top: 35px;
+  margin-left: 15px;
+}
 
 .dectails {
 	float: right;
 	width: 380px;
-	/* 	width: 330px; */
 	height: 66px;
 	margin-top: 18px
 }

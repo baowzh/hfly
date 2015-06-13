@@ -71,7 +71,8 @@ table select {
 			</tr>
 			<tr>
 				<td class="names">出游人数:</td>
-				<td colspan="5" class="ru">成人{$vo.pnumber} 儿童 {$vo.cnumber}</td>
+				<td colspan="5" class="ru">成人{$vo.pnumber} 儿童 {$vo.cnumber}
+				&nbsp;&nbsp;&nbsp;&nbsp;<a href="__ROOT__/index.php/travel/detail/id/{$vo.lid}" target="_blank">点击查看行程</a></td>
 			</tr>
 			<tr>
 				<td class="names">房间数:</td>
@@ -140,7 +141,7 @@ table select {
 					class="sub_bg"
 					style="width: 170px; height: 30px; line-height: 30px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
 					type="button" onclick="javascript:orderpay('{$vo.orderid}')"
-					value="开始支付"><br />支付成功会收到付款确认短信凭证</td>
+					value="开始支付">&nbsp;&nbsp;{$vo.remoney}元<br />支付成功会收到付款确认短信凭证</td>
 			</tr>
 			</if>
 			<if condition="$vo.state eq '1'">

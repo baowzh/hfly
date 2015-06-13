@@ -355,7 +355,7 @@ class travelAction extends CommonAction {
 			$LineOrder->add ();
 			$insert_id = $LineOrder->getLastInsID ();
 			// 邮件发送
-			$OrderData = $LineOrder->field ( "*,date_add(startdate, interval trip_days day) as enddate" )->find ( $insert_id );
+			$OrderData = $LineOrder->field ( "*,date_add(startdate, interval trip_days-1 day) as enddate" )->find ( $insert_id );
 			$this->assign ( "protocolData", $OrderData );
 			$protocolcontent = $this->fetch ( "protocol", "", "" );
 			$messContent = "亲 您的订单" . $OrderData ['orderid'] . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情";

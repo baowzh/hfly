@@ -45,19 +45,35 @@
 				src="{$vo.id|get_line_img}">
 
 				<div class="desc">
+				    <div style="width:100%;height:23px;">
+				     <div style="float:left;width:75px;height:23px;color: #fe1f0f;font-size: 16px;">
+				           ￥{$vo.id|get_line_min_price}起
+				     </div>
+				     <div style="float:left;width:80px;height:23px;font-size:14px;">
+				         喜欢&nbsp;{$vo.likeamount}
+				     </div>
+				       <div style="float:left;width:80px;height:23px;font-size:14px;">
+				         关注&nbsp;{$vo.attamount}
+				     </div>
+				     <div class="adds">
+				     {$vo.linebelongto|_get_city}
+				     </div>
+				    </div>
+					<!--  
 					<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
 						class="adds" >{$vo.linebelongto|_get_city}</span>						
 						<span
 							class="adds" style="background:none;width:70px;margin-right:5px;">
-							喜欢{$vo.likeamount}&nbsp;
+							喜欢0{$vo.likeamount}&nbsp;
 						</span>
 						
 						<span
 							class="adds" style="background:none;width:70px;">
-							关注{$vo.attamount}
+							关注0{$vo.attamount}
 						</span>
-						
+						-->
 					<p>{$vo.names} {$vo.trip_days}日</p>
+					
 				</div>
 		</a> <if condition="$vo.recomm eq 1">
 			<div class="tui">&nbsp;</div>

@@ -1,12 +1,16 @@
 <div class="dogview">
 	<div class="link_title">
-		<h3>订单号 :{$$vo.orderid} &nbsp;线路编号：{$vo.lcode}</h3>
+		<h3>线路编号：{$vo.lcode}</h3>
 		<span><a class="close" onclick="showclose()"
 			style="cursor: pointer">&nbsp;</a></span>
 	</div>
 	<div style="padding: 15px; border: 1px solid #05adae;">
-		<span style="color: #ff0000">注：如价格有变动，请联系客服修改价格后，通过手机号查询到订单再进行支付！<br>如非在线支付，汇款账户<a
-			href="http://www.hf97667.com/index.php/article/detail/id/62" target="_blank">点此查看</a>，仅限以上账户，打入其他账户与我方无关
+		<span style="color: #ff0000">注：
+		 您的订单已提交成功，可以支付了；如有变动请与客服联系，更改确认后再到订
+		 单页面支付即可。<br>客服电话4001 888 332；（订单查询方法：在网站右上角输入
+		 您的手机号码<br>便可找到您的订单）如非在线支付，汇款账户<a
+			href="http://www.hf97667.com/index.php/article/detail/id/62" target="_blank">点此查看</a>，
+			仅限以上账户，打入其他账户与我方无关。
 		</span>
 		<form id="a" method="post" target="_blank"
 			action="{:U('/order/index')}">
@@ -33,9 +37,9 @@
 				<td class="names" style="width: 240px;">开始旅行时间</td>
 				<td class="ru">{$vo.startdate}/(共{$lineInfo.trip_days}天)</td>
 				<td class="names" style="width: 240px;">成人单价</td>
-				<td style="color: #993300; font-weight: bold" class="ru">{$vo.pmoney}/{$vo.pnumber}</td>
+				<td style="color: #993300; font-weight: bold" class="ru">{$vo.pmoney}*{$vo.pnumber}</td>
 				<td class="names" style="width: 240px;">儿童单价</td>
-				<td style="color: #993300; font-weight: bold" class="ru">{$vo.cmoney}/{$vo.cnumber}</td>
+				<td style="color: #993300; font-weight: bold" class="ru">{$vo.cmoney}*{$vo.cnumber}</td>
 			</tr>
 
 			<tr style="color: #993300; font-weight: bold">
@@ -61,7 +65,7 @@
 					style="text-align: left; padding-left: 10px;"><input
 					class="sub_bg"
 					style="width: 190px; height: 40px; line-height: 40px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
-					type="submit" value="开始支付"><br />支付成功会收到付款确认短信凭证</td>
+					type="submit" value="开始支付"><br />支付成功会收到付款确认短信和电子合同等通知</td>
 			</tr>
 		</table>
 	</form>
