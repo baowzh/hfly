@@ -13,9 +13,6 @@
 				<div class="recommendeden">RECOMMEDDED ROUTES</div>
 			</div>
 		</div>
-		<!--       <div class="line_left"> -->
-		<!--       <img src="/style/images/hot.jpg" alt="" width="402" height="57" > -->
-		<!--       </div> -->
 		<div class="line_center" style="width: 497px;">
 			<li  <eq name="day" value="0"> class="curtent"</eq>><a
 				href="{:U('travel/index',array('id'=>$id,'day'=>0,'areaid'=>$areaid))}">全部</a></li>
@@ -39,8 +36,7 @@
 	<div class="mianconent">
 		<volist name="list" id="vo" mod='3'>
 		<li <if condition="$mod eq 2 "> class="lasts"</if> > <a
-			href="{:U('travel/detail',array('id'=>$vo['id']))}" target="_blank">
-				<!--            <img alt="{$vo.names}" width="376" height="247" src="{$vo.id|get_line_img}"  > -->
+			href="{:U('travel/detail',array('id'=>$vo['id']))}" target="_blank">				
 				<img alt="{$vo.names}" width="342" height="247"
 				src="{$vo.id|get_line_img}">
 
@@ -59,21 +55,7 @@
 				     {$vo.linebelongto|_get_city}
 				     </div>
 				    </div>
-					<!--  
-					<span class="price">￥{$vo.id|get_line_min_price}起</span> <span
-						class="adds" >{$vo.linebelongto|_get_city}</span>						
-						<span
-							class="adds" style="background:none;width:70px;margin-right:5px;">
-							喜欢0{$vo.likeamount}&nbsp;
-						</span>
-						
-						<span
-							class="adds" style="background:none;width:70px;">
-							关注0{$vo.attamount}
-						</span>
-						-->
 					<p>{$vo.names} {$vo.trip_days}日</p>
-					
 				</div>
 		</a> <if condition="$vo.recomm eq 1">
 			<div class="tui">&nbsp;</div>

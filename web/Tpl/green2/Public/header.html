@@ -28,8 +28,6 @@ $(document).ready(function() {
 		 $('#menu'+selmenu).addClass('curt')
 	 }
 });
- 
- //alert(selmenu);
 </script>
 </head>
 <body>
@@ -57,23 +55,21 @@ $(document).ready(function() {
 <!-- 				</div> -->				
 			</div>
 			
-			<if condition="$selmenu eq ''">
+			<if condition="$_SESSION['areaid'] eq ''">
 			<script type="text/javascript" src="http://ext.weather.com.cn/97609.js"></script>
 			</if>
-			<if condition="$selmenu eq '0471'">
+			<if condition="$_SESSION['areaid'] eq '0471'">
 			<script type="text/javascript" src="http://ext.weather.com.cn/97609.101080101.js"></script>
 			</if>
-			<if condition="$selmenu eq '0470'">
+			<if condition="$_SESSION['areaid'] eq '0470'">
 			<script type="text/javascript" src="http://ext.weather.com.cn/97609.101081001.js"></script>
 			</if>
-			<if condition="$selmenu eq '0479'">
+			<if condition="$_SESSION['areaid'] eq '0479'">
 			<script type="text/javascript" src="http://ext.weather.com.cn/97609.101080901.js"></script>
 			</if>
-			<if condition="$selmenu eq '0483'">
+			<if condition="$_SESSION['areaid'] eq '0483'">
 			<script type="text/javascript" src="http://ext.weather.com.cn/97609.101081203.js"></script>
 			</if>
-			
-			
 			<div class="dectails">
 			<form action="{:U('travel/order_query')}">
 				<li class="hotline">4001-888-332&nbsp;</li>

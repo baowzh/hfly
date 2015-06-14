@@ -1489,7 +1489,59 @@ EOF;
 		header ( 'Content-Type:text/xml; charset=utf-8' );
 		$this->show ( $returnxml, "utf-8", "text/xml" );
 	}
-	
+	public function meetinglines() {
+		// 获取所有团体策划相关的文章列表
+		$article= M('article');
+		$count = $article->join(M('article_section')->getTableName()." section on section.id=jee_article.cid")->where(" section.e_names in ('hyxl','hyfw','htqd','cjbz','cgal')")->field("jee_article.*")->count();
+		$p = isset ( $_GET ['p'] ) ? intval ( $_GET ['p'] ) : 1; // 获取分页页码
+		class_exists ( "Page" ) or import ( "ORG.Util.Page" );
+		$Page = new Page ( $count, 5 );
+		$show = $Page->show ();
+		$articlelist= $article->join(M('article_section')->getTableName()." section on section.id=jee_article.cid")->where(" section.e_names in ('hyxl','hyfw','htqd','cjbz','cgal')")->order('add_time desc')->field("jee_article.*")->limit( $Page->firstRow . "," . $Page->listRows)->select();
+		$this->assign ( 'articlelist', $articlelist );
+		$this->assign ( "page", $show );
+		$this->display();
+	}
+	public function meetingdetail(){
+		$id = (isset($_GET["id"])) ? $_GET["id"] : 0;
+		//生成文章分类列表
+		$sec = M("ArticleSection");
+		$list = $sec->where("pid=0 AND status=1")->order("id asc")->select();
+		$this->assign("list", $list);
+		
+		if ($id > 0) {
+			//获取文章内容
+			$art = M("Article");
+			$content = M()->table($art->getTableName() . " art")
+			->join($sec->getTableName() . " sec ON art.cid = sec.id")
+			->where("art.id=$id AND art.status=1")
+			->field("art.*, sec.id as Section_id")
+			->find();
+			$art->where("id={$content['id']}")->setInc("hits", 1);
+		} else {
+			//获取文章内容
+			$map = (isset($_GET["detail"])) ? "sec.id=" . $_GET["detail"] : "sec.id > 0";
+			$art = M("Article");
+			$content = M()->table($art->getTableName() . " art")
+			->join($sec->getTableName() . " sec ON art.cid = sec.id")
+			->where($map . " AND art.status=1")
+			->field("art.*, sec.model, sec.id as Section_id")
+			->order("sec.id asc")
+			->find();
+			//查不到内容（$content 为空）或为单页模型，则获取文章列表
+			if ($content == null)
+				$this->articelList($_GET["detail"]);
+			elseif ($content["model"] == 0)
+			$this->articelList($content["Section_id"]);
+			else
+				$art->where("id=" . $content["id"])->setInc("hits", 1);
+		}
+		
+		$this->assign("content", $content);
+		$this->assign("detailtype", 0);
+		$this->display();
+	}
+
 }
 
 ?>
