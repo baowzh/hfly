@@ -83,6 +83,29 @@ class articleAction extends CommonAction {
 	//全部列表
 	public function lists() {
 		$article = M("Article");
+		$where = array ();
+		$where ["act_sec.model"] = array (
+				"eq",
+				"0"
+		);
+		if($_GET ['end_time']!=null){
+			$where ["act.add_time"] = array (
+					"elt",
+					"{$_GET['end_time']}"
+			);
+		}
+		if($_GET ['start_time']!=null){
+			$where ["act.add_time"] = array (
+					"egt",
+					"{$_GET['start_time']}"
+			);
+		}
+		if($_GET ['cid']!=null){
+			$where ["act.cid"] = array (
+					"eq",
+					"{$_GET['cid']}"
+			);
+		}
 		$count = $article->table(C('DB_PREFIX') . "article" . C('DB_SUFFIX') . " act")
 				 ->join(C('DB_PREFIX') . "article_section" . C('DB_SUFFIX') . " act_sec ON act.cid=act_sec.id")
 				 ->where("act_sec.model=0")
@@ -90,11 +113,13 @@ class articleAction extends CommonAction {
 		$page = $this->pagebar($count);
 		$articles = $article->table(C('DB_PREFIX') . "article" . C('DB_SUFFIX') . " act")
 				 ->join(C('DB_PREFIX') . "article_section" . C('DB_SUFFIX') . " act_sec ON act.cid=act_sec.id")
-				 ->where("act_sec.model=0")
+				// ->where("act_sec.model=0")
+				 ->where($where)
 				 ->order('act.id desc')
 				 ->page($page)
 				 ->select();
 		$section = M("ArticleSection");
+		$sectioni = M("ArticleSection");
 		$sections = array();
 		foreach ($articles as $k => $a) {
 			$sections[$k] = $section->where("id=" . $a['cid'])->find();
@@ -104,8 +129,10 @@ class articleAction extends CommonAction {
 			$articles[$k]["id"] = $item["id"];
 			$articles[$k]["sort"] = $item['sort'];
 		}
+		$sectionis=$sectioni->select();
 		$this->assign("list", $articles);
 		$this->assign("section", $sections);
+		$this->assign("sections", $sectionis);
 		$this->assign('message', isset($_REQUEST['message']) ? C($_REQUEST['message']) : '');
 		$this->display("lists");
 	}

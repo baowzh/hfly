@@ -21,48 +21,49 @@ $(function(){
 			<td class="search">编码: <input id="code" type="text"
 				class="input-text" name="code" value="{$get.code}" />
 			</td>
-			<td class="search">地区: <select name="areaid" id="areaid"
+			<td class="search">地区: 
+			<select name="areaid" id="areaid"
 				class="input-text">
-					<option value=""<if condition="$get.areaid eq null">selected="true"
+					<option value=""  <if condition="$get.areaid eq null">selected="true"
 						</if>>请选择
 					</option>
-					<option value="0471"<if condition="$get.areaid eq '0471'">selected="true"
+					<option value="0471"  <if condition="$get.areaid eq '0471'">selected="true"
 						</if>>呼和浩特
 					</option>
-					<option value="0470"<if condition="$get.areaid eq '0470'">selected="true"
+					<option value="0470" <if condition="$get.areaid eq '0470'">selected="true"
 						</if>>呼伦贝尔
 					</option>
-					<option value="0479"<if condition="$get.areaid eq '0479'">selected="true"
+					<option value="0479" <if condition="$get.areaid eq '0479'">selected="true"
 						</if>>锡林郭勒盟
 					</option>
-					<option value="0483"<if condition="$get.areaid eq '0483'">selected="true"
+					<option value="0483" <if condition="$get.areaid eq '0483'">selected="true"
 						</if>>阿拉善盟
 					</option>
 			</select>
 			</td>
 			<td class="search">产品类型: <select name="linetype" id="linetype"
 				class="input-text">
-					<option value=""<if condition="$get.linetype eq ''">selected="true"</if>>请选择
+					<option value=""  <if condition="$get.linetype eq ''">selected="true"</if>>请选择
 					</option>
-					<option value="1"<if condition="$get.linetype eq '1'">selected="true"</if>>包团自由行
+					<option value="1" <if condition="$get.linetype eq '1'">selected="true"</if>>包团自由行
 					</option>
-					<option value="2"<if condition="$get.linetype eq '2'">selected="true"</if>>纯玩团
+					<option value="2" <if condition="$get.linetype eq '2'">selected="true"</if>>纯玩团
 					</option>
-					<option value="3"<if condition="$get.linetype eq '3'">selected="true"</if>>常规团
+					<option value="3" <if condition="$get.linetype eq '3'">selected="true"</if>>常规团
 					</option>
-					<option value="4"<if condition="$get.linetype eq '4'">selected="true"</if>>团队策划
+					<option value="4" <if condition="$get.linetype eq '4'">selected="true"</if>>团队策划
 					</option>
-					<option value="5"<if condition="$get.linetype eq '5'">selected="true"</if>>自驾游
+					<option value="5" <if condition="$get.linetype eq '5'">selected="true"</if>>自驾游
 					</option>
 			</select>
 			</td>
 			<td class="search">状态: <select name="status" id="status"
 				class="input-text">
-					<option value=""<if condition="$get.status eq ''">selected="true"</if>>请选择
+					<option value="" <if condition="$get.status eq ''">selected="true"</if>>请选择
 					</option>
-					<option value="0"<if condition="$get.status eq '0'">selected="true"</if>>已上线
+					<option value="0" <if condition="$get.status eq '0'">selected="true"</if>>已上线
 					</option>
-					<option value="1"<if condition="$get.status eq '1'">selected="true"</if>>已下线
+					<option value="1" <if condition="$get.status eq '1'">selected="true"</if>>已下线
 					</option>
 			</select> &nbsp; <input type="submit" value="查询" class="button" />
 			</td>
@@ -103,12 +104,12 @@ $(function(){
 						target="_blank">
 							<p>{$vo.names}</p>
 					</a></td>
-					<td><if condition="$vo.property eq 1">普通<elseif
+					<td> <if condition="$vo.property eq 1">普通<elseif
 							condition="$vo.property eq 2" />特价<elseif
 							condition="$vo.property eq 3" />新品<elseif
 							condition="$vo.property eq 4" />热门</if></td>
 					<td>{$vo.city_id|_get_city}</td>
-					<td><if condition="$vo.line_type eq 1">包团自由行<elseif
+					<td> <if condition="$vo.line_type eq 1">包团自由行<elseif
 							condition="$vo.line_type eq 2" />纯玩团<elseif
 							condition="$vo.line_type eq 3" />常规团<elseif
 							condition="$vo.line_type eq 4" />团队策划
@@ -120,7 +121,7 @@ $(function(){
 					<td>
 					 <input type="text" name="sort[{$vo.id}]"
 						id="sort_{$vo.id}" value="{$vo.sort}" style="width: 40px;" /></td>
-					<td><if condition="$vo['status'] eq 1"> 下线 </if> <if
+					<td> <if condition="$vo['status'] eq 1"> 下线 </if> <if
 							condition="$vo['status'] eq 0"> 上线 </if></td>
 					<td>
 					<if condition="$vo['recomm'] eq 1"> 是 </if> <if

@@ -359,7 +359,7 @@ class travelAction extends CommonAction {
 			$this->assign ( "protocolData", $OrderData );
 			$protocolcontent = $this->fetch ( "protocol", "", "" );
 			$messContent = "亲 您的订单" . $OrderData ['orderid'] . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情";
-		//	$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
+			$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
 			$messDate = array (
 					'action' => 'send',
 					'username' => '70208213',
@@ -368,7 +368,7 @@ class travelAction extends CommonAction {
 					'content' => urlencode ( $messContent ) 
 			);
 			// 短信发送
-			//$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
+			$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
 					"orderid" => $OrderData ['orderid'] 
 			) ), "订单详情", "u" );
@@ -1151,16 +1151,16 @@ EOF;
 		
 		// 商户订单号
 		
-		$out_trade_no = $_GET ['out_trade_no'];
+		$out_trade_no = $_POST ['out_trade_no'];
 		
 		// 支付宝交易号
 		
-		$trade_no = $_GET ['trade_no'];
+		$trade_no = $_POST ['trade_no'];
 		
 		// 交易状态
-		$trade_status = $_GET ['trade_status'];
+		$trade_status = $_POST ['trade_status'];
 		
-		if ($_GET ['trade_status'] == 'TRADE_FINISHED' || $_GET ['trade_status'] == 'TRADE_SUCCESS') {
+		if ($_POST ['trade_status'] == 'TRADE_FINISHED' || $_POST ['trade_status'] == 'TRADE_SUCCESS') {
 			// 判断该笔订单是否在商户网站中已经做过处理
 			// $orderModel = M ()->query ( "select orderid,price,state from jee_line_pin where orderid=" . $out_trade_no . " union select orderid,price,state from jee_line_order where orderid=" . $out_trade_no . "" );
 			$LineOrder = D ( 'LineOrder' );
@@ -1169,6 +1169,7 @@ EOF;
 			) )->find ();
 			$state = $orderInfo ['state'];
 			if ($state == 0) { // 如果订单状态是未支付则修改为已支付
+				/*
 				$LinePin = D ( 'LinePin' );
 				$LinePin->where ( array (
 						'orderid' => $out_trade_no 
@@ -1176,6 +1177,7 @@ EOF;
 						'state' => 1,
 						'trade_no' => $trade_no 
 				) );
+				*/
 				$LineOrder = D ( 'LineOrder' );
 				$LineOrder->where ( array (
 						'orderid' => $out_trade_no 
@@ -1190,7 +1192,7 @@ EOF;
 						'action' => 'send',
 						'username' => '70208213',
 						'password' => md5 ( 'hf6317995' ),
-						'phone' => $OrderData ['phone'],
+						'phone' => $orderInfo ['phone'],
 						'content' => urlencode ( $messContent ) 
 				);
 				$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
@@ -1200,7 +1202,7 @@ EOF;
 			
 			// 如果有做过处理，不执行商户的业务程序
 		} else {
-			echo "trade_status=" . $_GET ['trade_status'];
+			echo "trade_status=" . $_POST ['trade_status'];
 		}
 		
 		echo "验证成功<br />";

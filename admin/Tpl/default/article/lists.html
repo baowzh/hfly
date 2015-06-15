@@ -10,6 +10,31 @@
         <a href="{:U('add')}">添加文章</a>
     </ul>
 </div>
+<form action="{:U('lists')}" method="get" id="myform">
+	<table class="search_table table_form" width="100%">
+		<tr>
+			<td class="search">开始时间: <input name="start_time" type="text"
+				id="start_time" value='' class="input-text calender" /> &nbsp;
+				结束时间:<input name="end_time" type="text" id="end_time" value=''
+				class="input-text calender" /> &nbsp;
+			     栏目：<select name="cid" id="cid"
+				class="input-text">
+				<option value="" <if condition="$get.cid eq ''">selected="true"</if>>请选择
+				</option>
+				 <volist name="sections" id="vo" >
+				    <_option value="{$vo.id}" _value="{$get.cid}">{$vo.names}</_option>
+				  </option>
+				 </volist>
+			</select>
+			</td>
+			<td>
+			
+			<input type="submit"
+				name="submit" value="查询" class="button" />
+			</td>
+		</tr>
+	</table>
+</form>
 <form name="myform" id="myform" action="" method="post">
     <div class="table-list">
         <table cellspacing="0" cellpadding="0" width="100%">
