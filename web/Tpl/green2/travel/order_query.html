@@ -72,7 +72,7 @@ table select {
 			<tr>
 				<td class="names">出游人数:</td>
 				<td colspan="5" class="ru">成人{$vo.pnumber} 儿童 {$vo.cnumber}
-				&nbsp;&nbsp;&nbsp;&nbsp;<a href="__ROOT__/index.php/travel/detail/id/{$vo.lid}" target="_blank">点击查看行程</a></td>
+				&nbsp;&nbsp;&nbsp;&nbsp;<a href="__ROOT__/index.php/travel/detail/id/{$vo.lid}" target="_blank">&nbsp;&nbsp;&nbsp;点击查看行程</a></td>
 			</tr>
 			<tr>
 				<td class="names">房间数:</td>
@@ -130,6 +130,10 @@ table select {
 			<tr>
 				<td class="names">备注信息:</td>
 				<td colspan="5" class="ru">{$vo.desc}</td>
+			</tr>
+			<tr>
+				<td class="names">费用调整原因:</td>
+				<td colspan="5" class="ru">{$vo.updreason}</td>
 			</tr>
 			<if condition="$vo.state eq '0'">
 			<tr height="50px">

@@ -148,7 +148,7 @@ class travelAction extends CommonAction {
 		$price_day_tmp4 = null;
 		$price_day_tmp5 = null;
 		$price_day = null;
-		if ($line_base ['line_type'] != 3) {
+		if ($line_base ['line_type'] != 3 && $line_base ['line_type'] != 5) {
 			if ($numrange == 0) {
 				$numrange = 6;
 			}
@@ -298,6 +298,7 @@ class travelAction extends CommonAction {
 		$orderid = $phone . "-" . "001";
 		if (count ( $orderlist ) != 0) {
 			$ordercount = count ( $orderlist );
+			$ordercount = $ordercount * 1 + 1;
 			$neworderid = "" . $ordercount . "";
 			$strlength = strlen ( $neworderid );
 			$zero = '';
@@ -1092,7 +1093,7 @@ EOF;
 				// 若要使用请调用类文件submit中的query_timestamp函数
 				
 				// 客户端的IP地址
-				$exter_invoke_ip = "180.86.250.126";
+				$exter_invoke_ip = "121.42.111.74";
 				// 非局域网的外网IP地址，如：221.0.0.1
 				// echo $alipay_config ['partner'];
 				// exit();
@@ -1170,14 +1171,14 @@ EOF;
 			$state = $orderInfo ['state'];
 			if ($state == 0) { // 如果订单状态是未支付则修改为已支付
 				/*
-				$LinePin = D ( 'LinePin' );
-				$LinePin->where ( array (
-						'orderid' => $out_trade_no 
-				) )->setField ( array (
-						'state' => 1,
-						'trade_no' => $trade_no 
-				) );
-				*/
+				 * $LinePin = D ( 'LinePin' );
+				 * $LinePin->where ( array (
+				 * 'orderid' => $out_trade_no
+				 * ) )->setField ( array (
+				 * 'state' => 1,
+				 * 'trade_no' => $trade_no
+				 * ) );
+				 */
 				$LineOrder = D ( 'LineOrder' );
 				$LineOrder->where ( array (
 						'orderid' => $out_trade_no 
@@ -1393,7 +1394,7 @@ EOF;
 		$day = date ( 'd' );
 		// $linePrices = $linePrice->join ( $line->getTableName () . " on line_id=jee_line.id" )->where ( "year=" . $year . " and month=" . $month . " and day=" . $day . "" )->field ( "jee_line.*,1000 price_adult,1000 price_children,100 dfc" )->select ();
 		$lineInfos = $line->where ( "qunaer=1" )->field ( " *,front_money as price_adult, cmoney as price_children,100 as dfc " )->select ();
-		$list=array();
+		$list = array ();
 		foreach ( $lineInfos as $lineInfo ) {
 			// 每条线路生成一个
 			$routes = array ();
@@ -1429,7 +1430,7 @@ EOF;
 			$route_dates = array ();
 			foreach ( $line_prices as $key => $line_price ) {
 				$route_date = array (
-						'date' => date('Y-m-d',$line_price ['price_date']),
+						'date' => date ( 'Y-m-d', $line_price ['price_date'] ),
 						'price' => $line_price ['price_adult'],
 						'child_price' => $line_price ['price_children'],
 						'price_diff' => $line_price ['dfc'],
@@ -1440,110 +1441,162 @@ EOF;
 			// 获取每天的形成
 			$line_travels = M ( 'line_travel' )->where ( "line_id='" . $lineInfo ['id'] . "'" )->select ();
 			$daily_trips = array ();
-			foreach ( $line_travels as $daily_trip ) {
+			foreach ( $line_travels as $daily_tripi ) {
+				$dinings = $daily_tripi ['dining'];
+				$diningArray = explode ( ",", $dinings );
+				$beveragestr = "";
+				$zacanhan = 0;
+				$wucanhan = 0;
+				$wancanhan = 0;
+				foreach ( $diningArray as $diningi ) {
+					if ($diningi == '1') {
+						$zacanhan = 1;
+					}
+					if ($diningi == '2') {
+						$wucanhan = 1;
+					}
+					if ($diningi == '3') {
+						$wancanhan = 1;
+					}
+				}
+				if ($zacanhan == 1) {
+					$beveragestr = $beveragestr . "早餐：含";
+				} else {
+					$beveragestr = $beveragestr . "早餐：自理";
+				}
+				if ($wucanhan == 1) {
+					$beveragestr = $beveragestr . "  午餐：含";
+				} else {
+					$beveragestr = $beveragestr . "  午餐：自理";
+				}
+				if ($wancanhan == 1) {
+					$beveragestr = $beveragestr . "  晚餐：含";
+				} else {
+					$beveragestr = $beveragestr . "  晚餐：自理";
+				}
 				$daily_trip = array (
-						'day' => $daily_trip ['day'],
-						'desc' => $daily_trip ['title'],
-						'title' => $daily_trip ['title'],
-						'elename' => 'daily_trip' 
+						'day' => $daily_tripi ['day'],
+						'desc' => $daily_tripi ['title'],
+						'title' => $daily_tripi ['title'],
+						'elename' => 'daily_trip',
+						'traffic' => $lineInfo ['traffic'],
+						'beverage' => $beveragestr 
 				);
+				// 获取行程具体内容
+				$line_travel_sections = M ( 'line_travel_section' )->where ( "line_id='" . $lineInfo ['id'] . "' and travel_id='" . $daily_tripi ['id'] . "'" )->find ();
+				$daily_trip ['desc'] = '<![CDATA[' . strip_tags ( $line_travel_sections ['content'] ) . ']]>';
 				array_push ( $daily_trips, $daily_trip );
 			}
-			
+			// 获取线路最早时间和最晚时间
+			$maxandminDate = M ( 'line_price' )->where ( "line_id='" . $lineInfo ['id'] . "' and year='" . $year . "'" )->field ( "max(DATE(FROM_UNIXTIME(price_date))) maxdate,min(DATE(FROM_UNIXTIME(price_date))) mindate" )->find ();
+			// 获取线路价钱
+			$adultandchildren = M ( 'line_price' )->where ( "line_id='" . $lineInfo ['id'] . "' and year='" . $year . "'" )->field ( "min(price_adult) price_adult,max(price_children) price_children,max(dfc) dfc  " )->find ();
+			if ($adultandchildren ['dfc'] == null) {
+				$adultandchildren ['dfc'] = 0;
+			}
 			$route = array (
 					'title' => $lineInfo ['names'],
 					'url' => 'http://www.hf97667.com/index.php/travel/detail/id/' . $lineInfo ['id'] . '',
-					'price' => $lineInfo ['price_adult'],
-					'price_desc' => '价格说明',
-					'child_price' => $lineInfo ['price_children'],
-					'price_diff' => $lineInfo ['dfc'],
-					'function' => '自由行',
+					'price' => $adultandchildren ['price_adult'],
+					'price_desc' => '儿童标准（1.2米以下为儿童，儿童价格只含当地旅游车费和行程中所包含的餐费，超过1.2米的建议按成人报名）；单房差（酒店住宿都是按2人标准间核算的，如出现单人住一间房需补齐1间房费用，如不补单房差费用便默认和其他客人拼住一间房）。',
+					'child_price' => $adultandchildren ['price_children'],
+					'price_diff' => $adultandchildren ['dfc'],
+					'function' => '跟团游',
 					'departure' => $city_name ['names'],
 					'type' => '国内游',
 					'subject' => '自然风光',
-					'date_of_departure' => $year . '-' . $month . '-' . $day, // 最早出行时间
-					'date_of_expire' => $year . '-' . $month . '-' . $day, // 最晚出行时间
+					'date_of_departure' => $maxandminDate ['mindate'], // 最早出行时间
+					'date_of_expire' => $maxandminDate ['maxdate'], // 最晚出行时间
 					'advance_day' => 1,
 					'day_num' => $lineInfo ['trip_days'],
-					'hotel_night' => $lineInfo ['trip_days'] - 1,
-					'to_traffic' => $lineInfo['traffic'],
-					'back_traffic' => $lineInfo['traffic'],
+					'hotel_night' => $lineInfo ['hotel_night'],
+					'to_traffic' => $lineInfo ['traffic'],
+					'back_traffic' => $lineInfo ['traffic'],
 					'images' => $imagesvar,
 					'features' => $features,
 					'fee_includes' => $fee_includes,
 					'tips' => $tips,
 					'route_dates' => $route_dates,
-					'elename' => 'route' ,
-					'daily_trips'=>$daily_trips
+					'elename' => 'route',
+					'daily_trips' => $daily_trips 
 			);
 			array_push ( $routes, $route );
 			$xmlstr = xml_encode ( $routes, "utf-8", "routes" );
-			file_put_contents($lineInfo['code'].".xml", $xmlstr);
-			$listi=array('url'=>"http://www.hf97667.com/".$lineInfo['code'].".xml");
+			file_put_contents ( $lineInfo ['code'] . ".xml", $xmlstr );
+			$listi = array (
+					'url' => "http://www.hf97667.com/" . $lineInfo ['code'] . ".xml" 
+			);
 			array_push ( $list, $listi );
 		}
 		// 转化为xml文件
-		$returnxml='<?xml version="1.0" encoding="utf-8"?><list>';
-		foreach ($list as $li){
-			$returnxml=$returnxml.'<url>'.$li['url'].'</url>';
+		$returnxml = '<?xml version="1.0" encoding="utf-8"?><list>';
+		foreach ( $list as $li ) {
+			$returnxml = $returnxml . '<url>' . $li ['url'] . '</url>';
 		}
-		$returnxml=$returnxml.'</list>';
+		$returnxml = $returnxml . '</list>';
 		header ( 'Content-Type:text/xml; charset=utf-8' );
 		$this->show ( $returnxml, "utf-8", "text/xml" );
 	}
 	public function meetinglines() {
 		// 获取所有团体策划相关的文章列表
-		$article= M('article');
-		$count = $article->join(M('article_section')->getTableName()." section on section.id=jee_article.cid")->where(" section.e_names in ('hyxl','hyfw','htqd','cjbz','cgal')")->field("jee_article.*")->count();
+		$article = M ( 'article' );
+		$count = $article->join ( M ( 'article_section' )->getTableName () . " section on section.id=jee_article.cid" )->where ( " section.e_names in ('hyxl','hyfw','htqd','cjbz','cgal')" )->field ( "jee_article.*" )->count ();
 		$p = isset ( $_GET ['p'] ) ? intval ( $_GET ['p'] ) : 1; // 获取分页页码
 		class_exists ( "Page" ) or import ( "ORG.Util.Page" );
 		$Page = new Page ( $count, 5 );
 		$show = $Page->show ();
-		$articlelist= $article->join(M('article_section')->getTableName()." section on section.id=jee_article.cid")->where(" section.e_names in ('hyxl','hyfw','htqd','cjbz','cgal')")->order('add_time desc')->field("jee_article.*")->limit( $Page->firstRow . "," . $Page->listRows)->select();
+		$articlelist = $article->join ( M ( 'article_section' )->getTableName () . " section on section.id=jee_article.cid" )->where ( " section.e_names in ('hyxl','hyfw','htqd','cjbz','cgal')" )->order ( 'add_time desc' )->field ( "jee_article.*" )->limit ( $Page->firstRow . "," . $Page->listRows )->select ();
 		$this->assign ( 'articlelist', $articlelist );
 		$this->assign ( "page", $show );
-		$this->display();
+		$this->display ();
 	}
-	public function meetingdetail(){
-		$id = (isset($_GET["id"])) ? $_GET["id"] : 0;
-		//生成文章分类列表
-		$sec = M("ArticleSection");
-		$list = $sec->where("pid=0 AND status=1")->order("id asc")->select();
-		$this->assign("list", $list);
+	public function meetingdetail() {
+		$id = (isset ( $_GET ["id"] )) ? $_GET ["id"] : 0;
+		// 生成文章分类列表
+		$sec = M ( "ArticleSection" );
+		$list = $sec->where ( "pid=0 AND status=1" )->order ( "id asc" )->select ();
+		$this->assign ( "list", $list );
 		
 		if ($id > 0) {
-			//获取文章内容
-			$art = M("Article");
-			$content = M()->table($art->getTableName() . " art")
-			->join($sec->getTableName() . " sec ON art.cid = sec.id")
-			->where("art.id=$id AND art.status=1")
-			->field("art.*, sec.id as Section_id")
-			->find();
-			$art->where("id={$content['id']}")->setInc("hits", 1);
+			// 获取文章内容
+			$art = M ( "Article" );
+			$content = M ()->table ( $art->getTableName () . " art" )->join ( $sec->getTableName () . " sec ON art.cid = sec.id" )->where ( "art.id=$id AND art.status=1" )->field ( "art.*, sec.id as Section_id" )->find ();
+			$art->where ( "id={$content['id']}" )->setInc ( "hits", 1 );
 		} else {
-			//获取文章内容
-			$map = (isset($_GET["detail"])) ? "sec.id=" . $_GET["detail"] : "sec.id > 0";
-			$art = M("Article");
-			$content = M()->table($art->getTableName() . " art")
-			->join($sec->getTableName() . " sec ON art.cid = sec.id")
-			->where($map . " AND art.status=1")
-			->field("art.*, sec.model, sec.id as Section_id")
-			->order("sec.id asc")
-			->find();
-			//查不到内容（$content 为空）或为单页模型，则获取文章列表
+			// 获取文章内容
+			$map = (isset ( $_GET ["detail"] )) ? "sec.id=" . $_GET ["detail"] : "sec.id > 0";
+			$art = M ( "Article" );
+			$content = M ()->table ( $art->getTableName () . " art" )->join ( $sec->getTableName () . " sec ON art.cid = sec.id" )->where ( $map . " AND art.status=1" )->field ( "art.*, sec.model, sec.id as Section_id" )->order ( "sec.id asc" )->find ();
+			// 查不到内容（$content 为空）或为单页模型，则获取文章列表
 			if ($content == null)
-				$this->articelList($_GET["detail"]);
-			elseif ($content["model"] == 0)
-			$this->articelList($content["Section_id"]);
+				$this->articelList ( $_GET ["detail"] );
+			elseif ($content ["model"] == 0)
+				$this->articelList ( $content ["Section_id"] );
 			else
-				$art->where("id=" . $content["id"])->setInc("hits", 1);
+				$art->where ( "id=" . $content ["id"] )->setInc ( "hits", 1 );
 		}
 		
-		$this->assign("content", $content);
-		$this->assign("detailtype", 0);
-		$this->display();
+		$this->assign ( "content", $content );
+		$this->assign ( "detailtype", 0 );
+		$this->display ();
 	}
-
+	public function tosetpricedesc() {
+		// 儿童标准（1.2米以下为儿童，儿童价格只含当地旅游车费和行程中所包含的餐费，超过1.2米的建议按成人报名）；单房差（酒店住宿都是按2人标准间核算的，如出现单人住一间房需补齐1间房费用，如不补单房差费用便默认和其他客人拼住一间房）。
+		$this->display ();
+	}
+	public function setpricedesc() {
+		$linePrice = M ( 'LinePrice' );
+		$content = $_POST ['content'];
+		//
+		$linePrice->where ( array (
+				'1' => 1 
+		) )->setField ( array (
+				'price_desc' => $content 
+		) );
+		//
+		// $linePrice->setField(array ('price_desc'=>$content));
+		echo 'success';
+	}
 }
 
 ?>

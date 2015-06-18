@@ -257,6 +257,7 @@ function showTipsWindown(tit, url) {
 
 function showclose() {
 	$("#bodys").html("");
+	$('#windownbg').hide();
 }
 
 function ajaxPost(t, url) {
@@ -272,6 +273,7 @@ function ajaxPost(t, url) {
 			}
 			if (data.status == "u") {
 				showTipsWindown(data.info, data.data);
+				$('#windownbg').show();
 				return;
 			}
 		}
@@ -410,7 +412,7 @@ var setMoney = function() {
 										* pnumber + datePriceList[1][numrange][i].price_children
 										* cnumber)
 										+ dfcz);
-				$('#qjsm').html(datePriceList[1][numrange][i].price_desc);
+				$('#qjsm').html('儿童标准（1.2米以下为儿童，儿童价格只含当地旅游车费和行程中所包含的餐费，超过1.2米的建议按成人报名）；单房差（酒店住宿都是按2人标准间核算的，如出现单人住一间房需补齐1间房费用，如不补单房差费用便默认和其他客人拼住一间房）。');
 				existprice = true;
 			}
 		}

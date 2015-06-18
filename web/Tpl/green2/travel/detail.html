@@ -46,6 +46,9 @@
     	}
     	submitorderurl=submitorderurl+'/year/'+year+'/month/'+month+'/day/'+day+'/numrange/'+index+'/price_type/'+$('#lineprice_type').val();
     	showTipsWindown('发起订单',submitorderurl);
+    	//alert($(document).height());
+    	$('#windownbg').css('height',$(document).height());
+    	$('#windownbg').show();
     };
     var currentdate='';
     var currentnumrange=1;
@@ -100,21 +103,14 @@
 			</div>
 
 		</div>
-		<!--  
-		<div>
-			<img alt="" width="1200" height="570" src="__ROOT__/style/images/cont.jpg">
-		</div>
-		-->
-		<div style="width: 1100px; min-height: 480px; overflow: hidden;"
+		<div style="width: 1100px; min-height: 450px; overflow: hidden;"
 			id="ydbm">
 
 			<div class="lineimg" id="galleria"
 				style="float: left; width: 540px; height: 440px;">
-				<img src="__ROOT__/style/images/cont.jpg" />
 
 				<volist name="linepic" id="vo"> <img
 					src="__ROOT__{$vo.pic_path}" style="width: 540px;" /> </volist>
-
 			</div>
 			<!-- 价格日历 -->
 			<div style="width: 550px; float: left;">
@@ -288,7 +284,13 @@
 	</div>
 	<div style="clear: both"></div>
 	<div class="cont_sumit">
-		<h4>&nbsp;</h4>
+		<div class="h4div">
+<!-- 		background: #f85c23 -->
+		 <div
+				style="width: 80px; height: 31px; float: right; margin: 0;padding-top:8px; color: #fff;  text-align: center;  font-size: 17px;background: #f85c23;border: 1px solid #f85c23;border-radius: 5px 0px 0px 5px;">
+				<a href="javascript:submitorder();" style="color: #fff;">报名预定</a>
+			</div>
+		</div>
 		<div>
 			<if condition="$line_type eq '1'">
 			<table width="100%" cellpadding="0" cellspacing="1" bgcolor="dadada"
@@ -534,6 +536,7 @@
 			</if>
 
 		</div>
+		<!--  
 		<div style="width: 1090px; height: 40px;">
 
 			<div
@@ -541,6 +544,7 @@
 				<a href="javascript:submitorder();" style="color: #fff;">报名预定</a>
 			</div>
 		</div>
+		-->
 
 	</div>
 	<!--  

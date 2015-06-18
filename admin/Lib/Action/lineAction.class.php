@@ -47,6 +47,7 @@ class lineAction extends CommonAction {
 				// 添加其它内容到line_info表
 				$LineInfo->create ();
 				$LineInfo->lid = $insert_id;
+				$LineInfo->id = time () . rand ( 1000, 9999 );
 				$LineInfo->add ();
 				
 				$date_insert_id = $LineTravel->insertdata ( $insert_id ); // 添加行程安排到 line_travel
@@ -187,12 +188,31 @@ class lineAction extends CommonAction {
 			if (! isset ( $_POST ['status'] )) {
 				$_POST ['status'] = 0;
 			}
+			// print_r($_POST ["id"]);
+			// exit();
 			if ($data = $Line->create ()) {
 				$Line->save ();
-				
-				$LineInfo->where ( "lid=" . $_POST ["id"] )->save ( $_POST );
 				$updateid = $LineTravel->update ( $_POST ["id"] );
 				$LineTravelSection->update ( $_POST ["id"], $updateid );
+				$infolist = $LineInfo->where ( "lid=" . $_POST ["id"] )->select ();
+				if (count ( $infolist ) == 0) {
+					$templineInfo = $LineInfo->create ();
+					$LineInfo->lid=$_POST ["id"];
+					$LineInfo->id = time () . rand ( 1000, 9999 );
+					$LineInfo->add ();
+				} else {
+					$LineInfo->where ( "lid=" . $_POST ["id"] )->setField ( array (
+							'special_info' => $_POST ["special_info"],
+							'order_info' => $_POST ["order_info"],
+							'tip' => $_POST ["tip"],
+							'feature' => $_POST ["feature"] 
+					) );
+				}
+				
+				// $LineInfo1 = D ( "LineInfo" );
+				// print_r ( $_POST ["special_info"] );
+				// exit ();
+				
 				$submitandsetprice = $_POST ['submitandnext'];
 				if ($submitandsetprice == 1) {
 					$this->redirect ( "price_list", array (
@@ -557,14 +577,14 @@ class lineAction extends CommonAction {
 			}
 		}
 		$LineInfo = M ( "LineInfo" );
-		$infocount=$LineInfo->where ( "lid=" . $_POST ["line_id"] )->count();
-		$LineInfo->create();
-		//print_r($infocount);
-		//exit();
-		$LineInfo->lid=$_POST ["line_id"];
-		if($infocount==0){
-			$LineInfo->add();
-		}else{
+		$infocount = $LineInfo->where ( "lid=" . $_POST ["line_id"] )->count ();
+		$LineInfo->create ();
+		// print_r($infocount);
+		// exit();
+		$LineInfo->lid = $_POST ["line_id"];
+		if ($infocount == 0) {
+			$LineInfo->add ();
+		} else {
 			$LineInfo->where ( "lid=" . $_POST ["line_id"] )->save ( $_POST );
 		}
 		
@@ -782,7 +802,6 @@ class lineAction extends CommonAction {
 		}
 		$this->success ( "取消推荐成功", U ( "show_list" ) );
 	}
-	
 }
 
 ?>

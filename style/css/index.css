@@ -334,6 +334,14 @@
 	margin-top: 8px;
 	margin-bottom: 10px;
 }
+.cont_sumit .h4div {
+	width: 1080px;
+	height: 41px;
+	background: url(../images/dingdan.jpg) #05b5b5 no-repeat left center;
+	margin-top: 8px;
+	margin-bottom: 10px;
+	font-family: "微软雅黑";
+}
 
 .cont_sumit table {
 	font-size: 14px;
@@ -1714,7 +1722,7 @@
 	width: 800px;
 	height: 408px;
 	position: fixed;
-	z-index: 100;
+	z-index: 999;
 	background: #FFF;
 	margin: auto auto;
 	left: 0;
@@ -1895,7 +1903,7 @@
 	margin: auto auto;
 	left: 0;
 	right: 0;
-	top: 8%;
+	top: 4%;
 }
 
 .link_2 table {
@@ -2670,4 +2678,15 @@ td.day:not (.disable ):hover {
 	top: 0px;
 	right: 0px;
 	background: url(../images/day10.png) no-repeat left center;
+}
+#windownbg {
+  display: none;
+  position: absolute;
+  width: 100%;
+  min-width: 1140px;
+  height: 100%;
+  min-height: 643px;
+  background: #000;
+  top: 0;
+  left: 0;
 }
