@@ -1406,13 +1406,13 @@ EOF;
 			}
 			$line_info = M ( "line_info" )->where ( "lid='" . $lineInfo ['id'] . "'" )->field ( "special_info,contain,notcontain,tip" )->find ();
 			
-			if ($line_info ['special_info'] == null) {
+			if ($line_info ['feature'] == null) {
 				$features = array (
 						'feature' => '线路特色' 
 				);
 			} else {
 				$features = array (
-						'feature' => '<![CDATA[' . strip_tags ( $line_info ['special_info'] ) . ']]>' 
+						'feature' => '<![CDATA[' . strip_tags ( $line_info ['feature'] ) . ']]>' 
 				);
 			}
 			$fee_includes = array (

@@ -45,7 +45,7 @@ class lineAction extends CommonAction {
 				$insert_id = $Line->getLastInsID ();
 				
 				// 添加其它内容到line_info表
-				$LineInfo->create ();
+				$tempinfo=$LineInfo->create ();
 				$LineInfo->lid = $insert_id;
 				$LineInfo->id = time () . rand ( 1000, 9999 );
 				$LineInfo->add ();
@@ -137,7 +137,7 @@ class lineAction extends CommonAction {
 		$LineTravelSection = D ( "LineTravelSection" );
 		if (! $_POST) {
 			// 读取line表和line_info表线路信息
-			$line_list = $Line->table ( $Line->getTableName () . " line" )->join ( $LineInfo->getTableName () . " lineinfo on line.id=lineinfo.lid" )->field ( "line.*,lineinfo.special_info,lineinfo.order_info,lineinfo.tip,lineinfo.General" )->where ( 'line.id=' . $_GET ["id"] )->find ();
+			$line_list = $Line->table ( $Line->getTableName () . " line" )->join ( $LineInfo->getTableName () . " lineinfo on line.id=lineinfo.lid" )->field ( "line.*,lineinfo.special_info,lineinfo.order_info,lineinfo.tip,lineinfo.General,lineinfo.feature" )->where ( 'line.id=' . $_GET ["id"] )->find ();
 			
 			// 选中的目的地城市
 			$target = explode ( ',', $line_list ['target'] );
