@@ -45,11 +45,10 @@ class lineAction extends CommonAction {
 				$insert_id = $Line->getLastInsID ();
 				
 				// 添加其它内容到line_info表
-				$tempinfo=$LineInfo->create ();
-				$LineInfo->lid = $insert_id;
-				$LineInfo->id = time () . rand ( 1000, 9999 );
-				$LineInfo->add ();
-				
+				$templineInfo = $LineInfo->create ();
+				$templineInfo ['lid'] = $insert_id;
+				$templineInfo ['id'] = time () . rand ( 1000, 9999 );
+				$LineInfo->data ( $templineInfo )->add ();
 				$date_insert_id = $LineTravel->insertdata ( $insert_id ); // 添加行程安排到 line_travel
 				$LineTravelSection->insdata ( $insert_id, $date_insert_id ); // 添加行程安排的阶段到 line_travel_section
 				$submitandsetprice = $_POST ['submitandnext'];
@@ -188,8 +187,6 @@ class lineAction extends CommonAction {
 			if (! isset ( $_POST ['status'] )) {
 				$_POST ['status'] = 0;
 			}
-			// print_r($_POST ["id"]);
-			// exit();
 			if ($data = $Line->create ()) {
 				$Line->save ();
 				$updateid = $LineTravel->update ( $_POST ["id"] );
@@ -197,21 +194,17 @@ class lineAction extends CommonAction {
 				$infolist = $LineInfo->where ( "lid=" . $_POST ["id"] )->select ();
 				if (count ( $infolist ) == 0) {
 					$templineInfo = $LineInfo->create ();
-					$LineInfo->lid=$_POST ["id"];
-					$LineInfo->id = time () . rand ( 1000, 9999 );
-					$LineInfo->add ();
+					$templineInfo ['lid'] = $_POST ["id"];
+					$templineInfo ['id'] = time () . rand ( 1000, 9999 );
+					$LineInfo->data ( $templineInfo )->add ();
 				} else {
 					$LineInfo->where ( "lid=" . $_POST ["id"] )->setField ( array (
-							'special_info' => $_POST ["special_info"],
-							'order_info' => $_POST ["order_info"],
-							'tip' => $_POST ["tip"],
-							'feature' => $_POST ["feature"] 
+							'special_info' =>   $_POST ["special_info"] ,
+							'order_info' =>   $_POST ["order_info"] ,
+							'tip' =>   $_POST ["tip"] ,
+							'feature' =>   $_POST ["feature"]  
 					) );
 				}
-				
-				// $LineInfo1 = D ( "LineInfo" );
-				// print_r ( $_POST ["special_info"] );
-				// exit ();
 				
 				$submitandsetprice = $_POST ['submitandnext'];
 				if ($submitandsetprice == 1) {

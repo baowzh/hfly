@@ -66,8 +66,8 @@ class articleAction extends CommonAction {
 		} else {
 			$_POST["times"] = date('Y-m-d H:i:s');
 			$BaseConfig = M("Article");
-			if ($BaseConfig->create()) {
-				if (false !== $BaseConfig->add()) {
+			if ($articleInfo=$BaseConfig->create()) {
+				if (false !== $BaseConfig->data($articleInfo)->add()) {
 					self :: lists("添加栏目成功");
 				} else {
 					$this->assign('message', '添加失败');

@@ -44,6 +44,8 @@ class LineTravelSectionModel extends Model {
                 $data["names"] = $i;
                 $data["title"] = $_POST['activity_title_' . $k . '_' . $i];
                 $data["content"] = $_POST['activity_text_' . $k . '_' . $i];
+                //print_r($data["content"]);
+                //exit();
                 $olddata = $this->where("line_id=" . $id . " and travel_id=" . $v . " and names=" . $i)->field("id")->find();
                 if ($olddata) {
                     $this->where("line_id=" . $id . " and travel_id=" . $v . " and names=" . $i)->save($data);
