@@ -52,16 +52,16 @@
 				class="input-text" name="assistcode" value="{$get.assistcode}" />
 			</td>
 			<td class="search">订单状态: <select name="state" id="state">
-					<option value="">请选择</option>
-					<option value="0"<if condition="$get.state eq 0">selected="true"</if>>未付款
+					<option value="99"  <if condition="$get.state eq 99">selected="true"</if> >请选择</option>
+					<option value="0" <if condition="$get.state eq 0">selected="true"</if> >未付款
 					</option>
-					<option value="1"<if condition="$get.state eq 1">selected="true"</if>>已付款
+					<option value="1" <if condition="$get.state eq 1">selected="true"</if> >已付款
 					</option>
-					<option value="2"<if condition="$get.state eq 2">selected="true"</if>>已申请退款
+					<option value="2" <if condition="$get.state eq 2">selected="true"</if> >已申请退款
 					</option>
-					<option value="3"<if condition="$get.state eq 3">selected="true"</if>>已退款
+					<option value="3" <if condition="$get.state eq 3">selected="true"</if> >已退款
 					</option>
-					<option value="4"<if condition="$get.state eq 4">selected="true"</if>>已发团
+					<option value="4" <if condition="$get.state eq 4">selected="true"</if> >已发团
 					</option>
 			</select>
 			</td>
@@ -135,16 +135,17 @@
 					<td>{$vo.orderid}</td>
 					<td>{$vo.name}<br>{$vo.phone}
 					</td>
-					<td><a href="__ROOT__/index.php/travel/detail/id/{$vo.line_id}" target="_blank">{$vo.names}</a></td>
+					<td style="width:270px;"><a href="__ROOT__/index.php/travel/detail/id/{$vo.line_id}" target="_blank">{$vo.names}</a></td>
 					<td>{$vo.orderdate}</td>
 					<td>{$vo.startdate}<br>成人{$vo.pnumber}/ 每人￥{$vo.pmoney}元<br>儿童{$vo.cnumber}/每人￥{$vo.cmoney}元
 						<br>
 					</td>
 
-					<td><if condition="$vo.line_type eq '1'">包团自由行 <elseif
-							condition="$vo.line_type eq '2'" />纯玩团 <elseif
-							condition="$vo.line_type eq '3'" />纯玩团 <elseif
-							condition="$vo.line_type eq '4'" />团队策划 </if></td>
+					<td><if condition="$vo.line_type eq '1'">包团自由行 </if>
+						 <if condition="$vo.line_type eq '2'" >纯玩团 </if>
+						 <if condition="$vo.line_type eq '3'" >常规团 </if>
+						 <if condition="$vo.line_type eq '4'" >团队策划 </if>
+							</td>
 					<td>{$vo.remoney}</td>
 					<td>￥{$vo.price}元</td>
 					<td><if condition="$vo.state eq '0'">待付款 <elseif

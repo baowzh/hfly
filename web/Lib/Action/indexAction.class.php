@@ -26,7 +26,7 @@ class indexAction extends CommonAction {
 		$this->assign ( 'pointlist', $pointlist );
 		
 		$article = M ( "Article" );
-		$Articlelist = $article->where ( "cid<>'7' and cid<>'9' and cid<>'10'" )->order ( 'sort,id desc' )->limit ( 18 )->select ();
+		$Articlelist = $article->where ( "cid<>'7' and cid<>'9' and cid<>'10' and cid<>'18' and cid<>'19' and cid<>'20' and cid<>'21' and cid<>'22'" )->order ( 'sort,id desc' )->limit ( 18 )->select ();
 		$this->assign ( 'Articlelist', $Articlelist );
 		$mod_Line = M ( "Line" );
 		

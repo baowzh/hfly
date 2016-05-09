@@ -493,12 +493,10 @@ class PHPMailer {
       if ((count($this->to) + count($this->cc) + count($this->bcc)) < 1) {
         throw new phpmailerException($this->Lang('provide_address'), self::STOP_CRITICAL);
       }
-
       // Set whether the message is multipart/alternative
       if(!empty($this->AltBody)) {
         $this->ContentType = 'multipart/alternative';
       }
-
       $this->error_count = 0; // reset errors
       $this->SetMessageType();
       $header = $this->CreateHeader();
@@ -507,13 +505,15 @@ class PHPMailer {
       if (empty($this->Body)) {
         throw new phpmailerException($this->Lang('empty_message'), self::STOP_CRITICAL);
       }
-
       // Choose the mailer and send through it
+      
       switch($this->Mailer) {
         case 'sendmail':
           return $this->SendmailSend($header, $body);
         case 'smtp':
           return $this->SmtpSend($header, $body);
+        case 'SMTP':
+          	return $this->SmtpSend($header, $body);
         case 'mail':
         default:
           return $this->MailSend($header, $body);
@@ -606,10 +606,9 @@ class PHPMailer {
    * @access protected
    * @return bool
    */
-  protected function SmtpSend($header, $body) {
+  protected function SmtpSend($header, $body) {	
     require_once $this->PluginDir . 'class.smtp.php';
     $bad_rcpt = array();
-
     if(!$this->SmtpConnect()) {
       throw new phpmailerException($this->Lang('smtp_connect_failed'), self::STOP_CRITICAL);
     }

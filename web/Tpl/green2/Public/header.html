@@ -72,13 +72,21 @@ $(document).ready(function() {
 			<script type="text/javascript" src="http://ext.weather.com.cn/97609.101081203.js"></script>
 			</if>
 			<div class="dectails">
+			<li class="hotline">4001-888-332&nbsp;</li>
+			<li style="width:380px;height:31px;padding-left:50px;">
 			<form action="{:U('travel/order_query')}">
-				<li class="hotline">4001-888-332&nbsp;</li>
-				<li style="width:380px;height:31px;padding-left:50px;">
 				<input type="text" class="shuru" value="请输入手机号" id="phone"	name="phone" onFocus="if(value==defaultValue){value='';this.style.color='#999'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
 				<input type="submit" value="订单查询" class="buts" />
-					</li>
-			</form>
+			 </form>
+			</li>
+		  <li style="width:380px;height:31px;padding-left:50px;padding-top:3px;">
+		   <form action="{:U('travel/detail')}" method="post">
+				<input type="text" class="shuru" value="请输入线路号" id="lineno"	name="lineno" onFocus="if(value==defaultValue){value='';this.style.color='#999'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
+				<input type="submit" value="线路查询" class="buts" />
+				</form>
+		 </li>
+			
+		
 			</div>
 			
 		</div>
@@ -112,7 +120,7 @@ $(document).ready(function() {
 			-->
 		</div>
 	</div>
-
+<!--  
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -121,4 +129,9 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
+</script>
+-->
+<script type="text/javascript"> 
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8987594b0b7682191cafc4396e168113' type='text/javascript'%3E%3C/script%3E"));
 </script>

@@ -596,7 +596,9 @@
 	width: 800px;
 	padding-top: 0px;
 	margin-top: 0px;
-	color: #330066;
+	color:#000;
+	font-size: 14px;
+	font-family: "微软雅黑";
 }
 
 .history ul li.end {
@@ -604,7 +606,7 @@
 }
 
 .info_title_right {
-	color: #330066;
+/* 	color: #330066; */
 }
 
 .history ul li.services_title {

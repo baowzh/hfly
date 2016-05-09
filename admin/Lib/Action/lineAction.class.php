@@ -48,6 +48,10 @@ class lineAction extends CommonAction {
 				$templineInfo = $LineInfo->create ();
 				$templineInfo ['lid'] = $insert_id;
 				$templineInfo ['id'] = time () . rand ( 1000, 9999 );
+				$templineInfo["special_info"]=addslashes($_POST['special_info']);
+				$templineInfo["order_info"]=addslashes($_POST['order_info']);
+				$templineInfo["tip"]=addslashes($_POST['tip']);
+				$templineInfo["feature"]=addslashes($_POST['feature']);
 				$LineInfo->data ( $templineInfo )->add ();
 				$date_insert_id = $LineTravel->insertdata ( $insert_id ); // 添加行程安排到 line_travel
 				$LineTravelSection->insdata ( $insert_id, $date_insert_id ); // 添加行程安排的阶段到 line_travel_section
@@ -57,7 +61,10 @@ class lineAction extends CommonAction {
 							'line_id' => $insert_id 
 					), 2, "保存成功，请继续维护报价信息。" );
 				} else {
-					$this->success ( "添加成功", U ( "show_list" ) );
+					//$this->success ( "添加成功", U ( "edit/id/". ) );
+					$this->redirect ( "edit", array (
+							'id' => $insert_id
+					), 2, "保存成功。" );
 				}
 			} else {
 				$this->error ( "添加失败," . $Line->getError () );
@@ -196,6 +203,12 @@ class lineAction extends CommonAction {
 					$templineInfo = $LineInfo->create ();
 					$templineInfo ['lid'] = $_POST ["id"];
 					$templineInfo ['id'] = time () . rand ( 1000, 9999 );
+					$templineInfo["special_info"]=addslashes($_POST['special_info']);
+					$templineInfo["order_info"]=addslashes($_POST['order_info']);
+					$templineInfo["tip"]=addslashes($_POST['tip']);
+					$templineInfo["feature"]=addslashes($_POST['feature']);
+					//echo addslashes($templineInfo["special_info"]);
+				//	exit();
 					$LineInfo->data ( $templineInfo )->add ();
 				} else {
 					$LineInfo->where ( "lid=" . $_POST ["id"] )->setField ( array (
@@ -212,7 +225,10 @@ class lineAction extends CommonAction {
 							'line_id' => $_POST ["id"] 
 					), 2, "保存成功，请继续维护报价信息。" );
 				} else {
-					$this->redirect ( "show_list" );
+					// $this->redirect ( "show_list" );
+					$this->redirect ( "edit", array (
+							'id' => $_POST ["id"]
+					), 2, "保存成功。" );
 				}
 			} else {
 				echo $Line->getError ();
@@ -477,11 +493,14 @@ class lineAction extends CommonAction {
 		// 按阶段
 		$price_stage = $line_price->where ( "price_type=2 and line_id=" . $id )->select ();
 		// 按指定日期
+		$year=date('Y');
 		if ($sel_numrange != null) {
-			$price_day = $line_price->where ( "price_type=1 and line_id=" . $id . " and numrange=" . $sel_numrange )->getField ( "price_date,RACKRATE,price_adult,price_children" );
+			$price_day = $line_price->where ( "price_type=1 and line_id=" . $id . " and numrange=" . $sel_numrange ." and year=".$year )->getField ( "price_date,RACKRATE,price_adult,price_children" );
+           // print_r($price_day);
+           // exit();
 			$price_day_json = $this->json_price_list ( $price_day );
 		} else {
-			$price_day = $line_price->where ( "price_type=1 and line_id=" . $id )->getField ( "price_date,RACKRATE,price_adult,price_children" );
+			$price_day = $line_price->where ( "price_type=1 and line_id=" . $id ." and year=".$year )->getField ( "price_date,RACKRATE,price_adult,price_children" );
 			$price_day_json = $this->json_price_list ( $price_day );
 		}
 		// 费用说明
@@ -491,7 +510,7 @@ class lineAction extends CommonAction {
 		$this->assign ( "price_stage", $price_stage );
 		$this->assign ( "price_day", $price_day );
 		$this->assign ( "contain", $contain );
-		$this->assign ( "price_day_json", $price_day_json );
+	    $this->assign ( "price_day_json", $price_day_json );
 		$this->assign ( "line_id", $id );
 		$this->assign ( "sel_numrange", $sel_numrange );
 		$this->assign ( "stage_data_html", preg_replace ( "/[\t\r\xc2\xa0]/", "", $this->fetch ( "stage_html" ) ) );

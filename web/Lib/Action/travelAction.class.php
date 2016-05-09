@@ -359,19 +359,23 @@ class travelAction extends CommonAction {
 			$OrderData = $LineOrder->field ( "*,date_add(startdate, interval trip_days-1 day) as enddate" )->find ( $insert_id );
 			$this->assign ( "protocolData", $OrderData );
 			$protocolcontent = $this->fetch ( "protocol", "", "" );
-			$messContent = "亲 您的订单" . $OrderData ['orderid'] . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情";
-			$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
+			$messContent = "亲 您的订单" . $OrderData ['orderid'] . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hlx97667.com查询订单详情";
+			$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );			
 			$messDate = array (
 					'action' => 'send',
-					'username' => '70208213',
-					'password' => md5 ( 'hf6317995' ),
+					//'username' => '70208213',
+					//'password' => md5 ( 'hf6317995' ),
+					'username' => '70211716',
+				    'password' =>'8e8f7245edc25bd039072d2d60f2e2d4',
+				    //'phone' => '15184707203',
 					'phone' => $OrderData ['phone'],
-					'content' => urlencode ( $messContent ) 
+					'content' =>mb_convert_encoding(urldecode($messContent), "GBK","UTF-8")
+					//'content' => urlencode ( $messContent ) 
 			);
 			// 短信发送
-			$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
+			$returncode=$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			$this->ajaxReturn ( U ( 'order_ding_view', array (
-					"orderid" => $OrderData ['orderid'] 
+					"orderid" => $OrderData ['orderid'] ,"code"=>$returncode
 			) ), "订单详情", "u" );
 		} else {
 			$this->ajaxReturn ( "", "订单提交失败", "n" );
@@ -544,11 +548,27 @@ class travelAction extends CommonAction {
 			// 组织数据调用网银钱包接口
 		}
 	}
+	
 	public function detail() {
 		$id = $_GET ["id"] ? intval ( $_GET ["id"] ) : 0;
+		$lineno = $_POST ["lineno"] ? intval ( $_POST ["lineno"] ) : 0;
 		$line = M ( "line" );
 		$line_info = M ( "LineInfo" );
 		$line_pic = M ( "LinePic" );
+		if($id==0&&$lineno!=0){// 从前台搜索的
+			$line_base = $line->where ( "code='" . $lineno."'" )->limit(1)->find();
+			if(!$line_base){
+// 				$this->return ( array (
+// 						"info" => "没有找到编号为".$lineno."的线路，请仔细确认。",
+// 						"status" => "n"
+// 				) );
+// 				exit ();
+				header("Content-type:text/html;charset=utf-8");
+				$this->redirect( "../index.php", array (), 2, "没有找到编号为".$lineno."的线路，请仔细确认。" );
+			}else{
+				$id=$line_base ["id"] ;
+			}
+		}
 		$line_base = $line->find ( $id );
 		$line_keep = M ( 'line_keep' );
 		$keep = $line_keep->where ( "user_id='{$_SESSION['user_id']}' and line_id='$id'" )->count ();
@@ -609,7 +629,6 @@ class travelAction extends CommonAction {
 			// 拼团列表
 			// $this->zutuan_list ( $id );
 		}
-		
 		$this->assign ( "keep_status", $keep );
 		$this->assign ( "line_base", $line_base ); // 基本信息
 		                                           // print_r($line_base);
@@ -920,7 +939,7 @@ class travelAction extends CommonAction {
 		$user_name = get_user ( $_SESSION ["user_id"] );
 		$dom = <<<EOF
 		           <div class="dialog_left">
-                        <div class="toux"><img height="45" src="http://www.hf97667.com/style/images/niu.jpg" ></div>
+                        <div class="toux"><img height="45" src="http://www.hlx97667.com/style/images/niu.jpg" ></div>
                         <div class="dia_cont">{$data["question1"]}</div>
                         <div class="clear"></div>
                    </div>
@@ -1044,11 +1063,11 @@ EOF;
 				$payment_type = "1";
 				// 必填，不能修改
 				// 服务器异步通知页面路径
-				$notify_url = "http://www.hf97667.com/index.php/travel/alipaynotify";
+				$notify_url = "http://www.hlx97667.com/index.php/travel/alipaynotify";
 				// 需http://格式的完整路径，不能加?id=123这类自定义参数
 				
 				// 页面跳转同步通知页面路径
-				$return_url = "http://www.hf97667.com/index.php/travel/alipayreturn"; //
+				$return_url = "http://www.hlx97667.com/index.php/travel/alipayreturn"; //
 				                                                                      // 需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 				                                                                      // 商户订单号 // $out_trade_no = $_POST ['WIDout_trade_no'];
 				$out_trade_no = $orderid;
@@ -1085,7 +1104,7 @@ EOF;
 				
 				// 商品展示地址
 				// $show_url = $_POST ['WIDshow_url'];
-				$show_url = "http://www.hf97667.com/";
+				$show_url = "http://www.hlx97667.com/";
 				// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
 				
 				// 防钓鱼时间戳
@@ -1093,7 +1112,7 @@ EOF;
 				// 若要使用请调用类文件submit中的query_timestamp函数
 				
 				// 客户端的IP地址
-				$exter_invoke_ip = "121.42.111.74";
+				$exter_invoke_ip = "120.26.237.105";
 				// 非局域网的外网IP地址，如：221.0.0.1
 				// echo $alipay_config ['partner'];
 				// exit();
@@ -1188,13 +1207,14 @@ EOF;
 				) );
 				
 				// 发送支付短信开始
-				$messContent = "亲 您的订单" . $out_trade_no . "已支付成功,行程已确认,客服会在出团前一天通知您具体集合时间地点联系人等信息.如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情.";
+				$messContent = "亲 您的订单" . $out_trade_no . "已支付成功,行程已确认,客服会在出团前一天通知您具体集合时间地点联系人等信息.如有变动请联系客服4001888332,用手机号可在官网www.hlx97667.com查询订单详情.";
 				$messDate = array (
 						'action' => 'send',
-						'username' => '70208213',
-						'password' => md5 ( 'hf6317995' ),
+						'username' => '70211716',
+					    'password' =>'8e8f7245edc25bd039072d2d60f2e2d4',
 						'phone' => $orderInfo ['phone'],
-						'content' => urlencode ( $messContent ) 
+						'content' =>mb_convert_encoding(urldecode($messContent), "GBK","UTF-8")
+						//'content' => urlencode ( $messContent ) 
 				);
 				$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 			}
@@ -1274,13 +1294,13 @@ EOF;
 						'trade_no' => $trade_no 
 				) );
 				// 发送支付短信开始
-				$messContent = "亲 您的订单" . $out_trade_no . "已支付成功,行程已确认,客服会在出团前一天通知您具体集合时间地点联系人等信息.如有变动请联系客服4001888332,用手机号可在官网www.hf97667.com查询订单详情";
+				$messContent = "亲 您的订单" . $out_trade_no . "已支付成功,行程已确认,客服会在出团前一天通知您具体集合时间地点联系人等信息.如有变动请联系客服4001888332,用手机号可在官网www.hlx97667.com查询订单详情";
 				$messDate = array (
 						'action' => 'send',
-						'username' => '70208213',
-						'password' => md5 ( 'hf6317995' ),
+						'username' => '70211716',
+					    'password' =>'8e8f7245edc25bd039072d2d60f2e2d4',
 						'phone' => $OrderData ['phone'],
-						'content' => urlencode ( $messContent ) 
+						'content' =>mb_convert_encoding(urldecode($messContent), "GBK","UTF-8")
 				);
 				$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
 				$this->assign ( "mess", '支付成功!' );
@@ -1368,22 +1388,46 @@ EOF;
 		fclose ( $fp );
 		return $result;
 	}
-	function sendEmail($emailaddr = 'hf97667@163.com', $emailname = 'hf97667', $subject = '团队境内旅游合同', $content = '团队境内旅游合同') {
+	function sendEmail($emailaddr = 'hf97667@163.com', $emailname = 'hf97667', $subject = 'aaaa', $content = 'bbbb') {
 		$email = D ( "email" );
 		$email->send ( $emailaddr, $emailname, $subject, $content );
 	}
 	function sendMail() {
-		$this->sendEmail ( 'imubwz@126.com', 'baowz', '测试邮件', '测试邮件' );
+
+		$this->sendEmail ( 'imubwz@126.com', 'imubwz', '测试邮件', '测试邮件' );
 	}
 	function sendMess() {
+		/*
 		$messDate = array (
 				'action' => 'send',
-				'username' => '70208213',
-				'password' => md5 ( 'hf6317995' ),
+				'username' => '70211716',
+				'password' =>'8e8f7245edc25bd039072d2d60f2e2d4',
+				//'username' => '70208213',
+				//'password' => md5 ( 'hf6317995' ),
+				////utf8_encode('ceshi测试'
+				//		)
 				'phone' => '15184707203',
-				'content' => urlencode ( "测试短信" ) 
+				
+				'content' => urlencode( mb_convert_encoding(urldecode("ceshi测试"), "GBK","UTF-8")  ), 
+				//'encode'=>'utf8'
+				
 		);
-		$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
+		$yuuu=$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );*/
+		$messContent = "亲 您的订单" . 111111 . "已提交成功,合同已发送至您的邮箱,如有变动请联系客服4001888332,用手机号可在官网www.hlx97667.com查询订单详情";
+		//$this->sendEmail ( $OrderData ['email'], $OrderData ['name'], "团队境内旅游合同", $protocolcontent );
+		$messDate = array (
+				'action' => 'send',
+				//'username' => '70208213',
+				//'password' => md5 ( 'hf6317995' ),
+				'username' => '70211716',
+				'password' =>'8e8f7245edc25bd039072d2d60f2e2d4',
+				'phone' => '15184707203',
+				'content' =>mb_convert_encoding(urldecode($messContent), "GBK","UTF-8")
+				//'content' => urlencode ( $messContent )
+		);
+		// 短信发送
+		$yuuu=$this->curl_post ( "http://api.duanxin.cm/", $messDate, true );
+		print_r($yuuu);
 	}
 	function sendLineInfoToQuNRW() {
 		layout ( false );
@@ -1399,7 +1443,7 @@ EOF;
 			// 每条线路生成一个
 			$routes = array ();
 			$city_name = M ( 'area' )->where ( "id='" . $lineInfo ['city_id'] . "'" )->field ( "names" )->find ();
-			$images = M ( 'line_pic' )->where ( "line_id='" . $lineInfo ['id'] . "'" )->field ( "CONCAT('http://www.hf97667.com', pic_path) as pic_path " )->select ();
+			$images = M ( 'line_pic' )->where ( "line_id='" . $lineInfo ['id'] . "'" )->field ( "CONCAT('http://www.hlx97667.com', pic_path) as pic_path " )->select ();
 			$imagesvar = array ();
 			foreach ( $images as $image ) {
 				$imagesvar ['image'] = $image ['pic_path'];
@@ -1496,7 +1540,7 @@ EOF;
 			}
 			$route = array (
 					'title' => $lineInfo ['names'],
-					'url' => 'http://www.hf97667.com/index.php/travel/detail/id/' . $lineInfo ['id'] . '',
+					'url' => 'http://www.hlx97667.com/index.php/travel/detail/id/' . $lineInfo ['id'] . '',
 					'price' => $adultandchildren ['price_adult'],
 					'price_desc' => '儿童标准（1.2米以下为儿童，儿童价格只含当地旅游车费和行程中所包含的餐费，超过1.2米的建议按成人报名）；单房差（酒店住宿都是按2人标准间核算的，如出现单人住一间房需补齐1间房费用，如不补单房差费用便默认和其他客人拼住一间房）。',
 					'child_price' => $adultandchildren ['price_children'],
@@ -1524,7 +1568,7 @@ EOF;
 			$xmlstr = xml_encode ( $routes, "utf-8", "routes" );
 			file_put_contents ( $lineInfo ['code'] . ".xml", $xmlstr );
 			$listi = array (
-					'url' => "http://www.hf97667.com/" . $lineInfo ['code'] . ".xml" 
+					'url' => "http://www.hlx97667.com/" . $lineInfo ['code'] . ".xml" 
 			);
 			array_push ( $list, $listi );
 		}

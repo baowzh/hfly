@@ -288,21 +288,17 @@
 </form>
 <script type="text/javascript">
 	$(document).ready(function() {
+		if($('#_sel_numrange').val()!=null){
+			$('#sel_numrange').val($('#_sel_numrange').val());
+			$('#line_4').addClass('yes');
+			$('#b_line_4').css({display:'block'})
+		}
 		var agenda_data = '{$price_day_json}';
 		agenda_data = $.parseJSON(agenda_data);
-		//var stage_data = '{$price_stage|json_encode}';
-		//var stage_data_html = '{$stage_data_html}';
 		agenda_data.url='{:U('month_price_list')}';
-		//stage_data = $.parseJSON(stage_data);
 		$("#agenda").agenda({
 			data : agenda_data
 		});
-		/*
-		$("#b_line_2").set_stage({
-			data : stage_data,
-			data_html : stage_data_html
-		});
-		*/
 		$(".showline").click(function() {
 			var id = this.id;
 			$('#b_' + id).show().siblings("table").hide();
@@ -310,9 +306,7 @@
 			$('#PriceForm').hide();
 			$(".linePopPrice").hide();
 		});
-		if($('#_sel_numrange').val()!=null){
-			$('#sel_numrange').val($('#_sel_numrange').val());
-		}
+		
 		
 
 	});

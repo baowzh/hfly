@@ -108,7 +108,7 @@ table select {
 				<td class="names">费用总计:</td>
 				<td class="ru">{$vo.price}元</td>
 				<td class="names">联系人:</td>
-				<td colspan="3" class="ru">{$vo.phone}</td>
+				<td colspan="3" class="ru">{$vo.name}/{$vo.phone}</td>
 			</tr>
 			<tr>
 				<td class="names">预付定金总额:</td>
@@ -118,7 +118,7 @@ table select {
 			</tr>
 
 			<tr>
-				<td class="names">到达后支付总:</td>
+				<td class="names">到达后支付总额:</td>
 				<td class="ru">{$vo.eczfz}元</td>
 				<td class="names">客服号码:</td>
 				<td colspan="3" class="ru">{$vo.assistcode}</td>
@@ -145,7 +145,7 @@ table select {
 					class="sub_bg"
 					style="width: 170px; height: 30px; line-height: 30px; border: none; padding: 0; font-size: 14px; color: #fff; font-weight: bold; background: #F00; margin-top: 5px;"
 					type="button" onclick="javascript:orderpay('{$vo.orderid}')"
-					value="开始支付">&nbsp;&nbsp;{$vo.remoney}元<br />支付成功会收到付款确认短信凭证</td>
+					value="开始支付">&nbsp;&nbsp;支付金额为{$vo.remoney}元<br />支付成功会收到付款确认短信凭证</td>
 			</tr>
 			</if>
 			<if condition="$vo.state eq '1'">

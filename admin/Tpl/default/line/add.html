@@ -35,7 +35,7 @@
 			<td><input type="text" name="ly_type" id="ly_type" class="txt"
 				value="{$line_list.ly_type}" /></td>
 		</tr>
-
+       <!--  
 		<tr>
 			<th><span class="red">*</span>SEO优化：</th>
 			<td><input id="box_SEO" type="checkbox" name="SEO" /> <label
@@ -59,6 +59,7 @@
 					style="height: 50px; width: 600px;"></textarea> <span
 				id="box_detail" class="Dp">描述中请不要带英文的逗号，建议不超出80个字</span></td>
 		</tr>
+		-->
 		<tr>
 			<th><span class="red">*</span><em>参团性质</em>：</th>
 			<td><input id="line_type1" type="radio" name="line_type"
@@ -125,12 +126,13 @@
 					<option value="0483">阿拉善盟</option>
 			</select></td>
 		</tr>
+		<!-- 
 		<tr>
 			<th>行程预览：</th>
 			<td><textarea name="ps" rows="2" cols="20" id="ps"
 					style="height: 50px; width: 600px;">{$line_list.ps}</textarea></td>
 		</tr>
-		<!--  
+		 
 		<tr>
 			<td align="right">线路主题：</td>
 			<td><span id="L_OfferedProperties"> <volist
@@ -141,8 +143,8 @@
 			</span> <span id="msg_topic" class="msg"></span></td>
 
 		</tr>
-		-->
-
+		
+       -->
 		<tr>
 			<td align="right"><em>预约定金</em>：</td>
 			<td><input name="front_money" type="text" class="txt"
@@ -306,7 +308,9 @@
 	</table>
 	<div id="btnbox" class="btn">
 		<INPUT TYPE="submit" value="保 存 " class="button">
+		<!--  
 		<INPUT TYPE="button" value="保存并下一步" class="button" onclick="javascript:submitandsetprice();">
+		--> 
 		 <input
 			TYPE="reset" value=" 重 置 " class="button">
 	</div>
